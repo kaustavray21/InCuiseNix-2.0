@@ -1,0 +1,39 @@
+<div class="container-fluid mt-4 pb-5" id="player-data-container" 
+     data-video-id="{{ current_video.id }}"
+     data-csrf-token="{{ csrf_token }}">
+
+    <div class="row">
+        <div class="col-lg-3">
+            <h4 class="mb-3">Course Playlist</h4>
+            <div class="list-group" style="max-height: 80vh; overflow-y: auto;">
+                {% for video in all_videos %}
+                <a href="{% url 'video_player' course.id %}?vid={{ video.video_id }}" 
+                   class="list-group-item list-group-item-action {% if video.id == current_video.id %}active{% endif %}">
+                    {{ video.title }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="col-lg-9">
+            <h2 class="mb-4">{{ course.title }}</h2>
+            
+            <div class="video-section-wrapper shadow-sm rounded border p-3 mb-4">
+            
+                <div class="plyr-container">
+                    <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="{{ current_video.video_url|slice:"-11:" }}"></div>
+                </div>
+
+                <div class="d-flex align-items-center mt-3">
+                    <h4 class="mb-0">{{ current_video.title }}</h4>
+                    <div class="ms-3">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNoteModal">Add Note</button>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#notesOffcanvas">View Notes</button>
+                    </div>
+                </div>
+
+            </div>
+            {% include 'core/components/video_player/_assistant_chat.html' %}
+        </div>
+    </div>
+</div>

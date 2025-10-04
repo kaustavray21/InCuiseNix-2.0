@@ -1,0 +1,19 @@
+<div class="ai-assistant-wrapper mt-4 shadow-sm rounded border p-4">
+    <h4 class="mb-3">AI Assistant</h4>
+
+    <div id="assistant-chat-box" class="chat-box p-3 bg-light rounded mb-3">
+        <div class="chat-message assistant">
+            Hello! I'm your AI assistant. Ask me anything about this course or the current video.
+        </div>
+    </div>
+
+    <form id="assistant-form" class="mt-3">
+        {% csrf_token %}
+        <div class="input-group">
+            <input type="text" id="assistant-input" class="form-control" placeholder="Ask a question..." required autocomplete="off">
+            <button class="btn btn-primary" type="submit" id="assistant-send-btn">
+                Send <i class="fas fa-paper-plane ms-1"></i>
+            </button>
+        </div>
+    </form>
+</div>

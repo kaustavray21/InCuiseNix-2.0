@@ -29,6 +29,8 @@
                     <div class="ms-3">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNoteModal">Add Note</button>
                         <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#notesOffcanvas">View Notes</button>
+                        <a href="{% url 'download_transcript' current_video.id %}" class="btn btn-info">Download Transcript</a>
+
                     </div>
                 </div>
 

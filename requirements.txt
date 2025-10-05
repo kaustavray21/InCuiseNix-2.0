@@ -3,3 +3,4 @@ python-dotenv
 pymysql
 mysqlclient
 google-generativeai
+youtube-transcript-api

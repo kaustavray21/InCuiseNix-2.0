@@ -1,0 +1,1085 @@
+start,duration,text
+0.0,13.34," All right, everyone."
+13.34,1.7200000000000006, Let's get started.
+15.06,4.700000000000001," So today's lecture will be on this thing called dictionaries, and it's not the dictionaries"
+19.76,2.879999999999999, that our parents and grandparents used.
+22.64,5.039999999999999," Notice I never actually used regular book dictionaries either, maybe once in my entire"
+27.68,2.0, life.
+29.68,2.479999999999997, But it's actually on a Python dictionary.
+32.16,5.440000000000005," So this is going to be a new data type that we have not worked with before, but it'll"
+37.6,4.199999999999996, be a compound data type much like we've seen lists and tuples to be.
+41.8,4.280000000000001, It's just going to be very different than lists and tuples.
+46.08,7.960000000000001," So before I introduce a bunch of syntax and what a Python dictionary is, let's try to"
+54.04,4.280000000000001, just motivate the need for such a data structure.
+58.32,2.6000000000000014, So suppose we have the following problem.
+60.92,5.159999999999997," We've been dealing with this problem in many of our lectures, but we once again want to"
+66.08,3.1599999999999966, store student information.
+69.24,6.579999999999998, So let's say we want to store great information for a bunch of students.
+75.82,4.900000000000006," With what we know so far, we can store information using lists."
+80.72,4.799999999999997, It's a very reasonable data structure to use because we might get new students in the class.
+85.52,2.4000000000000057," Students might drop, grades might change, things like that."
+87.92,3.799999999999997, So let's use this mutable data structure list.
+91.72,5.400000000000006," Let's say we want to store names of students and their grades in the class, like their"
+97.12,1.1599999999999966, final letter grade.
+98.28,4.480000000000004," Additionally, we can store things like micro quiz grades and p-sets grades."
+102.76,3.0600000000000023," But for now, let's just assume we're storing just the names and the final grades in the"
+105.82000000000001,1.0, class.
+106.82000000000001,4.97999999999999," So if we do this using lists, one reasonable way to store this information is by saying,"
+111.8,3.480000000000004," well, I'm going to have a list of all the names of the students in my class."
+115.28,3.5999999999999943, I'm going to have a list of all the grades of these students in the class.
+118.88,6.820000000000007," And I'm basically going to go index by index and make the rule that says, at a particular"
+125.7,3.5400000000000063," index, I'm storing all the information related to this one person."
+129.24,1.759999999999991, So I have index zero here.
+131.0,3.4000000000000057, I'm storing the name of the student and their grade.
+134.4,4.319999999999993," At index one, I'm storing the name of that student, John, and their grade."
+138.72,3.3600000000000136," At index two, I'm storing the name of that student and their grade."
+142.08,2.4799999999999898, And at index three and so on and so on.
+144.56,5.139999999999986," So I now basically have to remember that for a particular index, I am storing all the"
+149.7,4.5800000000000125, information related to that student.
+154.28,4.840000000000003," OK, so seems like a reasonable way to do this."
+159.12,5.199999999999989, Now let's say that I wanted to look up the grade for a particular student.
+164.32,4.0800000000000125, So I write this function called get grade.
+168.4,1.4000000000000057, It takes in some parameters.
+169.8,2.9599999999999795, So the first thing it'll take in is the name of the student.
+172.76,1.8400000000000034," So Anna, for example."
+174.6,4.759999999999991, And I would pass in the list of all the names in my class and the list of all the grades
+179.35999999999999,1.0, in the class.
+180.35999999999999,3.240000000000009, So these are these two lists that I've previously created.
+183.6,2.359999999999985, So these get passed in to this function.
+185.95999999999998,4.360000000000014," So you can imagine if we have a list of everybody at MIT, these lists are going to be pretty"
+190.32,2.9199999999999875, large that we're passing in as parameters.
+193.23999999999998,4.360000000000014, How do we actually grab the letter grade associated with a student?
+197.6,7.0," Well, we're going to use the fact that the letter grade for the student at index I is"
+204.6,8.319999999999993, in the grade list is going to be grabbing the letter grade for the student at that same
+212.92,1.960000000000008, index in the name list.
+214.88,6.039999999999992, So we have to figure out this particular student being passed in here what index they're
+220.92,2.0, at in the names list.
+222.92,1.8799999999999955, So that's what this line of code is doing.
+224.79999999999998,7.280000000000001," It's using this index function on the name list with a parameter, for example, Anna."
+232.07999999999998,5.039999999999992, So this will return for us the index where Anna is in my list.
+237.11999999999998,5.840000000000003," So from the previous example, it's going to say that it's going to turn the number zero"
+242.95999999999998,4.280000000000001, because Anna is stored in the name list at index zero.
+247.23999999999998,5.240000000000009," So now that I have that index in hand, stored in variable I, I can just index into the"
+252.48,3.4799999999999898, grade list at that same index.
+255.95999999999998,4.8799999999999955, So I can get grades list at index zero will return for me the grade that I got for that
+260.84,4.400000000000034, particular class or whatever we're storing here.
+265.24,3.3999999999999773, And then we just return the two-pole student comma grade.
+268.64,2.160000000000025," So this becomes really messy, right?"
+270.8,4.839999999999975, I already mentioned that if I have a list of a whole bunch of students for a really large
+275.64,5.399999999999977," class or the entire university, then it becomes really unwieldy to just keep passing in"
+281.03999999999996,1.240000000000009, all these lists.
+282.28,4.920000000000016, And if I have in addition all these micro quiz lists and all these problem-set lists that
+287.2,4.399999999999977," also store additional information for the student, I then have to pass those in for their"
+291.59999999999997,2.160000000000025, respective functions.
+293.76,2.9599999999999795," And so it gets really messy, right?"
+296.71999999999997,3.079999999999984, Writing these functions that retrieve this information.
+299.79999999999995,3.8000000000000114," And additionally, if we're mutating these lists like if a new student comes in and we"
+303.59999999999997,3.840000000000032," need to add all their information, I need to make sure to update every single one of these"
+307.44,1.5600000000000023, lists that I'm maintaining.
+309.0,5.680000000000007," If a student leaves, or drops the class, I need to remember to remove that index from all"
+314.68,1.5199999999999818, of these different lists.
+316.2,6.439999999999998," So really, really messy situation that we could get into by using this method to store information"
+322.64,2.400000000000034, about students.
+325.04,2.759999999999991, So let's try a different approach.
+327.8,4.399999999999977," Instead of using all of these different lists, let's say that we're going to store everything"
+332.2,2.5200000000000387, in a master list.
+334.72,1.839999999999975, So we're not storing many lists.
+336.56,3.2800000000000296, We'll just store one list for the grades in the class.
+339.84000000000003,5.279999999999973, And the way it'll be stored according to this in the slide is going to be this grades
+345.12,1.0, list.
+346.12,3.840000000000032," Okay, so this is one list with three elements in it."
+349.96000000000004,4.039999999999964," And you can imagine if we have more students, we would just put all these students in this"
+354.0,1.5200000000000387, master list.
+355.52000000000004,4.439999999999998, So what is each one of these student elements?
+359.96000000000004,3.3600000000000136," Well, each student element is itself a list."
+363.32,5.319999999999993," So already I've got my master list, and each element within this list is also a list."
+368.64,3.7200000000000273," So this is a list for Eric, a list for Anna, and a list for John."
+372.36,2.5600000000000023, These are variable names.
+374.92,2.599999999999966, What are these lists going to be comprised of?
+377.52,2.6399999999999864," Well, they will be comprised of three things."
+380.15999999999997,2.480000000000018," So notice, right, two commas here."
+382.64,1.9600000000000364, So the first thing is their name.
+384.6,4.639999999999986, The second thing is another list containing their problem-sec grades.
+389.24,6.759999999999991, And I'm kind of using this element of that list to denote what that set of numbers
+396.0,1.1999999999999886, represents.
+397.2,5.1200000000000045," And then another list as my third element being for the micro, being the scores for the"
+402.32,1.0, micro quiz grades.
+403.32,6.759999999999991," And again, I'm denoting the first element of that list telling me what this list contains."
+410.08,7.080000000000041," Okay, so I've got lists, master list with three sublists for my three students."
+417.16,4.1200000000000045," And each one of those lists contains three elements, a string, a list, and another list."
+421.28000000000003,5.399999999999977, And those two lists are then also comprised of a string and a list themselves.
+426.68,5.680000000000007," So super complex, a data structure, a sort of composition or design choice that I've"
+432.36,1.8400000000000318, made here.
+434.20000000000005,7.519999999999982, But it solves the problem of maintaining all these different lists in separate variables.
+441.72,4.839999999999975, So now let's say I wanted to write a function that gets the grades for a particular student
+446.64,4.840000000000032, for either problem set or micro quizzes grades.
+451.48,1.7199999999999704, This is the function that does that.
+453.2,4.240000000000009," So again, it's not looking super nice."
+457.44,2.0, So what is this function going to take in?
+459.44,2.5600000000000023, The who is going to be a string representing the name?
+462.0,2.1999999999999886," So for example, Anna."
+464.2,5.520000000000039," The what will be also a string representing what information I'd like to grab, either"
+469.72,2.2799999999999727, PS or MQ.
+472.0,3.8799999999999955, And the data is going to be my master list of all the grades.
+475.88,3.7200000000000273, So this grades equals this list of everything.
+479.6,1.4399999999999977, So what is this code going to do?
+481.04,6.479999999999961," Well, it has a for loop down here and a nested for loop inside it."
+487.52,6.199999999999989, The outer for loop basically looks through each one of these elements here and looks at
+493.71999999999997,2.4399999999999977, the element at index zero.
+496.15999999999997,7.760000000000048," So either Eric, Anna, or John, and grabs only the list where that piece, the string here,"
+503.92,1.6399999999999864, matches the who.
+505.56,5.240000000000009," So if student at index zero equals who right here, then we found the student I'm interested"
+510.8,2.319999999999993, in grabbing the information for.
+513.12,1.0, Cool.
+514.12,3.9600000000000364," So now I've got, I've grabbed the right piece, the right list."
+518.08,4.519999999999982, And now I'm interested in their grades for a particular what?
+522.6,1.7999999999999545, So either MQ or PS.
+524.4,3.9600000000000364, So I do the exact same thing again for that list here.
+528.36,6.759999999999991," So if I'm interested in Anna's PS grades, I've grabbed these lists here."
+536.12,1.0, Right?
+537.12,6.360000000000014," And then I'm going to check if the info at index zero, so either this PS or this MQ matches"
+543.48,1.0, the what?
+544.48,4.919999999999959," So either PS or MQ to match what I'm interested in grabbing the information, what information"
+549.4,1.2000000000000455, I'm interested in grabbing.
+550.6,5.600000000000023, And then I'm going to go inside this if statement if they match and then he returned the who
+556.2,1.3600000000000136, in the info.
+557.5600000000001,1.6399999999999864," So again, super complex."
+559.2,5.199999999999932, No need to understand this that well because we're not going to use this method for long.
+564.4,2.840000000000032, So this get grades here.
+567.24,5.240000000000009," For example, if I grab Irox micro quiz grades and I run the code, it will return for me"
+572.48,4.559999999999945," this tuple that grabs, that returns for me the name of the student."
+577.04,5.399999999999977, And then this just the sub list of the thing that I was interested in in this case microquiz.
+582.4399999999999,4.720000000000027, And it grabs for me all the grades and then I can then index into this returned tuple
+587.16,5.440000000000055, to grab either the first quiz or the second quiz grades.
+592.6,1.919999999999959," And same for Anna, right?"
+594.52,6.080000000000041," In this particular case, it grabs for me just the tuple with my name and then that sub list"
+600.6,4.240000000000009, with the promise grade.
+604.84,2.519999999999982," Okay, so again, really messy."
+607.36,5.560000000000059," I have to, I've made my design choice for how to create all these lists with sub lists"
+612.9200000000001,2.919999999999959, and sub lists within those.
+615.84,3.5599999999999454, And so I'd have to document that probably if I was using this method.
+619.4,8.039999999999964," And then this function to grab this information, again super complex, hard to read."
+627.4399999999999,3.0, So it's not really a great way to store information either.
+630.4399999999999,7.0," But the idea behind this, which is to try to store some data associated with some sort"
+637.4399999999999,1.759999999999991," of key, right?"
+639.1999999999999,5.440000000000055," The PS or MQ or in this case, I'm storing a bunch of grades for Eric or Anna or Tom."
+644.64,2.919999999999959, That idea we can explore.
+647.56,3.0, And that's basically what dictionaries will do for us.
+650.56,7.720000000000027," It will allow us to create data structures that map some sort of custom index, a key,"
+658.28,1.0, to some value.
+659.28,2.3199999999999363," So much like a book dictionary does, right?"
+661.5999999999999,2.9200000000000728, It maps the word to its definition.
+664.52,5.719999999999914, We'll be able to create our own dictionaries that map some object to another object.
+670.2399999999999,6.080000000000041," So when we create a dictionary, we call every sort of quote unquote element in the dictionary"
+676.32,1.4800000000000182, and entry.
+677.8000000000001,5.159999999999968, And that entry is that mapping of a key to a value.
+682.96,5.639999999999986," So just to draw a parallel with a list, we can think of a list as mapping something to"
+688.6,2.0400000000000773, another something.
+690.6400000000001,7.919999999999959," The thing that a list maps is this index, number 0, 1, 2, 3, in that order, right?"
+698.5600000000001,5.439999999999941," So it has to start, have an element at index 0, and then that index increases by 1 from"
+704.0,2.0, their own.
+706.16,6.519999999999982," For each one of these indices, I'm mapping that index to some element in my list."
+712.68,1.0, Right?
+713.68,1.32000000000005, That's basically what the list does.
+715.0,4.960000000000036," There's something associated with index 0, something associated with index 1, and so on."
+719.96,4.039999999999964," So it's kind of like a very restrictive dictionary, right?"
+724.0,6.960000000000036," An actual Python dictionary works in similar way, except that now I am not putting any"
+730.96,3.0799999999999272, restrictions on my indices.
+734.04,4.960000000000036," My indices here become these sort of custom indices, called a key."
+739.0,7.7999999999999545, And so now I'm able to associate a value equivalent element in my list with that key.
+746.8,6.399999999999977, So I can have an element associated with any object.
+753.1999999999999,2.8799999999999955, So I am using the term value here.
+756.0799999999999,6.720000000000027," And in the dictionary, the key is associated with a value, and that's one entry in the"
+762.8,1.2000000000000455, dictionary.
+764.0,5.159999999999968," Now this is going to be a little bit confusing, because we've been using the term value to"
+769.16,3.840000000000032," refer to just some object's value, right?"
+773.0,5.2000000000000455," Like, variable A has value 5, or something like that."
+778.2,2.159999999999968, But now I'm going to try to make a conscious effort.
+780.36,5.919999999999959," Now that we're introducing dictionary and dictionary values associated with a key, whenever"
+786.28,6.2000000000000455," I'm talking about the dictionary's value to say dictionary value, just so it's not confusing."
+792.48,1.2000000000000455, Just keep that in mind.
+793.6800000000001,2.159999999999968, It can be a little bit confusing at first.
+795.84,4.360000000000014, Now that we're using the same terminology for two different things.
+800.2,4.559999999999945," So we're going to go through in this lecture, we're going to introduce a bunch of syntax"
+804.76,1.5199999999999818, and operations with dictionaries.
+806.28,3.3600000000000136, And there are lots of you try it exercises just to give you a little bit of practice with
+809.64,4.32000000000005," the syntax, because this is kind of a syntax heavy lecture."
+813.96,2.3999999999999773, So hopefully it helps a little bit.
+816.36,4.840000000000032, But let's first see how to store data in a Python dictionary.
+821.2,4.279999999999973," So as I mentioned, a Python dictionary stores entries."
+825.48,3.240000000000009, And that entry is a key value pair.
+828.72,4.360000000000014, So you're mapping one key to its value.
+833.08,3.519999999999982," The key can be any immutable object, and we're going to see what this means in a little"
+836.6,1.0, bit.
+837.6,4.399999999999977," And the value associated with that key, or the Python value associated with that key, can"
+842.0,5.360000000000014," be any object you'd like, even lists or other dictionaries."
+847.36,6.7999999999999545, So the way we create a Python dictionary is by using these open and closed curly braces.
+854.16,4.920000000000073," So tuples were open and closed parentheses, lists were open and closed square brackets,"
+859.08,3.0399999999999636, dictionaries are open and closed curly braces.
+862.12,2.8799999999999955, And this creates inside memory an empty dictionary.
+865.0,6.600000000000023," So an dictionary with zero entries, so the length of that dictionary is zero."
+871.6,4.67999999999995," To create a dictionary with one entry in it, again we have curly braces, and we add"
+876.28,1.3600000000000136, one entry in it.
+877.64,6.0," So this something colon, something else is an entry in my dictionary, one entry."
+883.64,5.139999999999986," And the thing before the colon is the key, and the thing after the colon is the value"
+888.78,4.980000000000018, associated with that key.
+893.76,5.559999999999945," So you can think of it if we're drawing a parallel to lists, this is now mapping at this"
+899.3199999999999,6.639999999999986," custom index four, we're putting element 16."
+905.96,4.639999999999986," So we can also create dictionaries that aren't just full of integers, and you can mix and"
+910.6,2.1200000000000045, match data types as you'd like.
+912.72,6.159999999999968," But usually in dictionaries we kind of have the keys all be the same type, and the values"
+918.88,2.080000000000041, all be the same type.
+920.96,4.440000000000055," But you can certainly mix and match types, just like you could create lists and tuples"
+925.4000000000001,6.039999999999964, full of an integer and the float and another list in mixed and matching that way.
+931.44,1.8400000000000318, So here I'm creating a dictionary.
+933.28,5.8799999999999955," Again open and close curly braces, starts my dictionary, and it has four elements in"
+939.16,1.0, it.
+940.16,4.7999999999999545," So each four entries in it, and each entry is separated by a comma."
+944.9599999999999,8.080000000000041," I've got here my first entry, so it is mapping the key, and add to the dictionary value"
+953.04,1.3999999999999773, B.
+954.4399999999999,3.6000000000000227," My second entry maps key, and add to value A."
+958.04,5.7999999999999545," Third entry maps key, and last entry maps key, and key to value A."
+963.8399999999999,6.2000000000000455, So this is a dictionary that essentially maps strings to other strings.
+970.04,5.519999999999982," So you can see here, I've kind of visualized the dictionary that we just created."
+975.56,9.960000000000036," We've got these custom indices, so we're basically mapping names to letter grades."
+985.52,1.0799999999999272, Everything okay so far.
+986.6,2.840000000000032," It makes sense, I guess conceptually."
+989.44,2.0," Okay, awesome."
+991.44,5.719999999999914," Okay, so the first thing we'd like to do is once we have a dictionary full of a bunch"
+997.16,3.400000000000091," of entries, how do we grab an entry?"
+1000.5600000000001,4.599999999999909, How do we look up a value associated with a key?
+1005.16,7.720000000000027," So the way we do that is in a very similar way to the way we look up an element in a list,"
+1012.88,1.0, right?
+1014.16,4.399999999999977," A key in a dictionary is just a custom index, right?"
+1018.56,2.0400000000000773, So how did we look up an element in a list?
+1020.6,5.439999999999941," So if I wanted the element at index three, I would basically say L square brackets three,"
+1026.04,3.2799999999999727, and that grabs for me the value at that index.
+1029.32,3.160000000000082," Well now I've got my custom indices, right?"
+1032.48,3.2799999999999727, My custom indices are these strings.
+1035.76,1.8800000000001091, The syntax will be exactly the same.
+1037.64,5.839999999999918," I've got this custom index I'd like to look up, so I say dictionary, name, square bracket,"
+1043.48,3.3199999999999363, custom index.
+1046.8,6.480000000000018," So if I say grade square bracket, John Python will go in to my dictionary named grades,"
+1053.28,6.720000000000027," it'll look up the key, John, and it'll return for me the value associated with that key,"
+1060.0,8.599999999999909," B. So this entire expression here is, evaluates or gets replaced with the string B."
+1068.6,4.319999999999936," Just like when we indexed into a list, L square brackets three, we replaced that entire"
+1072.9199999999998,4.600000000000136," indexing operation with the value of the element at that location, right?"
+1077.52,2.480000000000018, So similar here.
+1080.0,5.7199999999998," If I try to index into a dictionary and that key doesn't exist, so notice my dictionary"
+1085.7199999999998,3.520000000000209," has no string grace, Python will give me a key error."
+1089.24,5.039999999999964, So if you run code with dictionaries and you get a key error exception being raised
+1094.28,8.039999999999964," in the console, you'll know that you're trying to index into a key that doesn't exist."
+1102.32,7.600000000000136," So the question might be, yes, we're able to look up a value, right, given a key."
+1109.92,2.439999999999827, Can we do the same thing but backwards?
+1112.36,6.480000000000018," Given a key, sorry, given a value like A, B, C, whatever, can we look up a key associated"
+1118.84,1.0, with that value?
+1119.84,1.5199999999999818, And the answer is no.
+1121.36,4.680000000000064, You'd have to write some sort of loop or some sort of code that goes through every item
+1126.04,7.0, in my dictionary to check each value and see whether the key associated with that value
+1133.04,1.9600000000000364, is equivalent to the one I'm looking for.
+1135.0,4.039999999999964, So there is no nice expression to do that backward operation.
+1139.04,3.2000000000000455, And that's because the values in my dictionary can be repeated.
+1142.24,6.1599999999998545," So if I look up the value B, right, and I want what's the key associated with B, well,"
+1148.3999999999999,1.2799999999999727, there's actually two of them.
+1149.68,2.400000000000091, So how does Python know I want both of them?
+1152.0800000000002,2.0399999999999636, How does it know I want only one of them?
+1154.1200000000001,3.4400000000000546," How does it know I want maybe a list of all these things it doesn't, right?"
+1157.5600000000002,5.599999999999909, So you'd have to write code that does something for that operation.
+1163.16,2.2799999999999727, And we're going to see how to do that later.
+1165.44,4.920000000000073," Okay, so let's have you work on this, you try it, and this is just an exercise in looking"
+1170.3600000000001,1.2799999999999727, up a value.
+1171.64,4.599999999999909, So this is a function I'd like to write according to the specification.
+1176.24,2.6800000000000637, So it's called find grades.
+1178.92,3.2000000000000455," Grades is a dictionary, mapping student names to grades."
+1182.1200000000001,4.7999999999999545, So string to string exactly like we've seen in the previous slide.
+1186.92,3.7999999999999545, And students is going to be a list of student names.
+1190.72,4.960000000000036," So in the example here, I've got my input dictionary, this thing we just saw."
+1195.68,4.440000000000055," And then my list of student grades is, for example, you know, these two strings mat and"
+1200.1200000000001,1.5199999999999818, Katie.
+1201.64,4.559999999999945," For a bunch of these questions, especially even on microquiz and things like that, if"
+1206.2,6.720000000000027, it gets a little confusing when I try to write the specification in a very detailed way
+1212.92,4.079999999999927, to make it clear what I'd like from this function.
+1217.0,4.920000000000073," It's important to try to use the example to help you figure out what we'd like, because"
+1221.92,4.440000000000055," we're writing the specification in a general sense, but the example should hopefully make"
+1226.3600000000001,2.6799999999998363, things really clear for what we'd like.
+1229.04,6.560000000000173," So in this particular case, what we want the function to return is a list of the grades"
+1235.6,2.519999999999982, for the students being pasted.
+1238.12,4.6400000000001," So we look up mat, we see their grades as c, we look up Katie, their grade as an a, so"
+1242.76,5.399999999999864," I want to return the list c, a, in the same order that I passed in my students."
+1248.1599999999999,3.5599999999999454," So I'll give you a couple of minutes to work on that, and then we can write it together."
+1251.7199999999998,6.520000000000209, So that's line 94.
+1258.24,3.6799999999998363, So this is just the exercise on looking up values in the dictionary.
+1261.9199999999998,1.0, All right.
+1262.9199999999998,2.240000000000009, Does anybody have a start for me?
+1265.16,2.0," Yes, please."
+1267.16,10.319999999999936," Yep, El knew how about that."
+1277.48,3.0, So this will be my results list.
+1280.48,1.0, Yep.
+1282.48,1.0," Yep, for loop."
+1296.48,9.11999999999989," Yep, so grade square bracket LM looks up the value associated with my student named LM."
+1305.6,4.160000000000082, And maybe we can save it like this grade equals this.
+1309.76,1.8399999999999181, And then you set a pen.
+1311.6,6.0," Yep, so we can do el knew dot append the grade."
+1317.6,2.0, Anything else?
+1319.6,1.0," Yep, a return."
+1320.6,3.0, So we can return el knew.
+1323.6,1.0, Yep.
+1324.6,2.480000000000018, So very reasonable code.
+1327.08,3.519999999999982, I like it a lot.
+1330.6,3.6400000000001," You know, besides the first lecture, I don't know that we've written any code that didn't"
+1334.24,1.0, involve a loop.
+1335.24,5.440000000000055," So your best bet for writing code, you know, for any sort of thing in this class is to think"
+1340.68,1.7999999999999545, what loop can I do.
+1342.48,9.0," So let's run the code, and it should return for me C, A, and it does."
+1351.48,4.6400000000001," Now that we can iterate, so I mentioned this before, but once we're iterating over, you"
+1356.1200000000001,3.6799999999998363," know, tuples and lists and things like that, one thing I would add it just for debugging"
+1359.8,6.2000000000000455," purposes is say something like LM is, and then you can, you know, say like an example of"
+1366.0,3.4400000000000546," what it could be, like Anna or Matt or whatever."
+1369.44,5.879999999999882," It could be just to remind yourself that that thing, that loop variable is a string."
+1375.32,3.480000000000018, And so it's one less thing to remember as you're writing for their code.
+1378.8,3.0, This is really nice.
+1381.8,7.559999999999945," Okay, so dictionaries are already proving to be really, really useful."
+1389.36,5.039999999999964, You can create values associated with custom indices.
+1394.3999999999999,4.6400000000001," And if we want to grab the value associated with that custom index, it's really just a"
+1399.04,6.0," matter of indexing using a key, using that specific key, much like we did indexing into"
+1405.04,1.4800000000000182, a list.
+1406.52,1.0, No need to loop.
+1407.52,5.599999999999909," None of that, you know, iteration, it's just in a single line of code that indexes into"
+1413.12,2.0799999999999272, the list.
+1415.1999999999998,3.7200000000000273," So let's see a few more operations before we do the next, you try it."
+1418.92,5.400000000000091, So I've got my list of grades that we've been working with in the past couple of slides.
+1424.3200000000002,4.399999999999864, Let's say that we now want to add a new student in their grade.
+1428.72,7.440000000000055, The way we do that is very similar to the way that we would add an element to a list
+1436.16,3.2799999999999727, once we already have an index for that list.
+1439.44,1.0, Right?
+1440.44,3.759999999999991, Here notice we don't actually have a slot for grace.
+1444.2,3.2799999999999727, Yet I'd like to add her to my dictionary.
+1447.48,1.6800000000000637, That's okay.
+1449.16,6.720000000000027," With this particular syntax here, so grades at key grace, if Python does not find grace"
+1455.88,4.079999999999927," in my list in my dictionary of keys, it'll just add her."
+1459.96,2.240000000000009, Okay?
+1462.2,1.3999999999998636," Which is really nice, right?"
+1463.6,2.6800000000000637, I don't need to check if she's already in there.
+1466.28,1.0, There's no looping.
+1467.28,5.6400000000001," You just say grades at grace equals a, boom, it adds it for you."
+1472.92,3.119999999999891, What if I want to change an entry in my dictionary?
+1476.04,4.0," Well, let's say I want to change grace as grade to a C."
+1480.04,3.839999999999918, Grades at custom index grace equals C.
+1483.8799999999999,3.040000000000191," We'll go in, look at my keys."
+1486.92,4.319999999999936," When grace didn't exist, Python added her with her value."
+1491.24,5.720000000000027," But she already exists there, so Python will just overwrite her value."
+1496.96,2.0399999999999636, So really nice.
+1499.0,3.9200000000000728, Something to look out for in case you already have values in the dictionary.
+1502.92,2.9199999999998454, You want to be careful if you actually do want to overwrite things.
+1505.84,1.9200000000000728," But it's really, really nice behavior."
+1507.76,3.1599999999998545," And it's different than lists, right?"
+1510.9199999999998,3.0800000000001546, Especially adding an entry to the dictionary.
+1517.04,3.4400000000000546, You can delete entries much like we deleted entries from a list.
+1520.48,2.839999999999918, We use the Dell function.
+1523.32,6.720000000000027, And the Dell function says what entry you'd like to delete from what lists.
+1530.04,5.079999999999927," So here we just say the name of our dictionary at index, yeah."
+1535.12,7.0, So this will completely remove Anna and her value and the value associated with Anna from the dictionary.
+1546.3999999999999,5.960000000000036," So what I want to make a note of is that our dictionary is being mutated with all of these different methods,"
+1552.36,2.519999999999982," or all of these different functions, right?"
+1554.8799999999999,3.759999999999991," So here, when I added grace, I've mutated my original dictionary, right?"
+1558.6399999999999,4.839999999999918," The animation didn't make a copy of this dictionary with grace added,"
+1563.4799999999998,1.6000000000001364, leaving the original unchanged.
+1565.08,4.599999999999909, I've literally gone in and mutated my original dictionary to add grace.
+1569.6799999999998,3.519999999999982, I've mutated the original dictionary to change her grade.
+1573.1999999999998,4.040000000000191," I've mutated the original dictionary to remove Anna from the dictionary, right?"
+1577.24,3.8799999999998818, So all these functions are actually mutating my dictionary.
+1583.24,7.679999999999836," Okay, one other very useful thing that you can do with dictionaries is to check if a key is in my dictionary."
+1591.92,3.519999999999982," So we do this using the inoperator, the in keyword."
+1595.44,5.480000000000018," We've seen the in keyword being used to check if an element is in a list,"
+1600.92,4.079999999999927," to check if a substring or a character is in a string,"
+1605.0,2.160000000000082, to check if some element is in a tuple.
+1607.16,5.559999999999945, We can also use it to check if an element or a key is in my dictionary.
+1613.72,3.6800000000000637," So I want to make a note, it's only checking the keys."
+1617.4,3.0, It does not look for the values in the dictionary.
+1620.4,3.9200000000000728, We'll see how to check if some value is in the dictionary in a little bit.
+1624.3200000000002,4.1599999999998545, But the in keyword specifically only looks at the keys in the dictionary.
+1628.48,2.9600000000000364," So if I have the expression, you know,"
+1631.44,4.920000000000073," the string, John is in grades, Python only looks at the keys and say,"
+1636.3600000000001,1.4400000000000546," yep, there it is."
+1637.8000000000002,1.6799999999998363, I don't care what values associated with it.
+1639.48,2.8400000000001455, I just care that it's in my keys.
+1642.3200000000002,4.279999999999973," So this entire expression here, John in grades will evaluate."
+1646.6000000000001,1.9600000000000364, So we replaced with true.
+1648.56,4.079999999999927," Daniel obviously is not in my dictionary keys, so it returns false."
+1652.6399999999999,3.0800000000001546," B is not in my dictionary keys,"
+1655.72,3.759999999999991," even though it's in my values, it still returns false,"
+1659.48,1.759999999999991, because it only looks at the keys.
+1664.76,3.6399999999998727," All right, let's have you try this exercise."
+1669.6399999999999,3.2000000000000455, So function is called find in L.
+1672.84,4.759999999999991," Again, we can use the specifications and the example to help us figure out"
+1677.6,2.3599999999999, what we'd like from this function.
+1679.9599999999998,5.0, So Ld is going to be a list of dictionaries.
+1684.9599999999998,4.720000000000027," So in the example here, I've got three dictionaries defined."
+1689.6799999999998,4.400000000000091," And the first parameter here, the thing being passed as Ld,"
+1694.08,4.0," is the list with d1, d2, d3 as my elements."
+1698.08,3.6399999999998727, And k is just an integer.
+1701.7199999999998,4.440000000000055, What I'd like to do is return true from the function
+1706.16,6.480000000000018, if that k is a key in any of these dictionaries and false otherwise.
+1712.64,5.319999999999936," So as soon as I see a key that matches k, I want to return true."
+1717.96,6.720000000000027," So in this example here, when I look for the k2 inside these dictionaries,"
+1724.68,2.0," d1 doesn't have it, but d2 has it."
+1726.68,2.519999999999982, So I would return true.
+1729.2,3.880000000000109," When I look for 25 in that same list of dictionaries,"
+1733.08,6.559999999999945," 25 is a value in one of these in d3, but it's not a key in d1, d2, or d3."
+1739.6399999999999,1.1200000000001182, So that would return false.
+1745.0,6.039999999999964," All right, so that's just a little lower line, 115."
+1751.04,3.480000000000018, Give you a couple moments and then we can write it together like usual.
+1754.52,1.5199999999999818," All right, does anyone want to start me off here?"
+1756.04,3.599999999999909, So how can we do this?
+1759.64,4.480000000000018," Create a loop, yes?"
+1764.1200000000001,1.4800000000000182, Four.
+1765.6000000000001,11.079999999999927," Yeah, okay, so that means that d is, I can say like k1 mapped to v1 or something like that,"
+1776.68,1.0, right?
+1777.68,3.480000000000018, A key to a value.
+1781.16,13.839999999999918," If k in d, so that will check for me my keys in that particular dictionary that I'm looking at right now."
+1795.0,3.9200000000000728," Yep, we can immediately return true."
+1798.92,6.6400000000001," Right, as soon as we found it, no need to check the other dictionaries, just pop out of the function and return true."
+1811.72,4.759999999999991, Same inside the if or inside the four outside the four.
+1816.48,2.7999999999999545," Outside the four, we can return false."
+1819.28,1.6400000000001, Yep.
+1820.92,3.7999999999999545, I like this code a lot.
+1824.72,4.039999999999964, It uses this inoperator to do that the task.
+1828.76,7.600000000000136," So the return false outside of the four works really well because if I've gone through every d inside ld here,"
+1836.3600000000001,3.8799999999998818, then I'm checking every single dictionary.
+1840.24,8.920000000000073," As soon as I find one that has that key, this return true acts like a break and a return."
+1849.16,6.759999999999991," Right, so breaks out of the loop and returns immediately and it doesn't return false."
+1855.92,7.879999999999882," But if I've gone through every dictionary and didn't find the key matching k, then I return false."
+1863.8,10.200000000000045, Did anybody try it a different way or is this?
+1874.0,3.1599999999998545," We could certainly try it with a boolean flag, right?"
+1877.1599999999999,6.720000000000027, We could flag the fact that we found it through some loop and keep track of it and at the end just return that flag.
+1883.8799999999999,1.2000000000000455, That's another way to do it.
+1885.08,5.600000000000136, But this is probably the most pathetically.
+1890.68,2.6800000000000637," So we can run it on these two examples here, right?"
+1893.3600000000001,6.759999999999991, So I'm expecting to looking up to return true and looking up 25 to return false and it does.
+1900.1200000000001,5.119999999999891, Questions about this code or dictionary so far is everything.
+1905.24,2.4400000000000546," OK, so far."
+1907.68,3.0, OK.
+1910.68,1.599999999999909," All right, a couple more operations."
+1912.28,2.8400000000001455, So so far we've looked up values in a dictionary.
+1915.1200000000001,1.7200000000000273, We've added stuff to the dictionary.
+1916.8400000000001,2.7200000000000273, We've deleted stuff from the dictionary.
+1919.56,7.319999999999936, One really useful thing to do is to be able to look at every single entry in my dictionary.
+1926.8799999999999,6.400000000000091," The reason why we'd want to do this is because we should assume that when we create our dictionaries,"
+1933.28,2.5599999999999454," there's no order to them, right?"
+1935.84,1.7200000000000273, This is very much unlike lists.
+1937.56,1.8399999999999181, List had an order to them.
+1939.3999999999999,3.8400000000001455, We knew that the first element in our list was at index zero.
+1943.24,2.0799999999999272," The next one was at index one and so on, right?"
+1945.32,3.6800000000000637, List were ordered sequences of elements.
+1949.0,5.480000000000018, But dictionaries are not ordered sequences of elements.
+1954.48,2.4400000000000546, That's not super true.
+1956.92,5.1599999999998545," There are up until a very recent version of Python, there was no guarantee to order."
+1962.08,6.8400000000001455, They would put in some order that I couldn't figure out how it was determined.
+1968.92,5.639999999999873," But I forget which Python version, maybe 3.6 or something like that, started to guarantee"
+1974.56,4.960000000000036, an order for the dictionary element.
+1979.52,5.519999999999982, And that order was the same order that you inserted the elements.
+1985.04,5.039999999999964, But if you'd like to write robust code that could be run by people using an older version
+1990.08,4.880000000000109," of Python, you should write the code assuming that no such order exists."
+1994.96,1.0, It's okay.
+1995.96,3.759999999999991, It doesn't make the code that much harder to write.
+1999.72,6.559999999999945," But if we're not assuming any order to Python entries in the dictionary, then that means"
+2006.28,4.880000000000109, a lot of times we actually have to look at each entry in the dictionary to do some sort
+2011.16,2.2000000000000455, of task.
+2013.3600000000001,4.519999999999982, So one of the first things you might want to do is to iterate through all the keys in
+2017.88,1.759999999999991, the dictionary.
+2019.64,5.279999999999973," To do that, we use a function called grades.keys."
+2024.92,5.519999999999982," And this grades.keys function here doesn't mutate the dictionary at all, but instead"
+2030.44,7.480000000000018," it returns for me an iterable, a sequence of values, which are all the keys in my dictionary."
+2037.92,6.319999999999936, Now the data type of this return value is called dict underscore keys.
+2044.24,2.759999999999991, It's not a data type we've worked with before.
+2047.0,2.2400000000002365," Okay, it looks really weird."
+2049.2400000000002,5.199999999999818," But if you'd like and you don't have to do this, you can always cast this sequence of values"
+2054.48,3.7200000000002547, that's type dict keys to a list like this.
+2058.2000000000003,6.279999999999745," So if you cast to list grades.keys, it gives for us this more recognizable list with each"
+2064.48,4.2800000000002, key being an element in the list.
+2068.76,4.879999999999654," You don't have to do this, but if it makes it easier for you, you can."
+2073.64,3.400000000000091," So this line of code here, grades.keys returns for you."
+2077.04,4.639999999999873," You can think of it like this iterable, this list of all the keys in the dictionary."
+2081.68,1.5200000000004366," Again, they're not ordered, right?"
+2083.2,3.2800000000002," I mean, they're ordered in the order that I added them into the dictionary, right?"
+2086.48,4.519999999999982," Anna then Matt then John then Katie, but they're not sorted in alphabetical order."
+2091.0,3.0399999999999636," If you have integers, they won't be sorted in ascending or descending order."
+2094.04,4.559999999999945, So it's best to just not assume an order to begin with.
+2098.6,4.7199999999998," Similarly, we can get an iterable of all the values in the dictionary."
+2103.3199999999997,4.960000000000036," And to do this, no surprise there, we use grades.values."
+2108.2799999999997,4.360000000000127," And this is again a function where it doesn't mutate the grades at all, but instead,"
+2112.64,5.880000000000109," it gets replaced with this dict values data type, never seen it before either."
+2118.52,5.440000000000055," And you can cast it to a list if you'd like, because it makes more sense to us at this point in time,"
+2123.96,4.7199999999998, which just returns for us this list of every single value in my dictionary.
+2128.68,1.5199999999999818," Again, no order, right?"
+2130.2,5.039999999999964, We can see that there's no order except for the order that we actually added the element in.
+2136.8399999999997,1.0, Yeah.
+2137.84,8.159999999999854," When you said like an act like a bubble, it might be a great subject of other time to print out the same list."
+2146.0,5.360000000000127," Yeah, yeah, print out the same, the same, iterable, I guess."
+2151.36,1.2400000000002365," If you do it again, yeah."
+2152.6000000000004,3.599999999999909," If you're just doing like, if you're just iterating over the dictionary,"
+2156.2000000000003,3.400000000000091," there can be chances for like, to come up the order."
+2159.6000000000004,5.239999999999782," If you're iterating over the dictionary, not in the Python version we're using,"
+2164.84,3.7600000000002183," but in a previous version, if you ran, you know, you're on your machine,"
+2168.6000000000004,3.799999999999727," or if I ran the same code on my machine, it might have given me a different order."
+2175.28,3.199999999999818," But in the versions we're using from now on in Python, right?"
+2178.48,5.200000000000273," Because you guys all probably downloaded the latest version of an Acona and Spyder,"
+2183.6800000000003,4.399999999999636, it will guarantee the order that you inserted the elements in.
+2188.08,4.400000000000091," But if somebody using an older version of Python takes your code and runs it,"
+2192.48,7.360000000000127," they might actually get, you know, AAB or some other order for these functions here."
+2201.68,0.7200000000002547," Yeah, you're welcome."
+2203.88,5.119999999999891, So these being iterable just means that we can have something like four i or
+2209.0,6.0," so four k in grades dot keys, basically giving us a loop where k is going to be"
+2215.0,1.8800000000001091, each element in this list.
+2216.88,5.0, So that's fine.
+2221.88,3.5599999999999454, So we can iterate over the keys or we can iterate over the values directly.
+2225.44,6.079999999999927, But what I find personally most effective is to iterate over each entry in the dictionary.
+2231.52,3.1600000000003092," So not just over the keys or the values by themselves,"
+2234.6800000000003,3.9600000000000364, it's to iterate over the keys and the values together.
+2238.6400000000003,6.7599999999997635," So to do that, we use this function called grades dot items."
+2245.84,4.880000000000109," And unsurprisingly, this will return also an iterable where each element in my"
+2250.7200000000003,5.319999999999709," iterable is not just the key or the value, it's a tuple of the key comma, the value."
+2258.2000000000003,4.559999999999945," And again, we can cast it to a list to give us something that's more recognizable."
+2262.76,5.239999999999782," You can see now each element in the returned list is going to be the tuple where I have an entry,"
+2268.0,4.440000000000055, right? So my entry and a comma B is this first element in my returned list and
+2272.44,1.8800000000001091, then MATA and then John B and then KDA.
+2274.6000000000004,5.399999999999636, So I grab these entries together where I have access to both the key and the value for
+2280.0,5.559999999999945," that entry, which means, and this is the important part, that we can do something like this."
+2285.56,2.600000000000364, And we can do this for the previous slide as well.
+2288.1600000000003,8.519999999999982," But for this particular grades dot items iteration, if we're grabbing a key value pair"
+2296.6800000000003,5.960000000000036," out of items, that means we can do something like this for K comma V in grades dot items,"
+2303.64,6.960000000000036," means that Python will map K to the key for that entry and V to the value for that entry,"
+2310.6,2.7199999999998, as I'm iterating over each one of these pairs.
+2313.3199999999997,1.0, Right?
+2314.3199999999997,4.920000000000073," So with each iteration, I have access to both the key and the value for that entry,"
+2319.24,1.2800000000002, which is pretty useful.
+2320.52,1.1599999999998545, Right?
+2321.68,8.440000000000055," So if I have this line of code here, if I print K, K has value V, the K and the V will change with each entry."
+2330.7999999999997,2.5599999999999454, I'm just grabbing both the key and the value for that entry.
+2333.3599999999997,1.0," Yeah, question."
+2339.3599999999997,1.0, It's not a tuple.
+2340.3599999999997,4.760000000000218," So the actual object type is this thing, dict underscore items."
+2345.12,4.2800000000002," So again, not a type that we've worked with before, but that's just the type, right?"
+2349.4,5.519999999999982," Like we've seen lists, tuples, dictionaries, dict underscore items is another data type."
+2354.92,1.0, Yeah.
+2355.92,1.7599999999997635, But the cool thing is that it's an iterable.
+2357.68,4.239999999999782," So it's a sequence of values, which means that you can cast it to a list,"
+2361.9199999999996,3.2400000000002365, which is also a sequence of values in and knows how to do that casting.
+2365.16,2.7199999999998, And you get the more recognizable list that we've been using.
+2370.3999999999996,1.1200000000003456, Other questions?
+2373.7599999999998,3.680000000000291," Okay, so I really like using grades dot items to iterate over entries."
+2377.44,1.7999999999997272, So let's have you try this exercise.
+2379.24,3.2400000000002365, So it's a function called count matches.
+2382.48,2.2799999999997453," It takes in one dictionary, d."
+2385.6000000000004,4.7599999999997635," I didn't say what the elements are, but you know, you can mix and match."
+2390.36,3.7600000000002183, So here I have a dictionary with just in mapped to ints.
+2394.1200000000003,4.799999999999727," And here I've got a dictionary where it maps, you know, ints and strings and things like that."
+2398.92,5.360000000000127, And what I want this function to do is tell me how many entries in this input dictionaries
+2404.28,2.519999999999982, have the key match its value.
+2406.8,5.880000000000109," So here, in this first example, the key here is one, the values two, so they don't match."
+2412.6800000000003,1.6799999999998363, These don't match and these don't match.
+2414.36,1.7199999999998, So the count should be zero.
+2416.08,4.2400000000002365," But down here in this example, the one doesn't match two, so that's fine."
+2420.32,6.679999999999836," But the key A matches its value, one count, key five matches its value, two counts."
+2427.0,1.3600000000001273, So this should return count to.
+2431.36,5.239999999999782," All right, let's have you work on that down by line 137."
+2436.6,1.2400000000002365, And then we'll write it together.
+2441.1600000000003,1.2399999999997817," All right, how could I start this?"
+2445.1200000000003,1.0799999999999272, Yes.
+2447.1600000000003,1.319999999999709," Account, yes."
+2449.48,1.0," Zero, yep."
+2452.28,1.0," A for loop, yep."
+2460.52,1.6000000000003638," Yep, as a function, yep."
+2465.32,1.6399999999998727," V equal k, yep."
+2466.96,4.039999999999964, So this is where my value equals my key for that particular entry.
+2472.0,3.5599999999999454, Count equals count plus what?
+2475.56,0.8400000000001455, Perfect.
+2478.36,2.0," Yep, return count."
+2481.4,1.599999999999909, Did anybody do it a different way?
+2486.0,1.4800000000000182," Nope, okay, awesome."
+2487.48,2.0," Let, yeah."
+2489.48,5.360000000000127," Why do I have to call it like, oh yeah, I want to do it a way, I have to go over it."
+2495.84,0.9600000000000364," We can write it, yeah."
+2496.8,5.360000000000127," Yeah, I did like the count equals zero and then it's like for x in things like"
+2502.1600000000003,4.0, you said it was just going to call the value and say it's big.
+2506.1600000000003,3.3599999999996726," I got x equals x, but like that, it counts."
+2509.52,1.7600000000002183, I got to know that I'm just going to call it.
+2512.04,4.520000000000437," Yeah, so we can say for x in d dot keys or something like that, right?"
+2517.6800000000003,1.0, Something like that or no?
+2519.1200000000003,3.319999999999709," We can also say for x in d, I think that might work too."
+2522.84,1.3200000000001637, Because it'll grab the key for us.
+2525.0,1.5199999999999818, But just to be safe keys.
+2527.7599999999998,1.599999999999909, And now we need to grab the value.
+2529.3599999999997,2.5600000000004, So how do you grab the value associated with kx?
+2537.12,1.800000000000182," Yeah, score, it's just indexing, right?"
+2538.92,9.079999999999927," So d square brackets x, oops, if d square brackets x equals, so that's the value equals the key."
+2550.0,2.399999999999636," Then again, we, you know, count plus one."
+2553.4,3.2800000000002, So this is our other way.
+2559.52,10.039999999999964," Yeah, so we don't have to use items, but it just, items makes things easier because we have in hand a variable that's, you know, the value and the variable that's the key."
+2569.56,3.519999999999982, And doing things like indexing starts to get confusing.
+2576.36,2.519999999999982," If, you know, I mean, it can be confusing."
+2579.88,1.8800000000001091," But yeah, both ways are very valid."
+2581.76,1.0, So let's run it.
+2584.76,0.8800000000001091, And it should work.
+2585.6400000000003,3.6799999999998363," Yeah, so the first count is zero as we expected and the second count is two."
+2591.0,1.9200000000000728, Is that any questions about this code?
+2592.92,0.9200000000000728, Does it make sense?
+2594.6400000000003,2.199999999999818, Is there another way that somebody tried it?
+2600.08,0.6000000000003638," Nope, okay."
+2601.04,0.4800000000000182, Okay.
+2606.96,4.799999999999727," Okay, so dictionaries are mutable objects, right?"
+2611.7599999999998,3.1599999999998545, So all the aliasing and cloning rules apply.
+2614.9199999999996,7.760000000000218, Remember when we talked about lists and using the equal sign between a list and another variable name.
+2623.6,4.279999999999745, Just a plain old equal sign means that you are making an aliase for that list.
+2628.52,1.8399999999996908, Same thing applies to dictionaries.
+2630.36,6.960000000000036," So using, you know, saying d1 equals d2 where d2 is a dictionary means that you've just created an alias for that dictionary."
+2637.32,4.8400000000001455," So if you change the dictionary through either of those variables, you're changing the object itself."
+2643.08,4.600000000000364," If you want to actually make a copy, you use d.copy where d is the name of the dictionary."
+2647.6800000000003,3.0799999999999272, You'd like a copy and that gets you a copy of that dictionary.
+2650.76,2.3600000000001273, And then you can change it without changing the original one.
+2655.2400000000002,4.199999999999818, So let's talk a little bit about the values for a dictionary and the keys.
+2659.44,4.039999999999964, Because there are some restrictions on the keys for the dictionary.
+2663.48,2.0, No restrictions on the values.
+2665.48,2.9200000000000728," So dictionary values can be any type, right?"
+2668.4,4.400000000000091," You can have a dictionary value that's a float, int, string, tuple."
+2672.8,2.400000000000091," You can have a dictionary value that's a list, right?"
+2675.2000000000003,1.0399999999999636, Which is a mutable object.
+2676.2400000000002,2.519999999999982, You could have a dictionary value that's another dictionary.
+2679.48,2.9200000000000728," All are okay, whatever you'd like for the values to be."
+2683.32,2.2399999999997817, You can have dictionary values that are duplicates.
+2685.56,4.920000000000073," You can have one key that maps to value five, another key that maps to value five."
+2691.32,0.5199999999999818, All good.
+2693.84,3.480000000000018," So the key, so the values don't need to be unique."
+2697.32,2.319999999999709, We do have restrictions on the keys though.
+2700.72,4.600000000000364," The first restriction on the keys is that it has to be unique, right?"
+2705.32,5.079999999999927," So if you're mapping a key one to value five,"
+2711.2400000000002,4.559999999999945, you cannot map a key one to value six.
+2715.8,5.039999999999964," Because if you go and look up the value associated with one,"
+2720.84,3.9600000000000364, how does Python know which value you'd like the five or the six?
+2724.8,3.6799999999998363," Right. So the keys have to be unique, first of all."
+2730.2400000000002,4.799999999999727," Second, the keys have to be immutable, technically hashable,"
+2735.04,4.640000000000327," but for the purposes of this class, just think of them as having to be immutable."
+2739.68,3.4400000000000546," So a key can only be one of these types that we've seen so far,"
+2743.12,2.2399999999997817," int float, string, tuple, or bool."
+2745.3599999999997,1.4800000000000182," You cannot have a key that's a list,"
+2746.8399999999997,3.400000000000091, you cannot have a key that's a dictionary because they're mutable objects.
+2751.7599999999998,3.3200000000001637, So let's look at that a little bit further in detail.
+2756.3599999999997,8.0, So the reason why we can't have a key that is mutable is because of the way keys are stored in Python.
+2765.3599999999997,2.080000000000382," Sorry, the way the dictionaries are stored in Python."
+2768.44,2.0799999999999272, So I'm going to show you an example on the next slide.
+2770.52,4.119999999999891," First, I'm going to explain how they're stored and then we'll go through an example showing you"
+2774.64,3.800000000000182, exactly why you can't have a mutable structure.
+2779.44,5.7199999999998, So the way the way dictionaries are stored in Python is you first need a key
+2785.16,1.7600000000002183, to associate with a value.
+2786.92,3.2800000000002, So everything starts off with the key you'd like to add to your dictionary.
+2791.28,5.119999999999891, So Python basically runs a function called a hash function on the key.
+2797.4,3.800000000000182," For simplicity's sake, let's say the key you're trying to store is a number."
+2801.2000000000003,2.5599999999999454," That hash function might return that same number,"
+2803.76,1.4800000000000182, it might return something else.
+2806.04,3.7200000000002547," If you're trying to store a string as a key, Python again,"
+2809.76,3.6799999999998363," runs maybe a different hash function that takes in that string,"
+2813.44,2.2400000000002365," which might be a bunch of characters,"
+2815.6800000000003,2.119999999999891, and it converts it to some number.
+2817.8,5.0, So the hash function always takes in your key and converts it to a number.
+2823.8,1.0, Okay.
+2824.8,8.7199999999998," That number, think of it like representing a memory location where you're going to store the value associated with that key."
+2833.52,3.2800000000002, So you're always grabbing a number that represents a memory location.
+2839.28,2.880000000000109," At that memory location, you'll store the value."
+2842.1600000000003,3.519999999999982," So next time you want to look up the value associated with the key,"
+2845.6800000000003,2.480000000000018, you just run that same hash function.
+2848.1600000000003,1.5199999999999818, The function won't change.
+2849.68,2.2399999999997817," You run the same hash function on your object,"
+2851.9199999999996,2.5600000000004, and you'll be able to get that same integer back.
+2854.48,2.0799999999999272, You'll be able to grab that same value back.
+2857.2799999999997,4.079999999999927," But if you're storing mutable objects, that means that object can change."
+2861.3599999999997,2.200000000000273," So if you run the hash function,"
+2863.56,3.319999999999709," the thing that gives you a number on something that's changed,"
+2867.8799999999997,1.8800000000001091, that number might not be the same.
+2871.12,2.8400000000001455," Because you've changed the thing that you're passing into the function,"
+2873.96,2.399999999999636, so why would it give you the same value back?
+2877.24,1.5199999999999818, So let's look at this example.
+2878.76,1.8400000000001455," So again, we're storing grades."
+2880.6000000000004,3.519999999999982, And let's say we're trying to store a bunch of grades inside our memory.
+2884.1200000000003,5.359999999999673," And let's say our memory is just 16 locations, so 0 through 15."
+2890.28,3.519999999999982," So at each, at these locations, I'm going to store grades associated with a person."
+2894.76,4.960000000000036, The function I'm going to run on the student is using their name.
+2899.7200000000003,3.119999999999891, So I'm going to store Anna's grade somewhere.
+2903.48,2.800000000000182," But I need to run a function that takes in the string A and A,"
+2907.1600000000003,2.6399999999998727, and gets for me a number.
+2909.8,1.8400000000001455, That number is where I'm going to store my grade.
+2912.6400000000003,2.7599999999997635," So a simple hash function we might do is to say,"
+2915.4,4.200000000000273," well, I'm going to take A and map it to 1, B, map it to 2,"
+2919.6000000000004,1.2399999999997817," C, map it to 3, and so on."
+2921.84,5.760000000000218," I can sum all of those numbers associated with my letters in my name,"
+2927.6000000000004,1.0799999999999272," right, 16."
+2928.6800000000003,4.559999999999945," And then I can mod it with 16, which is how many entries I have in my memory."
+2933.9599999999996,3.9200000000000728," So if I mod it with 16, that's going to give me a number 0 through 15."
+2939.3999999999996,4.0," If you take the remainder when you divide by 16, you'll either get 0 all the way up through 15."
+2944.4399999999996,6.640000000000327," So if I mod my name, that means I'm going to store my grade at a memory location 0."
+2953.4799999999996,0.7200000000002547, So far so good.
+2955.8799999999997,4.2400000000002365," So I'm basically, I made up this hash function that tells me where to put my grade."
+2961.08,1.599999999999909, Now I add another person.
+2962.68,8.88000000000011," Again, I'm going to convert the letters in their name to numbers so that I can easily get a number out of their letters."
+2971.56,4.320000000000164, So I'm basically hashing their letters to a number.
+2975.88,7.519999999999982," Again, summing this for Eric is 35, I'm going to mod it with 16, which means I'm going to put Eric's grade at location 3."
+2985.4,3.6799999999998363," Next person, John, same thing, right, I add the numbers, mod 16."
+2989.08,2.6399999999998727, I'm going to put John at location 15.
+2991.72,4.800000000000182, So this is my memory where I'm storing the values associated with these students.
+2996.52,5.440000000000055," So if I want to grab back my grade, I run the exact same hash function."
+3002.84,2.799999999999727, So I'm going to run the same hash function on my name.
+3005.64,1.2800000000002," My name hasn't changed, right?"
+3006.92,1.199999999999818, It's still the string.
+3008.12,2.3200000000001637, I'm not allowed to change it because it's a string.
+3010.44,2.9600000000000364, And so I'm going to get the same value back 0.
+3013.4,5.359999999999673," So that means to grab the letter associated with my name, I just need to go straight into my memory location."
+3019.08,3.8400000000001455, And look up the value at that memory location.
+3023.64,1.2000000000002728, So I know it's going to be a C.
+3026.2799999999997,6.480000000000018," Now let's say I'm storing a list, a student name as a list."
+3035.08,3.599999999999909," So again, Anna, Eric and John are immutable, right?"
+3038.68,1.2000000000002728, They will not change.
+3039.88,3.4399999999996," But if I store Kate as a list, her name might change."
+3044.44,2.1599999999998545," Again, I can run the same hash function on her name."
+3046.6,4.559999999999945, That means her grade when I first store it is going to be at location 5.
+3051.48,1.7599999999997635, So I'm storing Kate at location 5.
+3054.52,4.559999999999945," All these three strings, I know I can get back because they cannot change."
+3060.04,4.880000000000109, But let's say that Kate goes and changes her name for Kate with a K to Kate with a C.
+3066.6,2.0," It's the same object, right?"
+3068.6,3.8400000000001455," The same person, she earned her grade B originally."
+3072.44,4.079999999999927," So if I want to grab her grade back, even though her name has changed,"
+3076.52,3.119999999999891, I would still like to grab the B associated with her as a person.
+3081.32,2.880000000000109," But Kate with a C, if I run that same hash function,"
+3084.2000000000003,2.9599999999995816, then I ran to put her grade in my table.
+3088.92,4.960000000000036, Tells me that I now need to look up her grade at memory location 13.
+3093.88,1.7599999999997635, No longer at memory location 5.
+3097.96,0.7199999999997999, She's not there.
+3098.9199999999996,5.2800000000002," So now it's like, did the student disappear?"
+3104.2,1.199999999999818, All that stuff.
+3106.6,7.360000000000127, So you see now that means that's the reason why I cannot have a mutable object as a key to my list.
+3113.96,4.7199999999998," Because if that object changes running that hash function on that changed object,"
+3118.68,5.199999999999818, might not give me the same memory location where I originally stored the value associated with that object.
+3125.72,0.6399999999998727, Does that make sense?
+3126.44,2.2400000000002365, Okay.
+3129.7200000000003,2.400000000000091, So let's revisit our original example.
+3132.1200000000003,5.039999999999964," The one where we tried to store everything in a master list, all these grades in a master list."
+3138.04,2.480000000000018, Now let's store it in a master dictionary.
+3142.1200000000003,4.959999999999582," So I've got my grades, notice curly bracket, curly bracket is a dictionary."
+3147.08,2.880000000000109," I've got two students in my class, Anna."
+3151.0,2.1600000000003092, Right? So this is Anna's information and Bob.
+3153.1600000000003,1.1199999999998909, That's Bob's information.
+3156.92,2.7200000000002547, So just two students in my master dictionary.
+3159.6400000000003,5.919999999999618," So the key Anna, right, is going to be one entry, one entry key."
+3165.56,1.5199999999999818, Key Bob is the other entry key.
+3167.8,2.9600000000000364, And what's the information associated with these keys?
+3170.76,4.1599999999998545," Well with Anna, I've got this dictionary associated with her name."
+3175.56,1.6000000000003638, So that's this big thing here.
+3177.1600000000003,0.9600000000000364, I'll explain it in a bit.
+3178.92,3.7600000000002183," And similarly with Bob, Bob has one thing associated with him."
+3182.6800000000003,1.7599999999997635, And it's another dictionary.
+3187.32,3.3600000000001273, So I'm mapping strings to dictionaries here.
+3190.6800000000003,4.0, And that's fine because values in a dictionary can be other dictionaries.
+3195.88,2.3200000000001637, So what are these dictionaries about?
+3199.32,4.800000000000182," Well, the number of items in the dictionary for a particular person,"
+3204.1200000000003,1.2799999999997453," there's three elements, right?"
+3205.4,2.9600000000000364," So comma, comma separates my three elements."
+3208.36,3.9200000000000728, The first one is going to be mapped with key MQ.
+3212.28,2.880000000000109," The second one mapped with key PS for problem set,"
+3215.1600000000003,2.7199999999998, and the last one mapped with the string fin for final.
+3217.88,0.3200000000001637, Great.
+3219.2400000000002,3.2799999999997453, So each one of these students has this dictionary associated with them.
+3222.52,3.4400000000000546, And that dictionary then itself has three entries.
+3225.96,2.5599999999999454," One for the microquiz, one for the PS, one for the final scores."
+3230.92,3.3600000000001273, So now what's the values associated with those keys?
+3234.28,2.2399999999997817," Well, the microquiz is going to be a list."
+3236.52,1.680000000000291," The problem set is going to be a list,"
+3238.2000000000003,1.2799999999997453, and the final is going to be a string.
+3240.28,6.239999999999782," So a really nice representation of my class, right, and same for Bob."
+3248.04,4.800000000000182, So now what if we want to grab a student's exam grade or the student's
+3253.88,1.199999999999818, list of exam grades?
+3255.8,4.639999999999873," Remember that big function, right, with the two nested four loops and the nested ifs?"
+3261.16,2.5599999999999454, That becomes this line.
+3265.2400000000002,0.7199999999997999, Isn't that cool?
+3266.68,2.3200000000001637, A pause.
+3269.0,0.5599999999999454, I like that.
+3269.56,1.1199999999998909," Yeah, exactly."
+3270.68,3.519999999999982, We should applaud this because look how easy it is now to grab.
+3274.2,0.9600000000000364," Yes, thank you."
+3275.16,0.4800000000000182, Yes.
+3277.64,1.4400000000000546, Dictionaries are awesome guys.
+3279.08,3.4400000000000546," So yeah, so look, that line becomes this, you know,"
+3282.52,4.0," grabbing one, one squizz score becomes this single line of code right here."
+3287.48,2.2400000000002365, So let's break it down.
+3289.7200000000003,4.319999999999709," Again, we do left to right whenever we've got this chain of stuff going on."
+3294.68,4.480000000000018," So the first thing we say is, well, we're looking up grades at some index."
+3299.16,2.880000000000109, So grades at some index gives me that dictionary.
+3302.04,3.4400000000000546," So something like this whole thing here, right?"
+3306.44,1.199999999999818," Okay, good."
+3307.64,1.3600000000001273, That's first chain.
+3309.0,3.519999999999982," Now this box here gets replaced with that dictionary,"
+3312.52,2.5599999999999454, and I'm doing another index into that dictionary.
+3315.08,7.119999999999891, So that means I'm going to grab the mq associated with that dictionary.
+3323.16,5.039999999999964, So the value associated with mq is going to be this list 544.
+3329.7999999999997,3.8400000000001455, So this box here gets replaced with the list 544.
+3333.64,2.9600000000000364," And then if I want to grab just the first quiz value,"
+3336.6,3.4400000000000546, I say now I'm going to index in the list 544 at index 0.
+3340.04,1.9200000000000728, So that grabs for me just the 5.
+3341.96,3.519999999999982, So then the first squizz score for Anna was a 5.
+3346.52,0.6399999999998727, It's pretty bad.
+3351.16,0.3200000000001637, Okay.
+3353.08,4.639999999999873, So let's have you think about this.
+3359.24,0.8800000000001091, This is a function.
+3361.16,1.9200000000000728," Nothing to code here, just to think."
+3363.08,9.519999999999982, This is a function that grabs the average of every single thing
+3374.12,3.119999999999891, where that thing is what in the class.
+3377.24,4.400000000000091," So if what is mq as, you know, is in down here in this example,"
+3381.64,5.760000000000218, if what is mq this code is supposed to get the average of all of the microquizzes
+3387.4,1.8399999999996908, for all the students in the class.
+3389.24,4.880000000000109, So you basically want to grab the average of 10 plus 8 plus 3.
+3394.92,4.239999999999782," And if it's PS, I would like to grab the average of all the problem sets"
+3399.16,1.2800000000002, for all the students in the class.
+3400.44,4.079999999999927," So the average of 10, 10, 7, 8, and 0."
+3407.3199999999997,1.5199999999999818," So we've got a loop, right?"
+3408.8399999999997,2.1600000000003092, That goes through other students in the keys.
+3411.64,6.960000000000036," So the student studs, studs, stud here is going to be this dictionary, right?"
+3419.56,3.8400000000001455," So given this dictionary, what line should you insert here,"
+3424.2,6.1599999999998545," such that you're creating a list, just a single top level list of all of the values in there."
+3430.3599999999997,3.8400000000001455," So the thing you actually want to end up with, and if we're looking at the PS scores,"
+3434.2,7.2800000000002," just because it's a little easier to think about, is going to be 10, 10, right, 7, 8, and 0."
+3442.12,4.639999999999873," So in the end, what I would like to get in my all data,"
+3446.7599999999998,4.2400000000002365," this list that I'm maintaining here, is something like this for the PS."
+3453.56,3.519999999999982, So think about which one of these lines will accomplish that.
+3461.4,8.879999999999654," And just to help you out, we can say, student is my dictionary of who thinks it's the first one."
+3472.52,1.599999999999909, Second one.
+3475.96,0.5599999999999454, Third one.
+3477.7999999999997,0.5599999999999454, Fourth one.
+3480.44,0.31999999999970896, Okay.
+3482.52,2.400000000000091," Nobody thought it's the first one, you guys sure?"
+3486.7599999999998,1.9200000000000728, Okay. Why do you think it's the second one?
+3489.56,1.1199999999998909, Is it because of the append?
+3491.72,0.3200000000001637, Yeah?
+3492.92,0.9599999999995816, Let's think about it.
+3493.8799999999997,1.680000000000291, So all data is a list.
+3496.52,1.6799999999998363, And what are we appending?
+3498.2799999999997,3.0399999999999636, So what is data at stud at what going to give us?
+3503.64,7.440000000000055," Data at student is the dictionary, this dictionary here, right, this value here."
+3512.9199999999996,6.320000000000164," And if we take this value and index into the what, will it be an integer or will it be a list?"
+3522.12,0.40000000000009095, A list.
+3523.24,4.559999999999945," So when we append a list to another list, what is that going to give us?"
+3528.3599999999997,12.16000000000031," So if we have a list already with, you know, ABC, if I append another list to this, will it put the element within that list or the list itself?"
+3541.7999999999997,1.2800000000002," Yeah, exactly."
+3545.7999999999997,1.7600000000002183," So I don't, that's not going to work for us."
+3548.6,2.0," Clearly, D is not right either."
+3551.56,4.1599999999998545, And definitely indexing into data at student at what is not going to be right.
+3556.68,4.960000000000036," So that leaves one other choice, the first one."
+3563.72,2.0, So let's see why the first one works.
+3566.8399999999997,1.4400000000000546," We're concatenating, right?"
+3568.2799999999997,1.3600000000001273, So the plus concatenates.
+3570.4399999999996,9.040000000000418," So let's say I already have a list, ABC, I'm going to concatenate something I already have with data at student at what,"
+3579.8,0.9600000000000364, which we said is what?
+3580.76,1.7599999999997635, Is it a single element or another list?
+3583.48,0.5599999999999454, Exactly.
+3584.04,3.519999999999982," So we would concatenate with something like, you know, 10, 10 or something like that."
+3589.0,9.519999999999982," So that will return for us, ABC, 10, 10, which will allow us to do something like getting the sum of all these elements."
+3600.84,0.7999999999997272, Questions about that?
+3601.64,0.8000000000001819, Does that make sense?
+3602.44,0.40000000000009095, Is that all right?
+3603.48,0.3200000000001637, Yes.
+3608.2,0.4800000000000182, Yeah.
+3610.04,1.7600000000002183," Like, why would it?"
+3618.44,3.599999999999909," Like, how about, how about, what does 10, 10, 10, 10, 10?"
+3624.28,2.399999999999636, Because we're indexing into mq.
+3626.68,3.200000000000273," So if you index into mq, mq is your key."
+3629.88,2.880000000000109, So you grab the value associated with that key.
+3632.76,4.480000000000018," So that would be this list here, the 10 or for PS, it would be the list 10, 10."
+3637.8799999999997,6.160000000000309, So quick recap on lists and dictionaries before we do one final longer example.
+3644.04,3.519999999999982," So again, lists are ordered sequences of elements, right?"
+3647.56,2.1599999999998545, There is some element at index 0.
+3649.72,2.800000000000182," There's some element and index 1, some element and index 2."
+3652.52,3.2799999999997453," So we do have these quote unquote indices, right?"
+3656.68,2.480000000000018, But there's an order to these indices.
+3659.16,4.079999999999927," And there has to be an element and index 0 and further up from there, right?"
+3663.7999999999997,5.039999999999964," Dictionaries also have these quote unquote indices, which we call keys,"
+3668.8399999999997,1.0399999999999636, but these are custom.
+3669.8799999999997,6.480000000000018," So you can basically rearrange, you could think of it as being allowed to rearrange indices,"
+3676.3599999999997,1.1199999999998909," however you'd like, right?"
+3677.4799999999996,3.600000000000364, There's no order to the indices in a dictionary.
+3682.4399999999996,2.880000000000109," There are some restrictions on the keys or these indices,"
+3685.3199999999997,2.5599999999999454, so they can't be immutable or a gayshable.
+3688.84,6.559999999999945," But other than that, the things that you store related to that key can be any type,"
+3695.4,3.199999999999818, just like you can store any type in a list.
+3699.88,4.079999999999927, So the last thing I'd like to go through is a larger example.
+3703.96,3.7600000000002183, And this was showcased a whole bunch of things that we've been talking about so far.
+3707.7200000000003,3.9200000000000728," It was showcased sort of how to, first of all,"
+3711.6400000000003,2.4799999999995634," create dictionaries, which is what we did today."
+3714.12,2.5600000000004," It was showcased how to reuse functions,"
+3716.68,3.3600000000001273, how to write functions and reuse functions in other places.
+3720.04,2.400000000000091, It was showcased a little bit of mutability as well.
+3723.96,2.6399999999998727, But this is all in a larger example.
+3727.96,3.6799999999998363," If I go a little bit fast through this, I've given you Python Tutor links,"
+3731.64,3.4400000000000546, and it's also in the file to run on your own.
+3736.04,8.7199999999998, The goal of this last example is to basically find the most common words in a song's lyrics.
+3744.76,3.6799999999998363, And dictionaries are going to be really useful for doing something like this.
+3748.44,2.9600000000000364," So I'm going to show you, first of all, what we want to end up with."
+3751.4,4.480000000000018, And then we can talk about how to divide this larger problem into smaller pieces.
+3758.2000000000003,3.3600000000001273, So those are all the pieces.
+3761.5600000000004,4.239999999999782," But basically, what I want to end up with is I want to have a song"
+3767.32,1.5199999999999818, be stored as a string.
+3771.7200000000003,2.0799999999999272," You'll recognize these, but these are very old."
+3773.8,3.0399999999999636," I actually haven't updated these songs for a few years, but yeah."
+3776.84,1.4400000000000546," Anyway, don't judge."
+3778.28,2.2399999999997817, So I've got a song stored as a string.
+3782.28,2.6399999999998727," And I'm going to run each individual function,"
+3784.92,4.640000000000327," but in the end, what I'd like to do is come up with something like this."
+3790.6000000000004,5.599999999999909, So I want to present the user the top most common words in the song.
+3797.1600000000003,1.3599999999996726, So here I have a list.
+3798.52,2.7200000000002547, So you can see OpenCloseCirc bracket tells me it's a list.
+3801.2400000000002,1.8400000000001455, And I've got elements in my list.
+3803.08,6.400000000000091," So here's the first element in my list, which tells the user that the word I occurs 18 times."
+3810.7599999999998,4.480000000000018, The next element in my list tells the user that the word we occurs 17 times.
+3815.96,5.599999999999909, The next element tells the user that the words ain't ever getting older occur all 16 times.
+3822.2799999999997,1.0399999999999636," And then so on, right?"
+3823.3199999999997,4.480000000000018, So we're decreasing in frequency with the most common word occurring 18 times.
+3828.36,4.400000000000091, And then I'm showing the user the most common words
+3834.84,1.6799999999998363, down to and including six.
+3836.52,3.2800000000002," So I would choose some arbitrary value I want to find in the song,"
+3839.8,2.5599999999999454," the words that occur at least six times, for example."
+3843.5600000000004,1.8399999999996908, So that's the goal of this program.
+3847.88,1.2800000000002, So how will we achieve this?
+3849.1600000000003,2.1599999999998545, It's obviously a pretty big task.
+3851.32,5.039999999999964, I wouldn't want to code the entire thing right off the bat.
+3856.36,3.3600000000001273, But we can actually divide it into three smaller pieces.
+3860.92,3.200000000000273," The first piece, and we're going to write the code for this,"
+3864.1200000000003,2.399999999999636, is to create something called a frequency dictionary.
+3866.52,5.360000000000127," So given a string of words, we're going to create a dictionary that maps each word"
+3871.88,1.6799999999998363, to how often it occurs.
+3874.1200000000003,3.4399999999996," So fancy word, frequency dictionary, but it's pretty simple."
+3877.56,3.680000000000291, It just maps the word to its count inside my long string.
+3881.7999999999997,4.0," So this presents the data, which is this string of words,"
+3885.7999999999997,2.0," in a much nicer format, right?"
+3887.7999999999997,3.7600000000002183, It's a dictionary that tells me the frequency of each word.
+3891.56,3.919999999999618," Once I have that in hand, things get a little bit easier."
+3895.4799999999996,5.920000000000073, I can write another function that finds the word that occurs most often in that dictionary.
+3901.3999999999996,4.720000000000255," So the way I'm going to do that is look up the frequencies in the values,"
+3906.12,2.1599999999998545," find the maximum of those values,"
+3909.0800000000004,3.919999999999618, and then figure out which keys are associated with that maximum value.
+3915.0,4.800000000000182, And this is all made possible because I've reimagined my data in this frequency dictionary format.
+3921.0,6.5600000000004," The last step, once I figure out how to write a function that returns for me the words"
+3927.5600000000004,4.959999999999582," that occurred the most times, is to find the words that occur at least some number of times."
+3933.48,5.279999999999745, And I'll go through an example of this one in a few slides when we get to it.
+3938.7599999999998,5.040000000000418," But this last function here, number three, you can actually rewrite it in a whole bunch of ways."
+3943.8,3.119999999999891," I'm just going to show you one way to write it that'll involve mutability,"
+3947.4,3.0399999999999636, but you don't have to do it using mutability.
+3950.44,4.480000000000018," You can definitely do it in a whole bunch of, you know, with a whole bunch of other implementations."
+3955.8,7.199999999999818, So let's begin by first creating a dictionary that maps the word to their frequencies.
+3963.88,7.199999999999818," So I've picked a song that it has a real song, and it has some repetition,"
+3971.08,1.8400000000001455, and it's short that it fits in one line.
+3974.04,4.880000000000109," So I've got this song here, and I've got my function generate word dictionary."
+3978.92,5.599999999999909," The song is a string, right? So it's basically the song a little bit cleaned up,"
+3985.16,6.080000000000382," not in terms of words, but in terms of removing punctuation, removing, you know, commas, maybe"
+3991.2400000000002,4.879999999999654," exclamation, or I might have kept quotations or something like that."
+3996.12,5.440000000000055," But basically it's removing all of the punctuation stuff, because that will mess up my word counts."
+4003.64,1.680000000000291, So what is this function going to do?
+4005.32,1.3600000000001273, Given a string for my song.
+4007.64,2.6400000000003274," Well first, I'm going to convert all my letters to lowercase."
+4010.44,8.0," This means that, you know, capital THG will be counted as the same word as lowercase THG,"
+4018.44,1.5199999999999818, which is the correct way to do it.
+4020.6800000000003,1.599999999999909, So convert everything to lowercase.
+4023.0800000000004,5.4399999999996," Then I'm going to use our friend, the split function, remember, which takes in my string and"
+4028.52,3.1200000000003456, splits on a character. So by default it'll split on the space.
+4031.96,9.83999999999969," This puts our string of words in a very manageable format, a list of words, right?"
+4041.7999999999997,2.9600000000000364, Much nicer to work with lists than work with a string.
+4045.8799999999997,4.720000000000255," Now that I have my word list, I'm going to create my empty dictionary and then populate it."
+4051.72,4.559999999999945," So I'm iterating over my list of words, and then I have a choice."
+4056.6000000000004,5.599999999999909," Either I've seen this word already, and I want to update the frequency, right?"
+4062.2000000000003,4.880000000000109," So I want to increase the frequency by one, because I've already added this word to my dictionary."
+4067.8,4.400000000000091," Or this is the first time I'm seeing this word, and I want to add it to my dictionary with a"
+4072.2000000000003,6.239999999999782," frequency of one. So the first case here, the if, will update the frequency, because I've"
+4078.44,4.720000000000255," already seen the word in my dictionary. So here I'm using the in-key word to check if the key,"
+4083.16,4.639999999999873," that the word is already in my dictionary. If so, I increase its frequency by one."
+4088.68,5.039999999999964," Otherwise, this is the first time I'm adding my word to my dictionary, so give it a frequency of one."
+4095.7999999999997,4.480000000000018," And then I return the word dictionary, right? So this will map strings to integers."
+4102.28,2.2399999999997817, Let's work through it in the Python tutor.
+4105.0,13.200000000000728," So step, step, step, step, step, step. Lowercase my input string, step. I've split it."
+4118.200000000001,7.039999999999964, So now I've got this list of all of my words. Step. This is where we begin.
+4125.240000000001,4.800000000000182, So I've created my empty dictionary over here. This is keep an eye on this area here. It will
+4130.04,6.720000000000255," be populated soon. The first word, W, is raw, right? It's the first word in my list."
+4136.76,5.4399999999996," It's obviously the first time I'm seeing it. I have nothing in my dictionary right now, so I'm"
+4142.2,4.239999999999782," going to pop in my else, and I'm going to add it to my dictionary with a frequency of one."
+4148.36,7.200000000000728," Okay, that worked. Next, word in my dictionary is this, in my list is this one. Same word,"
+4155.56,4.800000000000182, I've already seen. So I'm going to go inside the if and increase the frequency to two.
+4161.64,8.720000000000255," Raw is now two. Next is ah. So here's my word. I've got the next one. In my list, it's the first"
+4170.360000000001,5.519999999999527, time I'm seeing it. Add it to my dictionary with a frequency of one. Next word I'm seeing is
+4176.68,6.0," again, increase its frequency to two. And I'm going to go faster now. This is increasing the"
+4182.68,4.399999999999636," frequency to three, right? Because I've seen it three times now. And then I'm adding"
+4188.04,5.680000000000291," Rome for the first time, ma for the first time, and rho for the first time."
+4195.56,6.880000000000109," And lastly, I'm going to increase ma frequency two more times because it occurs two more times"
+4202.4400000000005,4.399999999999636," in my song, right? So that it's increased to two, and now it's increased to three, and then we're"
+4207.32,7.8400000000001455," done. So we return the word dictionary. Really nice way to represent my list, my song, right?"
+4215.16,7.360000000000582," Very nice. Okay, so now that I have this frequency dictionary and I've put it up here, this is"
+4222.52,4.799999999999272," what we ended up with, how can we write a function that returns for me the most frequent word?"
+4227.48,9.44000000000051," So one thing we can recognize is the most frequent word has the highest value,"
+4236.92,7.279999999999745," Python, dictionary value in my dictionary, right? So as a human, I would kind of look to see"
+4244.2,6.079999999999927," which one of these entries have the biggest value. As a computer, I can't really do that because"
+4250.28,6.800000000000182," I have to do it a little bit more systematically. So what we can say is, well, let's look at our values"
+4257.08,7.039999999999964, and grab the maximum of the values. So here I'm using this dot values function on my dictionary
+4264.12,6.0, to grab for me all of the values in my dictionary. So this will be kind of like the list two comma
+4270.12,4.5600000000004," three comma one comma three comma one, and then I'm running the max function on that list."
+4275.32,4.1599999999998545," So max of this list of numbers gives me the maximum value in that list, the three."
+4279.719999999999,7.8400000000001455," So highest now has the value integer three, and now all I need to do is iterate over my"
+4287.5599999999995,7.520000000000437," element entries in my dictionary, right? So this is kV in the items, and I'm checking now inside"
+4295.08,6.1599999999998545," this iteration is if the value is equal to the highest, right? So as I'm looking at each entry is"
+4301.24,5.8400000000001455," the value for that entry the same as the highest one I've seen. If it is, I'm going to maintain a"
+4307.08,5.279999999999745, list of all the words with that highest value because there might be more than one word that has
+4312.36,5.920000000000073," that highest value. As we saw when we actually ran it here, right? Here I had a list of all of"
+4318.28,4.3200000000006185, these words that occurred 16 times. So that's kind of the output that I want to maintain.
+4326.28,4.239999999999782, So I'm appending to my words list and at the end I'm returning this tuple with the words comma
+4330.6,9.840000000000146," that highest value. So Python tutor, and like in the previous time, so let's create our original"
+4340.4400000000005,3.8400000000001455," dictionaries. This is what we ended up with last time. So the highest value is three here,"
+4345.0,5.200000000000728, and I'm going to look through each entry in my dictionary so you can see kV is going to be
+4350.200000000001,5.199999999999818," each one of these in order. So first it's raw two, then it's three and so on. Obviously the two"
+4355.4,6.5600000000004, is not equal to the three so we move on. The three equals the three so we take the a and boom.
+4361.96,3.839999999999236, Add it to my list here. So this is the list I'm maintaining of all the words that occur with
+4367.4,7.760000000000218," frequency three. Next, no for your own yes for ma so I'm going to add it to my list and then no for"
+4375.16,8.800000000000182," row and I'm done. So the return is going to be this list, this tuple here with the list of the"
+4383.96,11.199999999999818," words that occur three times. Last part, I'm not going to go through Python tutor, I did include a"
+4395.16,4.720000000000255," link to it because it becomes very messy with the arrows, but I do encourage you to try it,"
+4399.88,6.1599999999998545, try to follow it along on your own time. I will explain however the way that I chose to solve
+4406.04,6.880000000000109, this problem. So I chose to solve this problem to include mutation and reusing the function that we
+4412.92,5.600000000000364, just wrote that grabs from you the highest value and the words associated with that highest
+4418.52,9.359999999999673," frequency value. So this is the idea. I have my original word dictionary, right? This is the"
+4427.88,7.920000000000073, frequency dictionary we created right off the bat. What I'm going to do is look to see which words
+4435.8,6.960000000000036," occur with the highest frequency. So the highest frequency, my function from before, grabs for me,"
+4442.76,6.0, it figures out that it's three and it figures out the words associated with that three are a and ma.
+4450.52,6.639999999999418, That's exactly what we just did. So I'm going to grab those words and those entries in the dictionary
+4457.72,5.039999999999964, and then I'm going to mutate the dictionary to remove those words because I know those words
+4462.76,7.359999999999673, occur with the highest frequency. So now I've removed those words and I've saved them because
+4470.12,5.760000000000218," they were the result of the function that I had just run, right? So I'm maintaining this frequency"
+4475.88,7.039999999999964," list which will contain all the words that occur at least, I guess I said greater than one time,"
+4482.92,6.5600000000004, so at least two times. So I'm going to grab the ones that occur three and two times. So right now I
+4489.48,5.600000000000364, had just grabbed the words that occur three times. I've removed them from my dictionary. So I've
+4495.08,7.279999999999745, actually mutated my dictionary to remove those words. Now if I run the exact same function that I
+4502.36,8.399999999999636," just wrote on the previous slide on this mutated dictionary which words will it give me, which words"
+4510.759999999999,7.520000000000437," occur the most now? Exactly, right? Now the highest value in my dictionary in this frequency dictionary"
+4519.0,5.199999999999818, is two because I mutated to remove what was previously the highest value. So I'm running the same
+4524.2,7.600000000000364," function again on the mutated dictionary to give me just the raw, right? So I grab that, keep track"
+4531.8,7.199999999999818," of that in my frequency list, right? Mutate the dictionary to remove that. And as I'm doing that,"
+4539.0,5.279999999999745, I'm also keeping track to make sure that the highest frequency I have in the remaining dictionary
+4544.28,6.239999999999782," is at least whatever I was interested in. So here I want it at least two. So this function,"
+4550.5199999999995,4.960000000000036," root end the one I will write, will no longer grab any other values from the dictionary because now"
+4555.48,6.480000000000473, one frequency one I don't want to grab. So this is the resulting value. And that's the idea. We're
+4561.96,5.199999999999818, using mutability and the function we just wrote to do this task. And this is the code that does that.
+4567.16,6.239999999999782," So this runs the function we wrote previously, step number two, gives us that list, that"
+4573.4,5.8400000000001455, tuple with the list of all the words. This loop here makes sure I still have frequencies that are
+4579.24,7.279999999999745," at least x in the dictionary. I grab the, the tuple that I just created. So something like this"
+4586.5199999999995,4.640000000000327, and add it to my frequency list. So this is the resulting list that I'm keeping track of. And then
+4591.16,5.279999999999745, this bit here removes the word for my dictionary. So I'm mutating the dictionary using this del keyword
+4596.44,4.079999999999927," that we saw, you know, at the beginning of this lecture. Yeah, question."
+4600.5199999999995,10.239999999999782," So what I wanted to, like I said, was basically while the user is raising that, yeah."
+4610.759999999999,15.44000000000051," So I think maybe it's because the function, I forget what the specification said, but I don't know if it said"
+4626.2,6.800000000000182," at least two or greater than two or greater, at least x or greater than x. It depends on which one"
+4633.0,4.559999999999491, I actually said in the specification. But you can imagine changing this to greater than or greater
+4637.5599999999995,5.360000000000582, than or equal to. And then we're running this function again inside this while loop to grab the
+4642.92,5.759999999999309, frequency value. Yeah. So these are just the observations I actually stated at the beginning of
+4648.679999999999,4.5600000000004, this example. A bunch of the different things that we've learned that we're using within this
+4653.24,9.199999999999818," example. So slicing or splitting, iterating over the list directly, mutability, using the items,"
+4662.44,7.279999999999745, things like that. So that's it. That's all I have. I'll see you guys on Monday. Monday is Halloween.
+4669.719999999999,9.040000000000873," If you'd like to bring a costume, I love Halloween. I will wear something different than what I usually wear."

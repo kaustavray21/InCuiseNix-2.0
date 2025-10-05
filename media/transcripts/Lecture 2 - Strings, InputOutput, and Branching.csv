@@ -1,0 +1,724 @@
+start,duration,text
+0.0,16.46, So let's start today's lecture. We're going to be looking at sort of three different
+16.46,5.460000000000001, topics. The first is we're going to look at a new object type called a string. We briefly
+21.92,5.239999999999998, mentioned this word last lecture. Then we're going to see how we can write programs that
+27.16,6.559999999999999," start to get input from the user and show the user output. And finally, we're going to"
+33.72,8.160000000000004, go into writing a little bit more interesting programs that make decisions based on decisions
+41.88,5.279999999999994," that we actually input in the code. So not decisions spontaneously, but things that we"
+47.16,5.080000000000005," will code within our programs. But before we go on to these topics, I just wanted to"
+52.24,3.8399999999999963, do a quick recap of what we learned last lecture just to make sure we're all on the same
+56.08,5.759999999999998, page. So we introduced the idea of an object. And every object in Python has a specific type.
+61.839999999999996,6.399999999999999, And the type tells Python the kinds of things you're allowed to do with that object. We talked
+68.24,4.719999999999999," about once you have objects, you can actually assign these objects to variables and these variables"
+72.96,5.799999999999997," basically bind a name to the object in memory. With objects, you can also create expressions"
+78.75999999999999,5.88000000000001," by combining objects together. And the expressions can either be things that we've seen in math,"
+84.64,7.840000000000003," like with parentheses and with object operator, object, or they can be things like this, which"
+92.48,5.159999999999997," was kind of introduced in programming. It's an expression, but it's kind of a different"
+97.64,6.280000000000001, one. It's more like a command. Or I'm asking Python to do this operation for me. What is the
+103.92,7.3999999999999915," object that comes back from this operation? So today, I'm going to go over this little sort"
+111.32,4.319999999999993, of memory diagram. We started drawing last lecture and I'm going to use this memory diagram
+115.63999999999999,7.160000000000011, today as well. Here's some lines of code that we wrote last lecture. So we wrote a line in
+122.8,6.999999999999986," Python that created an object. It's value is 3.14, a float in memory. And the name we gave"
+129.79999999999998,10.200000000000017," this object was pi. So just the name pi, P.I. Radius equals 2.2 is another assignment statement"
+140.0,5.52000000000001, in Python and it binds the name radius to the value 2.2 in memory. And once we've created
+145.52,4.799999999999983," these variables, we can just invoke their names. We can use their names to tell Python to"
+150.32,6.439999999999998," grab for me the values from memory. So when Python sees pi times radius star star 2, that"
+156.76,5.480000000000018," means take pi multiply with the radius squared. So behind the scenes, Python goes grabs the"
+162.24,6.039999999999992," value 3.14 from memory, replaces pi with that value, grabs 2.2 from memory, replaces"
+168.28,5.400000000000006," radius with that value, does the operation according to the precedence rules. And then"
+173.68,7.759999999999991," that expression, the thing on the right hand side of this equal sign, becomes a value. That"
+181.44,5.719999999999999, value is then created as a new object in memory right here. And that object in memory is then
+187.16,6.760000000000019, bound to the name area. That's exactly what this assignment statement said. And we can
+193.92,4.699999999999989," do something like this in Python, which we can't actually do in math. If we did this in"
+198.61999999999998,6.100000000000023," math, the expression would basically say 0 equals 1. But in Python, it's totally fine."
+204.72,4.439999999999998," Because again, we evaluate the thing on the right hand side of the equal sign. So on the"
+209.16,4.9199999999999875," right hand side of the equal sign, we say I want to grab the value of radius, so 2.2,"
+214.07999999999998,6.599999999999994," add 1 to it, 3.2, create this object in memory. Here, I have a whole new object in memory,"
+220.68,6.560000000000002," 3.2, and then assign it to the name radius. So I've lost the binding from the original 2.2,"
+227.24,6.719999999999999, and rebound the name to 3.2. So we're not modifying objects in memory. We're creating new
+233.96,5.960000000000008, objects in memory whenever we do such operations. We're going to see how we can modify objects
+239.92000000000002,6.399999999999977," way into the future. And just serve for completion, when we have a line that says var is equal"
+246.32,5.47999999999999," type 5 multiplied by 4, Python also sees this as an expression. And so as an expression,"
+251.79999999999998,5.400000000000006," it has a value. So the right hand side of this equal sign says, well, I'm going to sort"
+257.2,7.0," of systematically evaluate this and say, what's 5 times 4? It's 20. What's the type of 20?"
+264.2,4.920000000000016, It's an integer. And so that's what the right hand side evaluates to an integer. And I'm
+269.12,6.8799999999999955, going to bind that value int to the name var. So var is another variable name. And it's
+276.0,5.800000000000011," valued is int, the type of my object, which is a little strange. So far, we've kind of just"
+281.8,8.240000000000009," put numbers in our memory, but we can put any object type in memory. So let's move on"
+290.04,5.7999999999999545, a little bit onto the new object type called a string. So a string is actually a sequence
+295.84,6.28000000000003," of case sensitive characters. The characters can be anything. We have lower case letters,"
+302.12,5.0," upper case letters, the numbers on your keyboard, the special characters you see on the keyboard."
+307.12,5.800000000000011," Even the enter, when you do a new line or a tab has a special character associated with"
+312.92,2.5600000000000023," it. And the way we tell Python, we're creating"
+315.48,6.199999999999989, an object of type string is by enclosing the characters we want to be part of that object
+321.68,3.9599999999999795," in these quotation marks. So when Python sees the quotation mark, it knows you're creating"
+325.64,5.400000000000034," a string object. So here, I'm creating the string object, which has the lower case"
+331.04,5.079999999999984," letter m, lower case letter e. And here, I'm creating the string object, which has the"
+336.12,8.0," lower case y, lower case o, and lower case u letters. And these objects are things in Python."
+344.12,5.1200000000000045," And we're just going to give them a handle, a binding, with some more convenient variable"
+349.24,5.560000000000002," names, a and z. So in memory, the way this would look in a little memory diagram is we"
+354.8,5.600000000000023," would have the string characters, me, bound to the variable a. So basically what we've"
+360.4,5.8799999999999955," seen before. Alright, so now what are some things we can do with strings? Well, some"
+366.28,7.759999999999991," really common operations are that we can concatenate strings or we can repeat strings. So here,"
+374.03999999999996,3.3600000000000136, I'm not going to put the z in memory. You can kind of imagine how that would look like.
+377.4,7.9599999999999795, But let's say I create now a variable b equals the letters m y s l f. What if I do a plus
+385.35999999999996,4.720000000000027, operator between these two strings? The plus operator tells Python that I'm going to take
+390.08,4.800000000000011," these two strings, the individual characters in each string, and kind of just put them together"
+394.88,5.839999999999975, to make one new object that is all of these letters put together. So c is equal to a plus
+400.71999999999997,5.800000000000011," b is another assignment operator. And on the right hand side, we have an expression plus"
+406.52,6.600000000000023," operator between two objects. It's going to put m e, which is the c letters and the"
+413.12,6.519999999999982," m y s l f, the b letters altogether to create a new object, which I then give a handle or"
+419.64,6.800000000000011," a binding c. So from now on, anytime I want this particular string of characters and we"
+426.44,5.9599999999999795," m e m y s l f, I can just invoke the name c in my program. That's just the variable"
+432.4,6.28000000000003," name that I gave it. Now notice it didn't insert a space, right? It didn't do me space"
+438.68,6.399999999999977," myself because we didn't tell it to do a space. So if we wanted to do a space, we'd have to put"
+445.08,4.640000000000043," it in ourselves. So we can concatenate, so we can have a larger expression where we can concatenate"
+449.72,6.71999999999997," a with a space and with b together. So that will give me an entirely new object in memory,"
+456.44,9.28000000000003, the string m e space m y s l f. This new object is bound to the name d. Is that okay so far?
+465.72,5.680000000000007," Does that make sense? Okay. All right, so that's concatenation. Basically takes these two string"
+471.40000000000003,4.8799999999999955, characters put some together in a new object. What about the star? I kind of briefly talked about
+476.28000000000003,6.560000000000002," this as repeating something last lecture. Well, the star operator works between a string and a"
+482.84000000000003,4.800000000000011," number. It doesn't work between a string and a string. It doesn't work between, you know,"
+487.64000000000004,4.8799999999999955, things like that. It works between a string and a number in either order. So a number string
+492.52,5.920000000000016," or a string times number. So here, again, it's an assignment operator. The right hand side,"
+498.44,5.199999999999989, we're going to figure out what it evaluates to first. So a times three means I'm going to repeat
+503.64,5.920000000000016," this particular sequence of characters m e, because that's what a is. It's m e, three times."
+510.2,6.9599999999999795," So this line of code here is going to create m e m e as a new object, and the equal sign tells"
+517.16,5.1200000000000045, it to bind it to the name silly. So anytime I want to grab this particular string of characters
+522.28,5.1200000000000045," for memory, I can just type in silly in my program, and that will automatically grab that"
+527.4,6.720000000000027," particular sequence of characters for memory. All right, let's do a quick exercise to make sure that"
+534.92,5.600000000000023," you all have this. And as you're thinking about what this does, I can start typing it in"
+541.56,6.960000000000036," to the console, or you can either even type it in to check yourself. So B is going to be colon,"
+548.52,7.1200000000000045," and C is going to be the closed parenthesis. So if we go here, we have B is equal to just this colon,"
+556.68,9.680000000000064," and C is equal to the closed parenthesis. And we don't have to do all the operations at once,"
+566.36,5.600000000000023," right? We can just do something like two times C, and figure out what that is, right? It's just"
+571.96,8.080000000000041, repeating the closed parenthesis twice. And then we can do B plus two times C to give us closed
+580.0400000000001,4.399999999999977," parenthesis, or colon closed parenthesis closed parenthesis, right? So super happy."
+587.4000000000001,10.239999999999895," What about the next one? F is a G is actually the space B, right? So there's a space"
+597.64,7.919999999999959," character in there, little tricky, and H is three. Is this the number three or the string three for H?"
+606.92,7.279999999999973," Yeah, exactly. It's the string three. So what is F plus G? Again, we can do it in pieces. What is F plus G?"
+614.2,12.159999999999968," A space B, exactly, right? A is myself, and G is a space B. What is int H?"
+629.1600000000001,7.360000000000014," Yeah, it's just three. What's the type of three? Int, exactly. I just cast it to an int, right? So"
+636.52,8.639999999999986," if I have F is equal to A, G is equal to space B, and H is equal to the string three,"
+647.56,8.0," F plus G, we're doing it in a little bit at a time, right? Is A space B? And H is just see the"
+655.56,8.960000000000036," string three here. So if I cast it to an integer, it gives me just the number three, right? And we"
+664.52,5.759999999999991," can wrap each of these in a type command to see the exact type, but we can tell right away."
+671.96,11.599999999999909," So if we do F plus G multiplied by int of three, or sorry, int of H, right, which is just a three,"
+684.12,6.159999999999968," it's going to repeat a space B three times, right? So there's one, there's two, and there's three."
+691.0,5.039999999999964, What would have happened if I forgot to cast it to an integer? What do you think?
+697.56,8.080000000000041," If I just did H? An error, yeah, exactly. They're not scary. They're kind of informative,"
+705.64,4.319999999999936," once you get to know them. So it's a type error, yeah? Something's wrong with our types. Can't"
+709.96,13.759999999999991, multiply a sequence by a non-integer. Okay. So what are some other operations we can do with
+723.72,3.919999999999959, strings? There's some different things we can do with strings that we actually haven't seen
+728.52,6.6400000000001, with numbers in last lecture. One of the more common operations is to get the length of a
+735.16,5.759999999999991," string. So this tells us how many characters are in the string. So if we say S is equal to ABC,"
+740.92,6.240000000000009," here I'm creating a string with characters, ABC, and I'm giving it the name S. Now any time in"
+747.16,6.8799999999999955," my program when I say S, Python will replace that with this string of characters, ABC. I could wrap"
+754.04,6.8799999999999955," S in this LEN command, and this LEN command is an expression. Basically Python reads this,"
+760.92,6.720000000000027, and it evaluates it to one value. So replaces this expression with one value. How many characters
+767.64,6.8799999999999955, are in my string? So LEN S will basically become the number three. So in my program I can say
+774.52,7.1200000000000045," something like another assignment statement down here, right? Charrs is equal to LEN S. This is"
+781.64,5.199999999999932," an expression, right? Like in the previous line that evaluates to three. So basically this line"
+786.84,8.559999999999945," says Charrs is equal to three. Okay, that's a pretty simple operation with strings. Now we're going to"
+795.4,7.360000000000014, get into a little bit more detailed ones that requires you to kind of remember this Python syntax.
+803.32,6.399999999999977, So one thing we can do with strings is we can grab individual characters at different positions.
+810.6800000000001,7.199999999999932, So that's called slicing. The syntax or the way that we actually do this in Python is using
+817.88,5.360000000000014," square brackets. So you can see this here, right? We have some square bracket notation, and this"
+823.24,5.279999999999973," is just how Python does it. So if we have string S is equal to the characters ABC,"
+829.8000000000001,4.8799999999999955, the way we tell Python we'd like to extract a character at a particular position is by indexing
+834.76,7.67999999999995, into that string. Now in Python and modern programming languages indexing happens from zero. We count
+842.4399999999999,8.080000000000041," from zero in programming, okay? Computer science. So what that means is the index of the first"
+850.52,7.439999999999941," character, the index of A is zero, the index of B is one, and the index of C is two, right? So we"
+857.9599999999999,5.759999999999991," can say what's the character at the first position or the first location, but in computer science"
+863.72,5.360000000000014," speak we say that's the character at index zero, the character at index one is the character at"
+869.08,6.080000000000041," location two and so on, right? So when we're indexing into a string we're always starting to count"
+875.1600000000001,10.319999999999936," from zero. So S at index zero, that's how we call this line here, is another Python expression,"
+887.0,5.279999999999973," it just looks different than the expressions we've seen so far, but this entire expression,"
+892.28,5.519999999999982, Python evaluates to a particular value and the value it evaluates it to is the character at that
+897.8,6.639999999999986," index. So just to show you kind of what that looks like in here, if S is equal to ABC all we would"
+904.4399999999999,8.160000000000082," type is this, S at index zero and this expression evaluates to that single character A, okay? S at index"
+912.6,8.32000000000005," one, B, S at index two, C, S at index three basically says what is the character at the fourth"
+920.9200000000001,5.919999999999959," position? Well, ABC only has three positions so this will actually give us our second error of"
+926.84,5.600000000000023," the class, an index error. This is a pretty common error as we start working with more complex"
+932.44,5.67999999999995," programs, it basically means you index too far into the list either to the right or to the left."
+939.0,8.56000000000006, You can index into a list with negative indices as well. So if you ever want to grab the character
+947.5600000000001,5.919999999999959," at the last position, so at the right most place, that's the character at index negative one."
+954.52,5.920000000000073, It's a really convenient way to grab that last character. You basically ask what's S at negative
+960.44,6.319999999999936, one and Python automatically grabs for us that last character. So we don't have to use an expression
+966.76,7.759999999999991," sort of like LEN of S negative one, right? That would be C as well. And here I've inserted"
+974.52,5.2000000000000455," an expression, LEN S minus one directly in that index and that's totally fine. Again,"
+979.72,7.1200000000000045," Python evaluates things into out, left to right, it evaluated LEN S minus one to be two and"
+986.84,4.719999999999914," basically this line became what's S at index two, which we knew was C."
+991.64,7.519999999999982," So why did it make negative one C? Because when you index into negative numbers,"
+1000.04,3.2799999999999727," we start counting from the right hand side, just Python convention."
+1006.76,4.8799999999999955, And so S at negative four will give us an error as well because now we're indexing too far
+1011.64,6.719999999999914," to the left. There's nothing there. Okay, so we can index to get single characters."
+1019.08,5.040000000000077, That's fine. We just use square bracket and say the index that we'd like to get the character at.
+1024.76,5.360000000000127," We can also slice to get substring. So instead of getting single characters, we could ask Python"
+1030.1200000000001,6.559999999999945, to get us a substring starting from one index going up to some other index and potentially
+1036.68,4.240000000000009, skipping characters. You can take every character along the way. You can skip every other character
+1040.92,11.759999999999991, or some other pattern like that. The syntax for that is similar to slicing to get a single
+1052.68,5.039999999999964, character. Slightly different though. It's similar in that we have square brackets involved.
+1058.76,5.2000000000000455," Slightly different because now we have to give three numbers within those square brackets,"
+1064.92,7.2000000000000455, separated by colons. The first number will represent what's the start index? So where do you want
+1072.1200000000001,5.3599999999999, to start your substring from? The second is what's the stop index? So we're going to take every character
+1077.48,7.519999999999982," from that start index going all the way up to but not including the stop. Okay, and the step means"
+1085.48,5.519999999999982," how many characters do we skip? So if the step is one, we're taking every character. The step is"
+1091.0,5.599999999999909, two. We'll take every other character. The step is three. We skip every two characters and so on.
+1097.8,8.319999999999936, Now there's a bunch of combinations we can do within these three numbers within the square brackets
+1107.0,5.920000000000073," that you'll, as you work with these exercises, you'll sort of get the hang of."
+1113.88,5.599999999999909," For now, it won't hurt to always give it a start, a stop, and a step. That's perfectly fine."
+1120.3600000000001,4.479999999999791, But something that's really common if you're always going to take every single character is to just
+1124.84,7.040000000000191," omit the step part. So if you just give it two numbers, number colon number, Python automatically"
+1131.88,3.6799999999998363, knows that your step will be one by default. So you're not skipping anything.
+1137.56,4.720000000000027," If you're just giving it one number, no colons were back to the previous slide, right? We're just"
+1142.28,7.119999999999891, grabbing one element. And I know this is going to be a little confusing. We're going to look at an
+1149.3999999999999,4.320000000000164, example on the next slide. But this is something you'll just have to practice a little bit on the shell
+1154.44,6.319999999999936," with the following example, hopefully, just when you go home. Just to kind of make sure that you"
+1160.76,5.119999999999891," understand what it's doing. If you have a question, like what if I put in this number, this number,"
+1166.6,5.039999999999964, just put it in the shell and see what happens. So let's take a look at a couple of examples.
+1173.08,4.720000000000027," So how do we slice to get some strings? Let's say our string is this longer thing,"
+1177.8,5.279999999999973," ABCDEFGH. When we slice, the first thing we want to look at is the step."
+1183.8799999999999,5.440000000000055," Is it positive or negative? If it's positive, and remember if you omitted by default, it's"
+1189.32,5.680000000000064," plus one. So if it's positive, we're going to work our way left to right, the way we read. If it's"
+1195.0,7.920000000000073," negative, we're going to work our way right to left. So what if we index S from three, colon six?"
+1203.96,4.639999999999873," The step is positive one, so we're going to work our way left to right. So that means we're going"
+1208.6,5.680000000000064," to start at index three. So that's the D. So we're going to grab the D, and we're going to go"
+1214.28,5.279999999999973," up to get the substring from D up to, but not including the character at index six."
+1220.04,9.3599999999999," The G. So the characters we're going to grab are the D, the E, and the F. We start at three,"
+1229.3999999999999,4.480000000000018," we go up to, but not including six, taking every character because the step is one."
+1235.48,5.3599999999999," What if the step was two? So same thing as we just did, except the step is two. Again, the step"
+1240.84,4.6400000000001," is positive, so we're going to work our way left to right. We're going to start at index three,"
+1245.48,4.160000000000082," so we're going to grab the D, and we're going to create a new object, which is going to be the"
+1249.64,7.759999999999991," characters D. We're going to skip the E because the step is two. Take the F, and that's it. We've"
+1257.4,8.720000000000027," worked our way up to, but not including the element at index six. There are some other things,"
+1267.16,5.2000000000000455," I guess, tricks, or you might want to call them, that you can do. So if we just put an empty colon"
+1272.4399999999998,7.360000000000127," here that says just make the same object again, so that will evaluate to just A, B, C, D, F, G, H again."
+1281.9599999999998,7.040000000000191," If we do colon colon negative one, this is shorthand notation for basically grabbing for me the"
+1289.0,6.959999999999809," string backward. So H, G, F, E, D, C, B, A, right, just make the same string as the original one,"
+1295.96,6.6400000000001, but backward. And we can do something like this for one with a step negative two.
+1304.28,6.400000000000091," Now the step is negative, right? So that means we're going to work our way right to left."
+1311.4,6.240000000000009," We're going to start at index four, so we're going to grab the E. We're going to skip every"
+1317.64,5.599999999999909," other character, so we're not going to take the D, but we will take the C, and we're going to go"
+1323.24,4.0," down to, but not including, the character index one. So we're going to stop right here."
+1328.1200000000001,5.279999999999973," So the characters we took in this order were E, and then C, so this entire expression"
+1333.4,9.679999999999836," evaluates to E, C. Yes, question? Why do we skip D? Because the step is two. So when the step is"
+1343.08,3.4400000000000546," one, we take every character, the step is two, skip every other one. Yeah."
+1347.0,5.2000000000000455," For the first one, S, three, two, six, why is G not included?"
+1352.2,6.079999999999927," G is not included, just by definition. We go up to, but not including the stop. So we'll go up to,"
+1358.28,8.079999999999927," but not including the, the character at index six. That's just the definition of slicing in Python."
+1370.36,5.8400000000001455," So up to an including stop minus one means we go up to an including five, right? Yeah, exactly."
+1376.92,2.0, Yep.
+1381.88,6.1599999999998545," Okay, so again, if you're unsure what a command does, always try, you can always try it in your console,"
+1388.04,8.800000000000182," write the shell, and here's an opportunity to do that. So here's a string S, ABC, D3F, and I'm"
+1396.8400000000001,5.519999999999982," actually going to write this one down, just ABC, space, right? There's a space here. 3D,"
+1402.36,10.480000000000018," what did I do? Or D3F, and in another space, and Gag."
+1418.1999999999998,5.519999999999982," So what do you guys think the first one will be? 3 colon, Lens, minus one. I'll even do the indices"
+1423.72,14.480000000000018," here for you. What's the start? Yeah, the space, exactly. So it's going to be a little space."
+1439.16,2.3199999999999363, What is Lens S minus one?
+1441.48,4.0, That's the length of minus one.
+1450.6,4.720000000000027," 10, yeah, what's the length of, how many characters are in here? 11, yep, and minus one is 10."
+1456.1200000000001,5.3599999999999," So when we do this, when the stop is 10, that means we're going to go up to, but not including"
+1462.2,5.440000000000055," the character at 10. So we're going to go up to this H, right? So we're going to take the space,"
+1468.1200000000001,5.440000000000055," D3F, space, G, H, and we stop. Yeah."
+1474.1200000000001,3.519999999999982, Why do we start indexing at zero again? Convention.
+1479.0,6.080000000000155," Computer science, programming. Except for MATLAB, I think they still start indexing at one."
+1486.68,4.960000000000036," Other questions about this one? Is that all right? Okay, how about the next one? S,"
+1491.64,4.7999999999999545," four, colon zero, colon negative one. What's the element at index four?"
+1499.48,6.480000000000018," The D, yep, so we're going to grab the D. Are we working our way right or to the right or to the left?"
+1506.8400000000001,4.0," Yeah, exactly. So we're going to go up to, but not including the character at index zero."
+1511.72,6.800000000000182," So we're going to get the D, the space, the C, the B. Am I taking the A?"
+1519.48,2.480000000000018," No, exactly. So that's it. D space, C, B."
+1523.96,0.7200000000000273, Yes.
+1524.68,4.0," They want to include the A with the second value, negative one."
+1529.56,7.440000000000055," If you did want to include the A, actually, you would want to do something different, I think."
+1537.0,3.759999999999991, You can't go to negative one because negative one is actually this right here.
+1541.48,3.2799999999999727," That's a good question. I'd have to try it out, play around with it."
+1545.4,5.839999999999918," But if you want to include it, I think maybe you would just do an empty colon."
+1552.84,4.320000000000164," You would just probably do an empty colon. And by default, that means the beginning."
+1558.2,7.119999999999891, But I'd have to try it out. Yeah. How about the last one? Six colon three.
+1565.96,1.5199999999999818, What's the element at index six?
+1569.8,3.2000000000000455," Empty colon work. Okay, perfect. Thanks for trying it out. The empty colon works, yeah."
+1573.64,0.8799999999998818, If you wanted to grab the A.
+1575.4,3.9199999999998454," All right, so S, six colon three, what's the element at index six?"
+1580.6,3.2800000000002," Yeah. Okay, great. And we're working our way to the right or to the left?"
+1585.72,6.160000000000082," To the right. Okay, so we're going to start here, but we need to go this way. But what's the stop index?"
+1593.72,2.8799999999998818, Yeah. It's not there. It's behind us.
+1596.6,9.440000000000055," So this last one is actually an empty string. And I'll even, we can even, we can try it with something else too."
+1607.32,6.480000000000018," So if we have this ABC, right, if I'm indexing starting from two and I'm going backward to zero,"
+1614.52,5.599999999999909," then that gives me the empty string. And the empty string is just quote, quote with nothing inside."
+1621.9599999999998,4.080000000000155, So that means we didn't take any characters in that particular case.
+1627.56,2.480000000000018, Is that right?
+1632.4399999999998,4.800000000000182," It's valid. We just, there are no characters in between the F and behind the F."
+1642.04,4.720000000000027," Okay, so I'll mention the strings are actually immutable objects. And really a lot of the objects we've"
+1646.76,4.959999999999809, seen so far are immutable. That means they can't be modified once they're created. We've kind of
+1651.72,4.7999999999999545," seen this already, right? When I draw the memory diagrams, when I create a new object, which is,"
+1656.52,5.2000000000000455," you know, for example, what's the string version of this integer or, you know, when I cast a float to an"
+1661.72,5.039999999999964," end, things like that, I'm not changing those original objects I've created. I'm just making a new"
+1667.48,6.0, green box in my memory and reassigning the name. And we're going to see later on in this course
+1673.48,5.519999999999982," mutable objects, which means that once you create them in memory, you can modify them. But for now,"
+1679.08,5.360000000000127," anytime you make a change to such an object, well, you can't change the object, right? If you want"
+1684.44,5.2000000000000455," to get a different version of the object, Python will create a new object in memory and you can"
+1689.64,6.7999999999999545," reassign the variable to that new object. So in this example, if I want to grab, if I have the"
+1696.44,6.319999999999936," string, C-A-R in memory like this, and it's bound to variable S, and I want to change the first"
+1702.84,5.279999999999973," letter to a B, I'm not allowed to. Python won't let me do something like, I want to change the"
+1708.84,7.680000000000064, the letter at index zero to a B. That's not allowed. You can get new versions of that particular
+1716.52,6.960000000000036," string so you can do some, you know, random expression to create the B-A-R that you might want."
+1724.2,6.7999999999999545," But then the C-A-R remains in memory, right? So the C-A-R will still be there. We're just losing"
+1731.0,12.319999999999936," the binding from it. So any questions so far on these strings? Mostly, they're a new data type,"
+1743.32,3.3600000000001273," right? You haven't worked with them like you have with numbers, so it's a little bit different."
+1747.56,5.120000000000118," Again, you know, someone had a question, how do you get the A, right? Backward, try it out in the"
+1752.68,5.759999999999991," console. I'm happy to answer questions, help you try to try along with you. But that's what the"
+1758.44,4.0," console is there for, right? The shell here. That's what it's there for. It's just to try"
+1762.44,4.960000000000036," quick little things if you ever have a question, you know, what if this or this and you get to try that?"
+1768.76,5.120000000000118," Now let's move on to some input output, right? So far the programs that we can write are pretty"
+1773.88,5.3599999999999," stagnant, right? There isn't much interesting things that we can do with them. There's no interaction"
+1779.24,8.480000000000018," with the user. So so far when we tried to output things, well we might think we have been"
+1787.72,6.480000000000018," outputting things, right? So when we write in our console something like 3 plus 2, Python does"
+1794.2,6.240000000000009," show something in the shell, right? This is maybe how we interact with the user. But this is not"
+1800.44,7.519999999999982," actual true output. This is, I call this kind of like peeking into the value of the expression."
+1808.68,6.7999999999999545," But if you were to write some some expression like this in a file editor, Python wouldn't actually"
+1815.48,5.119999999999891," print it out. And so here's all the things that we've already tried today, right? We've created all"
+1820.6,6.320000000000164," these strings. We've got the length of s, right? We indexed. Anytime we typed these expressions"
+1826.92,5.599999999999909," in the shell, Python automatically gave us our value, right? But if I were to type those exact"
+1832.52,5.8400000000001455," expressions in a file editor on the left here, Python's not actually going to print these out. So this"
+1838.3600000000001,6.0, is the file editor from now on we're just going to work with files. I'm going to run it by hitting this
+1844.36,7.599999999999909," little green run button or hitting a five. Something happened in the shell. My program ran, right? It says"
+1851.9599999999998,6.400000000000091," here, it ran this file. But there's no output, right? Where was the length of s? Where were all these"
+1858.36,5.039999999999964," indices we've done before? And that's because these aren't actual outputs, right? When we type them into"
+1863.3999999999999,6.559999999999945," the shell, that was just us doing quick little expressions in the shell giving us quick, no. That's"
+1869.96,6.160000000000082, why I call it peaking into the value because it's not true output. If you want the user to see
+1876.1200000000001,4.879999999999882," output and the shell is how we're going to show the user output from running a file, we have to"
+1881.0,6.400000000000091," explicitly tell Python, hey, I want you to show the output from this expression or I want you to"
+1887.4,6.720000000000027, show the output from this command. And we do this using the print command. So if we take our expression
+1894.12,6.319999999999936," that we want to show the output from and wrap it in a print command, Python will then show that"
+1900.4399999999998,5.8400000000001455, output and only that output. Can you imagine if we wrote a file that did all these operations and
+1906.28,4.639999999999873, all these intermediary outputs were being shown? That would be really to a really messy file or a
+1910.9199999999998,4.720000000000027," messy program, right? And so that's why we have a command where you can explicitly tell Python"
+1915.6399999999999,5.039999999999964," just the things you want to show to the user. So here if you want to print the length of s,"
+1921.5600000000002,6.879999999999882, we can wrap the length of s in a print statement and then run the file. And now the only thing that
+1928.44,7.440000000000055, gets shown to the user is the thing I explicitly printed out. Three. And then down here if I want to
+1935.88,6.1599999999998545," print this other result of this other expression, I can wrap that around a print statement and"
+1942.04,5.2000000000000455, Python will then print that one as well. But now I'm in charge of showing the user the things
+1947.32,10.960000000000036," that I want to show them, right? Okay. So whenever you have a print statement, Python will print that"
+1958.28,4.720000000000027," resulting expression and then enter a new line. So as you saw here, we had two print statements,"
+1963.0,6.7999999999999545," one around length and one around s at negative three. And Python put the result of these expressions,"
+1969.8,5.680000000000064," each one on a different line. Sometimes you might want to have expressions on the same,"
+1976.28,5.519999999999982, the results of expressions all in the same line. So we can do that. We can put all of these different
+1981.8,6.6400000000001, objects within the same print statement. Okay. We separate them by a comma within the print statement.
+1988.44,7.680000000000064, That's down here. Python will print all of our objects no matter what types they are. And it'll
+1996.1200000000001,7.199999999999818," separate each object by a space. So there's my object, there's my object at the number three and"
+2003.32,4.880000000000109," there's my object, the string, mosquitoes, and it printed it all on one line with a space in"
+2008.2,6.399999999999864, between them. And that's what this comma does. It automatically inserts the space. Now let's say
+2014.6,5.920000000000073, you don't want a space for whatever reason. What if we try concatenating these objects together?
+2020.52,4.240000000000009, Right? Remember we saw concatenation. We said it does not automatically insert spaces. It just kind
+2024.76,5.3599999999999," of merges the strings together. And we run it. Well, I kind of already gave it away. It's going to be"
+2030.12,6.880000000000109, an error. But let's see the error. It's a type error. It says can only concatenate strings not
+2037.0,6.7999999999999545, integers to strings. All right. Make sense? This is a string. This is not a string. So that's not
+2043.8,7.999999999999773," okay. And this is a string. So instead of concatenating different objects together, we now have to"
+2051.7999999999997,7.680000000000291, remember to cast every object that's not a string to a string. So this line is exactly the same as
+2059.48,6.239999999999782," the previous one except that B, which was the number, the integer three, is now being cast to a"
+2065.72,8.480000000000018, string. So I'm wrapping the B around the STR. And that casts my integer to the string. And now
+2074.2,12.080000000000382, Python is happy to concatenate these three strings for me. Okay. That's basically what I said.
+2086.28,7.920000000000073," So that's output using the print statement. Now how about input? We can get input from the user,"
+2094.2000000000003,7.519999999999982," not surprisingly, with a command called input. The format of input is usually like this. So we have"
+2101.7200000000003,6.559999999999945," the input command. In the parentheses, we give it a string. And then we usually want to save the input"
+2108.28,5.920000000000073, to a variable. So the next few slides are going to go through step by step what happens when I have
+2114.2,5.519999999999982, these two lines of code. Text equals input type anything. And then I'm going to print five times text.
+2121.48,7.7599999999997635," So when Python sees a line that says input and then some string, Python will automatically take"
+2129.24,5.2800000000002," the string within the input. Right. So in this particular case, here's my command. The string inside"
+2134.52,6.879999999999654," the input is type anything colon space. On the shell, Python will put that string for you."
+2142.2000000000003,6.7199999999998, And then it will wait. It waits for the user to type some stuff in and hit enter.
+2150.28,5.279999999999745," As soon as the user hits enter, whatever the user typed in, so let's say the user typed in"
+2155.56,11.2800000000002," howdy, whatever the user types in will be saved as a string. Sort of replacing this input statement."
+2167.56,5.519999999999982, So you can think of the input kind of like an expression. It's a weird one because it's waiting for
+2173.08,7.2800000000002," the user to give us something. Right. But in the end, the input gets replaced by the string version"
+2180.36,4.559999999999945," of whatever the user typed in. So the user can type in something, you know, numbers, letters,"
+2185.56,5.600000000000364," characters, anything. As soon as the user hits enter, whatever the user typed in will be saved as a"
+2191.16,7.599999999999909," string replacing this input. So in memory, the way this looks like is, this is our, you know, memory"
+2198.7599999999998,5.760000000000218," cloud. Here is this very, here is this object that I've created, which is the exact characters"
+2204.52,7.920000000000073," the user typed in. Okay. Well, if the user typed in howdy, then what does this line end up being?"
+2212.44,6.559999999999945, Text is equal to the string howdy. And that basically is what we've seen on the previous two
+2219.0,5.679999999999836," slides, right, when we've worked with strings. We're going to assign this variable and bind it"
+2224.68,6.800000000000182," to this particular string of characters. Now the next line is easy, right. We're going to print"
+2231.48,9.199999999999818," whatever the result of repeating text is five times. So the print will show on the shell, howdy,"
+2240.68,4.1599999999998545," howdy, howdy, howdy, howdy, right, that whatever the user typed in five times."
+2248.52,4.559999999999945," Okay. Let's look at another example. In this particular one, we're going to ask the user for a"
+2253.08,7.440000000000055," number. And I want to print five times whatever the user types in. So number one, well,"
+2260.52,6.639999999999873," again, grab input. So what we're asking the user to do is to type in a number, right. So when the"
+2267.16,6.239999999999782," Python sees this, it prints type a number and then waits for user input. Let's say the user"
+2273.3999999999996,8.0," types in the number three, that gets saved as the string three. Again, so no matter what the user"
+2281.3999999999996,4.640000000000327," types in, it's being saved as a string. Even if it's a number, it's being saved as the string"
+2286.68,6.0," that number, right. So to Python, it's a character. To us, it's a number, but to Python, it's still a"
+2292.68,8.639999999999873," character. So number one in memory basically becomes the string three, just one single character, three."
+2302.8399999999997,3.9200000000000728," When I print five times number one, what is that going to look like? You guys tell me."
+2309.24,5.679999999999836," Exactly, right. 333333, right, because we're not, we're working with a string here, not an integer."
+2317.24,5.200000000000273," If we want to work with an integer, we have to wrap our input statement with a cast."
+2322.8399999999997,5.600000000000364," Statement, right. So again, this is what Python does. We can combine expressions together. In this"
+2328.44,6.479999999999563," particular case, we're going to combine the casting, the input, with the input statement. So now"
+2334.9199999999996,6.320000000000164," the user can type in for me three again. The input itself is going to be the string three, but"
+2341.8799999999997,7.519999999999982," that line becomes num2 equals int parentheses, string three, right. And that, we've, I did on the"
+2349.4,7.2800000000002," shallow earlier today, right. When we cast a number, a string to an int, it becomes the number that it."
+2359.88,8.400000000000091," So num2 is then going to be three. And memory num2 is not the string three anymore, because we've"
+2368.28,6.239999999999782," casted to three. So when we print five times three, we're doing the mathematical operation five times"
+2374.6,10.639999999999873," three, right. 15. Okay. Let's have you code. So I'm going to give you a couple minutes. I'm going to have"
+2385.24,4.5600000000004," you write a program that is interactive. So it's going to ask the user for something, and it's going"
+2389.8,5.039999999999964," to print the something back to the user. So we're going to ask the user for verb, and then I want you"
+2394.84,4.639999999999873," to print two things for me. The first is whatever the verb that user typed in, you're going to write"
+2399.48,6.0," I can whatever better than you on one line. And then on the next line, so with another print"
+2405.48,4.639999999999873," statement, I want you to print that verb five times. So if the user types and run, you're going to write"
+2410.12,6.400000000000091," I can run better than you. And then on the next line, run, run, run, run. So the way these try it,"
+2416.52,5.8400000000001455, you try its work is I actually have some space here that I've already prewritten the instructions for
+2422.36,5.199999999999818," you. And all you have to do is fill in the code. Okay. So I'll give you a couple minutes, and then we'll"
+2427.56,5.599999999999909," write it together with suggestions from you, and we'll see how far we can get, and we'll definitely"
+2434.2,10.16000000000031, finish it together. So you don't have to finish it on your. Yeah?
+2450.12,3.119999999999891, You should have this file. It's part of the zip file downloaded for today.
+2453.24,3.0399999999999636, Okay. Yeah.
+2465.4799999999996,3.8400000000001455, All right. Does anyone have a start for me? So how can I ask the user for input?
+2470.8399999999997,1.2000000000002728, Yeah.
+2472.52,4.0, I think the last two minutes are going to be a little bit more complicated.
+2480.52,5.199999999999818, Yep. That works for me. And I'm adding a little extra space here between the colon or whatever
+2485.72,5.920000000000073," prompt you have, just so that when the user types it in, it isn't right beside the colon or the end"
+2491.64,9.11999999999989," of your, the end of this string. So as soon as we do this, the user will, the program will wait,"
+2500.76,5.039999999999964," and the user will get to type something in. What's the next step? What's the first? How can you,"
+2505.8,7.760000000000218," how can you use this input? Two, uh, friends. Yep. Let's print something."
+2518.2000000000003,7.279999999999745," I can, in quotes, yep, I can. We just outside of the quotes put the question underneath."
+2525.48,4.800000000000182," Yep. We can put it, put it question. Yep. Exactly. I can question comma because it's another"
+2530.28,5.599999999999909, object and I'm happy to put a space in between it. I can question at another string better than you.
+2539.72,7.200000000000273, There. And we don't need to write the full program right away. We can just test this little bit out.
+2547.72,6.0, So choose a verb run. The one I gave you is fine. That looks good so far. All right. So then we can
+2553.72,8.960000000000036," work, keep working on the second part. How can I print that verb five times? Yeah. Print"
+2562.68,8.400000000000091, and then question times five. Print question times five. Okay. Let's run it and see what happens. Run.
+2573.64,5.8400000000001455," Not quite. I'm missing spaces, but this is an awesome start. How can I add the spaces in there?"
+2579.96,12.400000000000091," Yeah. In parentheses, yep. We can concatenate it with a space, exactly."
+2593.96,7.039999999999964, Times on all that times five. Yeah. Let's try that. Run. Yep. That looks pretty good.
+2602.76,4.399999999999636, I do want to mention one thing. There is one improvement we can make to this program.
+2607.24,5.920000000000073," If we look at the output here, the thing that we're actually printing out is this verb space, right?"
+2614.2,6.1599999999998545," There's one, two, three, four, and the last one actually prints it with a space at the end."
+2620.92,4.959999999999582," So a challenge for you, and the answer is a little bit lower. I'll provide you guys with answers to"
+2625.8799999999997,5.360000000000127," these, but a challenge for you is think about how you can change it, change this last print statement"
+2631.3199999999997,8.0, so that this last run doesn't actually have that extra space. Think about it. You don't have to do it right now.
+2644.04,6.239999999999782," Okay. So with what we know so far, we can actually apply some of these ideas to a more numerical example."
+2651.16,7.279999999999745, So Newton's method is a way to actually grab the roots of a polynomial numerically using this idea
+2658.44,5.599999999999909," called successive approximation. We can't actually write the full algorithm with what we know so far,"
+2664.04,4.720000000000255, but we can write a really important part of it. The part is the part that we can write is the one
+2668.76,8.0," that gets a next guess based on an initial guess. So you don't need to understand how the algorithm works,"
+2676.76,4.639999999999873, but basically the next guess based on an original guess looks like this. This is the formula.
+2681.88,6.0," So the next guess is the original guess minus, and we evaluate the formula for whatever"
+2689.1600000000003,7.039999999999964, polynomial we want to find at the original guess divided by the derivative of that function at
+2696.2000000000003,9.759999999999764, the same guess. So here's just some code we've got asking the user for input. What x do we want to
+2705.96,4.559999999999945," find the cube root of? Then we ask the user for input, what guess do you want to start with?"
+2711.16,4.720000000000255, And then we can just print the current estimate cubed. So we just guess cubed.
+2717.32,5.440000000000055," And then the next guess is just following the formula up here, right? The next guess is going to say"
+2722.76,6.239999999999782," it's my original guess. So the g that I read in from the student or from the input minus,"
+2729.0,4.079999999999927, and now I have a division. The top of it is going to be f at g.
+2734.92,5.599999999999909," And the computer is not evaluating f, right? We have to actually write down what the formula is."
+2741.24,4.400000000000091," The function is, we want to evaluate at g, so it's g cubed minus x. That's our function up there."
+2746.28,5.519999999999982," Divided by the derivative, and again the program is not going to evaluate the derivative"
+2751.8,4.559999999999945," automatically. We're going to tell it what the derivative is manually. So you know,"
+2756.36,5.440000000000055, the derivative of g cubed minus x is just 3g squared. So then we just kind of hard code that in.
+2761.8,5.119999999999891, And the next guess to try is just going to be that particular division and subtraction.
+2769.8,0.5599999999999454, I'm sorry.
+2773.8,6.320000000000164," There are, there are Python packages that allow you to do that, but for our purposes we're just"
+2780.12,8.559999999999945," going to hard code it in this case. But yeah. So the way this looks in code is as follows,"
+2788.68,4.1599999999998545," right? That's exactly what we had in there. And if we run this program, all it does is,"
+2792.8399999999997,4.320000000000164," let's say we want to find the cube root of say 27. Let's start with, I don't know, five."
+2797.96,6.399999999999636," Right? It tells me that five cubed is 125, way too big, obviously. So the next guess to try is 3.6."
+2804.36,6.079999999999927, That's all the program does. It doesn't take this next guess and do another guess. We haven't
+2810.44,4.639999999999873," learned how to do such a thing yet, but we will in the next couple lectures."
+2818.52,5.360000000000127, One other thing I want to mention is this thing called an f string. It's something that
+2823.88,6.639999999999873," became available, I think a couple years ago in Python with Python 3.6. It's a way more"
+2830.52,9.2800000000002, convenient way for us to print out mixtures of literal text and resulting expressions. So if you
+2839.8,5.199999999999818," have a bunch of complicated expressions, you want to print out an f string is the way to do it"
+2845.0,5.679999999999836, these days. What we know is these first two lines. This is what we've learned in the past couple
+2850.68,8.240000000000236, slides. So if you wanted to have these two values and print this big number is whatever fraction
+2858.92,6.800000000000182," percent out of the original number. If you actually run this in the Python file, you'll see that"
+2865.7200000000003,6.480000000000018, this comma here puts an extra space between my number and the percent. That doesn't look very
+2872.2000000000003,6.1599999999998545," good. When you have 3%, you're expecting the percent sign to be right by the three. But this comma"
+2879.0,5.519999999999982, adds for me an extra space. So it looks a little bit weird. Which means that our solution was to
+2884.52,5.360000000000127," cast things to strings. So if we wanted to have that percent sign be right beside the number,"
+2889.88,9.599999999999909, we'd concatenate this cast with the percent. But f strings allow us to do this all in one. So there's
+2899.48,6.800000000000182, no concatenation to think about. There's no casting to think about. F strings basically are this f
+2906.84,6.559999999999945, and then a long string. And it's a mixture of expressions and things that I want to print
+2913.4,6.239999999999782, literally to the screen. So the thing that's not inside a curly bracket are all things I'm going
+2919.64,6.320000000000164, to print literally to the screen. So the space is space and then later on percent space of percent.
+2925.96,4.639999999999873, Those are all things that will literally be printed to the screen. Anything that's within a curly
+2930.6,6.0, bracket is considered an expression in Python. And so before Python prints out the thing to the
+2936.6,4.720000000000255, screen it's actually going to evaluate whatever numtime fraction is. And it knows these are going
+2941.32,5.760000000000218, to be variables. And then later on fraction times 100 and then later on num. These are all variables
+2947.0800000000004,5.359999999999673, or expressions that it will evaluate before actually putting them on the screen. And now notice these
+2953.48,5.200000000000273, expressions we might have had to cast to strings beforehand if we wanted to concatenate them.
+2958.6800000000003,4.7199999999998, But now we don't because they're in this special format with the curly brackets of the extra.
+2964.1200000000003,6.1599999999998545, So just something to practice. I'll use sometimes this. I'll use sometimes casting. I'll use
+2970.28,5.2800000000002, sometimes abstracts. But if you can use abstracts whenever you can that's really the way to go
+2977.1600000000003,7.7599999999997635, in Python these days. So the big idea actually even with abstracts is that you can place expressions
+2984.92,5.599999999999909," anywhere. We saw we placed expression, I forget here, where we indexed, we placed the expression"
+2990.52,5.680000000000291, in the index. Now we're placing expressions inside print statements and now we're placing
+2996.2,5.119999999999891, expressions inside of strings. So expressions can be placed really anywhere. Just pretty awesome.
+3001.3199999999997,4.640000000000327, Very versatile. Python will just evaluate them and then just move on to the next lines.
+3008.04,6.559999999999945," Okay. So the last topic of, sorry, any other questions about the inputs and outputs? Where's that"
+3014.6,8.639999999999873, right? Okay. So the last thing that we'll talk about today and we will maybe talk a little bit
+3023.24,6.800000000000182, about it next time is conditions for branching. So right now the kinds of programs we can write
+3030.04,6.960000000000036, are basically very linear. We have a bunch of lines of code and they get evaluated one by one.
+3037.0,3.7599999999997635, There's no way to skip around. There's no way to repeat things. There's no decision points in
+3040.7599999999998,5.8400000000001455," the programs, values that you get are just values that are in the program. Now we're going to look"
+3046.6,7.679999999999836," at ways that we can add decision points in our program. So if some value, if some variable value"
+3054.2799999999997,5.360000000000127," is less than some other variable value, we want to evaluate some code and otherwise we'll do some"
+3059.64,9.920000000000073," other code, right? So some code can now be skipped in programs with this new idea. Before we go on"
+3069.56,5.119999999999891," to showing you exactly how to do that, I'm going to talk about another notion of equal in programming"
+3074.68,5.679999999999836, and this might be more the notion of equal you might be used to in math. So the first notion of
+3080.3599999999997,6.400000000000091, equal is the one we've already seen. It's assignment. It's done with one equal sign. The value on the
+3086.7599999999998,7.599999999999909," right hand side is bound to the variable on the left hand side, right? That we've known. Double equal"
+3094.3599999999997,7.600000000000364, in Python is how we tell Python that we'd like to know whether these two expressions are equal or
+3101.96,9.519999999999982," equivalent. Sorry, not it. So if we're going to be looking at equivalency, how do we express"
+3111.48,6.2400000000002365," equivalency? Well, if something is equal to something else, we can say yes or no, we can say true or"
+3117.7200000000003,6.799999999999727, false. True or false should ring a bell. It's the Boolean data type that we saw last lecture.
+3125.24,7.120000000000346," So now that we're going to show you equality or conditionals in programming, we're going to start"
+3132.36,6.559999999999945, talking about Boolean's a little bit more. So expressions don't just have to be numerical.
+3138.92,5.440000000000055," Expressions can actually give us Boolean results. So for example, an expression like"
+3144.6800000000003,10.879999999999654, two less than three is okay in Python. And this expression actually evaluates to a certain
+3155.56,7.600000000000364," value. It's not a number. It evaluates to true. The Boolean value true because yes, two is less than"
+3163.1600000000003,9.679999999999836," three. The equal sign here, this notion, with a double equal is how we ask Python to tell us"
+3172.84,10.320000000000164, whether two things are equivalent. And this will be the Boolean value false. So here's a bunch
+3183.1600000000003,7.119999999999891," of other operators that we can run on any type, really, in Python. Most of the time we're going"
+3190.28,5.920000000000073," to run them on numbers, but they can be run on strings and things like that as well. So obviously"
+3196.2000000000003,5.599999999999909," the double equal sign checks for equality. So if i is the same as j, this entire expression is"
+3201.8,5.039999999999964," replaced with true. And if they're not equivalent, this entire expression is replaced with false."
+3208.6000000000004,8.079999999999927," If we want to check for inequality, we use not equal. So exclamation mark equal means not equal."
+3216.6800000000003,7.679999999999836," So if the number i or whatever object i is not equal to object j, then this entire expression"
+3224.36,6.800000000000182," is true. If they are equal, then the entire expression is false. And then of course we've got"
+3232.12,5.599999999999909, the less than or equal to greater or greater than or equal to to work with as well. We can apply
+3237.72,6.079999999999927," these to strings. And with strings it's important to be careful about case. So for example,"
+3243.7999999999997,5.680000000000291," lower case a equivalent to upper case a is false, right? Because they are not the same character."
+3253.8799999999997,5.2800000000002," Now that we're talking about Boolean operators, we can actually start to combine them together."
+3259.96,6.1599999999998545," So if I have the expression, for example, two less than three, like I wrote on the board, that's"
+3266.12,5.7599999999997635, true. But I can combine that expression with another one. Actually by itself I can say what is
+3271.8799999999997,7.120000000000346, not two less than three? And that will be false. It's the opposite of it. But I can also combine
+3279.0,6.239999999999782, Boolean expressions together. So I can say what's two less than three and three less than four.
+3285.9599999999996,8.88000000000011," So two less than three is true, right? And three less than four is also true. So the combination"
+3294.8399999999997,9.2800000000002, of these two expressions is what is true and true? True. So if one is true and the other one is
+3304.12,6.480000000000018," true, then both of them and both of them together are going to be true. If one of these is false,"
+3310.6,8.7199999999998," so is three greater than four is false. Well, what's false and true? It's going to be false. So if"
+3319.3199999999997,7.440000000000055," one of these operators is false, then the entire expression is false. And you don't have to remember"
+3326.7599999999998,7.760000000000218," this truth table. You can always check it like I just did, right, here in the console. But at a high"
+3334.52,5.760000000000218," level, right, when we're doing the AND operator between two Boolean expressions, we need both of"
+3340.28,7.7599999999997635, the expressions to be true for the result and to be true. The OR is the other one we usually
+3349.0,6.1599999999998545, can usually do. The OR is always true except for when both of the operators are false.
+3356.28,7.199999999999818," And it kind of makes sense in English too, right? If either operator is true, then the entire"
+3363.48,4.559999999999945," result is true. But when both are false, the OR of both of them is false as well."
+3370.12,5.8400000000001455, So here's a little example where we can use these operators in Python so we can draw the little
+3375.96,5.440000000000055, memory diagram as well. So P set time is 15. There's my variable. Sleep time is 8. There's my other
+3381.4,4.799999999999727, variable. I'm going to print sleep time is greater than P set time. So here my print statement is
+3386.2,10.159999999999854," going to grab that expression, which evaluates to false. Eight is less than 15 is false. So that's"
+3396.3599999999997,5.200000000000273," going to print false. And then I have two more variables. These ones just happen to be Booleans,"
+3401.56,5.7599999999997635," derive is true, drink is false. So drink and arrive is going to be false because one of them is false."
+3408.68,5.440000000000055, And so here I've got this other variable both. And then I'm going to print false to the console.
+3417.0,6.799999999999727," Okay, quick, you try it for you guys. So let's have you write a program that saves a secret number"
+3423.7999999999997,5.920000000000073," in a variable. Okay, so that's going to be your program's secrets. Presumably people using your"
+3429.72,3.599999999999909, program won't be looking at the program itself. They'll just be interacting with the program in
+3433.3199999999997,5.760000000000218," the shell. So save a secret number in a variable, ask the user to guess a number, and then print"
+3439.08,8.0, either true or false if it's the same as your secret or not. So it's here in this you try it
+3447.08,4.239999999999782, down here. So you can start with something like secret equals and then put your favorite number
+3451.3199999999997,5.680000000000291," there, five, whatever, and then write the rest of the code. So ask the user to guess a number,"
+3457.96,5.599999999999909, print a Boolean depending on whether the guess equals this secret or not. So I'll give you a couple
+3463.56,12.960000000000036," minutes to write that. Yeah, sorry. If you use the symbol and it's not the same, you have to"
+3476.52,7.119999999999891, actually type out A and D in Python. The end means something else. It's like a it's an operator with
+3483.64,7.760000000000218," the bits of the number. So something it's not going to give the same answers. Right, you're thinking"
+3491.4,11.2800000000002," about Java or C++ or something, right? Yeah. All right, does anyone have a start for me for"
+3502.6800000000003,14.319999999999709," this program? How do I grab the user input? Guess equals input. We can be nice, please. Guess."
+3517.0,9.679999999999836," What's that? We want the user to give us an integer, yeah, a number. Exactly. So,"
+3529.16,8.320000000000164," okay, yeah. If we leave it like that, then we're just grabbing the string. So we have to cast it"
+3537.48,9.840000000000146," to an integer, exactly. Now what? How do I check for equivalency between my secret and the guess?"
+3551.88,8.639999999999873," Secret. Equal, equal guess. And you want to print this? Yeah, let's print that."
+3561.32,9.039999999999964," Okay, run it. Let's guess something that's not the same. False. Run it again. Let's guess something"
+3570.36,3.2799999999997453," that's the same truth. And we can guess something that's lower too, just."
+3577.64,1.4400000000000546," Is everyone, oh, yeah."
+3579.08,5.440000000000055," Can you assign, like, a different order, if you assign this, a pretty close to the guess"
+3585.08,8.480000000000018," to the number of the numbers? Yep, yep, exactly. Equal equals this thing. Yep, and then you can,"
+3593.56,4.480000000000018," you know, do whatever you want with that print equal or something. That's the same, but yeah,"
+3598.04,5.360000000000127, you can do other things with this variable. Yeah. Exactly. Five. Yeah.
+3609.56,3.7599999999997635," If you want at home, try to see what would have happened if you didn't cast it to an integer."
+3615.3199999999997,3.9200000000000728," See if the program would have crashed or not, or if it would have just, you know, worked by"
+3619.24,5.8400000000001455," giving a wrong answer. So why do we do Booleans, right? Booleans are important variables because"
+3625.08,6.400000000000091," they allow us to start thinking about writing programs that make decisions, right? The way we talk"
+3631.48,4.480000000000018," is, you know, we can say something like, if this is true, do this, otherwise do this. The Boolean"
+3636.04,5.599999999999909," part is if that something is true, right? So the something is true is going to be the Boolean that"
+3641.64,4.080000000000382," we can create in our programs. And then the do this is some sort of commands, and then the"
+3645.7200000000003,5.519999999999982," otherwise do that is going to be some other set of command. So really simple, you know,"
+3651.2400000000002,4.559999999999945," Boolean expression could be, it's midnight, you get a free food email, do you go get the free food"
+3655.8,6.399999999999636, or do you sleep? Right? That's the very simplest kind of decision point you can make. But with
+3662.2,5.440000000000055," conditionals, you can actually write a pretty cool program that gets you to that free food,"
+3668.3599999999997,4.720000000000255," right? So let's say this is a map of MIT, this is where you are, that's where the free food is."
+3673.64,5.599999999999909, Okay? We can write a really simple algorithm using just conditionals that takes you to that
+3679.24,5.440000000000055," free food. So the algorithm goes like this. So I'm going to say, I'm going to walk always, you know,"
+3684.68,3.6799999999998363," in this direction. So I'm either going forward, backward, left and right. I'm not turning."
+3688.44,5.119999999999891, And I'm going to say the algorithm is always going to have my right hand be on a wall. So if
+3694.76,4.480000000000018," the right is clear, so standing here, my right is clear, so I'm just going to keep shimming"
+3699.2400000000002,7.359999999999673," until I reach a wall. If my right is blocked, but my forward is clear, I'm going to keep going"
+3706.6,9.920000000000073," like this all the way to the end of the room. If my right is blocked and my forward is blocked,"
+3716.52,4.800000000000182," right as if I would have reached that end of the room, I would have gone to the left. And if my"
+3721.32,5.039999999999964," right forward and left is blocked, if I'm over there, I would go backward. So I'd go backward."
+3726.36,4.319999999999709," So basically, starting from here, I've made my way all the way around this room, and I would go"
+3730.68,6.720000000000255," out the door down the hallway. Right? And if the map of MIT doesn't have islands, so if the free food"
+3737.4,4.7199999999998," isn't somewhere sort of in an island in the middle here, if it's just a regular old maze, I would"
+3742.12,4.7199999999998, eventually make my way to the free food. Following this really simple conditional algorithm.
+3749.48,4.400000000000091," So how do we actually do conditionals in Python? How do we tell Python, hey, I want to create,"
+3753.88,7.679999999999836, I want to insert a decision point right here. We do that using the keyword if. And the if starts a
+3761.56,10.400000000000091, decision block. Now the simplest decision block is just an if by itself. So if Python sees that if
+3771.96,6.559999999999945," so there's some code that it's following, and then at some point it reaches the if. The condition"
+3779.2400000000002,7.039999999999964," tells Python to check whether that condition is true. If the condition is true, so this is our"
+3786.28,7.7599999999997635," decision point, then I'm going to deviate from my main program and do the code that's part of that"
+3794.04,7.360000000000127," condition. Those I guess two lines dot dot dot inside there. If the condition is not false,"
+3801.4,5.039999999999964, I'm not going to go that route. And I'll just keep following the rest of the main program.
+3807.72,4.0, How does Python know how many code lines to execute that's part of that condition?
+3812.2,4.2400000000002365," Well, it looks at the indentation. So notice here I've kind of put a few spaces"
+3817.32,6.399999999999636, for these two and dot dot dot code blocks here. Anything that's indented right after that if statement
+3823.72,6.639999999999873, and that colon there is a set of commands that are part of that block. So anything here will get
+3830.3599999999997,6.640000000000327," executed all at once. And that's a really simple if either you do the set of commands, extra commands"
+3837.0,7.7599999999997635, if the condition is true or you don't. Now you can add an exception to that. So if the condition is
+3844.7599999999998,6.880000000000109," true, again we're following the program, we reach this if conditional here. If the condition is true,"
+3851.64,4.480000000000018, again we're going to deviate from the program and execute this other set of commands right here.
+3858.04,4.7199999999998, Otherwise the condition is not true and we're going to execute this other set of commands over
+3862.7599999999998,5.680000000000291," here. So these guys over here. So either we do this set of commands or the other set of commands,"
+3868.44,5.039999999999964, but we never do both and we never skip both of them. So either we do one set or the other.
+3873.48,5.199999999999818, When we're done executing all the indented blocks part of the condition or the other one that's
+3879.48,4.960000000000036," if the condition wasn't true, then we rejoin the rest of the program and continue executing. So"
+3884.44,5.039999999999964, this is all the rest of the program is at the same indentation level as our original if and else.
+3892.04,6.7199999999998, We can add a whole bunch of conditions right not just an if do this otherwise do this. We can
+3898.7599999999998,8.400000000000091, actually add a bunch of things to check using L if which basically stands for else if another
+3907.16,6.559999999999945, condition do this. So here's our program we reach a decision point. If the condition is true like
+3913.72,4.800000000000182," before we'll execute this set of commands, but otherwise the condition is not true,"
+3920.6,6.400000000000091, we're going to check another condition else if this other condition is true we'll execute this
+3927.0,7.519999999999982, other set of commands. Otherwise here's another else. We'll check another condition. If it's true
+3934.52,6.559999999999945, we'll execute some other set of commands otherwise there can be more L ifs and at some point we're
+3941.08,7.8400000000001455, going to rejoin the rest of the program. Now these L ifs are going to be each condition is checked
+3948.92,5.839999999999691, one at a time. The very first one that's true is the one that gets executed. We're never going to
+3954.7599999999998,6.320000000000164, execute more than one right because this is an if else if else if else if. So even in English you're
+3961.08,4.960000000000036, only going to do one of these right you're never going to do all of them it is possible to skip
+3966.04,4.320000000000164, all of them though because if none of those conditions are true you just don't do any of them.
+3971.0,7.599999999999909, If more than one is true you do the first one that is true. If you want to have sort of a catch
+3978.6,6.079999999999927, all kind of version of the middle L if L if L if L if L if you just add an else at the end. So if
+3984.68,5.760000000000218, none of those conditions are true you can add an else which says you just do this if nothing is true.
+3991.72,6.079999999999927, Kind of like what we had over here if this one otherwise do this well if any of these conditions
+3997.7999999999997,10.0, are true do one of them otherwise do this. So here's an example we've got piece at time we'll
+4007.7999999999997,4.5600000000004, just put some variables in there sleep time we'll put some variables in there and run it see what
+4012.36,6.799999999999727, we get I've got one code block here an if L if and an else. So the first code block the condition
+4019.16,5.440000000000055, is it checks that the the sum of those two is greater than 24 and it does something this is the
+4024.6,7.199999999999818, block that's part of that condition notice it's indented by usually four spaces L if so if this
+4031.7999999999997,4.2400000000002365, one was not true then I'm going to go ahead and check the next one the next condition is that
+4036.04,4.639999999999873, the addition is greater than or equal to 24 and then we're going to do this print statement here
+4042.7599999999998,4.160000000000309, and if neither of those are true I'm going to do whatever is in this code block here I'm going to
+4046.92,5.519999999999982, do these two lines okay so this is my sort of I call it a catch all because none of those other
+4052.44,4.960000000000036, conditions were true so we're going to catch ourselves and do this print do these commands here
+4058.52,5.760000000000218, and otherwise once we finish doing either this one or this one or catching whatever's left over
+4064.28,4.480000000000018, in here we're going to evaluate the print statement here and we're going to print end of day
+4069.32,5.199999999999818, because this is the rest of my program notice it's at the same indentation level as my original program
+4076.92,12.400000000000091, so here is this this program so if a piece at time and sleep time is 22 and eight right the
+4089.32,6.879999999999654, addition is more than 24 so this is going to enter this code block here in print impossible
+4098.52,7.199999999999818, if it's exactly equal to 24 right so 22 and 2 we're not going to enter this one but we will
+4105.72,3.8400000000001455, enter this one right because it's exactly equal to it's not greater than so then we're going to
+4109.56,4.479999999999563, print full schedule and then rejoin the rest of the program here and print end of day
+4116.84,6.800000000000182, and otherwise if this is something low right less than 24 and not equal to 24 right so neither of
+4123.64,5.279999999999745, these conditions are true then we're going to enter the else and we're going to evaluate
+4128.92,6.079999999999927, or run these two lines of code here so the two lines of code here are going to grab the absolute
+4135.0,5.199999999999818, value of 24 minus the piece at time minus the sleep time figuring out how much time we have left
+4140.2,6.400000000000546, in the day it's also going to print this line here and then rejoin the rest of the program to print
+4146.6,10.55999999999949, end of day okay quick check nothing to run nothing to right here nothing to run think about this
+4157.16,8.720000000000255, program what is wrong with it so i'm grabbing a number for x a number for y and then i'm checking
+4165.88,5.6799999999993815, if x is the same as y i'm printing x is the same as y so if i give it 5 and 5 i'm going to print
+4171.5599999999995,5.520000000000437, 5 is the same as 5 and then i'd also like to print these are equal what's the problem with this
+4177.08,7.119999999999891, program yeah the x is not equal to y it's still going to print these are equal then because it's not
+4185.08,6.559999999999491, exactly if x is not the same as y we rejoin the rest of a program because the indentation level
+4191.639999999999,4.5600000000004, of this print statement is the same as the rest of our program so how do we fix it
+4201.96,5.039999999999964, indent yep we'll just indent that print statement in to be at the same level as the
+4207.0,10.239999999999782, if statement so we can actually nest indentation statement we can nest uh conditionals right because
+4217.72,5.519999999999527, once we've created a conditional it's just a code block so here i've got an if statement with
+4223.24,5.199999999999818, its own code block and inside that code block i can actually have more if statements that are
+4228.839999999999,8.079999999999927, going to be executed whenever this condition is true so this is the inside code block so for
+4236.919999999999,6.3200000000006185, example the the place where we would execute this inner code block is when x and y are equivalent
+4243.24,6.960000000000036, right because then i'm going to enter this code block here this is true i'm going to print x and
+4250.2,5.359999999999673, y are equal and then this second conditional here y is not equal to zero is also true
+4255.72,6.640000000000327, and then i'm going to print this one as well i've already done one of the conditionals they're
+4262.360000000001,3.9200000000000728, true so i'm going to skip the ellif and skip the else and i'm going to rejoin the rest of the program
+4268.4400000000005,5.599999999999454, all the other cases right when one values different than the other will either take me here
+4274.76,7.520000000000437, in the else and then rejoin the rest of the program or when they're equivalent i'm going
+4282.28,4.800000000000182, or you know here i don't know i don't actually have a case for that one on the slides but when
+4287.08,6.479999999999563, they're equivalent and one and y is equal to zero i'm not actually going to enter this inner
+4293.5599999999995,8.88000000000011, conditional right because while x and y were true were equivalent which is true y was equal to zero
+4302.44,8.640000000000327, so that not equal to zero is false and then we rejoin the rest of the program yeah
+4312.28,8.960000000000036, oh i'm casting the numbers to floats i could cast them to ints as well yeah just so i'm not
+4321.24,7.199999999999818, comparing strings yeah so now that i've introduced conditionals it's important to do a little bit
+4328.44,6.480000000000473, more practice to get a mental model a mental model of how to trace the code right and the the
+4334.92,4.399999999999636, visual structure of the code actually helps a lot and python is unique in the sense there's
+4339.32,6.399999999999636, no other languages that actually force you to indent things so the other languages don't really
+4345.719999999999,4.079999999999927, force you to have this visual structure to match exactly what's going on but it's actually
+4349.799999999999,5.520000000000437, really useful in python it that's what i like about python it just helps you see things that are
+4355.32,5.680000000000291, going on immediately like you know this this set of code is part of this code block and so it
+4361.0,3.8400000000001455, helps you kind of debug a little bit more efficiently but the more practice you get the more you'll
+4364.84,4.239999999999782, get used to kind of tracing the code and knowing exactly you know if these variables have this
+4369.08,5.199999999999818, value exactly where your code is going to go so i'm going to skip this you try it because it's
+4374.28,5.039999999999964, just kind of you tracing the code and i'm going to have you do this one or we can write it real
+4379.32,4.640000000000327, quick or you can start and then we can write it together it's a variation of the program you just
+4383.96,7.279999999999745, wrote instead of telling me whether the guess is true or is the same as the secret number i just
+4391.24,4.479999999999563, want you to print whether the guess is too low too high or the same as the secret number
+4396.92,4.880000000000109, so we're going to need to put a conditional in there if some conditional you know we're going
+4401.8,5.6799999999993815, to print something and yeah so i'll give you about a minute and then we can write it together and
+4407.48,10.5600000000004, then we can be done oh yeah you can have two of statements in the program yeah and there's actually
+4418.04,4.800000000000182, some exercises i have for you guys to try at home here where there are two if statements in the
+4422.84,5.6799999999993815, program and just to see what happens that starts two conditionals so if you have if some conditional
+4428.5199999999995,4.800000000000182, that one can be true and if some other conditional that one can also be true and then both will
+4433.32,9.360000000000582, be evaluated it's not an else situation right yeah that's a good question so i'm just going to
+4442.68,7.4399999999996, copy the input from before was anyone have a start to my condition i just copied what we had
+4450.12,3.280000000000655, before for the input
+4460.68,1.4399999999995998, yeah
+4462.12,0.9600000000000364, so
+4465.0,0.23999999999978172, here
+4466.2,0.3999999999996362, text
+4468.36,0.7200000000002547, very bad
+4471.08,0.9600000000000364, yep
+4473.5599999999995,0.24000000000069122, yep
+4477.8,0.3999999999996362, great
+4479.16,0.48000000000047294, great
+4479.64,0.47999999999956344, you have two
+4481.08,0.15999999999985448, yep
+4481.96,0.47999999999956344, two high
+4483.32,0.23999999999978172, good
+4485.72,4.719999999999345, yep that's a great start so we can even run it and you know guess something that's
+4490.44,1.5200000000004366, we know it's too high perfect
+4498.12,0.3999999999996362, next
+4505.5599999999995,3.600000000000364, do you want to do an else or an ellif yeah actually i would get rid of the
+4509.5599999999995,3.5200000000004366, equals sign because if you put in a five now we will still say two five
+4513.5599999999995,3.5200000000004366, that's a good point so if we run it now let's run it with a five
+4517.8,7.279999999999745, it says two high exactly yeah so let's remove the equal sign it's a good thing we debugged that
+4527.0,7.519999999999527, so we can do an ellif the guess is equivalent to the secret and then we can print
+4536.12,6.720000000000255, equal right
+4543.56,5.8400000000001455, does everyone understand why we remove that equal sign from the greater than
+4550.28,4.080000000000837, yeah because we would have missed it yeah we would have mistakenly gone into that first path
+4555.32,3.8400000000001455, but ellif we can have a case where the guess is equivalent to secret
+4559.16,5.920000000000073, sure and then we'll print equal and then the last one can either be an else because we know
+4565.08,4.800000000000182, the only other option is guess is less than or we can do another ellif if we want to but we
+4569.88,4.880000000000109, can leave it as an else and then we can print um too low
+4579.16,5.119999999999891, and then we can run it and we can guess all the variations so something that's too high
+4584.28,3.600000000000364, something that's the same and
+4594.52,3.839999999999236, i'm not sure what i did there i should restart my kernel
+4600.36,8.400000000000546, so we did something that's too high something that is
+4611.8,2.319999999999709, equivalent and then we can do something that's too low
+4616.4400000000005,9.679999999999382, okay yeah so there is no difference we can do an ellif guess is less than secret
+4626.28,4.880000000000109, that would the program would work just the same the else is just quicker because we know there are
+4631.16,10.319999999999709, no other options uh here we could also in this particular case we could also put a bunch of if
+4641.48,6.400000000000546, statements in a row but then we'd have to be careful that they are mutually exclusive so like
+4647.88,4.719999999999345, in the pre even previous example right if we have a bunch of conditions that might all be true
+4653.240000000001,5.920000000000073, all those ifs will execute right that's the thing because the if starts a block the ellif
+4659.160000000001,4.639999999999418, is just associated with that block so either you do one or the other or the other but if you have
+4663.8,4.5600000000004, a whole bunch of ifs then they might all be true and they'll all be executed yeah
+4670.92,6.720000000000255, yeah oh we could use parentheses in the if-else statements you mean like this
+4678.280000000001,3.9200000000000728, yeah we can do that especially if we have a whole bunch of expressions together but if there's
+4682.2,5.119999999999891, just one python will automatically know to do the expression first and then do the if
+4687.96,9.11999999999989, yeah these are all wonderful questions by the way okay so as we saw there was a little bug in our
+4697.08,4.1599999999998545, code it's a good thing we ran it I should have run it with a bunch of different options but it's
+4701.24,4.720000000000255, important to debug early and debug often just to make sure that you don't introduce a bug that will
+4705.96,5.8400000000001455, kind of carry on throughout the code um that's another big idea and then a quick summary of what we've
+4711.8,5.4399999999996, learned input and outputs obviously make our programs interactive we added branching as a way
+4717.24,3.8400000000001455, to introduce decision points in our program and next time we're going to do a little bit more
+4721.08,6.400000000000546, branching and then introduce looping so ways to repeat commands in our programs so I went a little
+4727.4800000000005,2.880000000000109, bit over time I won't do that again

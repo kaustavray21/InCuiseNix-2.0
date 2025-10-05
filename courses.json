@@ -23,7 +23,7 @@
       { "video_id": "py16", "title": "Lecture 16: Recursion on Non-numerics", "video_url": "https://www.youtube.com/embed/2XxGplWqXVQ" },
       { "video_id": "py17", "title": "Lecture 17: Python Classes", "video_url": "https://www.youtube.com/embed/tsMrUdynbQQ" },
       { "video_id": "py18", "title": "Lecture 18: More Python Class Methods", "video_url": "https://www.youtube.com/embed/gLnCmUkgUQk" },
-      { "video_id": "py19", "title": "Lecture 19: Inheritance", "video_url": "https://www.youtube.com/embed/gLnCmUkgUQk" },
+      { "video_id": "py19", "title": "Lecture 19: Inheritance", "video_url": "https://www.youtube.com/embed/rgM7Z9BNm1s"},
       { "video_id": "py20", "title": "Lecture 20: Fitness Tracker Object-Oriented Programming Example", "video_url": "https://www.youtube.com/embed/rgM7Z9BNm1s" },
       { "video_id": "py21", "title": "Lecture 21: Timings Programs and Counting Operations", "video_url": "https://www.youtube.com/embed/lvp4NfED6K4" },
       { "video_id": "py22", "title": "Lecture 22: Big Oh and Theta", "video_url": "https://www.youtube.com/embed/RJhoT5PEf_0" },
@@ -38,25 +38,23 @@
     "title": "Django Web Development",
     "description": "Build powerful web applications with the Django framework.",
     "image_url": "https://placehold.co/600x400/228B22/FFFFFF?text=Django",
-    "videos": [
-      { "video_id": "dj01", "title": "Lecture 1: Introduction", "video_url": "https://www.youtube.com/embed/Jz-8-8Q_M8s" },
-      { "video_id": "dj02", "title": "Lecture 2: HTTP", "video_url": "https://www.youtube.com/embed/k6Erh7oHv4c" },
-      { "video_id": "dj03", "title": "Lecture 3: Django", "video_url": "https://www.youtube.com/embed/3-n9tGYB32I" },
-      { "video_id": "dj04", "title": "Lecture 4: Python", "video_url": "https://www.youtube.com/embed/N5f_z5apB4o" },
-      { "video_id": "dj05", "title": "Lecture 5: Git", "video_url": "https://www.youtube.com/embed/e_kKsa-W-8A" },
-      { "video_id": "dj06", "title": "Lecture 6: HTML", "video_url": "https://www.youtube.com/embed/GA3A-g78h-E" },
-      { "video_id": "dj07", "title": "Lecture 7: CSS", "video_url": "https://www.youtube.com/embed/u4k5-xxA6-k" },
-      { "video_id": "dj08", "title": "Lecture 8: JavaScript", "video_url": "https://www.youtube.com/embed/l2rz-N-dI-s" },
-      { "video_id": "dj09", "title": "Problem Set 0", "video_url": "https://www.youtube.com/embed/8v-_Hn6o0-A" },
-      { "video_id": "dj10", "title": "Problem Set 1", "video_url": "https://www.youtube.com/embed/9NP62Xg6gOY" },
-      { "video_id": "dj11", "title": "Problem Set 2", "video_url": "https://www.youtube.com/embed/o0H3bA8lJ8A" },
-      { "video_id": "dj12", "title": "Problem Set 3", "video_url": "https://www.youtube.com/embed/XW70jelw2P0" },
-      { "video_id": "dj13", "title": "Problem Set 4", "video_url": "https://www.youtube.com/embed/p8-pP_nFTm4" },
-      { "video_id": "dj14", "title": "Problem Set 5", "video_url": "https://www.youtube.com/embed/x-0s6Hkv-r0" },
-      { "video_id": "dj15", "title": "Problem Set 6", "video_url": "https://www.youtube.com/embed/YIcb9_vLzJg" },
-      { "video_id": "dj16", "title": "Problem Set 7", "video_url": "https://www.youtube.com/embed/t0o-t2-2p7U" },
-      { "video_id": "dj17", "title": "Problem Set 8", "video_url": "https://www.youtube.com/embed/2-p-I402-90" },
-      { "video_id": "dj18", "title": "Final Project", "video_url": "https://www.youtube.com/embed/5BDVn4Ch-04" }
-    ]
+    
+  "videos": [
+    
+    { "video_id": "dj01", "title": "Introduction", "video_url": "https://www.youtube.com/embed/3EzKBFc9_MQ" },
+    { "video_id": "dj02", "title": "Setup and installation", "video_url": "https://www.youtube.com/embed/aAACOgAHg90" },
+    { "video_id": "dj03", "title": "Django Basics", "video_url": "https://www.youtube.com/embed/6Ctsv9VB8L8" },
+    { "video_id": "dj04", "title": "Database Setup", "video_url": "https://www.youtube.com/embed/DZVFgMSyRXI" },
+    { "video_id": "dj05", "title": "Adding Database Records", "video_url": "https://www.youtube.com/embed/qQPKqClSDbg" },
+    { "video_id": "dj06", "title": "Displaying Records", "video_url": "https://www.youtube.com/embed/RozHfswVZYE" },
+    { "video_id": "dj07", "title": "Admin Dashboard", "video_url": "https://www.youtube.com/embed/xc363xZGxXI" },
+    { "video_id": "dj08", "title": "Static Assets", "video_url": "https://www.youtube.com/embed/kJJx77PYMFA" },
+    { "video_id": "dj09", "title": "Forms", "video_url": "https://www.youtube.com/embed/WQISlkg_IZk" },
+    { "video_id": "dj10", "title": "Authentication", "video_url": "https://www.youtube.com/embed/0gAFW4UxsZg" },
+    { "video_id": "dj11", "title": "App Build(Part 1)", "video_url": "https://www.youtube.com/embed/wQPaXedytlg" },
+    { "video_id": "dj11", "title": "App Build(Part 2)", "video_url": "https://www.youtube.com/embed/jyjytSjqII4" },
+    { "video_id": "dj12", "title": "App Build(Part 3)", "video_url": "https://www.youtube.com/embed/ZpKl3U-arN8" }
+  ]
+
   }
 ]

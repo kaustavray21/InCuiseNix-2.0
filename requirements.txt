@@ -4,3 +4,5 @@ pymysql
 mysqlclient
 google-generativeai
 youtube-transcript-api
+yt-dlp
+openai-whisper

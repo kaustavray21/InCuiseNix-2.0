@@ -1,0 +1,934 @@
+start,duration,text
+0.0,19.080000000000002," Let's get started, everybody."
+19.080000000000002,4.799999999999997, So last lecture we began talking about this topic of recursion.
+23.88,6.879999999999999, And it hopefully solidified a few sort of really fundamental ideas about recursion that
+30.759999999999998,3.1199999999999974, we're going to use in today's lecture.
+33.879999999999995,6.760000000000005," Today's lecture, the first half of it ish, we're going to talk about recursion just kind"
+40.64,3.480000000000004, of to review on some actual numerical examples.
+44.120000000000005,4.239999999999995," But then the second half, which is the main event for today, is going to be recursion on"
+48.36,1.0, non-numeric.
+49.36,2.5600000000000023, So specifically recursion on lists.
+51.92,4.520000000000003, But the techniques we'll see on lists can be applied to other things that are non-numeric
+56.440000000000005,3.559999999999995," as well, like two pulls or strings or things like that."
+60.0,4.840000000000003, So let's start the review of a little bit of review of what we talked about last time
+64.84,2.5999999999999943, in some of the big ideas by looking at this example.
+67.44,4.480000000000004, So we're going to write a recursive function for the Fibonacci sequence.
+71.92,4.6000000000000085, And the Fibonacci sequence exists in nature in a lot of places.
+76.52,8.280000000000001, One specific place is you can model a mating of rabbits using Fibonacci sequence.
+84.8,1.7199999999999989, But we won't be setting that in depth today.
+86.52,2.1599999999999966, We're just going to be looking at the sequence itself.
+88.67999999999999,6.680000000000007," So just to remind you, the idea behind Fibonacci is we start out with two sort of basic values."
+95.36,3.6400000000000006, Fibonacci of one is one and Fibonacci of two is one.
+99.0,3.5999999999999943," So in my table here, I've got these two starting values."
+102.6,4.840000000000003, And we can fill in the remainder of the table by basically saying Fibonacci of n is Fibonacci
+107.44,3.280000000000001, of n minus 1 plus Fibonacci of n minus 2.
+110.72,2.3599999999999994, So Fibonacci of three will be 1 plus 1.
+113.08,2.0799999999999983, Fibonacci of four will be 2 plus 1.
+115.16,1.7999999999999972, Fibonacci of five is 3 plus 2.
+116.96,2.1200000000000045, Fibonacci of six is 5 plus 3.
+119.08,2.1599999999999966, And Fibonacci of seven is 8 plus 5.
+121.24,4.3999999999999915, That's the sequence we all know and love.
+125.63999999999999,5.240000000000009," So our two base cases, if we're going to put this in mathematical terms, are Fibonacci"
+130.88,3.0, of one is one. Fibonacci of two is one.
+133.88,7.560000000000002," And our recursive step, in terms of the math and sash programming, Lingo is going to be"
+141.44,5.560000000000002, the Fibonacci of n is equal to Fibonacci of n minus 1 plus Fibonacci of n minus 2.
+147.0,2.1999999999999886, So we put that in our function.
+149.2,5.240000000000009, So we slap a definition around that code and turn it into a nice function that we can
+154.44,0.7599999999999909, run.
+155.2,3.4399999999999977," If x is 1 or x is 2, those are our two base cases."
+158.64,4.8799999999999955," Because we just return 1 right off the bat, nothing to call, no functions to call."
+163.51999999999998,1.4800000000000182, There are base cases.
+165.0,3.839999999999975," But otherwise, we're going to return a value."
+168.83999999999997,5.1200000000000045, And the thing we're going to return is a call to Fibonacci of n minus 1 plus Fibonacci
+173.95999999999998,5.319999999999993," of n minus 2, just like the mathematical definition said to do."
+179.27999999999997,3.5200000000000102," So this is different than what we saw last lecture, last lecture, and our recursive"
+182.79999999999998,1.0, step.
+183.79999999999998,3.1599999999999966, We had basically just one function called to ourselves.
+186.96,5.560000000000002," So whatever function we had to find up here, we only had return some variation of that"
+192.52,4.52000000000001," function down here with something else tacked onto it, like an addition of some value"
+197.04000000000002,1.5199999999999818, or something else.
+198.56,4.840000000000003," In this case, we actually have the function being called twice."
+203.4,6.039999999999992, So we're going to see what implications this has as we trace through the code.
+209.44,3.960000000000008," And so as I trace through the code, I'll remind you of some of the big ideas that we"
+213.4,2.719999999999999, learned last lecture.
+216.12,3.759999999999991, So let's say that we wanted to calculate Fibonacci of 6.
+219.88,6.200000000000017, And so I'm going to illustrate a function call just by the name of the function with the
+226.08,2.1599999999999966, parameter that I'm calling.
+228.24,5.1200000000000045, So one of the big ideas from last lecture was that when you make a function call that
+233.36,5.239999999999981," to a function that's recursive, you're going to trace through that function call and then"
+238.6,3.0400000000000205, environment for that function just as you normally would.
+241.64,5.039999999999992," But as soon as you see another function call, so in this case, Fibonacci of 6 doesn't enter"
+246.67999999999998,4.1200000000000045," the base cases, it goes up into the recursive step."
+250.79999999999998,6.320000000000022," And it says, I'm going to calculate Fibonacci of x minus 1 plus Fibonacci of x minus 2."
+257.12,6.0," So for this Fibonacci of 6 function call, let's follow along and say, well, Fibonacci"
+263.12,6.8799999999999955," of 6, I want to calculate Fibonacci of 5."
+270.0,7.0," Is it, this is my question to you, is it going to now calculate Fibonacci of 4?"
+277.0,5.0," No, very good."
+282.0,5.399999999999977," Because Fibonacci of 5 is a function call, right, we need to explore what this function will"
+287.4,6.560000000000002," return before Fibonacci of 6 can add the result of this, the return of this, to Fibonacci"
+293.96,2.2000000000000455, of 4.
+296.16,7.1200000000000045, So that means this new Fib 5 is an entirely new environment calling Fibonacci with n is
+303.28000000000003,4.240000000000009," equal to 5, completely separate than our original Fibonacci of 6 call."
+307.52000000000004,2.5600000000000023, So let's explore what Fibonacci of 5 is going to do.
+310.08000000000004,3.8799999999999955," Well, in its function call, it's going to again go in the recursive step."
+313.96000000000004,2.9599999999999795, It's going to figure out Fibonacci of 4.
+316.92,3.0," And then it's going to pause there, right, because it needs to figure out what Fibonacci"
+319.92,5.28000000000003," of 4 is before it finishes its other half, right, to do Fibonacci of 3."
+325.2,4.519999999999982," So Fibonacci of 4 will now create a new environment, and now it has to explore its result of"
+329.71999999999997,1.0, return.
+330.71999999999997,4.640000000000043, So it figures out Fibonacci of 4 is again going into the recursive step to calculate Fibonacci
+335.36,2.0, of 3 plus something.
+337.36,3.4799999999999613," But we don't know what that something is yet, because we have to explore what Fibonacci"
+340.84,1.6000000000000227," of 3 is, right?"
+342.44,5.599999999999966," So already where 4 function calls deep, and we haven't really done any work that we"
+348.03999999999996,3.7600000000000477," can see the result of, right, there's no values being passed back."
+351.8,4.360000000000014, What we're doing is exploring this path down until we get to some sort of base case
+356.16,8.0, that will kick off our sort of conquer step where we pass values back up the chain.
+364.16,4.759999999999991, So Fibonacci of 3 again is going to look at Fibonacci of 2.
+368.92,4.240000000000009," And finally, we've reached a base case."
+373.16,2.519999999999982," So Fibonacci of 2 will immediately return, right?"
+375.68,2.0, It doesn't make another function call.
+377.68,7.680000000000007," So Fibonacci of 2 will return a value, and then Fibonacci of 3 in its function call has"
+385.36,6.319999999999993," the result for Fibonacci of 2, and then it's going to do plus, that value plus Fibonacci"
+391.68,1.0," of 1, right?"
+392.68,1.3600000000000136, 3 minus 2.
+394.04,1.5199999999999818, So that's this one here.
+395.56,6.639999999999986," It can easily grab the, do that addition, and return the value back up to Fibonacci of"
+402.2,1.0, 3.
+403.2,6.8799999999999955," So Fibonacci of 3 has its first half ready, right?"
+410.08,6.680000000000007," So Fibonacci of 4, sorry, so Fibonacci of 4 has its first half ready, Fibonacci of 3."
+416.76,5.0400000000000205," So Fibonacci of 4 was trying to figure out what Fib 3 was, and it did, right?"
+421.8,2.1999999999999886," It was Fib 2 plus Fib 1, too."
+424.0,6.0," So now it has a value for its first half here, and it needs to add that value to Fibonacci"
+430.0,3.7200000000000273," of 2, 4 minus 2."
+433.72,5.0," So it will explore that path, that's a base case, so all it does is return the value immediately,"
+438.72,6.479999999999961," and now Fibonacci of 4 has its value, whatever Fib 3 was, that we figured out, plus Fib"
+445.2,1.6000000000000227, 2.
+446.8,1.0, Okay.
+447.8,7.319999999999993," Now Fib 4, we have a value for it when we called Fib 5, so Fib 5 is now halfway happy"
+455.12,6.079999999999984," because it knows what Fib 4 is, but it needs to add that to Fib 3."
+461.2,3.480000000000018," So Fib 5 is still halted, right?"
+464.68,4.199999999999989," It can't return anything, because now it needs to explore what Fib 3 is."
+468.88,8.400000000000034," Well, Fib 3 is going to be, do another function call, right?"
+477.28000000000003,5.159999999999968," So it's going to call Fib 2 and Fib 1, which are two base cases, which easily return"
+482.44,5.720000000000027," the value back up to Fib 3, and now Fib 5 is happy because it knows this value, and"
+488.16,5.439999999999998," now it knows this value, it can add them together, and Fib 5 now has a value that it can keep"
+493.6,1.1599999999999682, track of.
+494.76,5.560000000000002," And now finally, Fib 6, we're not even close to being done, you guys, Fib 6 has a Fib"
+500.32,5.079999999999984," 5 value, so it has half of the things it needs to figure out what Fib 6 is, because now"
+505.4,2.640000000000043, it has to figure out what Fib 4 is.
+508.04,3.519999999999982," And already you can tell what we're going to do next, we're going to start exploring"
+511.56,2.2800000000000296, the exact same way like we did before.
+513.84,5.1200000000000045," Fib 4 needs to calculate Fib 3, it can't do Fib 2 yet, because Fib 3 needs to calculate"
+518.96,1.9599999999999227," Fib 2 and Fib 1, right?"
+520.92,6.240000000000009," Pass back up the value, Fib 4 can now finish its job by calculating Fib 3 and Fib 2, pass"
+527.16,6.639999999999986," up the value, and now finally, Fib 6 has its two halves here, Fib 5 and Fib 4, and it"
+533.8,3.6400000000001, can add them together and return the value.
+537.44,7.32000000000005," So a super inefficient algorithm, because there's a lot of sort of stuff going on, but"
+544.7600000000001,3.3999999999999773," not much work being done until the end, right?"
+548.1600000000001,4.0," We've got a bunch of base cases we get to, and then we can start building back up our"
+552.1600000000001,1.3999999999999773, result.
+553.5600000000001,4.840000000000032," And the reason why I say it's inefficient is because, well, we're exploring these paths,"
+558.4000000000001,7.199999999999932," and as we go along the way, right, we figure out what Fib 3 is and what Fib 4 is, right?"
+565.6,7.080000000000041," But then, when we explore the right half of Fib 6 over here, we're actually recalculating"
+572.6800000000001,1.8799999999999955, these values all over again.
+574.5600000000001,4.360000000000014," That's why I said we're not even halfway done, because when we got Fib 5, we had to explore"
+578.9200000000001,7.719999999999914," Fib 4, and Fib 4, this branch down here is basically a copy of this one down here."
+586.64,4.800000000000068, So there's a lot of work being done here where you just do the same thing over and over
+591.44,1.3199999999999363, again.
+592.76,5.279999999999973," And so that leads me to say, well, what if we didn't have to do all this work all over"
+598.04,1.4800000000000182," again, right?"
+599.52,5.440000000000055, If only there was some sort of data structure that we could use to keep track of things as
+604.96,3.0399999999999636," we calculate them, right?"
+608.0,2.7200000000000273, To basically map one thing to another.
+610.72,5.839999999999918," So if we already calculated Fib 4 to be some value, why don't we just look it up?"
+616.56,7.32000000000005," So anytime we use things like keeping track of and looking things up, that should ring"
+623.88,3.839999999999918, a little bell that says dictionaries can help us do that.
+627.7199999999999,4.82000000000005, And so what we can do is actually write a more efficient Fibonacci recursive Fibonacci
+632.54,6.519999999999982," function that uses, it's still recursive, but it uses dictionaries to keep track of"
+639.06,3.740000000000009, values as we calculate them.
+642.8,6.559999999999945," And so this is the Fibonacci efficient function, so my name is Fib efficient."
+649.3599999999999,4.32000000000005," Notice we're still calculating Fibonacci of some n, but we're going to pass in another"
+653.68,2.159999999999968," parameter, a dictionary."
+655.8399999999999,5.720000000000027, And this dictionary will keep track of the Fibonacci values as we calculate them.
+661.56,5.159999999999968," So the key will be the n, and the value will be Fib of that n."
+666.7199999999999,4.720000000000027, And so down here you can see we're going to initialize a dictionary that has Fib of
+671.44,3.519999999999982," 1 maps to 1 and Fib of 2 maps to 1, right?"
+674.96,3.6800000000000637, Those are our base cases.
+678.6400000000001,5.959999999999923, So let's take a look at our Fibonacci recursive function now that uses dictionaries.
+684.6,5.32000000000005, No longer do we need to think about the base cases as Fibonacci of 1 is this and Fibonacci
+689.9200000000001,1.0799999999999272, of 2 is this.
+691.0,5.440000000000055," Now all we need to do is say, well, let's look up the value in our dictionary."
+696.44,2.240000000000009, That's what our base case will be.
+698.68,4.8799999999999955," And we don't need to make a call to ourselves if the item is already in the dictionary, right?"
+703.56,8.56000000000006, So we can just return the value associated with n in dictionary D if that n is already
+712.12,1.7999999999999545, in the dictionary.
+713.92,4.759999999999991, So our two base cases down here will initially be in our dictionary.
+718.68,3.919999999999959," And as we figure out the values of Fibonacci, we'll add them to our dictionary."
+722.5999999999999,3.2000000000000455, And that's exactly what the recursive step will do.
+725.8,5.399999999999977," So else, the values not in our dictionary, so unfortunately we have to calculate it, right?"
+731.1999999999999,1.0, Which is fine.
+732.1999999999999,4.639999999999986, We'll basically do that the first time through that sort of exploring the left half of our
+736.8399999999999,1.0, path.
+737.8399999999999,3.0, But that's pretty much the only times that we're going to calculate it.
+740.8399999999999,3.0, All the other times we'll just look it up.
+743.8399999999999,4.960000000000036, So this is going to be a little different than what we've seen before because I'm not
+748.8,4.759999999999991, right off the bat returning Fib and minus 1 plus Fib and minus 2.
+753.56,5.7999999999999545," I'm actually still running the same recursive step, Fibonacci minus 1 plus Fib and minus"
+759.3599999999999,2.3600000000000136," 2, but I'm saving it in a variable."
+761.7199999999999,3.560000000000059, And that's totally fine to do.
+765.28,4.159999999999968," And then before I actually return this value, let me add it to my dictionary."
+769.4399999999999,5.840000000000032, So this is simply just saying this dictionary at this particular n for this particular function
+775.28,2.480000000000018, is equal to this thing that I just calculated.
+777.76,5.599999999999909, Just a straight up dictionary addition adding this item to the dictionary.
+783.36,4.399999999999977," And then after I've added it to my dictionary, I can return that value."
+787.76,6.680000000000064," So still passing it back up the chain of function calls, but we'll save it first."
+794.44,2.1200000000000045, Everyone okay with this code?
+796.5600000000001,1.0, Okay.
+797.5600000000001,7.199999999999932, So then this is the dictionary I mentioned where we initialize our two base cases and then
+804.76,1.5600000000000591, we can print the function.
+806.32,5.079999999999927, So let's trace through the code to see what exactly happens with these function calls
+811.4,1.0, now.
+812.4,5.0," So we're going to initializing our dictionary where we have n1, Fibonacci of 1 is 1 and"
+817.4,2.1200000000000045," n2, Fibonacci of 2 is 1, right?"
+819.52,2.0399999999999636, Our base cases.
+821.56,3.519999999999982," Fibonacci of 6 again, we're doing the same function calls, right?"
+825.0799999999999,3.560000000000059, So that means there's nothing stored for Fib 5.
+828.64,3.7200000000000273, So we still have to explore what value it will be.
+832.36,4.759999999999991," Nothing stored for Fib 4, we're still exploring, nothing stored for Fib 3, we're still exploring."
+837.12,1.7200000000000273, We've reached a base case.
+838.84,4.8799999999999955, So now the first thing we do is check if it's in the dictionary.
+843.72,3.32000000000005," It is, so we just return the one directly."
+847.0400000000001,3.4799999999999045," Check if the other half is in the dictionary, return the one directly, and now we've got"
+850.52,2.240000000000009, a value for Fib 3.
+852.76,3.1200000000000045," Before returning it, let's store it in our dictionary."
+855.88,2.480000000000018, So I just calculated what Fib 3 was.
+858.36,6.920000000000073," Let's put it in, the key is 3 and Fib 3 is 2."
+865.2800000000001,3.439999999999941," So far so good, it's pretty similar to what we've done before except that we're"
+868.72,1.4800000000000182, storing this value in the dictionary.
+870.2,3.3999999999999773," So now we explore the right half of this Fib 4, right?"
+873.6,6.8799999999999955," Fib 3 plus Fib 2, it's already in the dictionary, so it immediately returns this addition."
+880.48,3.7999999999999545," Now we know what Fib 4 is, so we add it to our dictionary."
+884.28,3.2000000000000455, Fib 4 is 3.
+887.48,2.0399999999999636," Explore the right part of Fib 5, right?"
+889.52,4.1200000000000045," So Fib 4 plus Fib 3, do we go further now, right?"
+893.64,2.1200000000000045," In the previous case, we explored 2 and 1."
+895.76,2.400000000000091," In this case, do we keep exploring?"
+898.16,4.919999999999959," No, exactly, because our base case says if 3 is already in the dictionary, simply return"
+903.0799999999999,2.0, the value associated with it.
+905.0799999999999,1.32000000000005," So yep, there it is right there."
+906.4,1.3999999999999773, We added it a while ago.
+907.8,5.440000000000055," We just returned the 2 immediately, no need to go down this path."
+913.24,5.639999999999986," So now Fib 5 is done pretty quickly, so that means we have the value for Fib 5 and we"
+918.88,1.759999999999991, add it to the dictionary.
+920.64,2.519999999999982, We explore the right half of Fib 6.
+923.16,3.480000000000018," Remember beforehand, I said we were not done."
+926.64,4.639999999999986," We don't need to explore this Fib 4 anymore, because we added it to our dictionary long"
+931.28,1.0, ago.
+932.28,5.960000000000036, So now all we need to do is look up the value associated with 4 from our dictionary.
+938.24,4.67999999999995," So boom, there it is, and then we can just add Fib 5 and Fib 4 together and get the value"
+942.92,4.560000000000059," for Fib 6, store it in the dictionary, and in this case, it's the end."
+947.48,6.319999999999936, We don't need to do anything else with this value passing it back or anything like that.
+953.8,2.7200000000000273," So we're not recalculating anything else, right?"
+956.52,3.32000000000005," We're just checking the dictionary and if need be, we calculated."
+959.84,6.3599999999999," So it's an improvement, but how much of an improvement is it actually?"
+966.1999999999999,4.400000000000091," So if we run this function, and it's in the Python code, you can play around with it"
+970.6,6.1200000000000045," yourself, if you run the function that we originally wrote, Fib, the one where we don't"
+976.72,7.279999999999973," store anything in dictionary, if we try to calculate Fib 5, not you of 34, it results"
+984.0,4.240000000000009, in 11.5 million function calls.
+988.24,6.039999999999964," That's a lot of function calls because even Fib 6 had Fib 3 being called twice, Fib"
+994.28,5.1200000000000045," 4 being called three times, Fib 4 being called twice, things like that."
+999.4,5.080000000000041, So can you imagine how many times Fib 3 will be called when we are trying to calculate
+1004.48,1.0, Fib 34?
+1005.48,4.0," Probably thousands, if not more."
+1009.48,4.480000000000018," So overall, the number of function calls we're making is 11.5 million with our original"
+1013.96,6.8799999999999955," code, but the efficient version only makes 65."
+1020.84,5.280000000000086," It's not like we went from 11.5 million to like 2 million, right?"
+1026.1200000000001,6.559999999999945," We went from the order of millions to tens, which is really, really impressive in terms"
+1032.68,1.0, of speed.
+1033.68,4.319999999999936," So if you try to run this program, it'll take a couple seconds for Fib 34, but the efficient"
+1038.0,2.3600000000001273, one will be instant.
+1040.36,3.160000000000082," And all of these function calls have some overhead, right?"
+1043.52,3.759999999999991, You need to create an environment in Python and each to pass these parameters.
+1047.28,5.319999999999936," So all of these function calls take a lot of time, whereas a dictionary lookup is basically"
+1052.6,1.759999999999991," instantaneous, right?"
+1054.36,6.240000000000009," So in this particular case, we've given up some of our memory to store values, right?"
+1060.6,4.759999999999991," The dictionary is storing 34 entries, which is not much, but there are applications where"
+1065.36,4.480000000000018," you can't spare 34 entries, right, in your memory."
+1069.84,5.599999999999909," In which case, you might spare some time to continue calculating without taking up some"
+1075.4399999999998,1.0, memory.
+1076.4399999999998,2.560000000000173," So there's a little bit of trade-off between these two programs, right?"
+1079.0,2.2799999999999727, One of them doesn't store anything but is slow.
+1081.28,4.679999999999836," The other one stores things, but is fast."
+1085.9599999999998,4.800000000000182, Let's look at one more example where we do Fibodachi on numerics.
+1090.76,6.119999999999891," And this, I don't know when you'd use Fibodachi in your real life, but knowing all the possible"
+1096.88,4.7999999999999545," ways, you can make a score of X, and basketball is a little bit more useful."
+1101.68,3.0800000000001546, So let's think about this problem recursively.
+1104.7600000000002,4.079999999999927," Certainly, we could do it iteratively and brute force our way through all the possible"
+1108.8400000000001,2.519999999999982," combinations of scores, right?"
+1111.3600000000001,4.039999999999964," So in basketball, you can make a basket that's worth 1.2 points or 3 points."
+1115.4,6.880000000000109, So you can think about all the possible combinations you can make to give you some score of X.
+1122.2800000000002,2.2799999999999727," We're going to think about this problem recursively, right?"
+1124.56,4.400000000000091, So let's start with our base cases.
+1128.96,2.9199999999998454," Base cases, we've got three of them."
+1131.8799999999999,5.440000000000055," So if we think about a score of 1, so if X is equal to 1, so that means if we have a score"
+1137.32,4.319999999999936," of 1 in basketball, what are all the possible ways we could have made a 1?"
+1141.6399999999999,3.2000000000000455," Well, you could just score 1 point and then that's it, right?"
+1144.84,5.120000000000118, I just did 1 plus C or just emphasized that we're just scoring 1 in the next.
+1149.96,4.119999999999891," If we make a basket, that's worth 2 points, or if we have 2 points in basketball, what"
+1154.08,2.6800000000000637, are all the possible ways we could have made 2?
+1156.76,4.319999999999936," Well, we could have scored a 1 and a 1, or we could have just scored 2 right off the"
+1161.08,1.0, bat.
+1162.08,3.9600000000000364," So that's 2 possible ways to make a score of 2, right?"
+1166.04,3.3999999999998636," And similarly, to make a score of 3, what are all the possible ways?"
+1169.4399999999998,2.6000000000001364," Well, we could have scored a 1 than a 1 than a 1."
+1172.04,3.599999999999909," We could have scored a 2 and a 1, or we could have scored a 3 right off the bat."
+1175.6399999999999,6.960000000000036," So that's 3 different ways you can make a score of 3 in basketball, okay?"
+1182.6,1.0799999999999272, Everyone with me so far.
+1183.68,2.880000000000109," These are our base cases, okay?"
+1186.5600000000002,3.3999999999998636," Because the recursive step will be very, will blow your minds."
+1189.96,1.5199999999999818," It's so simple, okay?"
+1191.48,5.880000000000109, So the recursive step looks like this.
+1197.3600000000001,4.879999999999882," Now somebody give me, what's a reasonable basketball score?"
+1202.24,1.7999999999999545," Like for our team, 87?"
+1204.04,1.0, Okay.
+1205.04,6.600000000000136," It's been probably 25 years since I've played pro basketball in grade 5, you guys."
+1211.64,2.400000000000091, So I forgot what's a reasonable score.
+1214.0400000000002,1.9199999999998454," All right, so 87."
+1215.96,2.8400000000001455, So let's say now we're not dealing with our base case.
+1218.8000000000002,4.959999999999809, We're dealing with some number that's bigger than one of these base cases.
+1223.76,2.8400000000001455, How do we think about this problem recursively?
+1226.6000000000001,3.839999999999918," Well, there's three possibilities, right?"
+1230.44,10.559999999999945," If I have a final score of 87, let's say that I think about the score of 86, right?"
+1241.0,6.779999999999973," If I know all the possible ways I can make a score of 86, all I need to do is add one"
+1247.78,1.6200000000001182," to that score, right?"
+1249.4,3.839999999999918," It'll give me 87, right?"
+1253.24,3.2000000000000455, So that's one possibility here.
+1256.44,3.6799999999998363," But that's not the only possibility, right?"
+1260.12,4.160000000000082, Because I could have a score of 85.
+1264.28,4.2000000000000455," And if I add two to that 85, not two counts, right?"
+1268.48,1.0, Just the score.
+1269.48,5.440000000000055," If I have an original score of 85, if I just add two to that score, it gives me my desired"
+1274.92,1.7200000000000273, score of 87.
+1276.64,6.240000000000009," So if I know the possible combinations to make 85, then I know that all I need to do is"
+1282.88,3.3599999999999," add two to my score, and that'll give me 87."
+1286.24,9.0," And then the last possibility is to know all the possible ways to make 84, the score of 84,"
+1295.24,4.119999999999891," is then I would just add a score, I would take that score and add a three to it to give"
+1299.36,1.7600000000002183," me 87, right?"
+1301.1200000000001,5.639999999999873, So I'm sort of using my base cases to guide my recursive step.
+1306.76,6.839999999999918, So the number of ways I can make a score of 87 is the sum of all the possible ways I can
+1313.6,5.920000000000073," make 86 or 85 or 84, right?"
+1319.52,3.880000000000109," Because if I've made 86, I would just add one to it if I made 85, I add two to it, and"
+1323.4,4.599999999999909," I made 84, I'd add three to the score."
+1328.0,3.3200000000001637," So that's essentially what this recursive step is doing, right?"
+1331.3200000000002,4.599999999999909," I've got, these are all the possible ways I can make a score of 87, you know, x minus"
+1335.92,1.0," one, right?"
+1336.92,2.2000000000000455," So 87, 86."
+1339.1200000000001,2.2799999999999727," And that's just me calling my function, right?"
+1341.4,3.6800000000000637," So score count x minus one, score count x."
+1345.0800000000002,3.8799999999998818, Plus all the possible ways to make a score of x minus two.
+1348.96,2.880000000000109, Plus all the possible ways to make a score of x minus three.
+1351.84,5.480000000000018," So if I add all these three ways together, I would get all the possible ways I can make"
+1357.32,1.6399999999998727, a score of x.
+1358.9599999999998,4.080000000000155, Does that make sense?
+1363.04,2.759999999999991, Okay.
+1365.8,1.759999999999991," So that's it, right?"
+1367.56,1.240000000000009, It's pretty clean code.
+1368.8,1.8399999999999181, It looks really nice.
+1370.6399999999999,3.7200000000000273," If we were to write this iteratively, it would be a mess."
+1374.36,4.160000000000082, Because we probably have a whole bunch of nested loops to try to brute force all the possible
+1378.52,3.240000000000009, combinations of scores that we can make.
+1381.76,7.0," And it wouldn't look very, very nice, very pithonic."
+1388.76,5.279999999999973," So let's do a trace of this code, just to bring it all together."
+1394.04,2.759999999999991, The trace will be very similar to the Fibonacci trace.
+1396.8,5.559999999999945," Except that now we have three paths to explore before having a return value, right?"
+1402.36,5.0," So for a score of six, I would explore how can I make a score of five?"
+1407.36,4.480000000000018," And of course, I will explore how can I make a score of four and three, but I'm not there"
+1411.84,1.599999999999909," yet, right?"
+1413.4399999999998,3.2799999999999727," First I need to explore how to make a score of five, which is a function call."
+1416.7199999999998,3.800000000000182," This one will explore how to make a score of four, and of course a three and a two, but"
+1420.52,1.599999999999909, not just yet.
+1422.12,3.6800000000000637, A score of four will lead us to our base cases.
+1425.8,3.240000000000009, It's just how to make a score of three and a two and a one.
+1429.04,1.2799999999999727, These are base cases.
+1430.32,3.0, They immediately return and we know how to make a score of four.
+1433.32,3.4400000000000546," A score of three is also a base case, and a score of two is also a base case."
+1436.76,4.3599999999999, So these ones will immediately return to give us the score of five.
+1441.12,1.5200000000002092, So now we know how to make a score of five.
+1442.64,4.679999999999836," We need to follow through how to make a score of four, which is just three and two and one."
+1447.32,3.160000000000082," Oops, I should have changed that to be a one."
+1450.48,4.720000000000027," And then how to make a score of three, and that's just a base case."
+1455.2,4.599999999999909, So very similar trace as the Fibonacci code.
+1459.8,3.3600000000001273, All right.
+1463.16,2.7999999999999545, Questions about those examples?
+1465.96,1.0, Are they okay?
+1466.96,2.0, Do they make sense?
+1468.96,2.119999999999891, Okay.
+1471.08,3.880000000000109, So there is one exercise in the Python file.
+1474.96,2.5599999999999454, It's for at home.
+1477.52,2.9600000000000364, I would like you to try to memoize this code.
+1480.48,7.160000000000082," So memoize means basically try to use a memo, a dictionary, to store values as you calculate"
+1487.64,3.839999999999918," them, because you see that it's going to be just as inefficient as the Fibonacci code,"
+1491.48,1.0, right?
+1492.48,3.839999999999918," And then we have a calculator score of four again, where we had calculated it way back"
+1496.32,1.9600000000000364," here, right?"
+1498.28,8.680000000000064, And so try your hand at adding a dictionary to this code to try to speed it up.
+1506.96,1.0, Okay.
+1507.96,5.240000000000009," So the next, the second half of this lecture, we're now going to move away from recursion"
+1513.2,4.920000000000073, on numbers and sort of having these nice mathematical operations that we can just
+1518.1200000000001,2.0799999999999272, translate to code easily.
+1520.2,5.160000000000082, And start looking at recursion on numerical things.
+1525.3600000000001,1.7200000000000273, And we're just going to look at lists.
+1527.0800000000002,6.199999999999818," But again, as I said, you can apply these very similar codes to any sequences of values,"
+1533.28,3.8400000000001455, tuples or strings or things like that.
+1537.1200000000001,3.839999999999918, So the reason why we're looking at lists is because lists are naturally recursive.
+1540.96,6.160000000000082, So one of the motivations I gave at the end of last lecture is that we have lists that
+1547.12,3.880000000000109," can have elements that are other lists, that can have elements that are other lists, that"
+1551.0,1.959999999999809, can have elements as other lists.
+1552.9599999999998,7.279999999999973," So without knowing sort of how deep these lists within lists go, it's going to be really"
+1560.2399999999998,1.9200000000000728, hard to write iterative code.
+1562.1599999999999,2.480000000000018," It's possible, but it's going to be really hard."
+1564.6399999999999,4.720000000000027," And instead, we're going to see that the recursive version of this code is going to be a lot"
+1569.36,6.519999999999982," more intuitive in the long run, maybe not right off the bat."
+1575.88,5.920000000000073," But definitely, it's a lot easier to write and to read."
+1581.8000000000002,5.319999999999936, So let's think about lists in a recursive way.
+1587.1200000000001,4.519999999999982, So if we were doing iteratively what we'd say is we're going to loop through each element
+1591.64,1.0799999999999272, and do something.
+1592.72,4.360000000000127, The problem we're going to solve is figuring out the sum of all the elements in the list
+1597.0800000000002,1.3199999999999363, to begin with.
+1598.4,4.720000000000027," So iteratively, we just said, right, we loop over each element in the list and keep it"
+1603.1200000000001,1.0, in our result.
+1604.12,4.440000000000055," I've got these state variables I talked about last time, right, result in e that keep"
+1608.56,4.639999999999873, track of which element we're at and what the value is.
+1613.1999999999998,5.0," Recursively, remember, we're going to make all these function calls until we get to a"
+1618.1999999999998,5.680000000000064," base case, at which point we're going to start to build up our result."
+1623.8799999999999,4.559999999999945, So how can we think about this list recursively?
+1628.4399999999998,5.080000000000155," Well, let's say that we have a list and we want to find the sum of all its elements."
+1633.52,3.3599999999999, That's our original problem.
+1636.8799999999999,6.6400000000001," Now let's say that we take the first element and we just extract it out, right?"
+1643.52,2.599999999999909, We know we have this list with a bunch of elements.
+1646.12,1.240000000000009, Let's take the first one.
+1647.36,2.519999999999982, We know it's a 10.
+1649.8799999999999,3.0, And then let's consider the remaining elements.
+1652.8799999999999,9.440000000000055," So the 20 onward, if I take my 10."
+1662.32,6.119999999999891," And I know the answer to the sum of all the elements in 20 onward, right?"
+1668.4399999999998,4.120000000000118," Then all I need to do to figure out the sum of my original list, right?"
+1672.56,8.559999999999945, This one here is to say it's the 10 plus the sum of whatever the sum of the 20 onward is.
+1681.12,5.120000000000118," Now the sum for elements 20 onward is the same problem again, right?"
+1686.24,3.599999999999909, It's the problem of finding the sum of all the elements in a list.
+1689.84,5.920000000000073, It just so happens that our list is now our original list without that first element in it.
+1697.04,2.0799999999999272," Does everyone understand that, right?"
+1699.12,3.400000000000091," We've got our original problem and we've just made the same problem again,"
+1702.52,2.0799999999999272, just a slightly different version of it.
+1704.6,2.7200000000000273, All the lists except for that first element.
+1707.32,2.3599999999999," So now we do the same thing, right?"
+1709.6799999999998,2.160000000000082, Let's say this is our new list.
+1711.84,5.519999999999982, We extract the first element from it and we consider the elements except for
+1717.36,2.519999999999982, that first one as a new list.
+1719.8799999999999,4.279999999999973," And again, if I knew what the sum of 30 all the way on to 60 was,"
+1724.1599999999999,5.720000000000027, all I need to do is add it to the 20 that I extracted and I would know the sum of this list.
+1729.8799999999999,1.2799999999999727," So we keep doing that, right?"
+1731.1599999999999,6.400000000000091," We take our list, extract the 30 and consider the remaining elements as a list."
+1737.56,0.8799999999998818, Same deal.
+1738.4399999999998,2.759999999999991," If I knew what 40 plus 50 plus 60 was, right?"
+1741.1999999999998,4.6400000000001," The sum of all the elements in this list, I'd just add it to the 30 and I have the answer to that problem."
+1746.8,4.279999999999973," And we keep doing this, extracting an element and considering the remaining lists,"
+1751.08,4.519999999999982, all the way down to when we have a list with just one element in it.
+1755.6,2.6800000000000637," Well, this is a pretty simple problem to solve."
+1758.28,3.9600000000000364," If I have a list with one element in it, the sum of the elements within that list"
+1762.24,2.0," is just the value of that element, right?"
+1764.24,1.5199999999999818, It's just 60.
+1765.76,4.119999999999891," So a very simple problem, no need to keep sort of going further,"
+1769.8799999999999,2.0, dividing this problem into smaller pieces.
+1771.8799999999999,1.3199999999999363, I already know the answer to this one.
+1773.1999999999998,0.7200000000000273, It's very simple.
+1774.88,7.960000000000036, So this is our base case and we know the sum of the elements in a list with length one is that element.
+1784.0800000000002,4.079999999999927," So once we reach the base case, we build back up our result, right?"
+1788.16,5.240000000000009, We take the 60 and we had extracted the 50 originally.
+1793.4,5.920000000000073," So we're going to pass the sum back up to whoever called it, which was the function that extracted the 50."
+1799.3200000000002,2.599999999999909, So now the 50 plus the 60 is 110.
+1801.92,3.0, Now this 110 gets passed back up the chain.
+1804.92,6.880000000000109," When we extracted the 40, we said what I'm going to add the 40 to the sum of the 50 and the 60, 110, which is 150."
+1811.8000000000002,1.7999999999999545, Pass that answer back up the chain.
+1813.6000000000001,5.240000000000009," When I extracted the 30, I said I was just going to add the 30 with the sum of the remaining things,"
+1818.8400000000001,2.3599999999999, which I figured out is 150.
+1821.2,0.9600000000000364," The 20, right?"
+1822.16,4.279999999999973," I had extracted it, becomes 20 plus the sum of everybody else, which is 180."
+1826.44,6.480000000000018," So the sum is 200 and then finally my original question was to extract the 10, add it to everything else,"
+1832.92,1.8799999999998818, which is the 200 that we figured out.
+1834.8,1.240000000000009, So the full sum is 210.
+1838.76,0.8400000000001455, Does that make sense?
+1839.6000000000001,0.9199999999998454, This animation.
+1840.52,1.0, OK.
+1841.52,4.880000000000109," So we've got the division, all the way down to the base case and building back up the result."
+1846.4,1.3999999999998636, So let's try to write it.
+1847.8,2.520000000000209, So we're going to write it in pieces.
+1850.3200000000002,2.2799999999999727, So the function is called total recur.
+1852.6000000000001,1.1599999999998545, It takes an List L.
+1853.76,4.279999999999973, So we're going to recursively figure out the sum of all the elements in this list.
+1858.04,2.7200000000000273, So we can have a base case when the list is empty.
+1860.76,2.6400000000001, We can return 0 up to you.
+1863.4,6.879999999999882," Another base case, which is the one that I illustrated on the previous slide, is when the length of the list is 1."
+1870.28,3.160000000000082," So when the length of the list is 1, what's the sum going to be?"
+1873.44,1.0799999999999272, No need for recursion.
+1874.52,2.0399999999999636, It's just that element.
+1876.56,5.279999999999973," And so in these slides, what I've also included, in addition to the code, is an a little example."
+1881.84,3.0, So it helps you think about what the function returns.
+1884.84,4.559999999999945," So in this base case, when the length of the list is 1, the list would look something like this."
+1889.3999999999999,3.759999999999991, And all I need to do is return L at index 0.
+1893.1599999999999,0.7999999999999545, So the 50.
+1893.9599999999998,1.7600000000002183, And that's my sum.
+1895.72,0.23999999999978172, OK.
+1895.9599999999998,3.6400000000001," And that's what I'm doing here, returning L at index 0."
+1899.6,1.1200000000001182, Cool.
+1900.72,2.199999999999818," Now, the recursive step."
+1902.9199999999998,3.400000000000091," Remember, in the recursive step, I extracted the first element."
+1906.32,2.5599999999999454," And I said, let me save this first element."
+1908.88,3.6400000000001, So here it is being saved as L at index 0.
+1912.5200000000002,1.7199999999998, And I'm going to add it to something.
+1914.24,4.800000000000182," So in this example here, I've got this list that's longer than 1."
+1919.0400000000002,5.119999999999891," I'm extracting the 30, L at index 0, and I'm going to add it to something."
+1924.16,14.319999999999936," Well, that's something, based on the previous slide, where I did the animation, is going to be us putting our trust in the fact that we write this function correctly."
+1938.48,7.240000000000009, That something is going to be us figuring out what the sum is of 40 and 50.
+1945.72,3.5599999999999454," It's the same problem we're trying to solve right now, the sum of 30, 40, 50."
+1949.28,4.960000000000036," Except that now, I'm just going to take the sum of just the 40 and the 50."
+1954.24,6.759999999999991," So that something becomes the same function we're writing right now, total recur."
+1961.0,4.2000000000000455," Except that I'm not calling it on L, not the whole thing all over again."
+1965.2,1.0, That would be bad.
+1966.2,2.9200000000000728, But I'm going to call it on L from index 1 onward.
+1969.1200000000001,4.3599999999999," So essentially, removing that first element."
+1973.48,3.1200000000001182, Is everyone OK with that?
+1976.6000000000001,2.0, OK?
+1978.6000000000001,1.2799999999999727, So that's it.
+1979.88,0.8799999999998818, That's the function.
+1980.76,2.2799999999999727," Nothing else to write, no loop."
+1983.04,5.160000000000082," We've basically written a function assuming that we wrote the function correctly, right?"
+1988.2,5.160000000000082," Which is a very strange way to think about recursion, but that's essentially what it is."
+1993.36,4.759999999999991," You're trusting yourself to write this function correctly, such that your recursive step"
+1998.12,4.240000000000009, leads you to the base case so that you can build back up the result correctly.
+2002.36,5.160000000000082, So there's a lot of trust involved in writing these functions recursive.
+2007.52,1.240000000000009, OK.
+2008.76,2.0, OK.
+2010.76,3.2799999999999727," So I'm not going to go through the Python tutor, but you should definitely go through it"
+2014.04,5.439999999999827," on your own as a practice for the quiz, things like that."
+2019.4799999999998,2.2000000000000455, Let's have you write this then.
+2021.68,4.2000000000000455, So it's going to be a slight modification to the code we just wrote.
+2025.88,4.2000000000000455, So it's going to take in a list as its parameter.
+2030.0800000000002,5.119999999999891," And instead of summing the elements in the list, like we did 10 plus 20 plus 30, whatever,"
+2035.2,3.9600000000000364," I would like you to sum the lengths of the elements in the list, right?"
+2039.16,4.240000000000009," So if I pass it in this function, it's going to sum the length of this 2 plus the length"
+2043.4,4.440000000000055," of this 1 plus the length of this 5, 2 plus 1 plus 5."
+2047.84,4.279999999999973, So it'll be a very slight modification to the code that we just looked at.
+2052.12,3.6799999999998363," And here it is online, 70-ish."
+2055.7999999999997,2.1600000000003092," So think about the base case, right?"
+2057.96,3.1599999999998545," If you have a list with one element in it, what do you return?"
+2061.12,3.2800000000002," And if you have a list with many elements, how can you put your trust in something that"
+2064.4,5.239999999999782, you just wrote to help you get to the answer?
+2069.64,1.0, All right.
+2070.64,1.0799999999999272, What do you guys have for me?
+2071.72,3.200000000000273, So let's start with the base case.
+2074.92,3.9600000000000364," And if you're having trouble, I encourage you to just in a little comment, just write"
+2078.88,3.2399999999997817," down sort of what that base case looks like, right?"
+2082.12,1.3600000000001273, Like I did in the slides.
+2083.48,2.1599999999998545," It looks like this, right?"
+2085.64,3.600000000000364, So what would I return if I have a list with one element in it?
+2089.2400000000002,1.0, Yeah.
+2090.2400000000002,4.960000000000036," Yeah, exactly."
+2095.2000000000003,2.4399999999996," So we would turn the length of that element, right?"
+2097.64,3.7600000000002183," So the length of whatever this is, a, b, whatever."
+2101.4,1.2399999999997817, Awesome.
+2102.64,3.400000000000091, How do we do the recursive step?
+2106.04,3.0, Yeah.
+2109.04,7.079999999999927," Yes, exactly."
+2116.12,5.559999999999945," Total, land, recur, width, what list?"
+2121.68,1.0, Yep.
+2122.68,3.6399999999998727, So we're going to extract that first one.
+2126.32,7.039999999999964, So this will give us some of the links of everybody else.
+2133.36,1.0, Exactly.
+2134.36,5.760000000000218," So we also need to add it to, yeah, L, C, right?"
+2140.1200000000003,3.8799999999996544, So it's fine to do it even before or after because we're just summing these two values.
+2144.0,4.320000000000164, So does it matter if you're the order that you're summing them?
+2148.32,2.400000000000091, So that's perfect.
+2150.7200000000003,2.6799999999998363, Any questions about this code?
+2153.4,2.0, Yes.
+2155.4,1.0, Sorry.
+2156.4,6.0," In terms of the variable creation, that's not really function."
+2162.4,4.559999999999945," You see, one or this is the function that's doing this function."
+2166.96,1.0, Then doing the what?
+2167.96,2.7200000000002547, That's classic words.
+2170.6800000000003,9.0," So in terms of efficiency, recursive, this function will be slightly less efficient, I"
+2179.6800000000003,1.0, would say.
+2180.6800000000003,1.0, Yeah.
+2181.68,5.8400000000001455, Because there's a little overhead in actually making a function call.
+2187.52,4.359999999999673," Whereas if you use a built-in operator, it's been optimized to work pretty fast."
+2191.8799999999997,1.0, Yeah.
+2192.8799999999997,10.519999999999982," And when it's doing plus equals, it's definitely not doing this in the background, exactly."
+2203.3999999999996,6.800000000000182," But this is just, I mean, we're, I'm trying to show you recursion on something that, you"
+2210.2,5.679999999999836, wouldn't typically use recursion on just to help illustrate the idea of recursion.
+2215.8799999999997,4.880000000000109," Certainly, you can use an iterative algorithm, obviously, to calculate the sum of these elements."
+2220.7599999999998,6.480000000000018," And it's more intuitive, more in line with what we've been learning so far."
+2227.24,1.0, Okay.
+2228.24,3.7200000000002547, Excellent.
+2231.96,5.919999999999618, So now let's look at a slightly different problem.
+2237.88,5.119999999999891," So instead of finding the sum of all the elements in a list, let's tackle the problem of looking"
+2243.0,1.9600000000000364, for an element in a list.
+2244.96,4.119999999999891," Completely different, but we're still doing some sort of list operations."
+2249.08,3.5600000000004, We're going to start with an implementation that's not quite right.
+2252.6400000000003,2.199999999999818, And we'll see why in a little bit.
+2254.84,3.800000000000182, So let's follow the same sort of pattern that we've seen in the previous one.
+2258.6400000000003,4.119999999999891, So let's consider a list of length one.
+2262.76,4.880000000000109," In this particular case, if I have a list with only one element in it, how do I know"
+2267.64,2.6799999999998363, if that element is the one I'm looking for?
+2270.3199999999997,3.600000000000364," Well, I'm just going to return this Boolean, right?"
+2273.92,4.079999999999927," Whether L at index zero, that element is the one I'm looking for, the E."
+2278.0,5.559999999999945, So notice this in list is passing in the list itself and the element I'm looking for.
+2283.56,1.2399999999997817, Okay.
+2284.7999999999997,3.0, I think.
+2287.7999999999997,3.0, Okay.
+2290.7999999999997,6.200000000000273, So then let's look at the recursive step.
+2297.0,5.519999999999982," The recursive step, in this particular case, let's say it says, well, else, right?"
+2302.52,4.920000000000073," We might think to say, well, if it's not the one I'm looking for, then let's look in"
+2307.44,2.0399999999999636, the remainder of the list.
+2309.48,4.7599999999997635," So like we did in the previous case, let's apply the same function we're writing right"
+2314.24,4.160000000000309," now to all the elements except for the first one, right?"
+2318.4,5.239999999999782, And we're still looking for element E in those remaining elements.
+2323.64,2.0, Okay.
+2325.64,4.320000000000164," So we can test it out and if we actually run it again, please I encourage you to do Python"
+2329.96,7.679999999999836," 2 to run your own, but we can test it out and say, if we in this particular case, 2581,"
+2337.64,2.6399999999998727," if I actually run this code, it will give me true."
+2340.2799999999997,6.2800000000002," So it found the one inside the list 2581, which is good, right?"
+2346.56,2.6799999999998363, It's exactly what we wanted.
+2349.24,3.2800000000002," But if I change my input list slightly, right?"
+2352.52,4.8400000000001455," And I've got 2158, the element I'm looking for is here."
+2357.36,4.119999999999891," The code will actually give me false, the one that I just wrote, which is not okay, right?"
+2361.48,4.599999999999909, I see the one is right over there.
+2366.08,2.2800000000002, And so what exactly is going on?
+2368.36,5.239999999999782, So we can run the code here.
+2373.6,3.4400000000000546, So this is this code here.
+2377.04,3.0," If you see that it gives you the incorrect value, one thing you could do when you're doing"
+2380.04,5.440000000000055," recursion is to put a print statement within the function itself, right?"
+2385.48,5.639999999999873, So we can print maybe the list we're currently at and the element we're looking for and
+2391.12,1.5599999999999454, see exactly what's going on.
+2392.68,6.400000000000091," So if I run it, it will say, well, first time through the function call, I'm looking for"
+2399.08,2.199999999999818, the number one in this list.
+2401.2799999999997,4.200000000000273," The next time I'm looking for the one in this list, the next time I'm looking for the"
+2405.48,5.199999999999818," one in this list and the last time for my function call, I'm looking for the one in"
+2410.68,3.2400000000002365, this list.
+2413.92,7.1599999999998545," And already we see something went wrong because as I was looking through these lists, right,"
+2421.08,5.639999999999873," I'm basically skipping over important elements, right?"
+2426.72,6.2400000000002365, What this code is actually doing is only checking if the last element is the one you're looking
+2432.96,1.0, for.
+2433.96,1.0, Right?
+2434.96,4.7199999999998," So basically ignores that first element in the code, right?"
+2439.68,8.5600000000004," The code here, yes, it extracts that first element, but it doesn't do anything with it."
+2448.2400000000002,2.5599999999999454, So that's our problem.
+2450.8,3.9200000000000728, What we want to do is still look at further elements in the list.
+2454.7200000000003,2.0799999999999272, So that part of the code is correct.
+2456.8,2.8799999999996544, But we only want to do it in a certain situation.
+2459.68,7.7199999999998," And that situation is when the element that we just extracted, L at index zero, is not"
+2467.3999999999996,1.6000000000003638," the one we're looking for, right?"
+2469.0,1.8799999999996544, That little else case.
+2470.8799999999997,1.0, Right?
+2471.8799999999997,4.600000000000364, So we still want to extract the first element if we have a list with more than one element
+2476.48,1.4800000000000182, in it.
+2477.96,4.399999999999636," But as we've extracted it, check if it's the one we're looking for."
+2482.3599999999997,4.920000000000073," If it is return true, no need to keep searching the rest of the elements in the list."
+2487.28,5.519999999999982," If it's not the one we're looking for, this else here, then we can look at the remaining"
+2492.8,3.119999999999891," elements in the list and run the exact same function we're writing, right?"
+2495.92,4.200000000000273, To check if the elements is in the remaining list.
+2500.1200000000003,1.0, Does this code make sense?
+2501.1200000000003,1.599999999999909, Is it all right?
+2502.7200000000003,2.1599999999998545, Okay.
+2504.88,6.2800000000002, So the way I wrote this code is sort of how I personally think about the problem.
+2511.1600000000003,4.400000000000091," And if we run the code again, it'll give me the correct answers each time."
+2515.56,4.1599999999998545, But I wanted to mention that we can actually clean up the code a little bit and write it
+2519.72,4.360000000000127," a little bit more, um, pathetically."
+2524.08,3.0799999999999272," So it's, you know, it's a little bit nicer to read."
+2527.16,1.0, It's more cleaned up.
+2528.16,5.440000000000055," But one of the things that was, um, confusing for me when I first started learning recursion"
+2533.6,8.320000000000164," is that I would always see these beautiful, cleaned up versions of code that do the recursion."
+2541.92,3.7600000000002183," And that's not sort of how we approach thinking about the problem, right?"
+2545.6800000000003,3.919999999999618, I can't come up with this nice form right off the bat.
+2549.6,3.9200000000000728," And this is one example, but there are certainly other examples of more complicated code where"
+2553.52,2.1600000000003092," you see it and it's just, it looks beautiful."
+2555.6800000000003,4.1599999999998545," And yes, if I look at it, I can figure it out and I say, okay, yeah, that makes sense."
+2559.84,3.3600000000001273, But I personally could never come up with it on my own.
+2563.2000000000003,1.4800000000000182," So I was, I was writing these lectures."
+2564.6800000000003,2.7599999999997635," I thought, well, how do I actually think about the problem?"
+2567.44,1.8800000000001091, So I just went back one slide.
+2569.32,5.800000000000182," And the way I think about the problem is to kind of separate it into these smaller, a"
+2575.1200000000003,3.6799999999998363," bunch of different base cases, right, or a bunch of different cases."
+2578.8,3.0399999999999636, And so that's what I've been trying to do in this particular lecture to help you guys
+2581.84,1.0, understand recursion.
+2582.84,4.760000000000218," It's, you know, think about the case when we have a list with one element in it, right?"
+2587.6000000000004,1.9599999999995816, How would you solve that problem?
+2589.56,2.600000000000364, And then think about the case when you have a list with many elements in it.
+2592.1600000000003,1.6399999999998727, How would you solve that problem?
+2593.8,1.7599999999997635," Yes, it's true."
+2595.56,3.400000000000091," There are some pieces here that are, that are repeating, right?"
+2598.96,4.239999999999782, So we've got L at zero equal E is in a couple places.
+2603.2,2.400000000000091," But you can do that clean up later, right?"
+2605.6,5.360000000000127, So here I've got two test cases that return two cases that return L at zero so we can pop
+2610.96,2.519999999999982, them into the same test case here.
+2613.48,2.480000000000018, And then we can check if the length of the list is zero.
+2615.96,3.7600000000002183," We can add that test case and else we check the remainder of the list, right?"
+2619.7200000000003,1.0, That's totally fine.
+2620.7200000000003,3.4799999999995634," And if it helps you think about the problem this way, that's okay."
+2624.2,4.160000000000309," Two, but personally for me, it was a lot easier to think about the problem in terms of a"
+2628.36,3.519999999999982, list with one element in it and then a list with many elements in it.
+2631.88,7.039999999999964," And it's totally fine to write a little bit, quote unquote, inefficient looking code to"
+2638.92,2.0, begin with.
+2640.92,1.9200000000000728," Certainly don't hard code all the base cases, right?"
+2642.84,4.7199999999998," If length is zero, do this, if length is one, do this, if length is two, do this, right?"
+2647.56,3.2800000000002, But some reasonable base cases are okay to do.
+2650.84,4.039999999999964, So this is just showing the simplified code.
+2654.88,4.559999999999945, Another thing that I wanted to mention and hopefully you've noticed this already is the
+2659.44,6.599999999999909," function that you're writing, all of the returns from this function need to have the same"
+2666.04,2.2800000000002," type, right?"
+2668.32,4.279999999999745," When we wrote, I'll go back a couple slides, when we wrote the function that calculated"
+2672.6,5.360000000000127," the sum of all the elements in the list, so that's this one here."
+2677.96,1.0, What were we returning?
+2678.96,5.079999999999927, Here we were returning an actual number and then here we were assuming that this function
+2684.04,4.400000000000091," returned an actual number that we can add to this actual number, right?"
+2688.44,5.679999999999836, So every single return statement needs to return the same type of object.
+2694.12,5.440000000000055," Because if you don't, if you're assuming that the base case returns a list, but then at"
+2699.56,6.1599999999998545," some point in the code, you're going to be working with a number or a Boolean, then Python"
+2705.72,3.080000000000382," as soon as it gets that base case is going to say, hey, you're trying to add a Boolean"
+2708.8,1.0, to a list.
+2709.8,1.0, What's up?
+2710.8,1.0, Right?
+2712.2000000000003,6.039999999999964," So in the summing of the list elements, all the test cases returned a number and in this"
+2718.2400000000002,4.960000000000036," case where we are trying to return the, whether the element is in the list or not, notice"
+2723.2000000000003,3.7199999999998, every single one of my returns is going to return a Boolean.
+2726.92,4.8400000000001455," So here, Boolean, here, Boolean, and here in the recursive step, I'm assuming that"
+2731.76,4.0, I'm just passing this Boolean back up the chain of command.
+2735.76,1.8800000000001091," So a very, very important thing."
+2737.64,4.1599999999998545, Something that was not made clear to me when I first started recursion.
+2741.7999999999997,7.160000000000309," But once I knew this, it just made so much more sense and it helped me write my code better,"
+2748.96,3.0399999999999636, more perfectly right off the bat.
+2752.0,1.9600000000000364, Let's look at a slightly different example now.
+2753.96,3.399999999999636, So we've looked at taking the sum of all the elements in the list.
+2757.3599999999997,2.6400000000003274, We've looked at figuring out whether an element is in the list.
+2760.0,3.119999999999891, Let's do something completely different.
+2763.12,1.5199999999999818, So we're working with lists.
+2764.64,4.039999999999964, Let's say that we now have an input list that looks like this.
+2768.68,1.5599999999999454, So we've got a list.
+2770.24,4.079999999999927, This is my list beginning an end.
+2774.3199999999997,3.9200000000000728, And this list only has list elements within it.
+2778.24,3.480000000000018," So no integers, but its elements are lists."
+2781.72,1.6399999999998727, So here's one list element.
+2783.3599999999997,3.7600000000002183," Here's another list element, and here's another list element."
+2787.12,1.0, Right?
+2788.12,4.960000000000036," So in this example, I've got a list with three list elements."
+2793.08,6.239999999999782," What I'd like to do is to flatten this list, which means that I want to remove any semblance"
+2799.3199999999997,11.16000000000031, of sublists and take just all the elements of the sublists and put them top level.
+2810.48,3.2399999999997817, Does this task make sense?
+2813.72,1.0, Okay.
+2814.72,2.6400000000003274, So I'm not assuming I've got lists within lists within lists.
+2817.36,4.7199999999998, I'm just assuming I've got lists with list elements that have integers or whatever.
+2823.08,1.0, Okay.
+2824.08,4.599999999999909," So again, let's think about the base case."
+2828.68,3.400000000000091, Let's think about the case when we have a list with one element in it.
+2832.08,3.0, And then we can figure out the recursive step.
+2835.08,5.0," So if I have a list with one element in it, again, I've got an example here on the right hand side."
+2840.08,4.0," It's a list, right, with one list element in it."
+2844.08,3.0, That's why I've got the double square brackets.
+2847.08,4.0," If I wanted to flatten this, what could I do?"
+2852.08,3.0," I could just grab the element at index zero, right?"
+2855.08,8.0," Because the element at index zero is this inner list, and it is a flattened version of my list."
+2863.08,2.0, Okay.
+2867.08,2.0," Else, what am I going to do?"
+2869.08,4.0," Well, let's do the same pattern. It seems to have worked so far for us."
+2873.08,3.0, Let's do the pattern of extracting that first element.
+2876.08,3.0, So grab element at index zero.
+2879.08,5.0," So here we would grab something like square brackets, one comma two,"
+2884.08,4.0, and concatenate it with something.
+2888.08,3.0," Okay. Remember when we concatenate a list with another list,"
+2891.08,3.0, it gives us a big list with all the elements in it.
+2894.08,4.0," Exactly what we're looking for, right, when we want a flattened list."
+2898.08,6.0," So the something we're going to add this, uh, L at index zero with is,"
+2904.08,4.0, just us flattening the remainder of our list.
+2908.08,4.0," Again, same pattern we've been seeing already, right?"
+2912.08,4.0," So if I extract, in this example, here, the one comma two as a list,"
+2916.08,4.0," I'm going to concatenate it with the assumption that,"
+2920.08,6.0, the function I'm writing will work correctly to flatten three comma four and nine comma eight comma seven.
+2926.08,7.0," Right. So if I flatten that, um, this will give me just a list with three, four, nine, eight, seven, all in it."
+2933.08,3.0," Okay. And if I concatenate one comma two with three, four, nine, eight, seven,"
+2936.08,5.0," that just gives me three, four, nine, eight, seven."
+2941.08,2.0," Everyone with me, is that all right?"
+2943.08,3.0," Okay, good. I see some nods, so that's actually a pretty good sign."
+2946.08,3.0, Okay.
+2949.08,2.0," Okay. You are with me, right?"
+2951.08,3.0, Because now it is your turn.
+2954.08,7.0, So we're going to write a variation of whether an element is in a list.
+2962.08,4.0, So I'm going to give you a very similar scenario to this flatten one.
+2966.08,4.0, So I'm going to give you a list that contains list elements.
+2970.08,4.0, So here's my list that contains list elements in it.
+2974.08,6.0," And what I'd like you to do is write a recursive function that checks whether this element,"
+2980.08,7.0," whatever the second parameter of the function, in my function call, is in these list elements."
+2987.08,6.0," So not at the top level, like we wrote last, the last code to check if an element is in the list."
+2993.08,3.0, But in these sub lists.
+2996.08,7.0," So just to show you kind of the difference, if I check whether three is in one comma two comma three,"
+3003.08,7.0," that will be true. But if I check whether three is in, you know, the list containing the list one comma two comma three,"
+3010.08,5.0, that's false because it's checking whether the three is equal to this list.
+3015.08,5.0, So let's just doing a top level equality here.
+3020.08,9.0, So let's have you write this code down online 166.
+3029.08,6.0, You may use the in operator to check if an element is in a list itself.
+3035.08,4.0," But obviously you won't be able to use the in operator, nor should you,"
+3039.08,6.0," or not writing a recursive function to check if the element is within a list, uh, list element."
+3045.08,8.0," So, um, have you worked on it for a couple minutes and, and then we can write it together."
+3053.08,2.0, All right. Does anyone have a start?
+3055.08,4.0, So let's look at the case where we have one element in it.
+3059.08,9.0," How do you, um, check whether that element is within the, the list inside."
+3068.08,14.0," So if, right, this is our, our case with one element in it, the length of L, um, equi equals one."
+3082.08,9.0, Yeah.
+3091.08,8.0," Yeah, exactly. E and, E and L is, is, is the correct, um, thing to do L at index zero, right?"
+3099.08,4.0," So if, if this is our L, that's why I added this little example here so it can help us."
+3103.08,3.0, So L at index zero is this guy here.
+3106.08,5.0," And all I need to do is check if E is in L at index zero, right?"
+3111.08,3.0, And I can just return that right off the bat.
+3114.08,4.0, Right.
+3118.08,11.0," I could do if E in L zero return true, L's return false, but E in L zero is already a Boolean, so I can just return that directly."
+3129.08,8.0," Okay. L's, we have a list, uh, with more than one element in it, right?"
+3137.08,3.0, So what do we do here?
+3140.08,11.0," Remember, extract the first element and then, you know, do the rest."
+3151.08,4.0," So let's say this, let's say the first element is L at index zero, right?"
+3155.08,5.0, That'll help us think about it a little bit.
+3160.08,10.0," So before looking at the remainder of the list, right, and calling our recursive function, what did we do when we checked if an element was in the list when we just had a plain list?"
+3170.08,16.0," We just said if, you know, um, E is in first, return true, L's return false, right?"
+3186.08,7.0, But we don't want to do else return false because that's not quite true.
+3193.08,6.0," Else, we want to look at the remainder of the list, right?"
+3199.08,7.0," We want to see if the element, obviously, if the element is not in the first thing that I just extracted, right?"
+3206.08,9.0," This list here, then I would like to say is it in the rest of this list, right?"
+3215.08,4.0, Which is us calling the function that we're just writing all over again.
+3219.08,12.0," So we can return the name of this function in lists of, what did I call it, lists of lists."
+3231.08,9.0, And then L from one onward with the same element we're trying to find.
+3240.08,18.0," And of course, we can simplify this just like we could simplify the previous one, but it helps to think about it in these two cases, a list with one element and a list with many elements."
+3258.08,11.0, Any questions about this? Yes.
+3269.08,7.0, This one? This one we're considering a list with one list inside it.
+3276.08,4.0, Yeah.
+3280.08,5.0," We could include another base case, I suppose, if the length of L is zero return false, that would also work."
+3285.08,5.0," Because obviously if the list is empty, then there's, it's not in there."
+3290.08,8.0," Okay, so when do we use recursion? Obviously, a lot of the examples we've seen here, we, they're very intuitive to write iteratively, right?"
+3298.08,7.0, But I mentioned a couple examples last time where it's more intuitive to use recursion.
+3305.08,8.0," And specifically, I wanted to draw a little bit of a parallel to this thing when we learned about while loops, right?"
+3313.08,5.0," We said, well, what if we tried to code a little game that just used if and else's?"
+3318.08,6.0," I said that we would have a bunch of nested if else statements, right, without a while loop."
+3324.08,6.0," Because we don't know how deep to make these if else, if statements."
+3330.08,5.0, And so very similar idea exists with recursion and when to use recursion.
+3335.08,13.0," So if I had a list where the whole bunch of lists in it and those lists could have lists within it and so on and so on, I don't know how long I need to, how deep I need to make my code go, right?"
+3348.08,5.0," So an example using a for loop would be to say for each element in L, right?"
+3353.08,6.0," I'm going to say I'm going to look at each element, I'm going to say, well, if you're not a list, then I can deal with you directly."
+3359.08,10.0," But if you are a list, then I need to iterate over you. And so I've got this other iteration here for each j and I, right, from one of those lists."
+3369.08,7.0," Again, I would say, are you a list? If not, I'll deal with you directly. Else, you are a list. So I do need to iterate over you."
+3376.08,12.0," And you can see this nested idea that now comes into play here. And of course, we could try to use a while loop to optimize the code a little bit, say, you know, while this element type is not a list, do this, you know, things like that."
+3388.08,10.0," But it leads to some reliever, both and verbose code. And so recursion is a way for us to deal with these lists within lists within lists."
+3398.08,11.0," And of course, when you have data structures that you don't know how long, how deep they go. So I mentioned file systems and a set of operations last lecture has really nice places to use recursion."
+3409.08,12.0," Scooby Doo gang looking for, you know, their culprit rooms that have doors that lead to other rooms that have doors lead to other rooms. They don't know how many doors they need to go through to get to a room without doors."
+3421.08,7.0," Obviously recursion, they should use. And then a bunch of other fun examples of places to use recursion."
+3428.08,13.0," So the last bit of class, I would like to work through this example where we're going to see the code to solve lists within lists within lists within lists."
+3441.08,8.0," Okay. But before we do that, we're going to talk about, so we're going to do that example in the context of reversing a list."
+3449.08,7.0," But before we look at a list that has all these different sub lists within it, let's look at a list that has just integers."
+3456.08,6.0, How would we think about this problem recursively to reverse all the elements in this list?
+3462.08,8.0," Okay. So again, we're going to use the very same pattern we've been using all throughout today when we've been dealing with lists."
+3470.08,12.0," We're going to take out the first element, extract it, and we're going to deal with the remainder of the list, basically by writing, running the same function we're writing on the remainder of the list."
+3482.08,7.0," So let's say I have my original list and I look at my first element, just like before, I'm going to extract it out."
+3489.08,20.0," If I take this first element and I pop it at the end, and then I consider the remainder list, right, everything except for that first element that I put at the end, I can just call the same function I'm writing right now to reverse the remaining list."
+3509.08,9.0," Which means that I'm going to take this remaining list, grab the first element, pop it at the end, and deal with the remaining list."
+3518.08,7.0," Again, take the first element, pop it at the end, deal with the remaining list, until I have a list with length 1."
+3525.08,11.0," How do I ever reverse a list that only has one element in it? It's just that list, right, I just, you know, reversing a list L is just L."
+3536.08,14.0," Okay, good. So that's the idea. And notice that when we're building back up the result, we took that first element and we tacked it onto the end."
+3550.08,12.0," So we're going to do another list concatenation kind of deal, except that the thing that I'm concatenating now, the first element will be at the end, right, that it'll be the second part of my plus."
+3562.08,3.0," Okay, so I'm just giving you a heads up. That's what it will look like."
+3565.08,12.0," So let's write the code. If the length of the list is 1, right, if I'm reversing a list with one element in it, just return that list. Easy peasy, right? It's just the list itself."
+3577.08,14.0," Okay, L's. And this is where the fun comes in, right? I've got something, so I'm going to do something concatenated with something else."
+3591.08,8.0," So I'm extracting the first element. There it is, L at index zero, but it's sitting somewhere funny that we haven't seen it sit before."
+3599.08,10.0," It's sitting on the second, you know, to the right of the concatenation. And that's fine because what we want to do is take the element from the first, the beginning of the list and tack it onto the end."
+3609.08,6.0, Right? And there's something else that's funny about it. I've put it in square brackets.
+3616.08,7.0," Okay, now I, again, I'm including this example to help us think about it. Why are those square brackets there?"
+3623.08,11.0," Think about what we want this function to return. Is it returning a number? No, is it returning a Boolean? No, it's returning a list, right?"
+3634.08,8.0," This function I want to take in a list and give me back a list, but where my elements are in reverse order."
+3642.08,9.0," So what I want to do, right, you can already see this return over here is returning a list, right? So it'll be square brackets, 10, or whatever."
+3651.08,15.0," In my recursive step, if I'm concatenating, I want to concatenate this thing here, which I'll tell you about in the next slide, but I'm going to concatenate it with, it's going to be a list with some other list, right?"
+3666.08,11.0," If I concatenate a list with a number, that L at zero is, L at zero is a 10, right? So if I concatenate a list with a number, Python will yell at me."
+3677.08,12.0," So what I need to do is make that number that I just extracted L at zero be a list. So I'm just going to slap a square bracket around it and say, hey, Python, this is a list with one element in it."
+3689.08,17.0," Does that make sense? Cool. So then what that means is I've got this 10 that I extracted, I'm going to concatenate something with that 10, and that something is me putting my trust into the function I'm writing to say that something is going to be the 20, 30, 40?"
+3706.08,15.0," So if I can do that, 40, 30, 20, and I concatenate it with a 10, my job is done. I've successfully reversed 10, 20, 30, 40 to be 40, 30, 20, 10."
+3721.08,12.0," So let's just do that. That's me putting my trust in this function I'm writing. I'm calling the same function again saying, hey, I would like to reverse the remainder of the list."
+3733.08,9.0," Exactly as we have been in the past, right? Super weird to think about still because we're trusting something that we're writing."
+3742.08,8.0," Cool. So then let's test it out. Let's run it. So if I run it with list 12 ABC,"
+3750.08,7.0," Python will reverse my list, right? So it will print ABC, then the two, then the one."
+3757.08,10.0, Let's say I run it now with something slightly different. So I run it with this list here. How many elements does this list have? Test.
+3767.08,9.0," You guys tell me. Three, exactly. The first one is an integer, the second one is a list, and the last one is a list that's got a bunch of garbage in it."
+3776.08,5.0," But as test, I don't care because I just care that I have three elements inside."
+3781.08,7.0," And so when I run this function on test, it will reverse just the top level because that's what this is doing, right?"
+3788.08,8.0," No, we're in here. Did I say I want to reverse lists within lists, right? I didn't say if you're a list, also reverse yourself."
+3796.08,8.0," I just said top level, take this element, put it at the end. So when I reverse test, this funky looking test over here,"
+3804.08,10.0," it will take that first element, put it at the end. The middle element stays where it is. And the last element comes first."
+3814.08,10.0," Is everyone okay so far? I'm worried there aren't many more questions. So, okay."
+3824.08,14.0," Right, so that's good. But this is now not really what I'd like, right? What I'd like is if I have lists within lists within lists within lists,"
+3838.08,9.0," and those lists have some sort of elements within them, right? At the lowest level, I've got a list that's going to have some integer string or whatever in it."
+3847.08,11.0," So what I would like to do is to reverse those elements as well. So really what I would have liked to have if I passed in this list here,"
+3858.08,12.0," is to say, well, why don't you reverse everything? So I would like to have had gf as a list, and then the e, and then the d, and then the one."
+3870.08,13.0," So this is where we're going to do that. So let's say I now have a list. So each one of these blue squares is my list, or my list elements and my top level."
+3883.08,10.0," And they happen to have some sort of lists within them. How do I do this? Well, now that I have potential list elements,"
+3893.08,11.0," I need to have my recursive function test whether the element I'm currently considering is a list or not. If it's not, like the three and the four,"
+3904.08,10.0," I can treat them in the exact same way that we treated them in this case. But if it is a list as this one is, right, this is a list element,"
+3914.08,7.0, and this is also a list element that has lists elements within it. So that's even funcier. Then we need to consider them separately.
+3921.08,13.0," So let's take the code that we wrote in the previous slide, because it's a good start, extract the first element, right, put it at the end. That's what we did before."
+3934.08,11.0," But before leaving, let's say if you are a list, right, if you are a list, then also reverse yourself."
+3945.08,11.0," So not only do I want top level, that list, that element to go to the end, I also want to consider what you are. I don't want this last element to be one comma two."
+3956.08,9.0," I want to reverse its elements two to be two comma one. So in the end, what I want this to give me is 8, 7, 6, 5, 4, 3, 2, 1."
+3965.08,10.0," So that deals with that first element being popped at the end there. Now I consider my new list. Again, this is going to be a recursive step."
+3975.08,13.0," The element at the front, again, I extract it. It's just a number, right, nothing special here. So you just go to the end, right, just like before. Nothing to consider, nothing to reverse for that three."
+3988.08,13.0," Again, the four, just like before, it goes to the end. And now, what about this list with lists within it, and so on. Well, we've reached sort of this Quarantco base case."
+4001.08,7.0," So there's nothing to put at the end, but you can imagine being put at the end if it was, if there were other elements within it."
+4008.08,9.0," So this one is going to stay as is, sorry about that, this one is going to stay as is, but what we're going to do is going to say, well, you are a list, just like this one was a list, right."
+4017.08,9.0, It was a list with two numbers in it. So you are also a list with two elements in it. So the first step I would like you to do is reverse yourself.
+4026.08,13.0, So the seven eight will come to the front and the five six will go after it. Right. But it's elements also are lists.
+4039.08,16.0," So not only do I want to reverse you, but I want you to tell all your elements to reverse themselves. So the six, the five six should reverse to be a comma six five, and the seven eight should reverse itself to become a eight seven."
+4055.08,16.0," Okay. Does that make sense? Conceptually, I think, I think we got it. Okay. So we want to reverse as far deep as we can until we get to some numbers. Okay."
+4071.08,19.0," So let's write the code. Okay. We're going to do a very similar thing to what we've done in the past, right. All of these examples following the exact same pattern. Consider a list with one element in it, and then consider a list with many elements in it."
+4090.08,25.0," If I have a list with one element in it, so here, here's a list, right. It's going to have only one element in it. If the list is a, if that element within that list is a number, I'm going to do something different than if the element within this list is a list."
+4115.08,10.0," Right. So what I actually want to do inside this, if lnl is equal to one, is have two subparts, right, depending on whether it's a list or not."
+4125.08,11.0," Because if it's just a number, I'm happy to just leave it as is, right. Like this number is already in place, right. It's already reversed."
+4136.08,15.0," But if the element within it is a list, right, this element is one element inside my list, is also a list, I want it to reverse itself."
+4151.08,15.0," So if the length, so if the length of the list is one, I now check the type. If it's not a list, I do exactly the same thing as I did before. If it's not a list, you are already reversed. No need to reverse anything else. Yes, question."
+4166.08,18.0," Yes, so we're just dividing it into one element or two or more than one. So in the case where we have one element, right, this is my list, and this is the one element."
+4184.08,7.0," And if I have an element that's a list itself, then this is still one element."
+4191.08,11.0, Yep. This is now a list with two elements in it.
+4202.08,11.0," Yeah, exactly. But I am considering the case where I have a list with one element, it happens to be another list. And what's inside it, I don't currently care."
+4213.08,19.0," So if it's not a list, it's already reversed. Otherwise, what do we do? Well, we want to ask it to reverse itself, and that's the function we're currently writing."
+4232.08,21.0," Cool, I guess. Again, a lot of trust going on here, you guys. So we're calling deep reverse this function. We are currently writing on this list element, L i, index zero, right. It's our only element."
+4253.08,18.0," And notice again, I've got these square brackets around here because this function is supposed to return a list. Right."
+4271.08,8.0," So just like in the previous case where I slapped on some square brackets around the number, I have to do it here as well."
+4279.08,10.0," Everyone okay with this case? Because the recursive step is going to be even crazier. Okay. Else, we have a list with more than one element in it."
+4289.08,10.0," We have a list with some stuff here, and then I have potentially another list and a bunch of other stuff here."
+4299.08,14.0," So then, what I would like to do is again, according to our pattern that we've been looking at, is to say, I'm going to extract the first element in the list."
+4313.08,17.0," Right. So if I have a list with many elements, let's extract the first one and deal with it. But again, I need to take care because that first element may be a number, or string, or whatever, or it may be a list."
+4330.08,14.0," Okay. And I deal with these two cases separately. If it's just a number, so that's this if case here, so if the type of L at zero, the thing that I've extracted as a list, then what I need to do is what I had in the previous example."
+4344.08,10.0," I grabbed that first element, slapped square brackets around it, and concatenated with deeper verse of the rest of it. Exactly the same as the previous case, right."
+4354.08,10.0," Because it's just a number. I do what I did before. Plop it to the end and we're done. And again, I'm making a function call here to myself."
+4364.08,17.0," Else, okay. This thing here, this element in take zero that I've extracted is a list. Right. So not only do I have to call deeper verse on these guys here, but everybody together."
+4381.08,16.0," We have to call deeper verse on the first element as well, right. Because it's a list. I can't just put it to the end. I want to reverse it to reverse all of its elements. Okay. So this is the code to do that. Right."
+4397.08,12.0," This bit here, deeper verse L1 colon, tells the remaining of the list, remainder of the list to reverse itself. Exactly like we did in the integer case. All the same."
+4409.08,12.0," But we can concatenate that again by putting square brackets around it, because we want to concatenate with the list, we can concatenate that with deeper verseing our element and index here. Right."
+4421.08,9.0," So not only do we put this at the end to reverse it, but we need to it to reverse all of its elements as well. Okay."
+4430.08,11.0," There are no more lines to this code, but what are your thoughts? I know. Yeah."
+4441.08,17.0," So, yeah. So we put square brackets because we want to maintain the same structure of what the original list was. So if it's an integer, I guess the simplest case to explain it. So if it's an integer, you can't concatenate the list with the integer. Right. It'll be a problem."
+4458.08,8.0, So you want to concatenate the list with the integer inside a list as a single element.
+4466.08,14.0," So what we can do is we can simplify the code. Again, I personally think of this as a little bit easier to think about just because I'm extracting out the case where I have one list with one thing and the list with many things."
+4480.08,15.0," You can certainly think of it like this. So if I have an empty list, just return an empty list. I'm extracting the element and index zero directly. And I deeper verse that the rest of the list concatenated with that element at the end."
+4495.08,17.0," And again, whoops, noting that we are putting this element as a list. And else, we can deeper verse the rest of the list concatenated with deeper versing this guy here. Right. So not only do we put it at the end, but we also reverse all of its elements."
+4512.08,16.0," So this is the simplified version of the simplified code. Okay. So this recursion that we saw, all these examples here that we applied to lists can actually be applied applied to any indexable ordered sequences. Right."
+4528.08,26.0," The same code will work for two pulls. The same code will work for strings, except for the one where it because you can't have strings within strings within strings. But certainly, you know, summing the elements in a list and checking whether an element is in a list will work for two pulls as well. And, you know, some of these will work for strings as long as you can do that operation on the strings. Right. Because these are all indexable sequences. Right. So it shouldn't be a problem."
+4554.08,18.0," So lots of takeaways here with recursion. This last example, namely, is it looks really nice in the cleaned up form. And it's you want like five lines of code to solve this really kind of hard problem that you would otherwise have to solve using while loops and for loops and things like that."
+4572.08,15.0, So I definitely encourage you to take a look through the Python tutor links that I've put in my two tips. So the two big takeaways on recursion is this thing about base case cases. Right. Any time you have a return statement and you're writing a recursive function.
+4587.08,14.0," Make sure that every single return statement is returning something that is of that same type. Otherwise, you'll have type mismatches all over the place. Okay. And then the recursive step takes advantage of the fact that you are returning these kinds of types. Right."
+4601.08,12.0, So then those operations in the recursive step will work with those types. And the second is the function doesn't have to be efficient on the first pass. Right. So the way we thought about the problem by separating it and list with one element.
+4613.08,6.0, And many is easier for me to think about because I can wrap my head around the problem.
+4620.08,9.0," And you know, you don't have to write the most efficient code right off the bat for recursion. Certainly no need to do that. But you can definitely clean it up after you have something that works."
+4629.08,9.0," Many practice problems on the Python on the Python file for today. Many, many practice problems. Memorizing the basketball. Obviously I mentioned that."
+4638.08,13.0, So I'm going to do a little practice with no lists within lists. An example or a practice with lists within lists within lists. And then I included three buggy recursion implementations for you to try to fix.
+4651.08,6.0, So a little bit of debugging practice plus recursion practice. All right. Thanks all.
+4668.08,3.0, You

@@ -1,0 +1,891 @@
+start,duration,text
+0.0,19.48," All right, let's get started."
+19.48,6.719999999999999, So today's lecture is lecture 3 out of 4 on the idea of object oriented programming
+26.2,4.239999999999998, and creating our own object types through Python classes.
+30.439999999999998,2.8000000000000043, The majority of today's lecture will be on this idea of inheritance.
+33.24,4.68," But before we get there, I'd like to do a little bit of a recap of the big things"
+37.92,2.1999999999999957, that we've seen already.
+40.12,3.720000000000006," And this particular slide, I've got six different objects."
+43.84,3.239999999999995," But the three on the left can kind of be grouped together, right?"
+47.08,3.1200000000000045, We know that they are kind of cat.
+50.2,3.1599999999999966," And as such, we know that all these cats have,"
+53.36,3.520000000000003, we can describe them using some common properties and common behaviors.
+56.88,6.999999999999993," So for these cats, I would say that all these cats have a name and age and a color associated with them."
+63.879999999999995,6.52000000000001," So I, the items on the right, those three objects, I know they can be categorized together."
+70.4,3.1999999999999886," Let's say that they're wild rabbits and let's say that for the wild rabbits,"
+73.6,1.6000000000000085, I don't actually give them a name.
+75.2,3.5600000000000023," So I would categorize them again using common properties,"
+78.76,3.839999999999989," properties just an age and a color, no name."
+82.6,4.760000000000005, And then those three objects on the right also have a common set of behaviors different
+87.36,1.3599999999999994, than the objects on the left.
+88.72,4.11999999999999," And so we're trying to mimic the idea of these categorizations,"
+92.83999999999999,3.1200000000000045, data types that we see in real life.
+95.96,0.9599999999999937, Okay.
+96.91999999999999,3.8400000000000034," So a little bit of recap, right?"
+100.75999999999999,5.240000000000009," When we define our own data type in Python, we decide on a bunch of attributes."
+106.0,4.159999999999997, And attributes can either be data or they can be procedures.
+110.16,5.400000000000006," The data is, you think of them as sort of what variables make up your object."
+115.56,1.7199999999999989, And this is something that you decide.
+117.28,7.039999999999992," So for a abstract idea of an animal, well, we can just say that we can describe an animal by its age."
+124.32,3.5200000000000102," So how long it's been alive, right, since birth."
+127.84,6.639999999999986," In terms of procedural attributes, these we implemented using methods in Python classes."
+134.48,4.0," And these are the idea behind these is just how can somebody,"
+138.48,3.5200000000000102, or somebody who's creating an object of this type manipulate the object.
+142.0,3.0, What are some ways to interface with this object?
+145.0,3.319999999999993," So our coordinate class, we, one of the more interesting things,"
+148.32,3.079999999999984, was to find a distance between a coordinate and another coordinate.
+151.39999999999998,3.1200000000000045," But some of the simpler things were, you know, to just, you know,"
+154.51999999999998,3.4399999999999977," get the value of the x coordinate, the y coordinate, things like that."
+157.95999999999998,2.680000000000007," For our animal class that we're implementing today,"
+160.64,2.3600000000000136, it's going to be a little bit more abstract.
+163.0,4.719999999999999," But one of those simplest things is to just say, hey, tell me how long you've been alive."
+167.72,6.240000000000009," That's basically just grabbing the value of the attribute, the h, right."
+173.96,5.840000000000003," So here we're defining our object, our data object, right?"
+179.8,4.119999999999976, The class keyword tells Python we're creating a new data type.
+183.92,1.6000000000000227, This is the name of our data type.
+185.52,4.119999999999976, So the type of this thing that we're creating is animal.
+189.64,6.52000000000001," In parentheses here, animal inherits, animals as parent is the generic."
+196.16,5.800000000000011, So the parent of a class that we create is something other than just the generic Python object.
+201.96,4.439999999999998, And then the very first method that we always write in our new object definition
+206.4,1.039999999999992, is the init method.
+207.44,1.4799999999999898, This tells us no.
+208.92,3.200000000000017," So the init method is a special dunder method,"
+212.12,3.079999999999984," double underscore init, double underscore."
+215.2,3.640000000000015," And by now, you're familiar, the first parameter of every single method"
+218.84,3.6799999999999784, that we define inside a class is this thing called self.
+222.52,5.159999999999997," And remember, self is a variable, right?"
+227.68,7.199999999999989, It's a variable name that allows us to talk about an object without having created one yet.
+234.88,2.960000000000008," Because all we're doing here is defining the class, right?"
+237.84,2.240000000000009, We don't have actual objects created.
+240.08,3.1999999999999886," And so this method here, the init method, and all the other methods"
+243.28,4.320000000000022," are run on an object of type animal, but we don't have that object yet."
+247.6,6.599999999999994, So the first parameter will be that object in this abstract sort of way.
+254.2,3.6399999999999864, And then you can put other parameters in that list.
+257.84,2.8799999999999955," And so we say that when we create a new animal object,"
+260.71999999999997,4.680000000000007," we're going to initialize it by its age, so at some number."
+265.4,3.1200000000000045," Within the init, what do we usually do?"
+268.52,7.720000000000027," Well, we usually initialize all the have for the animal class."
+276.24,1.4399999999999977," To, exactly, yeah."
+277.68,3.6000000000000227," Because we have that self appearing again, right?"
+281.28000000000003,5.71999999999997," If it was just a variable name like age or years or time or something like that,"
+287.0,2.160000000000025, it would just be a regular old variable.
+289.16,3.5600000000000023," And as soon as that init method ended, that variable would go away."
+292.72,4.479999999999961," But the fact that we've initialized this variable using self.tells python,"
+297.2,5.960000000000036," hey, this is a variable that I want to persist for as long as this object exists in memory."
+303.16,2.4399999999999977, So it's an instance variable.
+305.6,1.4800000000000182, So self.ag equals age.
+307.08000000000004,2.8799999999999955, Self.name is also a data attribute.
+309.96000000000004,2.2799999999999727, It's just not being passed in the parameter list.
+312.24,1.0400000000000205, And that's OK.
+313.28000000000003,3.7199999999999704, Not everything has to be passed into the parameter list.
+317.0,2.680000000000007," So here, what we're effectively doing is saying,"
+319.68,3.680000000000007," when we create a new animal object, we have to tell it the age,"
+323.36,5.8799999999999955," how long it's been alive for, but value for the name for every animal we create right off the bat."
+329.24,2.080000000000041, OK.
+331.32000000000005,1.3599999999999568, Everyone OK with pieces over here?
+336.28000000000003,1.8799999999999955, What's the purpose of defining this to be done?
+338.16,5.199999999999989," Well, later on, I'm going to add some methods that allow you to give a name to an animal if you'd like."
+343.36,3.160000000000025," But again, this is a design choice that I made."
+346.52000000000004,5.0," So you, yeah, you might not make the same design choices."
+351.52000000000004,2.4799999999999613," So that's the definition for my class, right?"
+354.0,1.9600000000000364, Just these four lines of code.
+355.96000000000004,6.279999999999973," And then down here, we saw the past couple of lectures how to create actual new objects, right?"
+362.24,5.0," So this is where the actual actually happens, right?"
+367.24,6.759999999999991," So here, I'm creating a new animal object, a variable my animal, is bound to that animal object, right?"
+374.0,3.400000000000034," So that's my variable name, name and anything you want."
+377.40000000000003,5.919999999999959," And then you're telling Python to create a new animal object simply by invoking the name of the class,"
+383.32,4.759999999999991," and then passing in all the parameters that we're expecting here, except for self, right?"
+388.08,3.1200000000000045, Because self becomes this thing.
+391.2,2.759999999999991," If I were to draw a box around animal three, that is self."
+393.96,4.079999999999984, That is this object that I just created.
+398.03999999999996,2.5200000000000387," Okay, so that's the init method."
+400.56,2.4799999999999613," Last lecture, we saw some dunder methods."
+403.03999999999996,8.32000000000005, And I think I said probably the second method you'd ever want to implement for a new class is this dunder STR method.
+411.36,9.439999999999998," Now the dunder STR method tells Python how Python should print an object of type animal, right?"
+420.8,7.759999999999991," Because initially right off the bat if we did generic Python object, which just tells us the memory location this object has been created at,"
+428.56,1.5600000000000023, which is not very useful.
+430.12,8.04000000000002," When we print an animal object, and again my design choice is to say I'm going to print animal colon,"
+438.16,3.2799999999999727," the name of that animal colon, and the age of that animal."
+441.44,2.1200000000000045," Again, my design choice, right?"
+443.56,3.920000000000016, And remember the dunder STR method returns the string you want to print out.
+447.48,2.680000000000007, It doesn't print it out straight up.
+451.44,2.400000000000034," Okay, everyone okay with that so far?"
+453.84000000000003,0.7999999999999545, Should be review.
+454.64,9.920000000000016," Okay, so then the other things that we want to include in our class, and this is something that you included no matter what the language you're working with,"
+464.56,3.9599999999999795, is these things called getters and setters.
+468.52,3.0400000000000205, So getters are these two right here.
+471.56,8.199999999999989, Getters are basically very simple functions that return the values of the data attributes that this object has.
+479.76,6.0, This object just has two right an age in the name because they were defined using self dot age and self dot name.
+485.76,3.920000000000016, So here's a getter to just tell me the value of self dot age.
+489.68,6.0," So all it does is return self dot age and name all it does is return self dot name very, very simple."
+497.52,10.360000000000014, Setters same idea except that now we're allowing someone using our class to set the values of these data attributes through this through these methods.
+507.88,0.7599999999999909, Right?
+508.64,6.919999999999959, So here all it's doing is taking in a parameter for the thing you want to change the age or the name to right.
+515.56,4.32000000000005, And all it does is say well say self dot age is going to be equal to the thing you passed in.
+523.08,2.6399999999999864, That's the age so we're changing this to a different number.
+526.72,4.719999999999914, And then the set name is changing the name data attribute to a different string.
+531.4399999999999,2.9600000000000364, And here I'm using this deep and we talked about functions right.
+534.4,5.0, So if you don't pass in an actual string value will default to the empty string.
+542.0799999999999,1.7600000000001046, So let me show you how this works.
+545.72,2.8799999999999955, So this is my animal class exactly as in the slides.
+548.6,2.7999999999999545," I've got my in it, str and my two getters and setters."
+552.36,2.439999999999941," And then I've got two animals being created here, right?"
+554.8,5.600000000000023, So here's a print for animal with age four and here's a print of animal age six.
+560.4,5.919999999999959, So if I run these it should print animal colon none because I didn't set the name to anything for the these two.
+566.3199999999999,3.0400000000000773," And then their respective ages, right?"
+569.36,6.759999999999991, So this is using the str method for on a and this is using the str method on b.
+578.24,1.1999999999999318, Okay.
+579.4399999999999,4.440000000000055, And then we can access of course using dot notation all of our data attributes.
+583.88,2.840000000000032, So here I'm accessing the age directly.
+586.72,4.720000000000027," But since the getter get age just returns for me the value of that data attribute,"
+591.44,1.759999999999991, these will actually print the same thing.
+593.2,2.0, So I'm just going to comment these out.
+595.2,5.439999999999941," So if I'm accessing age age through either the data attribute directly or through the getter method,"
+600.64,1.8799999999999955," it'll print for for both, right?"
+602.52,1.6000000000000227, Pretty straightforward.
+606.28,2.0400000000000773, And then we can do some things like this.
+608.32,2.5599999999999454, So I can call this set name method.
+610.88,2.7200000000000273, So here I'm passing an actual name for it.
+613.6,1.4400000000000546, And then I can print the name.
+615.04,3.2799999999999727, You see the name has now been changed for object a.
+618.3199999999999,3.6800000000000637," And then if I run the print method on a, then right,"
+622.0,3.199999999999932," it prints animal colon the new name that I just set it to, fluffy,"
+625.1999999999999,2.2000000000000455, and then the age has been unchanged.
+627.4,3.3999999999999773," If I run set name without a parameter,"
+630.8,5.279999999999973," it'll revert to the default parameter for the name, which is the empty string."
+636.0799999999999,3.3600000000000136, So the new name of my animal a will just be an empty string.
+639.4399999999999,2.240000000000009," So it's just going to be colon with nothing in there, right?"
+641.68,3.67999999999995," So just empty no space or anything, just nothing."
+647.64,1.0, Okay.
+649.5999999999999,1.6399999999999864, Everyone all right so far.
+651.2399999999999,1.32000000000005, Hopefully a little review.
+654.52,5.919999999999959," So we saw that we can actually grab the exact same value, right?"
+660.4399999999999,5.080000000000041," For the age using, by accessing the age data attribute directly, right,"
+665.52,4.559999999999945, using Don notation or our getter that we wrote.
+670.08,8.720000000000027, One of these is better than the other in terms of style and in terms of good coding product.
+679.9200000000001,5.719999999999914," The one that is better to use is the one that accesses the method, right?"
+685.64,9.280000000000086," Both are using Don notation, but the first one is actually accessing the internals of my class definition, right?"
+694.92,6.240000000000009, We're in order to know the value of my data attribute as someone who's just using this code for an animal class.
+701.16,7.1200000000000045," I have to actually go in and read, right, the init method to know these data attributes that are being initialized."
+708.28,3.0399999999999636," I don't know about you, but I actually, let's take an example of a list, right?"
+711.3199999999999,1.5600000000000591, Something we've used a lot.
+712.88,6.639999999999986," Have you ever gone into the definition of the list class to see the data attributes that are being initialized to lists,"
+719.52,2.3199999999999363, to do operations on lists and things like that?
+721.84,3.3600000000000136, So the internal workings of the list class is hidden from us.
+725.2,1.4800000000000182," And that's just the way we like it, right?"
+726.6800000000001,3.0799999999999272, I don't care how the list is actually implemented.
+729.76,2.3600000000000136," And the same thing should happen here, right?"
+732.12,3.3600000000000136, I shouldn't care how I implement the animal class.
+735.48,5.399999999999977, I shouldn't care what instance variables they're using.
+742.36,2.2799999999999727, So let me show you why.
+744.64,6.680000000000064," So if someone who's writing the animal class decides in the future that age was a strange variable named to use,"
+751.32,8.399999999999977," and they decide to change that the variable associated with how long this animal has been alive to to be years, right?"
+759.72,6.080000000000041," So here, I've got self dot years equals age."
+765.8000000000001,4.399999999999977," That's the only change I've made to my animal class, right?"
+770.2,1.3600000000000136, So I've made the design decisions.
+771.5600000000001,4.840000000000032, I need to make sure all my getters and setters and everything still works with this new data attribute.
+776.4000000000001,4.7999999999999545," So my get age will return self dot years, right?"
+781.2,4.159999999999968," I'm returning this variable, a data attribute that I've changed to."
+786.44,3.3999999999999773," Well, this is the full code."
+789.84,2.919999999999959," So this is, you can see the changed data attribute here."
+792.76,2.400000000000091, I'm using self dot years equals age.
+795.1600000000001,4.8799999999999955, And then my getter is going to return self dot years.
+800.0400000000001,2.6000000000000227, And my setter is going to set self dot years.
+803.9200000000001,4.600000000000023," Well, if this implementation should be hidden, right?"
+808.52,4.919999999999959," From me, somebody who is just trying to create a bunch of animals in their code."
+814.64,6.1200000000000045," So this code down here will work if I use my method, right?"
+820.76,5.7999999999999545," Because the method should still work no matter what the data attribute is called, right?"
+826.56,2.0400000000000773, Age or years or time or whatever.
+829.56,4.639999999999986," But if I had code that access, that data attribute directly, it doesn't work anymore."
+834.2,4.67999999999995," It works in there because surprise that hit attribute no longer exists, right?"
+840.4000000000001,5.399999999999977," So it's much better style and you know, you can,"
+845.8000000000001,2.3999999999999773," well, end to manipulate the objects."
+848.2,5.080000000000041," You should never ever really have to use the data attributes, right?"
+854.6400000000001,1.0, Questions about that.
+858.5600000000001,5.600000000000023," Okay, good because that's something that you'll have to keep in mind on the quiz next Monday."
+865.1600000000001,1.3999999999999773, Not using data attributes.
+867.5200000000001,0.5199999999999818, All right.
+870.6400000000001,6.119999999999891," So having said that, Python does allow you to do a bunch of questionable stuff."
+877.6,7.920000000000073," So first of all, it allows you as we just saw to access the data attribute of a particular instance that you create, right?"
+885.5200000000001,3.6399999999999864," So you create an object and it's a very specific animal, the specific age."
+889.3199999999999,5.440000000000055, You can just access the use dot notation to access the value of all of these data attributes.
+895.6,1.5599999999999454," Fine, we're not, you know, we're not."
+898.1999999999999,6.759999999999991," However, Python also allows you to change the value of a data attribute outside of the class definition."
+905.28,2.2799999999999727, Right? So this is code we write not within the cloud.
+907.56,6.040000000000077, I'm going to set the age data attribute to be whatever I want outside the class definition.
+913.9599999999999,2.8799999999999955, Right? I could even set it to a dictionary if I wanted to.
+917.84,3.480000000000018," In this particular case, I'm setting it to a string infinite."
+921.8000000000001,3.7199999999999136," But if I do then, maybe they assume that the age is always a number."
+925.84,4.759999999999991, And so a different method I might run will not work anymore if I happen to set it to the string.
+930.88,0.2400000000000091, Right?
+932.72,6.519999999999982, And then one other thing Python actually allows you to do is to add data attributes to instances.
+940.8000000000001,5.919999999999959," So now the problem with this is that, let's say I create a whole bunch of instances of animals, right?"
+947.0,3.840000000000032," The animals got age four, the animals got age six, the animals got age five."
+951.44,3.6000000000000227," And then one of these animals, I decide to add a new data attribute to it."
+955.0400000000001,5.599999999999909," Like only one of these instances now has three data attributes associated with it, a name and age."
+960.96,7.720000000000027," And now the size all the other data, all the other animal instances I've created only have a name and an age associated with them."
+968.76,2.560000000000059, Just this one happens to have this extra data attribute.
+972.08,7.519999999999982," So now the whole reason why we're creating our own data types, right, was to be consistent, to bundle the specific set of data and"
+979.6,3.0400000000000773, specific set of behaviors together flies out the window.
+982.6400000000001,6.159999999999968, Because now I have one instance that now has this extra data attribute associated with it and nobody else does.
+989.4000000000001,0.2400000000000091, Right?
+989.9200000000001,5.360000000000014," So all that consistency has, you know, is has gone out the window."
+995.2800000000001,5.639999999999986, So never ever do any of these outside of the class definition.
+1000.92,4.7999999999999545," It's totally okay to access data attributes while you're defining class, right?"
+1006.16,5.039999999999964," But not okay to do any of these outside of the class definition, even though Python allows you to do them."
+1012.88,5.639999999999986," Okay, so one of the things I wanted to show you in this lecture is something we haven't really seen so far."
+1018.52,3.0799999999999272, And that's actually just working with objects that we create.
+1022.24,5.079999999999927," Yes, when we created fractions and coordinates, we just created a whole bunch of objects and then, you know, printed,"
+1027.6,4.519999999999982," you know, the numerators or, you know, printed the object or multiplied them together."
+1032.32,4.599999999999909, But we never actually wrote nice functions that kind of work with objects of our type.
+1037.96,3.3999999999998636, So one of the things I wanted to show you is how to do that.
+1041.36,5.319999999999936, So here's a function that creates a dictionary out of a list.
+1047.6,9.079999999999927," So the input, the function, what I would like it to do is to pick up from the list, only numbers that are non negative."
+1057.6,1.0799999999999272, And just integers.
+1058.6799999999998,5.759999999999991," So in this particular case, I would like my function to pick up the two, the five, and the zero, ignoring everything else."
+1065.48,3.3199999999999363, And I would like to create a dictionary out of these numbers.
+1069.52,5.919999999999845," And what the dictionary should do is map each one of these numbers, so the two, the five, and the zero."
+1076.84,9.88000000000011, These would be my keys and they should be mapped to animal objects with these ages.
+1088.32,9.720000000000027," So that's an animal with two of age two, and this is an animal with age five, and this should be an animal with age zero."
+1098.36,9.759999999999991," So my keys, types, are in, and the values associated with the keys, the type should be animal, this object that I just created."
+1109.08,2.8799999999998818, So the code is pretty straightforward.
+1111.9599999999998,4.2000000000000455, We just have a little loop that goes through each element one at a time in my list.
+1116.1599999999999,8.559999999999945," That's for N and L. And then I'm just going to do something to the elements that are integers and greater or equal to zero, right?"
+1124.7199999999998,0.6400000000001, Non-negative.
+1126.1599999999999,5.920000000000073," So that'll extract only the two, the five, and the zero as we go through the loop over the elements in L."
+1132.08,5.559999999999945," I'm going to say, I'm going to, this line just adds an entry to my dictionary, right?"
+1138.36,3.240000000000009," So this is the syntax for putting something in a dictionary, right?"
+1141.6,3.839999999999918, There's no append or plus in a dictionary or anything like that.
+1145.4399999999998,8.600000000000136," It's just straight up indexing the key you want is N, so either a two or five or a zero, and the value I want to"
+1154.04,5.960000000000036," associate with that key is an animal with age whatever this is, two, five or zero, right?"
+1160.0,2.0, So exactly what I wrote here.
+1163.36,1.0799999999999272, Everyone okay so far?
+1165.4,5.759999999999991," All right, the loop goes through to the end of the list and then we've created our dictionary and we're done."
+1172.88,3.9199999999998454," As we're writing this code, how would we debug it or how would we check to see that it worked?"
+1177.56,4.160000000000082," Well, the instinct is to say, okay, well, let me check to see if this function worked."
+1181.72,7.440000000000055," So here this line animals equals, it runs it on this L, and at the end it returns a dictionary, right?"
+1189.16,1.0, Something that looks like this.
+1191.16,5.3599999999999," So our instinct is to just print that returned dictionary, okay?"
+1196.52,7.0," But if we were to print that and you can actually run the code in the Python, if you print that, you get something like this."
+1203.52,8.400000000000091, And that's because Python doesn't dig through elements of dictionaries or even elements of lists to run the print method
+1211.92,2.519999999999982," sort of recursively, right?"
+1214.44,7.039999999999964," It just runs the print method top level and the problem is it knows how to print integers just fine,"
+1221.48,4.880000000000109, but it doesn't know how to print a dictionary where the values are animal objects.
+1226.3600000000001,4.319999999999936," And so we run into the same problem where now the value associated with key two, right?"
+1230.68,4.599999999999909," You know, I created an animal with age five where it should have been two, right?"
+1237.44,5.839999999999918," So the solution and you'll probably encounter this on the next quiz if you're a deniery, right?"
+1243.28,4.7999999999999545, In such a way that you run that print statement directly on an object of type animal.
+1248.08,1.400000000000091," Python knows how to do that, right?"
+1249.48,3.0," We told it the STR method, right?"
+1252.48,5.639999999999873, We have an STR method here where the value of a dictionary is an animal object.
+1258.12,4.759999999999991, So let's replace this print of the dictionary with a little loop.
+1263.8799999999999,5.2800000000002," It goes through this, the dictionary's items, right?"
+1269.16,4.240000000000009, So n is going to be my key and a is going to be the value associated with that key.
+1274.44,1.759999999999991, And I've just got the print statement here.
+1276.2,5.759999999999991," So I'm using an f string here, that prints key and whatever value that he is with valve,"
+1281.96,3.160000000000082," whatever value that that is, right?"
+1285.1200000000001,5.079999999999927, So now the print statement is being run directly on an object of type animal.
+1290.2,4.2000000000000455," And now the result of this loop will be this, right?"
+1294.4,5.0, So key to with value and then it uses the print statement on my animal object.
+1301.48,0.9600000000000364, Does that make sense?
+1302.44,1.0, Everyone okay so far?
+1307.64,1.1600000000000819," It's converting, yeah, exactly."
+1308.8000000000002,7.559999999999945," It's converting the stuff in the dictionary with strings because my print statement is being run directly on that object, right, of type animal."
+1316.3600000000001,1.2000000000000455, And it knows how to do that.
+1317.5600000000002,1.4800000000000182, I implemented the Dundress here.
+1323.3200000000002,0.6399999999998727, Everyone okay?
+1325.4,1.0, Okay.
+1326.4,2.0, So let's have you try this.
+1328.4,2.0, Let's have you write a little cup.
+1330.4,2.0," You'll be making a list, but you'll encounter the same problem."
+1332.4,4.0, The input here is going to be two lists of the same length.
+1336.4,4.0," One list has numbers, one list has strings."
+1340.4,4.0, And what I'd like you to do is create for me a new list.
+1344.4,6.0, And the new list is going to have animal objects where you match sort of index by index.
+1351.4,6.0," So the resulting in you animal with age two and named blobfish, right?"
+1357.4,7.0," The animal object in the resulting list at index one will create a, will be with age five and name crazy ant."
+1364.4,4.0, And then the animal object at index two will be age one and name parafox.
+1368.4,10.0," So we're just doing the same thing index by index where you create a new animal object with the age, this value, right?"
+1378.4,4.0, One at a time and you set the name to be this value.
+1382.4,5.0," Should be mine, 79."
+1389.4,1.0, Okay.
+1390.4,2.0, Who has a start for me?
+1395.4,2.0, Okay. Should we call it L3?
+1397.4,1.0, Okay.
+1399.4,4.0," Is it like, um, or N and L1?"
+1403.4,2.0, Mm-hmm.
+1405.4,4.0, Do you want to share the income through an enemy cell?
+1409.4,3.0, Or L2 of N?
+1412.4,6.0," Yes, but then if you're doing L2 of N, then this should be the index, right?"
+1418.4,4.0, So how do I make this be the index instead of the element directly?
+1422.4,1.0, Yeah.
+1423.4,1.0," Uh, yeah."
+1425.4,6.0," Um, will maybe like the aggregate, uh, right over like the ring of the cell?"
+1431.4,1.0," Yeah, exactly, right?"
+1432.4,4.0," So instead of looking at the element directly, let's just look at the, uh, the range."
+1436.4,6.0," So for I in range, and then we need to do L1, pick one of the lists because they're the same length."
+1442.4,7.0," So now I is 0, 1, 2, 3, 4, 5, like all the index values."
+1450.4,1.0, Good.
+1451.4,5.0," Well, if you could make L3 and I, uh,"
+1456.4,5.0," um, equal to 0, um,"
+1461.4,6.0," um, L1, get, uh, and come back to L3 and get, uh,"
+1467.4,7.0," so L1 at index I, um, so I need to create an animal with that age, right?"
+1474.4,2.0," So let's do, let's do this."
+1476.4,7.0," Um, uh, age equals L1 at index I, right?"
+1483.4,5.0," Just to save it as a variable and name equals L2 at index I, right?"
+1488.4,3.0," Does, we agree?"
+1491.4,4.0," So now that I have age and name stored in these variables,"
+1495.4,6.0," how do I make an animal object with, with that age?"
+1501.4,1.0, Yeah.
+1502.4,3.0," Well, you'd call it animal with dot h."
+1505.4,5.0," Well, the init method creates for me an animal with that age, right?"
+1510.4,5.0," Right? So when we just create a new animal object, we just pass in that age."
+1515.4,6.0, Right? Like the constructor requires the age of the animal.
+1521.4,2.0, Right?
+1523.4,5.0," So when we construct a new animal object, we just invoke the name of our animal."
+1528.4,2.0," Uh, where is it here? Right?"
+1530.4,3.0," Or sorry, our animal type, our animal class,"
+1533.4,4.0," and then we pass in the age that we want to create this animal with age,"
+1537.4,6.0," be whatever is passed in, and a name, none."
+1543.4,2.0, So we're halfway there.
+1545.4,4.0," We've created an animal object with the age that we want,"
+1549.4,6.0," but the name, data attribute for this object, is none."
+1555.4,5.0, Everyone with me so far.
+1560.4,2.0," Yeah, exactly."
+1562.4,2.0, We can use a center function.
+1564.4,1.0," Yeah, set name right here."
+1565.4,3.0," Right? Don't access the attribute directly,"
+1568.4,3.0," but yeah, we can use a center function."
+1571.4,5.0," So, um, so this created for me that new animal, right?"
+1576.4,4.0," But I need to actually save that animal somehow, right?"
+1580.4,2.0, Because I need to reference it later.
+1582.4,3.0," So let me do this, a equals animal with that age,"
+1585.4,4.0," and then we run the center function on this object a, right?"
+1589.4,3.0, Set name.
+1592.4,3.0," It's just a function, and what name do we want to set it up?"
+1595.4,1.0, This thing here.
+1596.4,9.0, So name here is this variable that we extracted from the L2 list.
+1605.4,2.0, Everyone okay so far?
+1607.4,9.0, So now what I have is an object a is a variable that's bound to an animal object.
+1616.4,4.0," The name, the, the, the age was set when we first created it."
+1620.4,6.0, And the name we just set through this center function.
+1626.4,9.0," And now we should just put it in my, so let's just append it to L3 like that."
+1635.4,3.0, Right?
+1638.4,4.0," I mean theoretically I could have created an empty list that was, you know,"
+1642.4,5.0," three elements long, and then I could do L3 at i."
+1647.4,6.0, But this works too.
+1653.4,4.0," And then at the end, let's return L3."
+1657.4,3.0, Right?
+1660.4,3.0, Questions about this?
+1663.4,8.0, Is this all right?
+1671.4,4.0," Okay, so if we run it, and we just print the list with these animal objects,"
+1675.4,3.0," we run the same problem as that dictionary one, right?"
+1678.4,6.0, You see I've got a bunch of memory directly on my object.
+1684.4,1.0, Right?
+1685.4,4.0," So now if I run that, it should just run the print statement directly on each of these animals, right?"
+1689.4,6.0, So that's correct.
+1695.4,8.0," Oh, so instead of printing the list, this thing, I looped through my list and printed the elements."
+1703.4,2.0," That's not in the function, no."
+1705.4,2.0," That's just, yeah, that's outside."
+1707.4,2.0, But this is something pretty common that you'll run into.
+1709.4,4.0," You make a, you know, a list or dictionary, some structure or two, or something like that,"
+1713.4,5.0," with objects of your types, you know, that uninformative stuff."
+1719.4,2.0, It's through getters and setters.
+1721.4,3.0," So, you know, in addition to the init, the str method,"
+1724.4,6.0, writing getters and setters to have a consistent way of accessing and modifying these data attributes is really important.
+1730.4,8.0," And then you can even input that, and it allows, you know, a lot more consistent use of the object."
+1738.4,6.0," So there's something like maybe 28 objects on this slide, right?"
+1745.4,4.0, There's the six-way encounter at the beginning of the lecture and 22 up there.
+1749.4,3.0, So there's 28 separate objects on this slide.
+1752.4,7.0," And all of these objects, we could say our type attributes for an animal is how long they've been alive,"
+1759.4,4.0, and these are objects that have been alive for some time.
+1763.4,5.0," But in addition to having the attribute for how long they've been,"
+1768.4,7.0," and each one of these boxes that I've created is a different subset of animal, right?"
+1775.4,4.0, We call it a subclass or a child of an animal class.
+1779.4,10.0, And that's because they will bring about different data attributes in addition to what an animal's data attributes are.
+1789.4,6.0, And they will bring about different behaviors in addition to the behaviors of our really generic animal object.
+1796.4,4.0," So the things that cat can do, a rabbit, might not be able to do,"
+1800.4,3.0," and things a person can do, a cat won't do, and a rabbit can do, right?"
+1803.4,6.0," So they're all animals, but they all are going to have additional data attributes."
+1809.4,4.0," Something like the cat has a name, an age, and a pattern, or a color."
+1813.4,3.0," The rabbit, again I said our wild, so maybe they don't get a name,"
+1816.4,6.0," but they'll have a color or a pattern, and then the age, of course, for an animal."
+1822.4,5.0," But in addition they might have a list of friends or something associated with them, right?"
+1827.4,5.0," And a list of friends, something cat doesn't have, something a rabbit doesn't have."
+1832.4,2.0, So you see what I mean.
+1834.4,3.0," And we can even go further, we can say, well, if I take my person object,"
+1837.4,5.0," I can now subcategorize that as well and say, well, this is a student class."
+1842.4,5.0," And in this student class I would say a student is a person, and of course all the animal stuff,"
+1847.4,3.0, because a person is an animal.
+1850.4,5.0," For example, let's say an animal is a generic object, it doesn't speak,"
+1855.4,3.0, but let's say a person gets the behavior to speak.
+1858.4,7.0," A student is a person, so maybe they also get something like their age,"
+1865.4,3.0," the name, and maybe a list of friends associated with them."
+1868.4,5.0," But a student might also, right, so that's a new data attribute associated with a student,"
+1873.4,2.0, that's not associated with a person.
+1875.4,5.0," A student might also have different behaviors, like tell me your favorite subject in school,"
+1880.4,1.0, things like that.
+1881.4,3.0, Or it might override behaviors of a person.
+1884.4,4.0," So if a person speaks, you know, says hello, prints hello to the screen,"
+1888.4,4.0," we can say, hey, if I asked the student to speak, they might say, I have homework instead,"
+1892.4,2.0," or something like that, right?"
+1894.4,7.0, So what we're trying to do is take those relationships and implement them in code.
+1901.4,5.0," So here I've got an animal class, which is sort of my base class."
+1906.4,7.0," It's going to be my also called parent class, or super animal, will be inherited by person cat and rabbit."
+1913.4,4.0," So a person is an animal, a cat is an animal, a rabbit is an animal,"
+1917.4,4.0," so everything they have, all these three subtypes will have as well."
+1921.4,4.0," But all these subtypes will be different amongst themselves, right?"
+1925.4,3.0," A person will have an ability to speak, maybe print hello to the screen."
+1928.4,4.0," A cat could also have the ability to speak, but maybe they'll print me out of the screen."
+1932.4,3.0, A rabbit won't even have the ability to speak at all.
+1935.4,3.0," A person might have a list of friends, right?"
+1938.4,3.0," Whereas a cat won't, a rabbit won't, things like that."
+1941.4,4.0," So we can either add more information, like list of friends was an example of that."
+1945.4,5.0," We can add more behavior, like the ability to speak is an example of that."
+1950.4,7.0," And an example of overriding behavior, like I mentioned, is let's say we have a subclass student of person,"
+1957.4,5.0," a person's speak method said to print hello to the screen,"
+1962.4,5.0," we can override that behavior through a speak method inside student,"
+1967.4,5.0," where you don't just print hello to the screen, you can print I have homework."
+1972.4,5.0, So let's try to start implementing this relationship.
+1977.4,4.0, This is just our animal class. There's nothing new here.
+1981.4,3.0, I'm just doing a little refresher on what this class looks like.
+1984.4,5.0," So we've got our knit, where we initialize an age, and a name that's none."
+1989.4,8.0," We've got two getters, two setters, and this STR method that prints animal colon name colon age."
+1997.4,2.0, Let's...
+1999.4,2.0," So yeah, okay."
+2001.4,4.0," This animal class inherits from object, so the generic Python object."
+2005.4,3.0, And now let's work on a subclass cat.
+2008.4,8.0," So when the parentheses here, the name of the type that I want this class to inherit from."
+2016.4,2.0, So a cat is unanimal.
+2018.4,4.0," A data type, you have to have an init method."
+2022.4,4.0," This doesn't specifically have an init method, right?"
+2026.4,2.0, I've just got two other methods here.
+2028.4,6.0," So you might think that here in the parentheses, so that cat is an animal."
+2034.4,5.0," Think of it like Python going into the animal class, copying and pasting."
+2039.4,6.0," Everything that's part of that animal class, and have an init method in specifically defined in cat,"
+2045.4,6.0," Python will say, oh, we'll just use the init method of your parent animal."
+2051.4,5.0," So the way we create a cat is going to be exactly the same way we create an animal,"
+2056.4,5.0, except that the name is going to be cat as my object type instead of animal.
+2061.4,5.0," But we just pass it in one thing, which is the age of this cat."
+2066.4,4.0," So since we're copying and pasting everything, yeah, question."
+2070.4,3.0, The parent class of the animal is objects.
+2073.4,1.0, Yes.
+2074.4,1.0," Yes, exactly."
+2075.4,5.0," So the parent class of animal is object, so cat will also be a Python object."
+2080.4,7.0," But that's super generic stuff, like binding a variable name to the object, things like that."
+2087.4,6.0," So not only does the init get copied in, but every single data attribute, age and name,"
+2093.4,3.0, every single way that that data attribute gets created.
+2096.4,6.0," So the self.age is going to be a data attribute of cat, and it's going to be set to whatever is passed in as a parameter."
+2102.4,3.0," Self.name will be initialized to none, just like for animal."
+2105.4,4.0," I've got my two getters, my two setters that also work with cats."
+2109.4,7.0, And then the str method of animal will also be inherited in here.
+2116.4,5.0," But now we notice one thing, and that's we have an str method defined in the animal class."
+2121.4,5.0," But then in my cat class, I define an str method as well."
+2126.4,5.0, So that's called overriding your parent's class.
+2131.4,11.0," And when we create an object of type cat, if this object has a method, that has the same name as their parent, we use this method."
+2142.4,4.0, There's no reason to go up to your parent to ask for their method.
+2146.4,4.0, We use the one that is for this object.
+2150.4,4.0," And cat, in addition to having everything that animal has,"
+2154.4,8.0," implements a new behavior, which is the ability to speak, and all it does is print me out of this grid."
+2162.4,3.0, So let's look at some code.
+2165.4,2.0, So here's my cat.
+2167.4,7.0," So I create a new cat object the same way I would create an animal, but passing in the age of this thing."
+2174.4,3.0," So here I'm creating a cat, who's ages five."
+2177.4,2.0," The name of this cat is none, right?"
+2179.4,4.0, Because that's what the init method of animal does.
+2183.4,5.0, So all the methods that work with animals will work with an object of type cat.
+2188.4,4.0," So here I can just run the set name method on my cat object,"
+2192.4,5.0," even though the method's not explicitly defined in here, it's defined in my parent."
+2197.4,5.0," So if I set the name to fluffy, and then I print the cat object, it's going to print,"
+2202.4,5.0," it's a cat, colon, the name, colon, the age."
+2207.4,5.0, So all of these methods I would implement with animal work with cats as well.
+2212.4,8.0," Now, A here, object A, was created up here when we talked about animals."
+2220.4,7.0," Right? It's an animal object, because it was created using the animal invocation here."
+2227.4,4.0, Does the animal class have a method to speak?
+2231.4,1.0, No.
+2232.4,3.0," So if I actually run this, it'll give me an error, right?"
+2235.4,1.0, It's just...
+2236.4,2.0, Okay.
+2238.4,6.0, Questions about cats.
+2244.4,3.0, Okay.
+2247.4,8.0," So I want to briefly touch upon overriding methods, because it can get a little bit confusing."
+2255.4,6.0," So you notice which overrides the animal's method to print cat, colon, name, colon, age."
+2261.4,4.0," And the animal method, STR method, prints animal, colon, name, colon, age."
+2265.4,4.0, So the rule is objects.
+2269.4,2.0, You look at...
+2271.4,2.0," Which one is it? It's the STR, right?"
+2273.4,2.0," So it would be the print method, right?"
+2275.4,2.0," Or any method, it doesn't matter what it is."
+2277.4,2.0, You look at the object you're calling the method on.
+2279.4,4.0," Right? So if it's a dot notation, you look at the thing before the dot."
+2283.4,5.0," If it's, you know, one object C, Python asks, what is your type?"
+2288.4,3.0," Oh, your cat. Do you have an STR method defined?"
+2291.4,4.0," Yes, you do. So then it uses the one that it finds right away."
+2295.4,7.0," But if for some reason the current object doesn't have that method, so when I get..."
+2302.4,3.0, Right? C is an object of type cat. It doesn't have that method.
+2305.4,2.0," Python says, oh, you don't have that method."
+2307.4,3.0, Let me look at your parent. Does your parent have that method?
+2310.4,3.0," And then it, you know, looks through and here and it finds it."
+2313.4,2.0," Good. If it finds it, it uses that one."
+2315.4,3.0," If it doesn't find it, it looks at your parent's parent."
+2318.4,2.0," Right? If your parent's parent has it, it uses that one."
+2320.4,2.0," And if it doesn't, it looks at your parent's parent."
+2322.4,4.0," Until it gets to the generic Python object, this one right here."
+2326.4,3.0," If they have it, it uses that one."
+2329.4,3.0," And if it doesn't, then it throws an error."
+2332.4,5.0," So an example of something that the generic Python object has is the STR method, right?"
+2337.4,3.0, It's Python defaults to the generic Python object one.
+2346.4,3.0, Questions?
+2353.4,2.0, Okay. Let's look at a person.
+2356.4,3.0, So let's create a person object.
+2359.4,11.0," This person object, again, will inherit from animal because an animal is the only things we said an animal is defined as,"
+2370.4,2.0, is being alive for some period of time.
+2372.4,3.0," And it has no name, right? The name is none."
+2375.4,2.0, So we don't even pass that in.
+2377.4,4.0, So let's say the parent class of person is animal.
+2382.4,4.0, But this is my design choice also to highlight a bunch of stuff.
+2386.4,9.0," But let's say that this parent, sorry, this person class, when I create a new person object, I would like to pass in an age and a name."
+2395.4,3.0, Right? So I don't just want to create a person with an age.
+2398.4,4.0, I want to actually create it using a name in that parameter list.
+2402.4,7.0," So as an example in my code here, when I create a person, I would like to pass in their name,"
+2409.4,3.0," comma and the age, two parameters to make a person."
+2412.4,2.0, Okay.
+2414.4,5.0," Well, I can't use the animals in knit method, right?"
+2419.4,4.0, I could for cat because cat was happy to just be created using an age.
+2423.4,8.0, But I can't do that for a person because I would like to create a person by passing in two parameters in the creation of the person.
+2431.4,10.0, So what I have to do is effectively override the knit method of animal by implementing it in my class definition.
+2441.4,1.0, Right?
+2442.4,3.0, So here I have to define my own in-it method.
+2445.4,7.0," And I do it because now I'm not just passing in an age, I want to pass in a name and an age in the parameter list."
+2452.4,4.0," And then beyond that, what do I do inside the in-it method?"
+2456.4,4.0," Well, I know that this person is an animal."
+2460.4,6.0, So what I'm going to do to make my life simpler is to call animals in-it method.
+2466.4,7.0," So here we use this donotation on the name of the class, sort of similar to how I showed you that sort of long way of calling methods."
+2473.4,4.0," Well, here's the name of the class dot the name of the method in it."
+2477.4,5.0," And now I pass in all the parameters, self and age."
+2482.4,7.0," So I'm going to call animals in-it method, which will create that self dot age, already does those two lines for me."
+2489.4,4.0, Right? So I've turned those two lines into a one line here.
+2493.4,4.0," And then I'm going to say, well, I'd like to set the name of my person."
+2497.4,5.0, So I'm going to call the method set name with the parameter that's passed in.
+2502.4,7.0," And then I'm also going to initialize another data attribute for a person, which is a list of friends, initially empty."
+2510.4,5.0," So what's nice about this, and when we implement the student class, it'll look even nicer."
+2515.4,6.0, What's nice about this is we're taking advantage of the fact that the in-it method of animal already does some work for us.
+2521.4,10.0," But at the same time, we can clearly see in this subclass what the person object brings in addition to the animal object."
+2531.4,1.0, Right?
+2532.4,7.0," So in addition to just being an animal, we give a name and get a list of friends."
+2539.4,4.0, Right? So it's very nice to see the extra data attributes or beyond that.
+2543.4,4.0," So I think that's what I said. Sorry, I didn't go through that as I said it."
+2547.4,5.0," And then beyond that, I've got some, you know, we can add some getters and setters."
+2552.4,3.0," I just did a select few, but you should add them for all of them."
+2555.4,6.0," So the get friends just returns a copy of my list, because maybe I want to keep my original order or something like that."
+2561.4,3.0, It's just good style to return a copy of a list.
+2564.4,8.0, The ability to add a friend to my list basically just adds a friend name as a string if it's not already in the list.
+2572.4,3.0, So I can't have each just prints hello to the screen.
+2575.4,9.0, And then I added this cute little function to tell me the age difference between this object that I'm calling age difference on and some other person.
+2584.4,6.0," Right? And all it does is grab the two ages, take the absolute value of the difference and print that to the screen."
+2590.4,6.0, A vanimal to instead of saying animal colon name colon age to say person colon name colon age.
+2596.4,4.0, So this way it helps me figure out the type as well.
+2600.4,5.0," So in my code here, I've got two people, right?"
+2605.4,4.0," P1, P2. Here's Jack, age 30, he'll just Jill age 25."
+2609.4,4.0, If I run the animals get age good name.
+2613.4,3.0, I've not defined these in here.
+2616.4,7.0," If I ask if I print P1, it'll print person colon name age."
+2623.4,4.0," If I ask P1 to speak, it just prints hello."
+2627.4,4.0," If I ask the agent, let's add some friends to P1."
+2631.4,10.0," So here I've got two bobs, but it's just a list keeping unique names."
+2641.4,6.0," Okay, so let's have you try this for a little bit."
+2647.4,3.0, It's a little bit again working with objects of this type.
+2650.4,4.0, So it's a function that takes an addictionary.
+2654.4,2.0, So I'll tell you what the dictionary looks like.
+2656.4,6.0, It maps a person object to a cat object.
+2662.4,3.0," Right, so that's my dictionary. So this is the key."
+2665.4,3.0," This is the value. So I've got all these person objects, right?"
+2668.4,4.0, Being mapped to cat objects.
+2672.4,3.0," So as an example, here's an input dictionary."
+2675.4,6.0," P1 is this person here, or person objects, right?"
+2681.4,3.0," They're not integers, float strings, they're person objects."
+2684.4,3.0, And then the values associated with those are cat objects.
+2687.4,3.0, So here's an object of type cat with this name.
+2690.4,3.0, I just ran set name on that cat after I created it.
+2693.4,3.0, Same here. Here's the name.
+2696.4,3.0, I set to this new cat object.
+2699.4,3.0," So I've mapped P1 to C1, P2 to C2."
+2702.4,2.0," So if I run this function, what I'd like to do,"
+2704.4,4.0," not return anything this function, it just prints something on each line."
+2708.4,3.0," As you're going through all the items in the dictionary,"
+2711.4,8.0," it just prints the name of that key, colon, the value of the name of the value."
+2719.4,5.0, All I'd like to do is write code that extracts the name from my person object
+2724.4,7.0, from the cat object.
+2731.4,1.0, I know what you're thinking.
+2732.4,9.0," I look really young for 86, but it's diet exercise and hanging out with you guys."
+2741.4,3.0," Ed Candy, for sure."
+2744.4,6.0," So here, let's write this code on 178."
+2751.4,4.0," All right, does anyone have a start?"
+2755.4,3.0, This K is person.
+2758.4,2.0, This is cat.
+2760.4,8.0, Yep.
+2768.4,3.0," Oh, or no."
+2771.4,3.0," Oh, you want to put it on the one line? That's fine."
+2775.4,5.0, Print K dot get name.
+2780.4,3.0, Yep.
+2783.4,2.0, V dot get name exactly.
+2785.4,2.0," Yep, perfect."
+2787.4,3.0," And yeah, nothing to return."
+2790.4,9.0, So let's run that.
+2799.4,3.0," All right, so we're just manipulating these object types."
+2802.4,5.0," And if it's confusing, I highly recommend quiz situations and things like that."
+2807.4,4.0," Now that we're working with convention, keys, integers, things like that."
+2811.4,4.0," But this particular case, just a little note that K is a person will help you remember"
+2815.4,10.0, that you need to run a method on this K variable.
+2825.4,2.0, Okay.
+2827.4,14.0, How do you ensure that the keys are person?
+2841.4,4.0, You can't ensure it in this particular case.
+2845.4,9.0," I mean, you could say if type of K equal equal person, capital P person, then do the code."
+2854.4,3.0, And else probably just skip it or raise a value error or something.
+2857.4,2.0, Like you could enforce it that way.
+2859.4,8.0," But in this particular case, we're just assuming that the tester will make person objects mapped to cat objects."
+2867.4,2.0, Yeah.
+2869.4,7.0," But yeah, certainly if you're making like a software for something more complex, you should probably make sure that enforce that."
+2876.4,4.0," Okay, so the big idea with inheritance is that appearance is attributes."
+2880.4,4.0, So everything that a parent has and can do a child has and can do as well.
+2884.4,5.0, But that child can override certain parents' behaviors.
+2889.4,6.0, And the child can add new behaviors or new attributes in addition to the parent.
+2895.4,4.0, Let's look at one more subclass student before we go on to one last thing.
+2899.4,6.0," So, um, student here from our, or, so, a student is a person."
+2905.4,6.0," And when I create a person, I would love to create using a name on age and a major."
+2911.4,5.0, But we can use a default parameter for that major to be none if we don't actually want to pass it in.
+2916.4,4.0," But I would like to create it using, by setting its major, their major as well."
+2920.4,7.0," So now, I can't use the parents in that method because I've got three parameters I would like to initiate my student with."
+2927.4,5.0," So I would, uh, I would like to create my own init method inside person."
+2932.4,4.0, So here I am defining my own init method.
+2936.4,6.0, And now it becomes apparent why it's nice to call the init method of your parent.
+2942.4,11.0," Because if I say a student is a person, all I need to do to initialize a person type, like all the attributes associated with a person and the init method of the person,"
+2953.4,3.0, so just call the init method the person.
+2956.4,6.0," That will, um, create my name, my age, set my name, create my list of friends, all that stuff."
+2962.4,4.0, So those five lines get compacted into this one line.
+2966.4,6.0, And then it also becomes really easy to see what the student has in addition to the person.
+2972.4,4.0," Well, it just has a major, uh, data attribute, right?"
+2976.4,3.0, Self-domainter is set to whatever is past it.
+2979.4,5.0," And then beyond this, um, it's just, you know, methods here and there to do stuff."
+2984.4,3.0," So here I've got a change major, uh, method."
+2987.4,5.0," It just sets the major to something I should probably add a getter in there as well, but I ran out of room."
+2992.4,5.0, And here's a speak method that gets overridden from the method of person.
+2997.4,9.0," So the speak method for student, I made it, um, slightly more complex than what the parent has."
+3006.4,6.0," So here I'm using this random library, uh, not a random library I found, like arbitrary library."
+3012.4,1.0, It's a library called.
+3013.4,5.0, So one of the functions that this random library has gives you a number between zero and one at random.
+3018.4,3.0, So the float at random.
+3021.4,7.0," So what I'm doing in the speak method for student is randomly printing one of four, uh, strings."
+3028.4,1.0, Right?
+3029.4,2.0," According to where that random, oops, not yet."
+3031.4,4.0," And then here I've, I've got, uh, I'm overriding my STR method."
+3035.4,7.0," So I'm going to see in the student class here, here I've created two students."
+3042.4,6.0," So this one actually has a major, this one's major is going to be said to none, just the default value."
+3048.4,6.0," And then if I run this code, you can see every time I run it, the student one says something different."
+3054.4,2.0, Student two says something different.
+3056.4,7.0," So it's just, you know, running this random number by a set toward something."
+3063.4,3.0," All right. So one more class I'd like to talk about, rabbit."
+3066.4,4.0, That's the one that we actually haven't talked about from those little subcategories.
+3070.4,5.0," And as we talk about this rabbit class, I'd like to introduce one more idea of a variable."
+3075.4,4.0," So far we've talked about instance variables, aka data attributes, right?"
+3079.4,7.0," Which are consistent for objects that you create of a certain type, but have different values for different instances."
+3086.4,4.0, The last kind of variable I'd like to talk about is a class variable.
+3090.4,6.0," What's cool about a class variable is that it's, think of it like a shared resource."
+3096.4,9.0, So it's a variable that any instance of this particular type can access and modify.
+3105.4,6.0," And if it's modified, all the other instances will see this modified value."
+3111.4,6.0, Right. So it's just shared across all the instances of type rabbit in this particular case.
+3117.4,6.0," And so there's many different ways to use class variables, you know, for an object-oriented programming."
+3123.4,12.0, They're pretty useful. The way I'm going to use it here is to give me the ability to basically count how many instances of this type rabbit I've created in my program.
+3135.4,6.0," So when I run the program, I remember I can create a whole bunch of instances, instances I've created."
+3141.4,4.0, All right. So let's look at the code.
+3145.4,4.0, So the first thing I'm going to do is just inherit from animal.
+3149.4,6.0," Gets a name and an age and that's about it. All those, those getters and setters and the SDR method."
+3155.4,5.0," Now to create my class variable, notice I'm defining this variable."
+3160.4,6.0, Just plain variable outside of any methods within the class definition.
+3166.4,5.0, Right. So here's tab the value of whatever it says here.
+3171.4,9.0," But then if any instance changes this value, other instances will see that changed value."
+3180.4,7.0, So what we're going to do is we're going to implement ID numbers for these rabbits.
+3187.4,4.0," Right. So sort of like, you know, tagging them to keep track of how many there are."
+3191.4,8.0," So in the init method of animal or of rabbit, I'm going to create a new rabbit using an age and two parents."
+3199.4,5.0," So again, different than animals. So I'm going to have to implement my own init method."
+3204.4,4.0, But I'll call animals init method because it does some work for me.
+3208.4,6.0, Then I'm going to add two data attributes for the two parents to be whatever is passed in.
+3214.4,8.0," And then down here is where I'm going to do is add one last data attribute for my rabbit, which is the RID value."
+3223.4,6.0, So it's the rabbit ID. And this is going to be a unique value for every rabbit I create.
+3229.4,3.0," So what am I setting it to? Well, I'm going to set it to whatever the tag is."
+3232.4,5.0," So the very first rabbit I create, their RID will be one."
+3237.4,3.0, That's what the tag is initially set to.
+3240.4,11.0," But then before I finish the init method, there's one right before it finishes creating itself is going to take that tag and incremented by one."
+3252.4,8.0," So the next rabbit I create, it's going to grab the tag value that was just changed."
+3260.4,6.0," Okay, let's visualize it. So we're going to do it with actual rabbits."
+3266.4,5.0," Okay, so first I create my first rabbit."
+3271.4,4.0, It's our RID.
+3276.4,4.0, So the tag is one.
+3280.4,4.0, So the tag was initialized to one.
+3284.4,6.0," So your rabbit, it's ages eight, two parents are none, and RID is one."
+3290.4,9.0," But then before I finish creating this rabbit, the last line of the init method says take the tag and incremented by one."
+3300.4,4.0," Alright, next line in the code says here, let me create another rabbit."
+3304.4,3.0, This one I'm going to pass in age six as my parameter.
+3307.4,4.0," So that's the age six, two parents are none by default."
+3311.4,3.0," So Python says, alright, well, here's a new RID."
+3314.4,4.0, So the RID of R2 will be whatever tag is right now.
+3318.4,3.0," Well, the previous rabbit incremented it to two."
+3321.4,4.0, So the RID of this next rabbit is two.
+3326.4,8.0," Okay, the last line of code before this rabbit finishes creating itself is to increment the tag to three."
+3334.4,6.0," So now, if I have one more line of code, I'm creating one more rabbit, this ages 10."
+3340.4,5.0," So behind the scenes, Python creates this variable named R3."
+3345.4,7.0," It's bound to an object, a rabbit object whose ages 10, two parents are none, of course, because we didn't pass in any parents."
+3353.4,4.0, And the RID is whatever the tag is right now.
+3357.4,5.0," Okay, well, here's the one with ID of three."
+3362.4,5.0," And before we finish creating, let's just increment the tag so that we set it up for the next rabbit."
+3367.4,3.0," Okay, everyone okay, so, yeah."
+3370.4,4.0, I just created the first line of the other one for running the page.
+3374.4,2.0, Yep.
+3376.4,2.0, Yes.
+3378.4,1.0, Yes.
+3379.4,2.0, The init to completion.
+3381.4,6.0, And the last line of the init always increments it to be one more than what it started with.
+3387.4,3.0, Like you can't...
+3392.4,5.0," Okay, so let's look at a couple other methods that we can implement for..."
+3397.4,7.0," Sorry, other questions about that very cool way of creating rabbits."
+3404.4,2.0, Yeah.
+3406.4,5.0," You want to know more about the space, type of, the definition of the..."
+3411.4,1.0, Yep.
+3412.4,2.0," Like, yes."
+3414.4,2.0, Let's go back here.
+3416.4,7.0," Yeah, so like, above the init without definition, that space there was almost completely..."
+3423.4,2.0, Mostly just this.
+3425.4,4.0," Yeah, mostly you want the object to have things associated with it."
+3429.4,2.0," So, Penny was in using it just because..."
+3431.4,3.0," Like, you should use it for pretty specific situations, right?"
+3434.4,6.0, You don't just want to define a whole bunch of variables that everybody can access here and there only specific situations.
+3440.4,1.0, Yeah.
+3441.4,3.0, Most of the time you just have methods in the definition.
+3444.4,2.0, Yeah.
+3446.4,3.0, But maybe there's other stuff I just don't know about it right now.
+3449.4,3.0, Yeah.
+3452.4,1.0, Okay.
+3453.4,2.0, Let's look at a couple more methods for the rabbit.
+3455.4,3.0," So, here I've got a getter."
+3458.4,1.0, Just three getters.
+3459.4,2.0, I should probably put...
+3461.4,3.0, I don't want to put a setter for the RID because that would mess up my...
+3464.4,1.0, My counting.
+3465.4,4.0," And probably I don't want setters for parents too, but maybe we might..."
+3469.4,1.0, I don't know.
+3470.4,4.0, The only thing that looks a little bit weird for the getRID is this Z-fill.
+3474.4,5.0, And I added that as a cute little thing to basically make the ID look like an ID number.
+3479.4,2.0," So, it pre-fills the front with zeros."
+3481.4,4.0," Like, it pads the front with zeros when we print out the ID."
+3485.4,5.0, Otherwise the two parents just return the parent objects.
+3490.4,4.0, One interesting method that I would like to add and we'll play on the fact that
+3494.4,4.0," rabbits dunder method, double-end score, add double underscore,"
+3498.4,6.0, to have the ability to add two rabbits together in our code.
+3504.4,3.0," So, again, this is a design decision I made."
+3507.4,1.0," So, when I create..."
+3508.4,5.0," When I add two rabbits together, I'm going to create a new rabbit object."
+3513.4,3.0, And that's exactly what the code is doing inside here.
+3516.4,5.0," And in front of the scenes, I guess, is going to be this plus operator."
+3521.4,5.0," So, the self will be the thing before the plus and the other will be the thing after the plus."
+3526.4,2.0, Just like what we saw last.
+3528.4,3.0, R1 and the other parent R2.
+3531.4,2.0, Those are the things we added together.
+3533.4,3.0, And let's say this new rabbit object is edge of zero.
+3536.4,3.0, It's a new board.
+3539.4,3.0," So, to implement that, we just have..."
+3542.4,3.0," We're returning a new rabbit object here, right?"
+3545.4,4.0," So, we're just creating a new rabbit object on the fly in this matter."
+3549.4,5.0," Originally, when we created those three R1 R2 R3s, right?"
+3554.4,2.0," They didn't have parents, right?"
+3556.4,3.0, They were just unknown or something like that.
+3559.4,3.0," But in this particular case, we do want to know what their parents are."
+3562.4,4.0, Their parents are the thing before the plus and the thing after the plus.
+3566.4,3.0," So, one parent will be self and the other parent will be other."
+3569.4,7.0, The thing that's in the parameter list.
+3576.4,3.0," So, let's continue on with our program here, right?"
+3579.4,2.0, We had these three lines of code that were run.
+3581.4,6.0," And I created these three rabbits with these IDs, or, yeah, 1, 2, 3."
+3587.4,3.0," If I add two rabbits together, R1 plus R2,"
+3590.4,4.0," to give me a rabbit object variable R4,"
+3594.4,7.0," Python says, all right, well, let me run this dunder method behind the scenes of the plus."
+3601.4,4.0," So, our four effectively becomes what?"
+3605.4,1.0," Well, we replace..."
+3606.4,5.0," So, when we make this addition, we have rabbit, zero, comma, one parent,"
+3611.4,4.0," the thing before the dot, comma, the other parent, or the thing before the plus,"
+3615.4,2.0, and then the thing after the plus.
+3617.4,3.0, Or these two.
+3620.4,3.0," Now, how does this rabbit get created?"
+3623.4,1.0, Right?
+3624.4,5.0," It's a new rabbit object, so we run the init method of the rabbit object, right?"
+3629.4,6.0," Which means that, here's a variable, it's bound to a rabbit object, it's ages zero,"
+3635.4,4.0, it has these two parents that are objects bound to other...
+3639.4,2.0, Whatever the tag is right now.
+3641.4,3.0," Well, we already created three rabbit objects ahead of this one,"
+3644.4,3.0, so this one's tag will be four.
+3647.4,4.0," And then, right before we finish, we increment the tag to five."
+3651.4,4.0," So, no matter how we're creating these rabbit objects,"
+3655.4,4.0," either just plain old in our program directly,"
+3659.4,3.0," or through an indirect method, right?"
+3662.4,6.0," In this case, the plus, we're still creating rabbit objects in our program, right?"
+3668.4,5.0," So, that counter, that shared variable tag, is still coming into play."
+3673.4,6.0," So, we're still counting all of these rabbit objects created."
+3679.4,2.0, Does that make sense?
+3681.4,3.0," Okay, good."
+3684.4,4.0," So, yeah, that's fine."
+3688.4,5.0," So, one last method, so this is a method that checks for equality between two rabbits,"
+3693.4,4.0," and again, my design choice is to say that parents."
+3697.4,5.0," So, if I create another rabbit object, right?"
+3702.4,5.0," So, say that five and four are equal, because they have the same parents, right?"
+3707.4,3.0," I don't care that it was R1 plus R2 or R2 plus R1,"
+3710.4,3.0, they have the same parents. It's just an opposite order.
+3713.4,3.0," And so, that's what this EQ method is doing,"
+3716.4,4.0, it's a dunder method to implement equality between two rabbits.
+3720.4,5.0," So, parents' same is a Boolean here that just checks the RIDs."
+3725.4,4.0," So, this Boolean parent's same is going to check that the addition was made"
+3729.4,6.0," R1 plus R2, either two or false, that checks if I made the rabbits R1 plus R2"
+3735.4,4.0," and then R2 plus R1, so backward in the parents."
+3739.4,6.0, But they still have the same parents.
+3745.4,6.0, And the reason I'm checking for IDs is because IDs are unique.
+3751.4,3.0," So, originally, when I wrote this code a long time ago,"
+3754.4,6.0," I actually ended up my first iteration checking just the straight up parents' values, right?"
+3760.4,4.0," So, it was comparing basically rabbit objects together."
+3764.4,3.0," But the problem with that code is that at some point,"
+3767.4,4.0, it tried to compare a none.
+3771.4,3.0," Some, you know, some rabbits might have a none as their parent,"
+3774.4,3.0, with an actual rabbit object and then the code crashed.
+3777.4,6.0, And then I realized I can just compare the ID values directly because those are one just numbers.
+3783.4,3.0," So, very easy to compare and two they're unique."
+3786.4,4.0," So, I know I'm not going to have two rabbits with the same ID."
+3790.4,5.0," And so, in this particular case, I've got these two rabbits should say they're equal."
+3795.4,3.0," But then if I add, you know, R2 plus R3, you know, R6,"
+3798.4,7.0, this one is not going to be equal to any of my other rabbits.
+3805.4,7.0," So, here's my code."
+3812.4,2.0," So, here I've got my three rabbits, right?"
+3814.4,4.0," So, this is just, I think we've printed this out already."
+3818.4,3.0," And then, you know, our ones parents, our two parents,"
+3821.4,3.0," and our three parents all have none, our none."
+3824.4,8.0," But then when I add R4 as R1 plus R2,"
+3832.4,7.0," I can print R4, right, is a rabbit with ID of 4,"
+3839.4,3.0," and then R1 and R2 are as usual, what we just saw."
+3842.4,4.0," And then when we grab the parents of R4, it's going to be R1,"
+3846.4,7.0," which is this rabbit with this ID, and R2 with this rabbit with this ID."
+3853.4,3.0, And then we can check the equality.
+3856.4,5.0," So, here I can create our four, our five, and our six."
+3861.4,3.0," So, our three plus our four, and our four plus our three,"
+3864.4,3.0," they should be equivalent, right?"
+3867.4,5.0," So, here I've got R5 and R6 down here, pretty cool."
+3872.4,4.0," And they're the same, right, because they have the same two parents."
+3876.4,2.0, I don't care that they're in opposite order.
+3878.4,3.0," But then, R4 and R6 have different parents, right?"
+3881.4,9.0," R4 had one and two, and R6 had, what was it, three and four?"
+3890.4,6.0, Questions about this code?
+3896.4,2.0," Okay, so class variables are pretty cool."
+3898.4,4.0," You share them across all the instances, so one instance modifies it."
+3902.4,3.0, They'll be modified for all the other instances.
+3905.4,3.0," So, class, it's going to be a little bit more complex,"
+3908.4,3.0," but we're going to see a lot of the same ideas that we saw today,"
+3911.4,4.0," just in this slightly more complex setting,"
+3915.4,2.0, of implementing our own fitness tracker.
+3917.4,2.0," So, it's still kind of an abstract thing,"
+3919.4,6.0, but more useful than animals and rabbits and person and student classes.
+3925.4,1.0, Bye.

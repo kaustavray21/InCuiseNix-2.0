@@ -1,0 +1,408 @@
+start,duration,text
+0.0,12.8, All right.
+12.8,1.0, Welcome everyone.
+13.8,6.68," So in case you missed last lecture, I've got some extra debugging ducks that were left"
+20.48,4.440000000000001, over from last lecture's debugging lecture.
+24.92,1.0, Please take them home.
+25.92,3.5599999999999987, I don't want to have to take them back to my office and then bring them back.
+29.48,1.0, So many times.
+30.48,2.4400000000000013, So please give them a good home.
+32.92,8.519999999999996," If you find them useful in your debugging strategy throughout your programming careers, I suggest"
+41.44,3.440000000000005, you upgrade to carrying a debugging duck with you everywhere.
+44.88,3.4399999999999977," As I have on my phone, I use it in my day-to-day life."
+48.32,4.719999999999999, So that's just the next step beyond an actual duck.
+53.04,1.000000000000007, All right.
+54.04,2.3599999999999994, Let's get started on today's lecture.
+56.4,6.520000000000003, We will be going over the idea of exceptions and assertions.
+62.92,7.3999999999999915, And these are basically those scary red errors that we get when our program crashes.
+70.32,5.0800000000000125, Today's lecture will hopefully shed some light on exactly what these exceptions are and
+75.4,3.239999999999995, how we can actually use them to our advantage in our code.
+78.64,4.679999999999993, So let's start by talking about exceptions.
+83.32,6.480000000000004," So when you run your code, usually it runs without error, produces the right output all"
+89.8,1.8799999999999955," the time, like mine does."
+91.67999999999999,6.560000000000002," But sometimes, it so happens that your code hits an unexpected condition."
+98.24,5.659999999999997," And when that unexpected condition is run, you get an exception to something that was"
+103.89999999999999,1.0, expected.
+104.89999999999999,4.260000000000005, So we've already seen a bunch of different exception examples.
+109.16,2.519999999999996," So we talked, we even talked about a couple of these last lectures."
+111.68,4.040000000000006, So we've got index errors where you index too far into some list.
+115.72000000000001,4.920000000000002, Type errors where you're doing funky things with types that Python doesn't like.
+120.64000000000001,3.319999999999993," Syntax errors are also exceptions, name errors are also exceptions."
+123.96000000000001,5.280000000000001, So a bunch of these errors that we've encountered are types of exceptions.
+129.24,7.52000000000001," So it turns out so far in our programming experience that whenever we get an exception,"
+136.76000000000002,1.8799999999999955, the programming immediately crashes.
+138.64,3.4799999999999898," And really, we don't have any way to handle these exceptions."
+142.11999999999998,4.640000000000015, We just accept the fact that it crashed and we go back to the debugging board.
+146.76,5.560000000000002," But it turns out that in Python, we can actually write code to handle these exceptions."
+152.32,6.680000000000007," So if your code does happen to throw an exception, so an error occurs or something unexpected happens,"
+159.0,4.119999999999976, you can write code that deals with that situation.
+163.12,5.360000000000014," And either decides to ignore the fact that an error occurred, set some default values,"
+168.48000000000002,4.8799999999999955, or just raise your own exception and move on.
+173.36,5.239999999999981, So we're going to see a bunch of examples of these cases.
+178.6,5.719999999999999, So the way that we deal with exceptions is using some code blocks.
+184.32,4.200000000000017, The way that we handle exceptions is using these try and accept blocks.
+188.52,9.240000000000009, So the way that we write an exception handler is to put some potentially problematic code
+197.76000000000002,2.0, inside this try block.
+199.76000000000002,2.079999999999984, So the try is a keyword in Python.
+201.84,3.5200000000000102, So obviously you can't name a variable try or anything like that.
+205.36,2.519999999999982," If you type it in your code, you'll see it turns blue."
+207.88,4.800000000000011, And try tells Python that you're starting a code block that contains some lines of code
+212.68,2.240000000000009, you'd like Python to execute.
+214.92000000000002,3.039999999999992, So just normal code.
+217.96,4.960000000000008," If Python is able to successfully execute these lines of code without an exception being raised,"
+222.92000000000002,3.680000000000007," so without the program crashing, then nothing happens."
+226.60000000000002,3.359999999999985, Nothing is run inside this accept block.
+229.96,3.1999999999999886, And the code just continues as normal.
+233.16,5.52000000000001," But if it so happens that in that code that you ran, something strange has happened,"
+238.68,7.0," and the code would have crashed, the code actually doesn't crash because we can catch"
+245.68,4.52000000000001, the exception that gets raised inside this accept block.
+250.20000000000002,6.599999999999994," So if we have an associated accept block over here to a try block from here, Python is"
+256.8,2.8000000000000114, going to try to run this potentially problematic code.
+259.6,5.519999999999982," And if an exception is raised, it will stop running any further lines inside the try block,"
+265.12,3.7200000000000273, and immediately hop to the lines in the accept block.
+268.84000000000003,4.559999999999945, And the lines in the accept block will then get executed.
+273.4,5.360000000000014, So to just kind of draw a parallel to if I were to kind of say this in terms of if and
+278.76,7.159999999999968," else, the way that I would describe the try and accept blocks is I would say if, and"
+285.91999999999996,4.680000000000007, then I would put all the potentially problematic lines of code that I'd like to write inside
+290.59999999999997,2.0400000000000205, this condition for the if.
+292.64,5.560000000000002," And if all of these lines of code manage to successfully run, then nothing else happens."
+298.2,2.920000000000016, The inside of this if is essentially just a pass.
+301.12,4.519999999999982," And we don't execute the else, and then we just carry on with the rest of our lives."
+305.64,4.480000000000018, But if there is some line of code here that we're trying to run that crashes or that causes
+310.12,5.160000000000025," the program to crash, Python will say, no, I'm not going to crash just yet."
+315.28000000000003,2.2399999999999523, Let me see what the code would like me to do.
+317.52,3.8799999999999955," And so we'd hop inside this else, and then we'd do something to handle the problem."
+321.4,3.1200000000000045, And the something we do is inside this accept block.
+324.52,2.240000000000009," So again, this is not code we'd ever write."
+326.76,4.759999999999991, It's just kind of a way to draw parallel with what we know so far.
+331.52,6.920000000000016," The code that we would write is this try a bunch of code, accept, do something you'd like,"
+338.44,4.920000000000016, do some lines of code if an error should come up in the in the try block.
+343.36,4.439999999999998, So let's look at some examples with code that you should be able to write at this point
+347.8,1.0, in the course.
+348.8,2.919999999999959, So we have some code on the left here.
+351.72,6.800000000000011," It's a function called some digits, and we're writing this code without any exceptions."
+358.52000000000004,3.3999999999999773, We're just writing it as if you were given this code on a quiz.
+361.92,3.160000000000025, What would be one solution?
+365.08000000000004,6.360000000000014," So this sum digits takes in a string S, and we say it's non-empty containing some digits,"
+371.44000000000005,2.839999999999975, and I want to return the sum of all the characters that are digits.
+374.28000000000003,6.71999999999997, So I don't actually say anything about whether this string S contains non-digit characters.
+381.0,2.839999999999975, But let's write it in a robust way anyway.
+383.84,5.560000000000002, So we'd have a loop that goes through every character in that string S.
+389.4,4.520000000000039," And I'm using this in keyword here, this nice little trick here that says if that character,"
+393.92,7.8799999999999955," so whatever character it may be, is inside this string of digits."
+401.8,5.240000000000009," Then I know it's a number, sorry, I know it's a digit, and I'm going to cast that digits"
+407.04,4.360000000000014," 0 through 9, whatever it may be to an integer, add it to my running total,"
+411.40000000000003,5.319999999999993," and then that loop does its thing until it's done, and then I return the total."
+416.72,6.759999999999991," So in terms of running the code, this is just as I have it on the slide."
+423.48,8.199999999999989," So here, if the user gives me the string 123, I'm going to sum 1 plus 2 plus 3, 6, perfect."
+431.68,5.519999999999982," And if the user gives me 1, 2, 3, and then some random characters that I know I can't add,"
+437.2,6.28000000000003," Python will still be able to evaluate it because that if statement will not be run, right?"
+443.48,5.039999999999964," For A, B, and C, we don't go inside the if, so there's no need to cast anything."
+448.52,2.160000000000025, So the code still works.
+450.68,5.360000000000014," If I didn't have this if here, right, if I decided to just cast to an int every single thing"
+456.04,4.199999999999989," that comes my way, the first line of code will still work,"
+460.24,3.6000000000000227, but the second line of code will throw an exception.
+463.84000000000003,7.0," You see, I have on right hand side my scary red text that says value error in valid literal"
+470.84000000000003,2.8799999999999955, for int with base 10a.
+473.72,6.039999999999964," Kind of hard to parse, but after you've seen a bunch of these,"
+479.76,3.3600000000000136," you'll figure out that there's something going on with my types,"
+483.12,6.560000000000002," and then I'm trying to cast, you know, I'm trying to cast to an integer, the string A."
+489.68,2.920000000000016, And obviously it doesn't know how to do that.
+492.6,5.800000000000011," So that's the potentially problematic line, right, casting to an integer."
+498.40000000000003,5.479999999999961," So let's try to write the same code, except that now we'll do it with exception handling."
+503.88,3.400000000000034, So a bunch of it is going to be the same.
+507.28000000000003,6.71999999999997," What we're going to change is the potentially problematic code is these two lines here, right?"
+514.0,3.6399999999999864, I don't need the if anymore.
+517.64,5.759999999999991," Instead, I'm going to just assume I can cast every single character to an integer,"
+523.4,1.2000000000000455, and I'm going to try to do that.
+524.6,3.519999999999982," So I'm going to try to cast every single character to an integer,"
+528.12,3.5599999999999454, and then add it to my running total.
+535.12,3.480000000000018," Most of the time that's going to work if the input is a digit,"
+538.6,4.719999999999914, but sometimes the users give me something that's non-digit.
+543.3199999999999,4.0," In that case, you saw what happens, the code throws a value error."
+547.32,3.4400000000000546," So if we didn't have the accept block, nor the try block,"
+550.7600000000001,3.519999999999982," the code crashes immediately, no answer is even given."
+554.2800000000001,6.039999999999964," But with the accept block, Python will say, oh, in this particular for loop run,"
+560.32,3.2000000000000455, I had an exception raised.
+563.5200000000001,2.67999999999995, So I'm going to execute whatever's inside the accept block.
+566.2,3.159999999999968," And the accept block says print, can't convert,"
+569.36,4.32000000000005," and then the character that it couldn't convert, that time through the loop."
+573.6800000000001,2.6399999999999864," And then that loop iteration is done,"
+576.32,2.759999999999991, and it goes on to the next character in the sequence.
+582.08,2.560000000000059, So let's run the code.
+584.6400000000001,3.67999999999995, And this is the sum digits with the accept.
+588.32,4.7999999999999545, So here I've got the user giving me perfectly fine input.
+593.12,1.2800000000000864, No exceptions were raised.
+594.4000000000001,2.4799999999999045, The code worked well.
+596.88,4.600000000000023," If the user gives me some characters within there, the loops go through."
+601.48,2.560000000000059, It adds 1 plus 2 plus 3.
+604.04,4.960000000000036," But then when it tries to cast to an integer the a over here,"
+609.0,6.959999999999923," as the iteration goes to a, it's going to say this raises a value error, as we just saw."
+615.9599999999999,2.759999999999991, And I'm going to execute whatever's inside the accept block.
+618.7199999999999,1.9200000000000728, So prints couldn't convert character.
+620.64,0.5599999999999454, There it is.
+621.1999999999999,3.240000000000009, And then I actually gave the user the character it couldn't convert.
+624.4399999999999,4.360000000000014," It goes on to the next iteration, the next character in the sequence, the b."
+628.8,1.6800000000000637," Again, tries to convert b."
+630.48,3.9600000000000364," It can't cast a to an integer, so we print couldn't convert b."
+634.44,3.480000000000018," And then lastly, the same with the c."
+637.9200000000001,1.2799999999999727, Does that make sense?
+639.2,1.3600000000000136," All right, so far."
+640.5600000000001,2.839999999999918, So kind of like a little if else situation going on here.
+647.44,4.7999999999999545, Nice places to put try accept blocks are when you're dealing with user input.
+652.24,6.279999999999973," Because the users, when they give you some inputs for using the actual input command,"
+658.52,1.5199999999999818, they're very unpredictable.
+660.04,4.279999999999973," We don't know what kinds of things they'll give you, even though you give them clear instructions"
+664.3199999999999,4.080000000000041, to tell me one number or tell me another number.
+668.4,10.43999999999994," So in this three lines of code down here, I've got the user giving me two numbers."
+678.8399999999999,3.840000000000032, And then I print the first one divided by the second one.
+682.68,1.7200000000000273, So I'm a nice user.
+684.4,1.0399999999999636, I do what I'm told.
+685.4399999999999,2.560000000000059, So I'm going to do five divided by eight.
+688.0,4.360000000000014," Perfect, the code runs well."
+692.36,1.6000000000000227," Let's see, somebody else runs the code."
+693.96,7.1200000000000045," And this time they decide to do seven divided by, I don't know, five like that."
+701.08,2.599999999999909, Value error.
+703.68,1.6000000000000227, So that's one thing that could go wrong.
+705.28,3.840000000000032, The user tries to be funny.
+709.12,3.759999999999991," And then another thing that could go wrong is, let's say, the user gives me a zero for"
+712.88,2.0, the second number.
+714.88,2.2799999999999727," So in this case, I get a zero division error."
+717.16,2.919999999999959, You can see Python doesn't know how to divide by zero.
+720.0799999999999,5.1200000000000045," So it raises an exception, this thing's zero division error."
+725.1999999999999,5.440000000000055," So these are, this is a case where I'm dealing with potentially problematic input."
+730.64,5.519999999999982, So I'm going to wrap my potentially problematic lines of code in a try and accept block.
+736.16,2.4400000000000546, So I've got those three lines that I'm going to try to do.
+738.6,4.599999999999909," And if anything goes wrong, I'm going to execute whatever's in the accept block."
+743.2,4.399999999999977, And all I do is say print bug and user input.
+747.6,2.0, So let's run that.
+749.6,3.159999999999968, That's this one here.
+752.76,5.1200000000000045," So here again, proper input works well."
+757.88,4.760000000000105," If the user gives me a letter, bug and user input."
+762.6400000000001,3.439999999999941," So much nicer, friendlier way to crash the program, right?"
+766.08,3.0399999999999636," Then value error, whatever it was."
+769.12,4.32000000000005," And then again, if the user gives me a zero, bug and user input."
+773.44,5.67999999999995," Again, much nicer way to crash the program."
+779.12,8.67999999999995," So what we can actually do is give specific, have specific behaviors depending on what"
+787.8,2.080000000000041," exceptions are raised, right?"
+789.88,6.080000000000041," So maybe I don't want a generic text that says bug and user input for both of those cases,"
+795.96,1.0, right?
+796.96,3.759999999999991," If the user divides by zero, I want to give them a different message than if the user gave"
+800.72,2.840000000000032," me a letter, right?"
+803.5600000000001,5.039999999999964," So in that case, what I can do is I can have different accept blocks for every different"
+808.6,2.6800000000000637," error that I know might come up, right?"
+811.2800000000001,4.1200000000000045," So as I'm writing this code, I can think ahead, right?"
+815.4000000000001,2.7999999999999545, And I can try to catch specific errors.
+818.2,4.1200000000000045," So here, I can catch the value error."
+822.32,5.32000000000005, So I say accept and then I say the name of the error that I'd like to catch.
+827.6400000000001,5.959999999999923," And this block of code, this accept block of code will be run only if the code in the"
+833.6,5.240000000000009," tri block crashes with that specific value error, right?"
+838.84,3.9600000000000364, And then I can also catch my zero division error down here.
+842.8000000000001,6.67999999999995," And in this particular case, only this accept block is only run when the zero division"
+849.48,2.6000000000000227," error is raised, right?"
+852.6800000000001,4.919999999999959," So here in the value error, I'm going to print for the user I could not convert to a number."
+857.6,3.759999999999991, So a more specific error message so they know what's up.
+861.36,4.279999999999973," And in the zero division error, I can also flag that there was an issue."
+865.64,2.7200000000000273, I can't divide by zero by printing that to the screen.
+868.36,3.2799999999999727," And then I can say, you know, a divided by b is infinity."
+871.64,5.920000000000073," And I can continue the last statement that was supposed to be done in the tri block,"
+877.5600000000001,0.8799999999999955, a plus b.
+878.44,4.7999999999999545, I can give the answer to a plus b because we can add a zero to a no problem.
+885.0,5.880000000000109, The last accept block down here is catching anything else that's not a value error and not
+890.8800000000001,1.4799999999999045, a zero division error.
+892.36,3.480000000000018, So I can't think of anything that could go wrong.
+895.84,4.480000000000018," So if we happen to go in here, something went very wrong."
+900.32,6.480000000000018, I would say the only thing I can think of is if our computer is almost out of memory
+906.8,3.67999999999995," and running this little piece of code pushes it over the edge, right?"
+910.4799999999999,3.9200000000000728, Then the Python will probably crash and maybe it'll print that error
+914.4,3.0799999999999272, before completely shutting down the computer or something.
+917.4799999999999,2.6800000000000637, But that last one should never really run.
+921.3199999999999,5.960000000000036, So let me show you what happens when we run the code with these specific accept blocks now.
+927.28,3.1200000000000045," So if the user gives me perfectly nice input,"
+930.4,1.759999999999991, then the program proceeds as normal.
+932.16,3.67999999999995, Every line of code inside the tri block is executed over here.
+935.84,2.3600000000000136, None of the accept blocks are executed.
+939.2,2.080000000000041, The user gives me a letter.
+943.24,3.6000000000000227, I end the program gracefully with the message could not convert to a number.
+946.84,2.2000000000000455, So then they know that I caught them.
+949.84,5.0," And then the last one is if I try to divide by zero, again,"
+954.84,2.32000000000005, I've got the little message can't divide by zero.
+957.1600000000001,4.1200000000000045, And then I give them their division to be infinity and a plus b is six.
+961.2800000000001,2.919999999999959, So I do all the lines of code that are caught over here.
+966.84,1.0, Question so far.
+968.84,1.0, Seems alright so far.
+970.84,1.0, Okay.
+971.84,6.0, So really nice ways for us to deal with with exceptions that get raised in our programs.
+977.84,7.0," Now, the things that I told you that we can associate with a tri block is an accept block, right?"
+984.84,1.0, So we've done that.
+985.84,4.0, But we can actually associate a couple other things with tri blocks.
+989.84,2.0, And we don't really use them in this class.
+991.84,1.0, But I just thought I'd mention them.
+993.84,11.0," So if you have an else block associated with a tri block, that means the lines of code inside the else block will execute whenever everything inside the tri block is executed perfectly."
+1004.84,6.0," So if everything goes according to plan, whatever you put inside the else block will also get executed."
+1011.84,2.0, And then you could have a finally block as well.
+1014.84,5.0," So, you know, just like we have a try and accept, you can also have a finally associated with those."
+1019.84,3.0, And the body of the finally will be executed no matter what.
+1022.84,3.0000000000001137," If an exception was raised, you also execute the finally."
+1025.8400000000001,5.0," If the code work perfectly fine without raising any errors, the finally also gets executed."
+1030.8400000000001,6.0," So I gave an example here of something that you might put inside the finally block, sort of clean up code."
+1036.8400000000001,7.0," So if you're, you know, writing code that opens files from the file system, a good idea is to close them before you finish your program."
+1043.84,8.0," So that's something that you might want to do inside the finally block, just close files before shutting down the before your program terminates."
+1053.84,1.0," Okay, so."
+1055.84,6.0," I've shown you how to deal with exceptions, but now what do we do inside the accept blocks?"
+1061.84,5.0," Okay, we've done a couple different things, mostly printing out that something went wrong."
+1066.84,3.0, But we can do various other things.
+1069.84,3.0," One thing, and I don't recommend doing this, is to just fail silently."
+1072.84,5.0," Certainly we could write code that basically, you know, has, yeah, there's a question."
+1077.84,7.0," It's very, the last time when you said, yep, how is it different from normal?"
+1084.84,3.0, So this is an else that we'd associate with a try.
+1087.84,8.0," So we would do something like else, and then you would, you know, print something here, success or something."
+1097.84,5.0," And then if the code executes perfectly without an error, then you will also print success."
+1102.84,2.0, Yeah.
+1107.84,4.0," So what do we do inside the, inside the accept blocks?"
+1111.84,8.0," One thing is to fail silently, which means that, well, you could say, you could try your entire piece of code, and then you could say accept."
+1120.84,4.0, And then the only line you have in accept is maybe a line that says pass.
+1124.84,9.0," So that means any error that happens, you would catch, but you'd do absolutely nothing, and let the program continue with potentially bad value being passed along."
+1133.84,2.0, That's not a good idea.
+1135.84,9.0," You could also silently substitute values that you know might be, might be problematic, without, you know, flagging things happening, also not good ideas."
+1145.84,5.0," At the very least, you should flag something to the output that something weird has happened."
+1150.84,16.0," Another thing you could do is return some error values, so you could have a whole bunch of variables in your code that you could set to some values, like flags kind of thing, whenever your code runs into an exception block."
+1166.84,7.0, But the problem with that is that you have to now check for all these values further on in your code.
+1173.84,10.0, So now your code becomes overly complicated because you have a whole bunch of extra variables you're constantly checking to see if any errors were flagged or something like that.
+1183.84,5.0," One last thing, and this is what I'll show you you can do, is to actually still stop the execution."
+1188.84,12.0," So much like when we input, when we tried to run the some digits program and it crashed with a value error, we could still make our program crash, but it's on our own terms."
+1200.84,7.0, So we can raise our own value errors or whatever kind of error you'd like to raise with your own custom message.
+1208.84,14.0," So the code still crashes, which is fine because maybe you don't want problematic codes to move on, but you're basically having a crash with a custom message and a custom error type of being raised."
+1222.84,9.0," So this is a keyword in Python, you raise your own value error, and then the parentheses you put whatever message you'd like to put."
+1231.84,19.0," So here's an example of the some digits where we raise our own exception. So let's say that indeed we only wanted the user to give us digits, and we don't actually want this function to keep running and passing along the total if the user ever gave us a string that contains letters."
+1251.84,11.0," So in that particular case, I'm going to still put a try block and an accept block around a try block around the problematic code and accept block to catch any errors."
+1262.84,11.0," But now instead of printing something and letting the code carry on with the loop, we're going to raise a value error with our own message."
+1274.84,11.0," So if I run this code, and it's actually up here, if I run this code with perfectly fine inputs, there's no issue, right?"
+1285.84,17.0," We just calculate the total as we want. But if the user gives us some code that some string that does contain extra characters, which maybe we don't actually want to have happened, you see, I still have a value error, which is the same kind of exception that was raised."
+1303.84,15.0," So I'm going to do a string without the try and accept, but now the message that I've passed in is string contained a character as opposed to invalid literal for whatever that, you know, that cryptic message was."
+1318.84,12.0," So this is a much nicer way to to flag or to stop the program to terminate the program, but do it on your own terms."
+1330.84,10.0, So I've done this for a couple minutes. You'll raise your own value errors. I'd like you to write this function that's called pairwise division. It takes in two lists.
+1340.84,9.0," The lists should be not empty in their equal lengths, right? So as per this example, here's two lists that are not empty and they're the same length."
+1349.84,13.0," So I'd like the code to basically go element by element and create a new list where each element is going to be, for example, four divided by one, five divided by two and six divided by three."
+1362.84,7.0," So pairwise, you do the division, put all those elements in a new list and return that list."
+1369.84,11.0," So if the denominator, so the second parameter passed in, L, denom, contains any zeros, raise a value error."
+1380.84,7.0," So don't let the code crash with the zero division error, but instead raise a value error with a nice message."
+1387.84,8.0, So start with just the code to do the task and then add the value error bit at the end.
+1395.84,6.0, Does anyone have a start? How would you like to solve this problem? How do you want to write it?
+1401.84,3.0, Yeah.
+1404.84,8.0, Yep.
+1412.84,17.0," I'll nom at i divided by L, denom, at i."
+1429.84,11.0, So we do the division for i in.
+1440.84,15.0," So here, what is i? Is it element or is it an index? Yeah. So how do we grab, like basically, numbers zero through the length of one of these lists?"
+1455.84,13.0," Yeah. So we have to do range. Remember, yeah, range, den, L, denom."
+1468.84,5.0, I think those are my parentheses. That's cool. That you did list comprehension right away.
+1473.84,11.0, Does anyone want to rewrite this using a loop?
+1484.84,5.0," Oh, yeah."
+1489.84,9.0, Yep.
+1498.84,15.0," So we still want to use the index, right? Because if we're looking at the element in L num, it's going to be hard for us to grab the same element in L denom."
+1513.84,10.0," So let's iterate through the, like zero through the range, right? So basically what we did up there, range, den, and then pick one of them."
+1523.84,10.0," So now let's change this to i. Just so we're not confused. I would say i is zero, one, two, three, four. Right? So now we know this is the index."
+1533.84,7.0," So with this index in hand, this is the right start, right? L num at i gives me the element in L num."
+1540.84,5.0, Divide by L denom exactly at i.
+1545.84,20.0," We can do L dot append, something like that. We can't say L at i equals that because our L is not made exactly. Yes."
+1565.84,8.0, So we could do like this. This is just another way.
+1573.84,8.0," And then at the end, we can return our variable, right?"
+1581.84,4.0," Okay, so that solves our problem. How do we add the piece where we raise a value?"
+1585.84,6.0," So how do you want to check that there's a, that L denom has a zero?"
+1591.84,8.0," Because this should hopefully run work with our code without, oops, did I do it twice? Sorry, yes I did."
+1599.84,3.0, Let me just comment one of these out.
+1602.84,4.0, Oops. There.
+1606.84,5.0, So how do I add the piece about values? Yes.
+1611.84,8.0, How do I add them in your try and then you add accept raise value there?
+1619.84,8.0," Yep, so we can pop this into a try and then accept and raise value error."
+1627.84,4.0, Yep. And with some nice message here.
+1631.84,5.0, Nice message.
+1636.84,5.0, And we can also put the entire for loop under the try. The code is not very long that it does.
+1641.84,2.0, It wouldn't make a difference.
+1643.84,6.0," So if we try to run it like that now, I've got my value error with my nice message."
+1649.84,10.0," Another, yeah, another way we could raise the value error just for completion sake is to say something like you can even raise things inside if statements."
+1659.84,10.0," So you don't have to be part of accept blocks. Before we even do anything with the code, we can say if zero is in L denom, raise value error."
+1669.84,5.0, That would also be a fine thing to do.
+1674.84,5.0, So we can raise value is wherever we'd like.
+1679.84,3.0, So now I'd like to talk a little bit about assertions.
+1682.84,14.0, So assertions are actually still exceptions that get raised. They're just a very special type of exceptions that we mostly use as a defensive programming tool.
+1696.84,9.0, So assertions are basically used to enforce these contracts that we make between somebody who writes a function and somebody who uses a function.
+1705.84,3.0," So that's basically the function dog strings, right?"
+1708.84,8.0," So dog strings, I said that it's very hard for us to enforce the text within the dog string, right?"
+1716.84,11.0," Because it's just the person who's writing the function saying, you know, the input list should not be empty or you know, these two input lists like in the previous example should be the same length."
+1727.84,9.0, And there's no way for us to really enforce that. It's just something that's nice to have. And we're going to guarantee that the code runs if these things are upheld.
+1736.84,11.0, It turns out that assertions are actually a nice way for us to add to a nice thing to add to our functions that do try to enforce these this contract through the specification.
+1747.84,6.0," So the way we create an assert, we say assert and I'm asserting that this statement is true."
+1753.84,9.0," So if I want that the input length for a function to be non zero, I would assert that the length L is not equal to zero or something like that."
+1762.84,6.0," And if the assertion is true, right, if that condition is met, then the code carries on as normal."
+1768.84,8.0," But if the assertion is not true, then Python ends with an assertion error and then some message that the condition was not true."
+1776.84,7.0," And these are really nice because it holds the execution of a program as soon as that contract is not held, right?"
+1783.84,6.0," As soon as something within the specification has gone wrong, then the program terminates with those assertion errors."
+1789.84,14.0," And it's nice to see them because if you're debugging your code, you don't want to propagate bad values or bad values through functions because that value might get propagated later and later and later."
+1803.84,3.0, And then it would make your debugging very hard.
+1806.84,14.0," So if you stop the execution as soon as something is just strange or off as in something like an assumption on parameters not met, then that's that's good."
+1820.84,5.0," So in our some digits example, here is the code that we wrote last."
+1825.84,4.0, So total down to the bottom is exactly what we had before.
+1829.84,9.0, All we're going to add is this assert statement up here that the length of s is not empty because part of my contract here is that s is a non empty string.
+1838.84,6.0," Right, so that's a nice thing to assert if the user ever gives us an empty string, the program will terminate."
+1844.84,6.0," So in this example here, I've got the some digits with the assert."
+1850.84,12.0," So if the user gives us an empty string, no total was created and the assert was immediately false, right, so length s was equal to zero."
+1862.84,9.0, The assert assertion error was raised with the message s is empty. So what I had here.
+1871.84,11.0," So if I have fine input, then no assertion is raised and the code carries on as norm. So that's nice."
+1882.84,6.0, So let's have you add one more line of code to your the program that we just wrote.
+1888.84,10.0, Just add an assert statement that enforces the contract. So I have LNUM and LDNUM are non empty lists of equal length.
+1898.84,14.0," So you can do this all in one assert statement or you can put two separate assert statements with two separate messages. However, you'd like it is fine with me. So I'll give you a minute to work on that. And then we can write it."
+1912.84,15.0, All right. What assertions should I put in here? Yeah.
+1927.84,15.0," So the thing I'm asserting should be true. So do I want them to be equal? Yes. Exactly. So what we I want LNUM to equal LL. Yeah, like that. Yeah, that's one."
+1942.84,13.0," Right. So the thing you want you're asserting that this is true. And if not comma, we're going to put a message, right, list lengths different or something like that."
+1956.84,10.0, Do you want to do the other assert statement or does this somebody else want to take a crack at the other assert?
+1966.84,5.0, So the other one is that they are non empty lists.
+1971.84,23.0, Yeah. So we can definitely do that. Not equal to zero comma.
+1994.84,5.0, So I'm going to do that.
+1999.84,13.0, Yeah. Very nice. So here we're trying to enforce our nice contracts. And I've got two examples down here. So here I've got two different lengths of lists. So there you go.
+2012.84,10.0, So I've raised with the nice message length differ and then the code would immediately stop. And it would force us to check to see why these lengths are different.
+2022.84,12.0, So these bad lists won't propagate any further if I had larger pieces of code. And then same here. I've got this assertion error that I have an empty list.
+2035.84,6.0, Any questions so far?
+2041.84,14.000000000000227," One more example I want to go through. I'm not going to actually run this one, but it is in the Python slides. I just wanted to give you another example of how we can use exceptions assertions in just a different setting."
+2056.84,13.0," And it hopefully shows that as a programmer you get to choose how you add these exceptions and assertions. So wherever they seem reasonable to add, you should add them."
+2069.84,10.0," So in this particular example, we're assuming that we have a class list. In this case, I only have two students in my class."
+2079.84,15.0," So these are their test grades. So I've got a list that looks like this. It looks complicated, but I'll walk you through it. This is one student in my list. And this is another student in my list."
+2094.84,12.0," So I've got a list of lists, right, where these things that I've highlighted in red is my students. And for each student, I have more lists as part of their sort of information."
+2106.84,9.0," So the first list related to one student is their name, right, the first element is their first name, second element is their last name."
+2115.84,8.0, And then the second list for that student is their grades in the class. So just another list of all the grades in the class.
+2124.84,13.0," So what I would like to do, and this is the code I'm going to go through, is what I'd like to create a new list based on the original grade a test grades."
+2137.84,13.0," That contains the same information as before. So you can see I still have two lists of students, the first row and the second row. And in each student's information, I again still have their name and their list of grades."
+2150.84,15.0," But I'm adding one more item at the end for each student, which is the average of the list of grades. So I've taken the average of these and plopped it as my integer or float at the end and same with my next student."
+2165.84,12.0," So the code that's going to do this looks like this. I've got, that's just the original list to give you an example to look at, because I find it hard to see things without examples."
+2177.84,7.0," So this is the code that gets the stats for the class, so that creates this new list containing my average at the end."
+2185.84,8.0," For each student in the class list, so for example, student here, stew is going to be this list of two lists."
+2193.84,16.0," What I'm going to do in my new list that I'm creating here, new stats is I'm going to pen student at zero, which is just their name, so just a straight copy and paste, student at one, which is just their grades again, a straight up copy and paste of all their list of grades."
+2209.84,10.0, And then I'm going to apply a function named average to the list of student grades.
+2219.84,11.0," And what we're going to see in the next couple slides is we're going to see a few variations of this average function and what happens when we, when we apply these different, these different functions."
+2230.84,17.0," But for now, I will assume that this code will do the job. So the original average function will take in a list of grades. So this grades here will look like this blue box here, right? So just a list of numbers."
+2247.84,8.0, It's going to sum all the grades. So some of all the elements inside that list and divide by how many there are average.
+2256.84,16.0," Okay, now let's say that I have a student that contains no quiz grades or no grades at all. In that case, their list of grades will be empty."
+2272.84,10.0," So if I try to apply the sum of all the grades divided by the length of the grades for somebody who has no grades information, that length will be zero."
+2282.84,7.0, So I'm going to get a zero division error when I run my code and it will crash.
+2289.84,12.0, So what I'd like to do is to change my average function to try to catch such an error. So I'm going to try to do the sum divided by the length.
+2301.84,8.0, And I'm going to catch this zero division error inside this except block. And all I'm going to do is print warning no grades data.
+2309.84,13.0," So for any student that actually has grades information here, the code will work for the code to get the average will work just fine because it will do the sum divided by the length."
+2322.84,6.0, But and then so that means the tri block will succeed and we're going to return the sum divided by the length.
+2328.84,21.0," But if any student enters the zero division error here, we're going to print something and what do we return? What is the function return if we enter the except block?"
+2349.84,13.0," That's what's going to be printed. But what does this function actually return? What value? None. Exactly, right? There's no return inside the except block and no code after it either."
+2362.84,13.0," So you can see here if it successfully completes for these three students, we've got our numbers. That's what we return. But for the last student that has no grades information, we're returning none."
+2375.84,15.0," I don't like that. What I would like in my grades book is to have numbers as my as my value there. So instead, let's add a return for that except for that except block."
+2390.84,21.0," So we're still going to flag the error. We still want to know that something weird has happened. I don't just want to replace return a zero without actually telling the user that something's gone down. I still flag the error, but then I can return a zero so that it's still a number. And then if I do something with numbers at the end, then it all works out."
+2411.84,7.0," This was a particularly hard first quiz, 10, 10, 80."
+2418.84,17.0," Okay, one last thing we can do is to just assert. Right? So if we want to make sure that every student had some sort of grades information, maybe if the grades data was empty, something weird happened from a previous function that might have been called."
+2435.84,15.0," I don't know, but maybe we say, let's just assert that the length of the grades is not zero. So we only want this code to execute if there are some grades information. And if not, let's just raise an assertion error just in case."
+2450.84,16.0," So we can assert that the length of grades is not equal to zero. And in that case, the code will terminate as soon as we try to get that last student's information. Right? It will crash and it will crash with this assert statement that there's no grades data."
+2466.84,11.0," And then we can go back to the code and see, did we actually expect the student to have information or not and then we can try to work through it."
+2477.84,11.0, So just a quick summary of exceptions and assertions. Hopefully this lecture kind of demystified some of these exceptions that we've been getting.
+2488.84,10.0, It showed you they're not as scary as they might have seemed originally. They don't always have to terminate the program. Right?
+2498.84,12.0, You can catch them. You can deal with them in whatever way that makes sense for that particular function or program. You can print a nice output to the screen. You can set some default values.
+2510.84,11.0," You can still terminate the program, but do it on your own terms with your own errors with your own custom messages so that the users can see something nicer than the default Python messages. Right?"
+2521.84,11.0," And so exceptions, exception handling is very important. It's a very important part of writing a program, especially if you expect weird things to happen."
+2532.84,11.0," Right? Assertions on the other hand are a type of exception. And they're useful, as I've mentioned, to try to enforce these contracts, these specifications."
+2543.84,21.0," You basically use assertions because you don't want bad values to propagate. So as soon as something that isn't as you expect it to be happens, assertion error is raised and the programming media terminates allowing you to check to see why exactly those conditions were not met."
+2564.84,3.0, Okay. So that's it. That's all I had.

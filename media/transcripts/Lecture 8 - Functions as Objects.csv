@@ -1,0 +1,977 @@
+start,duration,text
+0.0,12.56," All right, everyone."
+12.56,3.0, So let's get started.
+15.56,3.7200000000000006, Last lecture we introduced functions.
+19.28,4.359999999999999," And we saw some syntax around how to create functions, but mostly we were interested in"
+23.64,5.039999999999999, kind of motivating functions as a way for us to start writing really clean code.
+28.68,4.240000000000002, That's easy to debug and code that's easy to read in the future.
+32.92,7.519999999999996, Today we will continue our fun adventure with functions and we'll see what it means
+40.44,3.0799999999999983, to treat functions as objects.
+43.519999999999996,4.240000000000009, So let's recall the example we talked about last lecture.
+47.760000000000005,4.0, We created this function is even.
+51.760000000000005,5.679999999999993, So the syntax for creating a function is basically the keyword df.
+57.44,4.880000000000003," Because Python we're defining a function, we decide what name to give our function."
+62.32,2.3599999999999923, parentheses tells Python in here.
+64.67999999999999,4.160000000000011," We're going to name all the arguments, all the inputs to the function."
+68.84,3.4399999999999977, The colon starts the body of the function.
+72.28,6.840000000000003," The first part, it's not required, but should always kind of be in there as a way for"
+79.12,4.039999999999992, us to implement abstraction is the call the doc string.
+83.16,2.200000000000003, So this in green is the doc string.
+85.36,4.1200000000000045, The quote starts our doc string and triple quotes ends the doc string.
+89.48,7.0, And you think of the doc string also known as a specification as just a really long comment.
+96.48,5.039999999999992," And in it, it's, and the doc string is kind of, I called it a contract between the person"
+101.52,4.280000000000001, who writes the function and a person who uses the function.
+105.8,4.640000000000001," And in the contract, the person who writes the function basically says this function is"
+110.44,2.280000000000001, going to take these inputs.
+112.72,5.1200000000000045, And I guarantee this function to work correctly when you give me these inputs of these types
+117.84,3.319999999999993," and these restrictions on them, things like that."
+121.16,3.719999999999999, And then you also state what the function is going to do.
+124.88,4.439999999999998, And then you also state what the function will return.
+129.32,3.680000000000007," In this particular function, we have only one line."
+133.0,2.1200000000000045, This is the body of the function.
+135.12,4.079999999999984, But you've hopefully seen functions that are a little bit longer as you did the practice
+139.2,2.5600000000000023, from last lecture.
+141.76,3.8400000000000034," And the body of the function itself, so the lines of code are basically lines of code"
+145.6,1.9199999999999875, that we've seen before.
+147.51999999999998,6.480000000000018, There's nothing sort of special about that except for lines that start with a return.
+154.0,6.039999999999992, So lines that start with a return basically tell Python that as soon as I see this line
+160.04,5.8799999999999955," with a return hit in when I'm executing my function, I need to stop executing this"
+165.92,5.680000000000007," function, take the value associated with this return, and pass it back to whoever called"
+171.6,1.0, me.
+172.6,4.079999999999984, A function always returns something.
+176.67999999999998,4.760000000000019," In this particular case, the function will return either true or false, a Boolean, but"
+181.44,7.519999999999982," you can write functions, I return integers, floats, strings, things like that."
+188.95999999999998,2.1200000000000045," In this case, yeah, this is what is returned."
+191.07999999999998,1.0, It is possible.
+192.07999999999998,3.5200000000000102, And we actually saw this in one of the utriots as we were writing our code.
+195.6,5.319999999999993, It is possible to write a function that doesn't actually return anything explicitly.
+200.92,2.680000000000007," So here is the, is even function."
+203.6,4.840000000000003," And inside the body, the only change I've made is I've eliminated the little return keyword."
+208.44,2.680000000000007," But otherwise, the work that is done is the same."
+211.12,4.439999999999998," So here, I'm just calculating whether the remainder is zero or not."
+215.56,4.840000000000003," So this line of code when the, when the function is executed just is replaced with either"
+220.4,1.8400000000000034, true or false.
+222.24,2.5999999999999943, Notice this function doesn't have a return keyword.
+224.84,2.039999999999992, But all functions return something.
+226.88,5.840000000000003," So while function is being executed because of a function call, if the function reaches"
+232.72,6.1200000000000045," the end of all of these indented lines here, right, and everything that's indented, if"
+238.84,5.240000000000009," it reaches the end and no return statement has been hit, then Python automatically returns"
+244.08,1.0, none.
+245.08,2.1999999999999886," Okay, so this is the line without a return statement."
+247.28,5.0800000000000125," You can think of this code as basically behind the scenes, Python putting this little line"
+252.36,2.4399999999999977, at the bottom that says return none.
+254.8,4.0400000000000205," Okay, now this is not something that we would ever write."
+258.84000000000003,4.199999999999989," You just do the operations, maybe you print some stuff out, and then you just omit the"
+263.04,4.279999999999973, return keyword if you want to return none from the function.
+267.32,6.240000000000009," And none is this, uh, none type is, is of, of value that is of type none type."
+273.56,4.1200000000000045," We talked about it back in maybe lecture one or two, and we haven't really used it that"
+277.68,2.0, much since.
+279.68,4.319999999999993," But basically you think of it as just having the type none type, and there's just one"
+284.0,1.6399999999999864, value associated with it.
+285.64,1.0, None.
+286.64,5.400000000000034, And usually we use this value to represent the absence of a value in our code.
+292.04,5.319999999999993," So let me just run some code first, just to show you exactly some of the kind of, uh, things"
+297.36,4.800000000000011," you might observe when you, when you write code that doesn't have a return statement."
+302.16,4.079999999999984," So here, uh, I promise this is the last time we're going to see is even."
+306.24,4.319999999999993," Um, so here I have two versions of the is even function."
+310.56,5.360000000000014," So I have one that I named is even with return, and I have one that is named is even without"
+315.92,1.0, return.
+316.92,1.0, Okay.
+317.92,2.1200000000000045, They do very similar things.
+320.04,5.240000000000009, The difference is that this one has a return statement where I return whether the remainder
+325.28000000000003,6.139999999999986," is equal to zero, and this one has no return statement, but it just prints whether the"
+331.42,2.5," returns, the remainder is equal to zero."
+334.40000000000003,0.5199999999999818, Okay.
+334.92,5.1200000000000045," So let's look at, uh, running the code with, uh, is even with return."
+340.04,5.9599999999999795," And as we're doing so, this first, uh, function will be a recap of last lecture, kind of tracing"
+346.0,3.3600000000000136, through what happens when we make a function call.
+349.36,6.639999999999986," So I've uncommented this line, and now I'm running line 13."
+356.0,5.080000000000041," So when Python sees this file, it basically sees this function definition, and this is"
+361.08000000000004,2.1200000000000045," not code that runs yet, right?"
+363.2,4.199999999999989, It's just telling Python that I've created this function inside memory.
+367.4,6.560000000000002," When I have this line being run, that's when the function is actually being called, and"
+373.96,2.0, actually being run.
+375.96,7.78000000000003," So I is replaced with a parameter three, and at this point, the body of the function is"
+383.74,1.0, executed.
+384.74,5.17999999999995, So the first thing that we tell the function to do is print the string with return.
+389.92,3.6399999999999864," So if I run it, you'll see it prints with return."
+393.56,4.400000000000034," Then it calculates this variable remainder, which is going to be one, right?"
+397.96000000000004,2.1999999999999886, Because 3% 2 equals one.
+400.16,3.740000000000009, And then I'm going to return whether one equal to zero.
+403.90000000000003,1.5, So that's going to be false.
+405.40000000000003,5.159999999999968," So as soon as we see this return statement, Python returns out of this function call, and"
+410.56,4.840000000000032, replaces the function call entirely with the return value.
+415.4,5.240000000000009, So this entire line after the function call is executed is replaced with false.
+420.64,2.599999999999966, So I've just noted that here.
+423.23999999999995,2.3600000000000136," We're not doing anything with this return, right?"
+425.59999999999997,8.04000000000002," All we're doing is making the function call, and it just kind of sits online 13."
+433.64,5.560000000000002," In order to see the result of the function call, we saw last lecture that we actually"
+439.2,4.399999999999977," wrap the function call around a print statement, right?"
+443.6,3.759999999999991," And the function calls in that sense are kind of just expressions, right?"
+447.36,1.3600000000000136, They do some work.
+448.72,5.279999999999973," Python evaluates them to some value, and then replaces that function call with the value."
+454.0,6.160000000000025," So if we wrap is even with return 3, this function call around with a print statement."
+460.16,1.2799999999999727, Python does the whole thing again.
+461.44,1.080000000000041, I use 3.
+462.52000000000004,2.1999999999999886, It returns false.
+464.72,4.0, And this line effectively becomes print parentheses false.
+468.72,1.240000000000009," And we know what that does, right?"
+469.96000000000004,2.9599999999999795, It just prints false to the screen.
+472.92,1.6399999999999864, There it goes.
+474.56,4.520000000000039," Notice we still did this print statement because as part of the function body, we tell it"
+479.08000000000004,2.9599999999999795, to do this print.
+482.04,4.800000000000011, Everyone okay so far?
+486.84000000000003,6.599999999999966, So now let's see what happens when we run this function is even without return.
+493.44,1.0, So very similar.
+494.44,5.960000000000036, I've just created an extra parameter here or variable here just to show you that you
+500.40000000000003,1.5, can.
+501.9,5.920000000000016, So this function is even without return 3 is being run on line 27.
+507.82,2.8000000000000114, So I is 3.
+510.62,2.8799999999999955, This function will print without return.
+513.5,3.840000000000032, And then it calculates remainder to be 1.
+517.34,4.239999999999895," And then has rem will be false, right?"
+521.5799999999999,3.6400000000001, So the variable has rem will have a value of false.
+525.22,5.199999999999932," And then as part of the function body, we're going to print the value of has rem, which"
+530.42,1.3999999999999773, is false.
+531.82,4.279999999999973, So this line here will actually print for me without return.
+536.1,5.680000000000064, And then this thing false.
+541.7800000000001,4.599999999999909, And then the function has no return statement explicitly in there.
+546.38,6.240000000000009, So you think about it like Python implicitly adds this return none at the end of the
+552.62,1.32000000000005, function call.
+553.94,1.0, We don't add this.
+554.94,3.6399999999999864, I just wrote it there just to show you that Python would add a line such as this when
+558.58,4.32000000000005," it reaches the end of the function, but you would never add it."
+562.9000000000001,7.0, So that means that the entire function call is replaced with none.
+569.9000000000001,1.0, OK.
+570.9000000000001,7.0, So what happens when you put print in the definition?
+577.9000000000001,5.240000000000009, What happens when you put print in the definition versus around the function call?
+583.1400000000001,2.3999999999999773, Versus that what you put return in the definition.
+585.5400000000001,1.6000000000000227, Versus when you put return in the definition.
+587.1400000000001,1.2399999999998954, So that's the next line.
+588.38,6.440000000000055," So in the next one, if we were to do what we did before, which is let's print the result"
+594.82,1.8799999999999955, of the function call.
+596.7,3.2799999999999727," Well, Python will do everything we just did, right?"
+599.98,2.240000000000009, So it'll print without return.
+602.22,1.9599999999999227, It'll print false.
+604.18,5.400000000000091, But then it'll additionally print the return from the function call.
+609.58,6.4799999999999045," So if the return is none, this line effectively becomes print none."
+616.06,3.759999999999991, So what we end up seeing or what the user would end up seeing if they actually run this
+619.8199999999999,5.1200000000000045," program is they'll see without return, they see false, and then they see this extraneous"
+624.9399999999999,3.0399999999999636, none in the console.
+627.9799999999999,3.240000000000009, So you'll see probably this in problem set two.
+631.2199999999999,3.8799999999999955, You'll probably encounter an error such as this and maybe problem set three.
+635.0999999999999,1.6000000000000227, But don't be scared.
+636.6999999999999,4.1200000000000045," Whenever you see a none out in the console, it just means you have to be careful about"
+640.8199999999999,2.080000000000041," the function that was called, right?"
+642.9,3.0, You probably forgot to return something.
+645.9,4.600000000000023," And instead, we're just printing the correct value within the function, but just never"
+650.5,1.0, returned it.
+651.5,3.480000000000018, So that's just something to be wary of.
+654.98,3.199999999999932, Should you always be good friends with their friends?
+658.18,1.5199999999999818," Yeah, so that's a good question."
+659.6999999999999,1.240000000000009, Should you always use return?
+660.9399999999999,2.240000000000009, It depends on what you want in the function to do.
+663.18,3.0400000000000773, Most functions are useful because they go off on their own.
+666.22,2.839999999999918, They do a task and they get a value at the end.
+669.06,2.7200000000000273, And they pass the value back to whoever called it.
+671.78,2.840000000000032, And then you can use that function with many different inputs to give you many different
+674.62,1.0, outputs.
+675.62,3.919999999999959, So usually you'd want to make functions that return something that you can then do something
+679.54,5.039999999999964, else with in another part of the program.
+684.5799999999999,7.2000000000000455, The prints within the functions should usually be maybe for debugging or for the status
+691.78,4.080000000000041," of the function, what part is executing or something like that."
+695.86,4.480000000000018," And then when you run the function that it will give you the return, if you print in"
+700.34,2.3600000000000136," the function, that's what does it know."
+702.7,1.0, Exactly.
+703.7,4.519999999999982," If the function is not returning anything, then it'll do ill print none."
+708.22,1.0, Right.
+709.22,3.840000000000032," But if the function is returning something, it will print, right?"
+713.0600000000001,4.519999999999982," If you wrap it with a print, it'll print whatever got returned."
+717.58,3.759999999999991, Okay.
+721.34,3.1200000000000045, So let's have you work on this.
+724.46,3.080000000000041," Actually there's nothing to write, but think about it."
+727.5400000000001,2.759999999999991, So I've got four lines of code here.
+730.3000000000001,5.039999999999964," Add 1,2, print, wrap that around the print statement, multiple three comma four, and then add"
+735.34,1.2799999999999727, that around a print statement.
+736.62,8.360000000000014, So try to trace through and tell me what outputs each function call will give me.
+744.98,2.0," So add 1,2, what happens?"
+746.98,1.5600000000000591, What do you think the output of this function is?
+748.54,8.32000000000005, What gets printed to the screen?
+756.86,1.6399999999999864, What is it?
+758.5,5.519999999999982, Am I telling it to print anything?
+764.02,1.0, That's the question.
+765.02,1.0, Yeah.
+766.02,2.5599999999999454," So nothing is actually printed to the screen, right?"
+768.5799999999999,5.400000000000091," Because in the function call add comma 2, right, we basically map the parameters one at"
+773.98,1.0, a time.
+774.98,1.0," X is 1, Y is 2."
+775.98,1.3599999999999, That was good.
+777.34,2.3600000000000136, We return 3.
+779.7,6.039999999999964, And so this entire function call is replaced with 3.
+785.74,4.040000000000077," But we never told that line of code to print that result, right?"
+789.7800000000001,2.3999999999999773, So there's nothing printed in this case.
+792.1800000000001,10.360000000000014," Well, what if we wrap this in a print statement?"
+802.5400000000001,2.199999999999932, Is anything printed in this case?
+804.74,1.0, Yes.
+805.74,1.0, What is printed?
+806.94,1.1599999999999682," Yeah, exactly, right?"
+808.1,3.0, The add itself gives me 5.
+811.1,3.080000000000041, And so I'm telling it to print 5.
+814.1800000000001,1.759999999999991, What about the next one?
+815.94,1.4799999999999045," Multi, what is that?"
+817.42,2.9200000000000728," 4, 3, 4."
+820.34,6.199999999999932, Is anything printed as a result of running this line?
+826.54,3.32000000000005," I heard some yes, some no."
+829.86,2.240000000000009," Yeah, the print is in the function exactly."
+832.1,4.600000000000023, So just because it's a function call doesn't mean we don't print
+836.7,0.7599999999999909," anything, right?"
+837.46,3.080000000000041, We need to check out what the function is actually doing.
+840.5400000000001,4.959999999999923," So in molt, X gets mapped to 3, Y gets mapped to 4,"
+845.5,3.9600000000000364, and the function body itself says to print the result.
+849.46,5.1200000000000045," So this will print as a part of the body, right?"
+860.1,0.6800000000000637, Prince the 12th.
+863.74,2.840000000000032," Anything else, a prince?"
+866.58,2.32000000000005, No.
+868.9000000000001,3.1200000000000045," And lastly, what if we put a print statement"
+872.0200000000001,5.079999999999927," around the molt 4, 5?"
+877.1,3.080000000000041, What will that print?
+880.1800000000001,1.6000000000000227," Yeah, exactly, 20 than none."
+881.7800000000001,4.839999999999918, So the molt itself is going to print same as there.
+886.62,3.240000000000009, It prints the 20.
+889.86,6.080000000000041, So the function call returns none.
+895.94,3.67999999999995," So this entire function call basically is replaced with none,"
+899.62,2.400000000000091, and the line then becomes the print none.
+902.0200000000001,3.3999999999999773, So this will print the none to the screen.
+905.4200000000001,3.159999999999968, So there's actually four print outs generated
+908.58,2.7200000000000273," from these four lines, right?"
+911.3000000000001,2.5599999999999454," The first one generates nothing, but the last one"
+913.86,2.1200000000000045, generates two lines of print outs.
+918.7,1.919999999999959, Any questions about this example?
+920.62,0.7600000000001046, Yes.
+921.3800000000001,1.919999999999959," You go over the white print 7, 9."
+923.3000000000001,1.4399999999999409, This one here?
+924.74,3.7999999999999545," Yeah, so the molt, check out what it's doing."
+928.54,1.8799999999999955, It's doing a print statement.
+930.42,3.7600000000001046, So that 20 gets printed out to the console.
+934.1800000000001,1.6399999999999864, But what's the return value of molt?
+938.7,1.240000000000009," There is no return, right?"
+939.94,3.919999999999959," So if there's no return, Python adds the none."
+943.86,2.32000000000005, That's just something that's implicitly done.
+946.1800000000001,2.3199999999999363," So the return from molt, because it doesn't actually"
+948.5,1.5600000000000591," have an explicit return, is none."
+950.0600000000001,3.1200000000000045," So we're asking it to print the return, which is none."
+955.1800000000001,2.0, OK.
+957.1800000000001,2.7999999999999545, So a couple words on return versus print.
+959.98,5.2000000000000455, So the return only has a meaning inside a function.
+965.1800000000001,4.67999999999995," So as an example, if I just have this file open"
+969.86,3.5599999999999454," and I have returned 5, just randomly that's not"
+973.42,3.080000000000041," within a function definition, already I'm in trouble."
+976.5,0.9600000000000364, You see that red X.
+977.46,3.67999999999995," And if I run that code, Python gives me a syntax here."
+981.14,1.3999999999999773, This one's pretty easy to debug.
+982.54,2.080000000000041, There's a return outside of a function.
+985.22,2.67999999999995, There it is.
+987.9,2.3600000000000136, So return only has a meaning inside a function.
+990.26,2.800000000000068, It basically says this function has done some work for me
+993.0600000000001,2.7199999999999136, and it's returning back this value.
+995.78,2.3999999999999773, Print statements can be put wherever you'd like.
+998.18,3.480000000000018," Inside functions, outside functions, wherever you'd like."
+1001.66,2.1200000000000045, And they all get executed.
+1003.78,2.9200000000000728, You can have many return statements inside a function.
+1006.7,2.6399999999999864, Like if you have a function that returns 0
+1009.34,4.240000000000009," if some condition applies or 1 if some other condition applies,"
+1013.6600000000001,2.7199999999999136, then you can have those two return statements.
+1016.38,3.9200000000000728, But as soon as Python during execution hits one return
+1020.3000000000001,4.159999999999968," statement, it immediately ends the function, takes that return"
+1024.46,3.160000000000082," value, and pops it back to whoever called it."
+1027.6200000000001,4.839999999999918, So it's not going to run more than one return statement.
+1032.46,2.9200000000000728," Print on the other hand, you can run as many print statements"
+1035.38,1.7999999999999545, as you'd like inside the program.
+1037.18,4.119999999999891, And they can all be hit and they can all generate some sort
+1041.3,1.0, of output to the console.
+1044.46,7.199999999999818, So the return statement has a value associated with it.
+1051.6599999999999,4.560000000000173," So return 5, return, we had remainder equal equals 0, whatever."
+1056.22,2.839999999999918, There's the associated value with that return statement.
+1059.06,2.759999999999991, That value is what gets passed back to whoever
+1061.82,1.759999999999991, called the function.
+1063.58,2.119999999999891, The print statement also you can think of it
+1065.6999999999998,2.0800000000001546, as having a value associated with it.
+1067.78,3.240000000000009, That's the thing that gets put out to the console.
+1071.02,3.240000000000009, But that value associated with the print statement
+1074.26,2.8799999999998818, is just something that's outputted to the console.
+1077.1399999999999,2.880000000000109, It's not being passed around through the program at all.
+1080.02,1.1600000000000819, It's just kind of static.
+1081.18,2.119999999999891, It gets put to the console and then that's it.
+1083.3,3.7200000000000273, Nobody else can really use that value unless it's a variable.
+1087.02,3.5599999999999454, And then you're just using a regular variable.
+1090.58,3.3200000000001637," The last thing I want to show you, this is kind of cool."
+1093.9,5.399999999999864," So if we have a print statement, just in here,"
+1099.3,4.279999999999973," and we run it, obviously that prints that to the console."
+1103.58,2.400000000000091, But what is this print?
+1105.98,1.5199999999999818, It's a function.
+1107.5,2.8799999999998818, It has all the telltale signs of a function.
+1110.3799999999999,2.6000000000001364, The name is print.
+1112.98,1.4399999999998272, The parentheses are there.
+1114.4199999999998,4.120000000000118, And I'm giving it 1 parameter 5.
+1118.54,6.519999999999982," So if I print the return of the print function,"
+1125.06,3.2000000000000455," so if I wrap my print function in another print function,"
+1128.26,1.5199999999999818, what do you think this is going to output?
+1142.26,1.759999999999991, It outputs none.
+1144.02,3.3199999999999363, So the first 5 is due to this.
+1147.34,2.0800000000001546, This shows up on the console.
+1149.42,3.5599999999999454," But print being a function, it doesn't actually return anything."
+1152.98,1.2799999999999727, It does something useful.
+1154.26,4.519999999999982," Like, take whatever you want and show it on the console."
+1158.78,3.3600000000001273, But it doesn't return anything back to whoever called it.
+1162.14,4.319999999999936," And so if I wrap my print function around another print function,"
+1166.46,4.319999999999936," I'm basically printing the return of the print function, which is not."
+1170.78,3.6400000000001, So that's where the second none comes in.
+1174.42,4.759999999999991," So thought of another way, you can make a variable a equals print 5."
+1179.18,2.240000000000009," And if I print a, basically we're"
+1181.42,3.839999999999918, saying the return of that first print function is just none.
+1197.74,3.4400000000000546, So I'm going to have you work on this code for a little bit.
+1201.18,3.759999999999991," Nothing to write, but there is something to fix."
+1204.94,2.480000000000018, So here's a function called is triangular.
+1207.42,2.6800000000000637," It takes in 1 parameter and it's a number,"
+1210.1,2.3599999999999, an integer greater than 0.
+1212.4599999999998,5.2800000000002, I want this function to return true if n is triangular and false otherwise.
+1217.74,7.679999999999836, So triangular just means it's a whole number such that it's equal to 1 plus 2 plus 3 plus
+1225.4199999999998,2.560000000000173, some summation like that.
+1227.98,6.599999999999909," So 1 is triangular, 3 is triangular, 6 is triangular, and so on and so on."
+1234.6599999999999,3.400000000000091, So take a look at this code.
+1238.06,5.839999999999918, It's online around 49-ish.
+1243.8999999999999,4.6400000000001," So start by running it, seeing what you get."
+1248.54,1.9600000000000364, And I'll give you about a minute or so
+1250.5,1.759999999999991, to see if you can try to fix it.
+1252.26,2.0399999999999636," OK, so make sure it runs with all these test cases here."
+1258.34,2.2799999999999727," OK, what's the first thing you should do"
+1260.62,4.240000000000009, when you're asked to fix some code that's buggy?
+1264.86,0.5199999999999818, Yes?
+1265.3799999999999,2.240000000000009," If you like to put more pictures here,"
+1267.62,1.6800000000000637, see if I can see that.
+1269.3,5.639999999999873," We can do that, but first let's run it with something, right?"
+1274.9399999999998,1.9200000000000728, So let's run it with the first one.
+1276.86,2.400000000000091, Print is triangular for.
+1279.26,2.479999999999791, So we know the answer should be false.
+1281.7399999999998,4.080000000000155," I mean, I told you so that's good."
+1285.82,4.559999999999945," Yes, it does give me false, which is good."
+1290.38,4.440000000000055, But it also prints out a none.
+1294.8200000000002,3.0399999999999636, What does that mean for us?
+1297.8600000000001,0.5199999999999818, Yes?
+1298.38,1.6400000000001, There's no actual answer.
+1300.0200000000002,4.759999999999991, I just want to put it in the column.
+1304.7800000000002,1.5199999999999818," Yeah, exactly, perfect."
+1306.3000000000002,2.199999999999818," So there's no actual return statement, right?"
+1308.5,2.6400000000001," Like I mentioned with this, even example,"
+1311.14,4.839999999999918," if you're seeing some nuns show up in places, check your returns."
+1315.98,2.519999999999982, So is this function actually returning something?
+1318.5,2.5599999999999454," No, it's just printing the result."
+1321.06,3.6000000000001364," So it's printing the right thing in this case, right?"
+1324.66,6.199999999999818, So let's start by changing the prints to returns.
+1330.86,0.8400000000001455, Yeah.
+1331.7,3.8799999999998818, I know that it says true and men false.
+1335.58,0.7599999999999909, For this one?
+1336.34,0.5199999999999818, Yeah.
+1339.34,1.759999999999991," Oh, remember, I think I just read it."
+1341.1,1.040000000000191, It's going to be so good.
+1342.14,1.7999999999999545, OK.
+1343.94,2.9600000000000364," All right, let's run it."
+1346.9,0.6799999999998363, Perfect.
+1347.58,0.6800000000000637, Yeah.
+1348.26,1.6400000000001, So that seems to have fixed it.
+1352.94,0.9199999999998454, What should we do next?
+1362.9,0.599999999999909, Yes?
+1363.5,2.160000000000082, Check the rest of the prints statements.
+1365.66,0.6799999999998363, It doesn't work.
+1366.34,0.9600000000000364, It doesn't work.
+1367.3,0.9600000000000364," Yes, exactly."
+1368.26,2.0399999999999636, Let's check the rest of the prints statements.
+1370.3,3.0399999999999636, So the second one is triangular.
+1373.34,1.7200000000000273, So that prints true.
+1375.06,5.759999999999991," And last one, as you mentioned, is going to fail on us."
+1380.82,3.1200000000001182," It prints false, but one is triangular, right?"
+1383.94,1.959999999999809, Because one is just the sum of one.
+1385.8999999999999,2.7200000000000273, So do you know what a fix could be?
+1388.62,2.0800000000001546, The range is equal to n plus 1.
+1390.7,0.9199999999998454," Yeah, exactly."
+1391.62,1.5599999999999454, So you've spotted it.
+1393.1799999999998,2.2000000000000455, The range should be n plus 1.
+1395.3799999999999,3.7999999999999545," If you didn't spot that right away, as I think somebody"
+1399.1799999999998,1.8400000000001455," mentioned there, the first thing we should do"
+1401.02,1.8399999999999181, is just start putting some prints statements.
+1402.86,3.240000000000009, And inside the loop is a great place to put a print statement.
+1406.1,4.2000000000000455, We can see what thing we're iterating over.
+1410.3,3.2799999999999727," And so if this was still n, and we didn't manage to fix it,"
+1413.58,4.639999999999873," and we run it, we see that we've iterated when i is 0, right?"
+1418.2199999999998,1.240000000000009, Right here.
+1419.4599999999998,3.6000000000001364, And we never actually hit one.
+1423.06,4.2000000000000455," So the fix for that is make sure we go up to n, including n."
+1427.26,3.7999999999999545," And now if we run it, and remove this print statement,"
+1431.06,2.9200000000000728," because it might be a little confusing,"
+1433.98,3.240000000000009, that now gives me the correct answer.
+1437.22,3.599999999999909, Last step should probably be to run the other two cases again.
+1440.82,4.079999999999927," Just in case my fix broke something else, and it didn't."
+1444.8999999999999,1.4400000000000546, The other two cases are still the same.
+1449.34,1.6000000000001364, Questions about this code?
+1450.94,1.3599999999999, Does it make sense?
+1452.3,11.599999999999909," OK, so now last lecture I mentioned that once we write functions,"
+1463.8999999999999,3.3600000000001273, it's really easy to include these functions in larger pieces of code.
+1467.26,4.1599999999998545, And it makes those larger pieces of code very nicely readable.
+1471.4199999999998,3.800000000000182, So let's try to do the same with a slightly more complex example.
+1475.22,5.399999999999864," Let's try to take our bisection root code, right?"
+1480.62,1.4400000000000546, And make it into a function.
+1482.06,2.519999999999982, And then there's going to be an exercise in a couple slides
+1484.58,2.880000000000109, where you get to use this function.
+1487.46,5.879999999999882, So the inside of this function here is basically
+1493.34,3.2799999999999727, what we had like three lectures ago.
+1496.62,2.6800000000000637, It's just the bisection spare root code.
+1499.3,4.119999999999891, The only thing I've done is I've wrapped it around a function definition.
+1503.4199999999998,4.080000000000155," So df, I gave it a name, bisection root is a pretty nice name."
+1507.5,2.839999999999918, And figured out what input this function should take.
+1510.34,1.5199999999999818, So the input should be the x.
+1511.86,4.120000000000118, I would like to approximate the square root of.
+1515.98,3.6399999999998727, One thing I didn't do is put a doc string on this.
+1519.62,2.3199999999999363, So that's my bad.
+1521.9399999999998,4.600000000000136, But the doc string would say x is a positive integer greater than 1
+1526.54,4.039999999999964, and returns the approximation to the square root of x or something like that.
+1533.54,4.279999999999973, So here we're hard coding epsilon to be 0.01.
+1537.82,2.519999999999982," We've got our low and high end points, right?"
+1540.34,2.0799999999999272, Just remembering what the bisection root does.
+1542.4199999999998,2.6400000000001, And we're starting out with a guess that's
+1545.06,3.119999999999891, right in between the low and high.
+1548.1799999999998,4.240000000000009, The while loop here is going to do the work for us.
+1552.4199999999998,5.600000000000136," So the while loop condition is while the difference, the absolute value,"
+1558.02,0.2400000000000091, right?
+1558.26,3.9199999999998454, The difference between our guess squared and the actual x.
+1562.1799999999998,2.3200000000001637, We're trying to find the square root of is bigger than epsilon.
+1564.5,3.0799999999999272," So while we're still farther away than epsilon,"
+1567.58,2.480000000000018, we have more guesses to make.
+1570.06,4.440000000000055," The way we make the guesses is by updating the low end point or the high end point,"
+1574.5,2.7200000000000273, depending on whether our guess was too low or too high.
+1577.22,2.1599999999998545," This should be review, hopefully."
+1579.3799999999999,3.6000000000001364," And then after we've decided on which end point to update,"
+1582.98,4.919999999999845, we update our new guess to be whatever high plus low is divided by 2 again.
+1587.8999999999999,6.080000000000155," So the midpoint of those where either high or low would have just changed,"
+1593.98,1.599999999999909, because of this if else.
+1595.58,2.480000000000018," And this loop will just keep going over and over and over again,"
+1598.06,3.9600000000000364, making better and better approximations until we come within plus or minus
+1602.02,3.5599999999999454, epsilon of the squared of x.
+1605.58,2.2799999999999727, Obex.
+1607.86,6.279999999999973, The difference between this code and what we wrote a few lectures ago is this part
+1614.1399999999999,1.240000000000009, down here.
+1615.3799999999999,6.240000000000009," So a few lectures ago, we all we could do really was write a print statement"
+1621.62,3.0399999999999636," where we took our guess that we ended up with, right?"
+1624.66,8.0, And we printed it along with that guess is close to the root of our original x.
+1632.66,2.2799999999999727," But instead, since we're writing a function,"
+1634.94,2.9600000000000364," I would like to take the result, right?"
+1637.9,3.0, My approximation to x and return it.
+1640.9,5.3599999999999," So somebody can call this function many, many, many times with different values of x"
+1646.26,5.240000000000009, and figure out a bunch of different approximations for all of these different x's.
+1651.5,3.6400000000001," So here I have the function calls, right?"
+1655.14,4.1599999999998545, So I've got bisection root with 4 and bisection root with 123.
+1659.3,2.8400000000001455, And then I can just print the results of these.
+1662.14,4.079999999999927, So here is the bisection root function.
+1666.22,5.039999999999964, I've got my printout commented out because I don't actually need it.
+1671.26,3.7999999999999545," The rest of the code will do something useful with the approximations, right?"
+1675.06,4.559999999999945," So in this case, bisection root of 4 was, gave me a 2.0."
+1679.62,8.519999999999982, So that's the approximation and the bisection root of 123 was approximated to 11.09.
+1688.1399999999999,3.1200000000001182, OK.
+1691.26,5.399999999999864," So what I would like you to do, and this is going to be a little bit involved code,"
+1696.6599999999999,5.120000000000118," it'll require some thinking, is to write a function called count the numbers"
+1701.78,6.279999999999973, with the square root close to n plus or minus epsilon.
+1708.06,3.759999999999991," And I'll help you out by drawing something on the board,"
+1711.82,3.4400000000000546, but I would like you to do the code for it.
+1715.26,5.919999999999845," So the idea here is that you have some n that's given as an input,"
+1721.1799999999998,2.7600000000002183, and you have an epsilon that's also given as an input.
+1723.94,8.599999999999909, What you'd like to find out is how many whole numbers have their square root
+1732.54,3.3599999999999, within plus or minus epsilon of n.
+1735.9,5.440000000000055, So this is kind of hard to wrap your mind around without actually drawing a picture.
+1741.3400000000001,3.3199999999999363," So this is also something you should try to do in quiz situations,"
+1744.66,1.5599999999999454," p-sets, things like that."
+1746.22,1.240000000000009, Don't code right away.
+1747.46,3.9600000000000364," Try to draw a picture, kind of depicting what we're asking for here."
+1751.42,4.360000000000127," So here, we'll start with a line."
+1755.7800000000002,5.079999999999927, This is our number line because we're doing the square root.
+1760.8600000000001,4.0, We want to know how many integers have a square root with an epsilon of n.
+1764.86,4.960000000000036, So let's start with an n.
+1769.82,3.599999999999909, And we have something plus or minus epsilon.
+1773.4199999999998,6.559999999999945," So this is epsilon, and this is also epsilon."
+1779.9799999999998,5.960000000000036," In the end, we want to know how many integers have a square root,"
+1785.9399999999998,6.0," square root of i, so actually I don't know if this square root of i is equal"
+1791.94,3.400000000000091, to somewhere in this range.
+1795.3400000000001,2.1599999999998545, Does that make sense so far?
+1797.5,1.0800000000001546, That's what we're trying to figure out.
+1798.5800000000002,3.8799999999998818, The square root of i is somewhere in this range.
+1802.46,5.720000000000027, So that means i is going to be some giant number out here.
+1808.18,4.7999999999999545, So this line can go further out.
+1812.98,6.400000000000091," So in the example here, I've got n is equal to 10."
+1819.38,7.599999999999909," So I know for sure that an i of 100, just kind of us as humans, would work."
+1826.98,6.0, Because the square root of 100 is probably going to be approximated to pretty darn close to 10.
+1832.98,4.960000000000036, So I know that that value will be within plus or minus epsilon of 10.
+1837.94,6.720000000000027, But there's probably a couple numbers around 100 that also match this criteria.
+1844.66,10.480000000000018," If I take the square root of 99, according to this example, that approximation puts me within plus or minus epsilon of 10."
+1855.14,5.3599999999999," So it's going to be, you know, square root of 99 is going to be like 9 point, whatever is here."
+1860.5,2.2799999999999727," 9, 5."
+1862.78,2.6000000000001364, So that's within plus or minus epsilon.
+1865.38,5.399999999999864," And similarly, square root of 101 and 102 also work."
+1870.78,9.11999999999989," Because if I take the square root of these guys, that will also put me within plus or minus epsilon of 10."
+1879.8999999999999,6.2000000000000455," So the goal here is basically to figure out these numbers, 99, 101, 102."
+1886.1,6.519999999999982," You should use the power of computation and computers being able to do a task really, really quickly."
+1892.62,8.120000000000118," To basically say, I'm just going to brute force my way through this problem and say, I'm going to test each number."
+1901.1,6.880000000000109," One at a time, all the way up to some pretty large number."
+1907.98,3.3599999999999," So you want to make sure you hit 99, 101, 102."
+1911.34,2.880000000000109, Maybe going up to maybe n cubed.
+1914.22,8.400000000000091," If you go and take the square root of some i cubed, you know you're going to hit all these values within plus or minus epsilon."
+1922.6200000000001,1.6399999999998727, So you're just going to brute force.
+1924.26,3.839999999999918, Look at all the integers between 0 and n cubed.
+1928.1,8.6400000000001," And figure out if this, if they're square root, the approximation of this square root is within plus or minus epsilon of n."
+1936.74,3.240000000000009," If it is, keep a counter and increment it."
+1939.98,2.839999999999918," And if it's not, ignore it."
+1942.82,5.680000000000064, And that's the idea to this question.
+1948.5,2.199999999999818, Loop and a check.
+1950.6999999999998,2.759999999999991, That's it.
+1953.46,7.400000000000091, And you can definitely feel free to make use of the bisection function that we wrote in our code.
+1960.8600000000001,3.2799999999999727, You should definitely use it because it's very helpful.
+1964.14,3.1599999999998545, So around line 96 is where you can write your code.
+1974.26,6.720000000000027, All right. Does anyone have a start for writing this code or how would you think about it?
+1980.98,1.7200000000000273, Yes.
+1982.7,12.799999999999955," For i in range n cubed, yet we can do that."
+1995.5,7.440000000000055, All right. So this will give me number 0 through n cubed.
+2002.94,3.240000000000009, Perfect. So I've generated basically this sequence now.
+2006.18,2.160000000000082, What do I want to do once I have i?
+2008.3400000000001,2.7199999999998," And you know, you can always write a little comment for yourself."
+2011.06,2.880000000000109, What you want to do once you have i.
+2013.94,6.399999999999864," So in English, what would you want to do once you have a number like this?"
+2020.34,1.400000000000091," Take the square root, yeah."
+2021.74,4.519999999999982, Take the square root of i.
+2026.26,5.3599999999999, How do you want to take the square root of i?
+2031.62,1.0800000000001546, We can.
+2032.7,4.399999999999864, Shall we use our bisection root?
+2037.1,4.3599999999999, We can too.
+2041.4599999999998,1.1600000000000819," Yeah, we can do both."
+2042.62,3.1200000000001182, So let's use the function we just wrote.
+2045.74,7.319999999999936," So bisection root of i, this gives me square root."
+2053.06,5.7599999999997635," So now sqrt is going to be some value here, right?"
+2058.8199999999997,0.8400000000001455, It could be 10.
+2059.66,2.0399999999999636, It could be 99.5.
+2061.7,1.9600000000000364, It could be 99.7.
+2063.66,1.4400000000000546, What do I do with this number now?
+2067.1,7.0, Yes.
+2074.1,5.0," Yes, exactly."
+2079.1,1.0, Let's use an if statement.
+2080.1,4.639999999999873," So if, and there's many ways we can, if, if, if, use the if statement, we could do absolute"
+2084.74,1.0," value, right?"
+2085.74,1.8800000000001091, That's what we've been doing already.
+2087.62,9.400000000000091," So if we take n minus the square root, right?"
+2097.02,9.0, So n minus this value we just calculated is less than epsilon.
+2106.02,13.0," All right, so here we know that square root is within epsilon."
+2119.02,7.0, And what do we want to do once we know that the square root is within epsilon?
+2127.02,4.0," Well, if we don't know, we can look at the doc string."
+2131.02,7.0, So we need to return how many integers have that square root with an epsilon of n?
+2138.02,1.0," Yeah, exactly."
+2139.02,1.0," Keep count of it, right?"
+2140.02,7.0, So count plus equals one.
+2147.02,6.0," Yes, and I do have to initialize count, count equals zero, right, before women."
+2154.02,6.0," Okay, anything else?"
+2160.02,1.0," Yeah, we do need to return."
+2161.02,8.0," So at the end of the loop, we can return our count."
+2169.02,3.0," Okay, run it."
+2172.02,1.0, What is this from?
+2173.02,4.0," Oh, this is from the other two lines here."
+2177.02,1.0, So four.
+2178.02,4.0, I think that works because from the example there were four numbers that were.
+2183.02,9.0," To double check, we can, or if something went wrong and the number you got was what you were expecting."
+2192.02,2.0," Again, print statements, very useful."
+2194.02,2.0, So we could print the value of i.
+2196.02,4.0," So this thing here, we're trying to find the square root of."
+2200.02,3.0," And we can print the square root of that value, right?"
+2203.02,6.0," And so if we actually add it to the code here, we see the four values that we grabbed."
+2209.02,9.0," 99, 100, 100, 100, 100, and now that we wrote this code, we can actually make really simple changes to it."
+2218.02,3.0," And we have some pretty useful code, right?"
+2221.02,8.0," So if we make our boundary bigger, 10 plus or minus one, we're going to get more values that match this criteria, right?"
+2229.02,7.0," So in fact, we got 40 of them, right, all the way from 81, all the way up to 120."
+2237.02,10.0," They all match the criteria, which is when you take the square root of that value, it's plus or minus 9 to 11."
+2251.02,2.0, Any questions about this example?
+2253.02,6.0," I know it's kind of involved, but I hope that actually drawing a picture helped explain what we were trying to get at."
+2259.02,6.0," And then at that point, it should have been pretty easy to figure out the structure of the code itself."
+2265.02,2.0, Any questions?
+2267.02,1.0, Yes.
+2268.02,1.0, I'm sure regarding the red.
+2269.02,1.0, Yep.
+2270.02,6.0, So how does it have to be like that large in the upper?
+2276.02,2.0, It could be smaller.
+2278.02,4.0," Yeah, I mean, we could have done an n to the power of four."
+2282.02,9.0, We just couldn't do n squared because then we would definitely miss 101 and 102 in that particular example.
+2291.02,11.0," In fact, if our epsilon is really big, we might, actually, I'm not sure about the math, but if our epsilon is really big, we might actually need to go bigger than n cubed as well."
+2302.02,2.0, I'd have to think about that.
+2304.02,2.0," But we just, it's okay."
+2306.02,2.0," I mean, it's fine to make it big."
+2308.02,6.0, It doesn't take that much longer to compute because running the function is very quick to Python anyway.
+2314.02,1.0, Yeah.
+2315.02,2.0," Yeah, there's a question."
+2317.02,2.0," Yeah, I had a similar question."
+2319.02,4.0, So is there reason why we chose n cubed as like a arbitrary number that's big enough?
+2323.02,3.0," Yeah, arbitrary number that's big enough."
+2326.02,19.0," What we could have also done just along those lines is we could have done something a little bit smarter in here, where once we find this a number that actually works, like once we start incrementing our count, we could have some sort of flag that keeps track of as long as we're incrementing the count."
+2345.02,4.0," Right, keep going, but at some point you know you're going to reach a number that's too big."
+2349.02,3.0, And at that point you can just end the function early.
+2352.02,7.0," Right, you can just break out of the loop and you don't need to keep looking at, you know, all the way up to n cubed."
+2359.02,10.0, So we could have done something a little bit smarter to make the function just a little faster with flags.
+2369.02,2.0, Would you can try?
+2371.02,4.0, So see if you can have the program stop as soon as you hit 103.
+2375.02,4.0," Right, see if you can write the program that uses a flag to trigger that event."
+2379.02,7.0," And then when that event is true, just break out of the loop or return immediately or something like that."
+2386.02,5.0, Other questions?
+2391.02,2.0, Okay.
+2393.02,3.0, So let's sum out a little bit on functions.
+2396.02,2.0, We did this a little bit last lecture.
+2398.02,2.0, This is a function that we actually wrote last lecture.
+2400.02,3.0, It was some of odd numbers between A and B.
+2403.02,2.0," This was essentially our black box, right?"
+2405.02,2.0, Remember that now we're writing functions.
+2407.02,6.0," We are kind of separating ourselves as a programmer who writes a function, right?"
+2413.02,5.0, You basically make this nice modular piece of code that can be reused over and over again.
+2418.02,5.0, So we're separating that aspect from somebody who's using a function.
+2423.02,4.0," So once there's a function already written for you, you just use it in code, right?"
+2427.02,2.0, Like we use the bisection route here.
+2429.02,3.0," Right, I know we wrote it, but I guess technically I wrote it."
+2432.02,3.0," But here we just kind of used it, right?"
+2435.02,4.0," And we used it to write this nicer, more complex piece of code."
+2439.02,2.0, And so this is what we do.
+2441.02,2.0, We basically create this black box.
+2443.02,3.0," And once you know this specification or the dox string of the black box,"
+2446.02,4.0, you don't need to know how it's implemented in order to use it.
+2450.02,12.0, But what I wanted to mention is something I mentioned last lecture is the function definition is just creating a function object inside the memory.
+2462.02,3.0, And the name of this function object is the name of the function.
+2465.02,5.0," So if we're thinking about the program there is the orange box,"
+2470.02,9.0," we have an object that just happens to be a function which has some code associated with it, whose name is some odd."
+2479.02,6.0," And kind of drawing a parallel to that is when we create just a variable as we have been so far, right?"
+2485.02,4.0, Here we're creating an object to whose name is low.
+2489.02,4.0," So in that same way that black box is basically saying,"
+2493.02,6.0, I am creating a function object that has some code associated with it whose name is some odd.
+2499.02,7.0," So in this case I've got some odd, low and high as three sort of objects inside my program."
+2506.02,8.0, And then only when I make a function call does the code associated with the function object run.
+2514.02,3.0, So up when I'm defining the function it does not run.
+2517.02,4.0, It just stays inside computer memory as an object that exists.
+2521.02,4.0, And when I make my function call is when I use that object.
+2525.02,9.0, So the function call basically takes my variables and matches them to the function definition.
+2534.02,4.0, So A gets matched to low and B gets matched to high.
+2538.02,8.0, And low and high in the function call have actual values associated with them two and seven.
+2546.02,3.0, And so that function will then go ahead and do the work.
+2549.02,3.0," And at the end it's going to return something, either an actual value or none."
+2552.02,4.0, And then that actual value replaces the entire function call.
+2556.02,6.0, So in my program the variable my sum here is going to be equal to the right here.
+2562.02,5.0, Just a little recap but hopefully this kind of keeps bringing that point home.
+2567.02,6.0, So now we're going to talk about in more detail what exactly happens when we make a function call.
+2573.02,6.0, So when we make a function call you can think of the program as sort of taking a pause.
+2579.02,4.0, I've got my main program and in my main program I have a function call.
+2583.02,3.0, That main program will just pause for a bit.
+2586.02,11.0, And that function call you can treat it as sort of a little mini program that needs to run and terminate return of value before the main program can resume executing.
+2597.02,9.0, So that little mini program that function call basically creates its own little environment that it lives in.
+2606.02,5.0, So in that little environment it can create variables just like we would in a regular program.
+2611.02,4.0," It can modify variables, it can print things."
+2615.02,3.0, It can do all this work within its body.
+2618.02,8.0," And at some point it'll finish its job, finish its task, and it'll have some value that's the result of all of that work that it did."
+2626.02,9.0, And that value is what it hopefully returns back to the main program and then the main program can finish its job.
+2635.02,7.0, So what's key here is that every time you make a function call you basically create a new environment.
+2642.02,5.0, And that environment is completely separate from the main program environment.
+2647.02,6.0, As soon as the function call terminates that function call environment disappears.
+2653.02,6.0, So any variables that were created within that environment of the function call will also disappear.
+2659.02,4.0, So all we're left with is just what's in the main program.
+2663.02,3.0, So now we're going to talk a little bit about environments.
+2666.02,6.0, And if you understand this you'll understand 80% of functions and what to do with that.
+2672.02,8.0," So basically when you first run your program the program enters what we call the global environment, the main program environment."
+2680.02,5.0, And any time you make a function call we're creating this new environment.
+2685.02,5.0, So what exactly happens when we do these function calls?
+2690.02,3.0, How do these environments interact?
+2693.02,3.0, And the answer is they don't actually interfere with each other that much.
+2696.02,8.0, They only interfere with each other through passing in parameters and through returning values.
+2704.02,9.0," But beyond that these two different environments, the main program environment and a function call environment, can actually have variables that have the same name."
+2713.02,4.0, But don't interfere with each other because they exist in different environments.
+2717.02,5.0, So we're going to look at this example to showcase that.
+2722.02,4.0, So here's a function. It's pretty simple. It does not do much.
+2726.02,5.0," It takes in one parameter, probably a number, and adds one to it."
+2731.02,6.0, So takes in an x and does x plus one. Reassigns x to it.
+2737.02,5.0, And then it does this print statement and then returns the new value of x.
+2742.02,5.0, And then it returns the new value of x.
+2747.02,5.0, So that's the definition. Again this just sits in Python memory.
+2752.02,4.0, It doesn't actually get run until we make a function call.
+2756.02,7.0, The parameters here when we wrote our function are called formal parameters because there's no actual value associated with them.
+2763.02,6.0, We're writing this function assuming that at some point we're going to get a value for x.
+2769.02,7.0, But at the time we're writing the function there's no value for x. It's just this abstract variable.
+2776.02,7.0, And we're using that variable x within the function body assuming that at some point we're going to get an initial value for x.
+2783.02,5.0, So x is equal to three. And at which point the body can the next account.
+2788.02,8.0," Now when you make a function call in the main program scope, that's when you make a function call with an actual parameter."
+2796.02,11.0, So here you'll notice I'm using the same name x. But this x inside the main program is different than the x that's this formal parameter of the function.
+2807.02,6.0, This actual parameter when we make the function call is mapped to the formal parameter.
+2813.02,7.0," So at that point the formal parameter can get the value of the function call, which is three."
+2820.02,7.0, And in fact it doesn't actually matter what we name this variable out here.
+2827.02,5.0, We can name x is equal to three and make the function call f of x.
+2832.02,5.0, But we can also have y is equal to three and we make the exact same function call f of y.
+2837.02,7.0, Because we want to pass in three as a parameter to this function call.
+2844.02,5.0, So this x out here is different than this x over here.
+2849.02,3.0," So the re, oh yeah go ahead."
+2852.02,3.0, The formal is the one from the function definition.
+2855.02,6.0, We say it's formal because there's no value associated with it when you first write the function.
+2861.02,3.0," You write the function first, there's nothing going on here."
+2864.02,9.0, And then you have some code that actually now is taking on some values and you can run it.
+2873.02,8.0, So let's trace through this code little by little to see exactly what environments get created as we make function calls.
+2881.02,3.0," Again this is my black box, it's a function."
+2884.02,4.0, When I first run the program we finish the function definition.
+2888.02,3.0, So we're at this point in our program right before we do x is equal to three.
+2891.02,9.0, Inside my sort of computer Python memory what I have is one environment created and that's the environment of the main program.
+2900.02,10.0, The only thing I have in this environment is by f right because at this point in the program where the red arrow is I just had a function definition.
+2910.02,6.0," So again it's a definition, it's a function whose name is f and it's an object right."
+2916.02,2.0, It's not being run quite yet.
+2918.02,3.0, It's an object that contains some code.
+2921.02,6.0, Now we have x is equal to three so that's pretty easy inside my main program environment.
+2927.02,4.0, I've got a variable name x whose values three.
+2931.02,2.0, And then I have my function call.
+2933.02,6.0, So as soon as Python sees a function call it creates a new environment.
+2939.02,7.0, And the current environment where the call is being made from so the main program one will be put on hold.
+2946.02,13.0, So here I'm calling function f. So now I'm creating this new environment that think of it like this mini program this little task that needs to get done before the main program can continue executing.
+2959.02,6.0, So I need to figure out what's going on in this mini program right in this function call to f.
+2965.02,4.0, Alright so here's my new environment the scope of f.
+2969.02,4.0, So the first thing that we need to do is figure out what are the parameters of f.
+2973.02,5.0, So we look at the function definition and we see it has one parameter named x.
+2978.02,7.0, So we're going to take that x and the first thing we're going to do is map the formal parameter to the actual parameter.
+2985.02,8.0, So we're going to make the formal parameter of f named x take on the value three.
+2993.02,7.0, That's kind of what we've been doing already but now this is getting down to sort of details just details.
+3000.02,4.0, We've mapped all the parameters the body of the function executes.
+3004.02,5.0, I've again kind of blurred out this one because we're not in this global scope.
+3009.02,3.0, We're trying to figure out what f is doing.
+3012.02,5.0, So the body of f says take x add one to it and reassign it to x.
+3017.02,3.0, So what's x inside my function?
+3020.02,6.0, It's three. We add one to it and we make x before.
+3026.02,6.0, I skipped one thing which is if in my main program I had y is equal to three and f of y.
+3032.02,3.0, Nothing really would have changed.
+3035.02,11.0, My formal parameter of f is still x and I'm still mapping x to the value that's in my here in the actual parameter.
+3046.02,5.0, So in my scope of f I've got x is three. I incremented by one.
+3051.02,3.0, It gives me four and I resave it back into x.
+3054.02,8.0," Again, there's no collision here in terms of naming because the scope of f, the environment at f,"
+3062.02,5.0, has a variable named x and I'm just doing stuff with the x that f knows.
+3067.02,6.0, I do have another x inside my global scope but that one's put on hold for now.
+3073.02,5.0, So I've done x equals x plus one. Then I do the print statement.
+3078.02,2.0, So in f of x x equals four that gets printed out.
+3080.02,6.0, And then I return x so the thing that gets returned is the value of x is the four.
+3086.02,5.0, And this again replaces the function call so this gets returned back to whoever called me.
+3091.02,3.0, And the environment that called me was just by main program.
+3094.02,5.0, And here I'm going to return four and this is going to replace that with four.
+3099.02,6.0," As soon as the function sees the return and returns that value back, it goes away."
+3105.02,3.0, So notice that x that we had created is gone.
+3108.02,4.0, Now we're in the main program. There's no confusion.
+3112.02,9.0, My main program has its own x that other x that was part of the execution of f is gone because that function finished its job.
+3121.02,3.0, And it doesn't need its environment anymore.
+3124.02,6.0, So now the return of the function replaces f of x and we see z is equal to four.
+3130.02,3.0, That was super detailed.
+3133.02,6.0, But that's kind of what happens step by step when we make a function call with the new environment being created.
+3139.02,6.0, So if you can understand that it should be pretty straightforward.
+3145.02,4.0, And you won't get confused when you see an x out here.
+3149.02,9.0, You have f of x as one function and then maybe another function that has g of x and so on.
+3158.02,6.0," So in order to know the scope that you're in, the environment that you in, you need to know what expression you're evaluating."
+3164.02,3.0, So here we were evaluating this function call.
+3167.02,6.0, So that means that we were inside the environment of f.
+3173.02,7.0, So another example and this one's a little bit weird. It shows some of the nuances of Python.
+3180.02,4.0, And these aren't necessarily true in other languages.
+3184.02,5.0, So I'm just going to do the drawing of the scopes out here.
+3189.02,2.0, So let's start with the one on the left.
+3191.02,3.0, So you can see here I've got one function f of y.
+3194.02,5.0, And I've got the main program that creates x is equal to five and then a call to y.
+3199.02,4.0, Inside my main program I've got x is equal to five.
+3203.02,3.0, And then I have a function called to f.
+3206.02,3.0, Function call means we need to create a new scope.
+3209.02,7.0, So this one's put on hold for now until we figure out what f parentheses x is right here.
+3216.02,6.0, So the first thing we need to do is grab f and take all the formal parameters of f.
+3222.02,3.0, There's one. Its name is y.
+3225.02,5.0, And map them to the actual parameters. So I'm calling f with five.
+3230.02,4.0, So I'm going to map y to five.
+3234.02,6.0," This function is going to take, now do the body of its function."
+3240.02,6.0, x is equal to one. So it creates also an x whose value is one just within its scope.
+3246.02,5.0, It adds one to x. So this becomes two.
+3251.02,3.0, And then it prints x. So it's going to print two.
+3254.02,5.0, And then the function terminates. It returns none.
+3259.02,5.0, There's no return statement. And the function is done.
+3264.02,10.0, So this line has now finished. And the last thing that the function does after it's done the return is the scope goes away.
+3274.02,6.0, And the last thing we need to do now is print x. So this will print the value of x in the global scope which is five.
+3280.02,10.0," So the output of this, a little piece of code on the left side here is two and five."
+3290.02,7.0," Okay. What about the middle code? Similarly, I've got a function definition."
+3297.02,5.0, And then I create x is equal to five. And then I make a call to g.
+3302.02,5.0," x is five. So as soon as I see a function call, I need to create a new scope."
+3307.02,8.0, And I need to map all the formal parameters of g. It has one formal parameter. Its name is y.
+3315.02,5.0, That one will be mapped to whatever I made the function call with.
+3320.02,6.0, Five. Right. x is five out here. So that gets mapped to five.
+3326.02,5.0," What is this function going to do? Well, it prints x."
+3331.02,9.0, What's x inside the scope of g? Do I have a g inside x inside g? No.
+3340.02,9.0," So this is something that Python does. It says, well, if your environment doesn't have a variable named x in this case,"
+3349.02,7.0," look further out and see who called you. Well, which environment called this g?"
+3356.02,7.0," The main one, right? Does your bigger environment, the one who called you have a variable named x?"
+3363.02,7.0," It does, right? It's five. So Python grabs the value associated with that larger environment."
+3370.02,7.0," And if that larger environment didn't have one, it would look further out and further out until it doesn't have an environment to look at."
+3378.02,10.0," So g is going to print the value of x, which is five. And then it's going to print x plus one, which is six."
+3388.02,10.0," And then it's done. It returns none. And then as soon as it returns none, this scope goes away."
+3398.02,5.0," And what we're left with is the global program. And we print x, which is still five."
+3404.02,6.0," What I want you to notice is that that function g printed x plus one, but never modified x."
+3410.02,5.0," Right? We never said, you know, something like x is equal to x plus one or something like that."
+3415.02,5.0, We just figured out what x plus one was and printed it.
+3420.02,8.0, Okay. One more example. And this one will actually end up in an error.
+3429.02,6.0," So here I've got x is equal to five, just like before. And then I have a function called to h."
+3435.02,7.0," So again, a function called means a new scope is created. I've got one variable y."
+3442.02,5.0, That's my formal parameter. It gets mapped to whatever I call the function with five.
+3447.02,4.0, Oops. That's nice. And then what is this function doing?
+3451.02,7.0, That line x plus equals one is x is equal to x plus one.
+3465.02,4.0, This is actually an error. Python doesn't let you do that.
+3469.02,3.0, And the error gives you is actually what it says there. So unbounded local error.
+3472.02,5.0, Local variable x is referenced before an assignment.
+3477.02,6.0," So it doesn't actually grab the value from the outer scope, like we did in the middle bit."
+3483.02,9.0, It doesn't grab it because it thinks you're trying to create a variable named x inside h.
+3492.02,4.0, And you're trying to add one to x.
+3496.02,10.0, But you never had a line that said x is equal to something originally inside h.
+3507.02,6.0," And so when you're trying to say x is equal to x plus one, it's trying to look for an x inside the scope of h."
+3513.02,7.0, But it doesn't have one. And so that's where we get that error from.
+3520.02,15.0," And this is not something. I mean, it's just a nuance of Python, but it's kind of important to understand that you can access variables, but you can't change variables outside of your scope."
+3535.02,5.0, So the middle one just accesses a variable adds one to it and prints it.
+3540.02,5.0, But we never said x is equal to this value.
+3545.02,6.0," And it's kind of like, I guess the error you get is kind of like if you made this be something completely different."
+3551.02,3.0," Like z, you would get the same error."
+3554.02,5.0," It would be error variable z, reference before assignment."
+3559.02,7.0," So you can grab x plus one, but I don't know what z is."
+3566.02,3.0, That's your reason.
+3569.02,6.0," So you said like, like you said the definition, like z equals x."
+3575.02,2.0, And then you like x plus equal one.
+3577.02,11.0," So if you want to explicitly say that you're taking it from outside, there's a keyword called global that you would need to."
+3588.02,7.0," That explicitly says, hey, I'm grabbing this variable that is not part of me."
+3595.02,6.0," It's part of the main program, the global scope."
+3601.02,7.0, Okay. The last thing I want to talk about is using functions as arguments to other functions.
+3608.02,15.0," So the way I've sort of been explaining a function definition is basically saying that when we define a function, Python essentially puts some code in memory whose name is the function name."
+3623.02,7.0, So basically the function name creates for me an object inside memory that happens to be a function object.
+3630.02,5.0," And just to show you sort of what that means is we have a function is even, right?"
+3635.02,7.0," So if we say the type of is even, it's function, right?"
+3642.02,7.0, So the function is even actually has a type and its type is a function in Python.
+3649.02,8.0," So functions are basically just objects, just like an integer is an object, a Boolean is an object, a float is an object, right?"
+3657.02,4.0," A function, it's an object, it just looks different."
+3661.02,3.0, It has a bunch of code associated with it.
+3664.02,7.0," So function is an object, what that means is we can use an assignment operator on a function name."
+3671.02,6.0," So we can have two names, a function that point to the same function code."
+3677.02,9.0," We can use a function as an argument to another function, like a parameter to a function, or we can return a function from another function."
+3686.02,7.0, So here's an example. Pretend that this is our code file. We've got the memory.
+3693.02,6.0," The first line of code here, the definition basically creates this function object for me in memory."
+3699.02,6.0," It's kind of like a variable, right? Is underscore even is the name of this function object."
+3705.02,6.0, And this variable is bound to my function object with some code associated with it.
+3711.02,4.0, So you think of the function as just an object.
+3715.02,5.0," Similarly, right, when we write r is equal to two, I think of that as the same thing, right?"
+3720.02,3.0," r is the name, and I've got an integer object whose value is two."
+3723.02,5.0, That's exactly what happens when we create a function definition.
+3728.02,8.0," Similarly, pi is equal to 22 over seven, right? Pi is the name associated with a float object that has that value."
+3736.02,9.0," So what we can do, right, now that we've established that a function is basically an object with a name, we can say a line like this."
+3745.02,4.0, MyFunk equals to is even.
+3749.02,5.0, The right-hand side here is just the name of my function.
+3754.02,5.0," It's not a function call, right? Notice there's no parentheses after is even."
+3759.02,6.0, There's no parameter. None of that. It's literally the name of my function.
+3765.02,6.0," So inside memory, what I've ended up doing is I have two names."
+3771.02,6.0, MyFunk and is even that both point to the exact same function object.
+3777.02,9.0," So that means that that function object, so this is even function, can be referenced by both of these names."
+3787.02,8.0," So on the next two lines here, a equals this and b equals this, I'm running the same code just referenced by different names."
+3795.02,9.0," So then a is going to be bound to false and b is bound to true, because I'm accessing the same code fundamentally by different names."
+3804.02,3.0, Does that make sense? Yes.
+3807.02,6.0," So everything in Python is an object, including functions, it's strange to think, but there you have it."
+3813.02,3.0, So let's look at this code.
+3816.02,9.0, I've got three function definitions and only one function call.
+3825.02,5.0," What are the functions, function definitions? One, I have named Calc."
+3830.02,7.0," It takes in three parameters. One, I have add, it takes in two parameters, and one, I have div, it takes in two parameters."
+3837.02,8.0," Add does something pretty simple. Div has maybe a print statement, but also does something pretty simple."
+3845.02,3.0," Calc is the one that's really strange, right?"
+3848.02,5.0," Because it takes in these three parameters, but what's the thing it's doing in here?"
+3853.02,9.0," It's kind of treating one of the parameters, OP, operation, as a function."
+3862.02,3.0, Okay. That's what's strange about Calc.
+3865.02,4.0, Now let's trace through the code to see exactly what that means for us.
+3869.02,5.0," So when I first run my program, I have three function definitions."
+3874.02,3.0, So I'm creating three function objects inside memory.
+3877.02,10.0," Calc, a function object that has some code, add a function object that has some code, and div, a function object that has some code."
+3887.02,5.0," And then we get to the good stuff, res equals the function call."
+3892.02,4.0, So res is going to be a variable that's going to have a value.
+3896.02,7.0, What value? We need to figure that out. Calc is a function call.
+3903.02,5.0," Every time we have a function call, we need to create a new environment."
+3908.02,6.0, So now we are creating our Calc environment.
+3914.02,6.0," So we've put aside the main program scope for now, and we're focusing on what Calc is going to do."
+3920.02,7.0, First thing we need to do is take every single one of our parameters and map it to the actual parameters.
+3927.02,10.0, So the first parameter is OP. It gets mapped to add.
+3937.02,7.0, The next parameter is x gets mapped to 2. The last parameter is y gets mapped to 3. Is everyone okay so far?
+3944.02,6.0," Yes. Okay. I've literally just matched names, a formal parameter to actual parameter."
+3950.02,4.0, Okay. So now we finished mapping the parameters.
+3954.02,6.0," Next we get to run the body of the function. Return, what is this?"
+3960.02,5.0," Let's replace OP, x, and y with the actual values."
+3965.02,6.0," This basically becomes return a function call, add 2,3."
+3971.02,3.0, I've just replaced the names. That's it.
+3974.02,4.0," What's add 2,3?"
+3978.02,3.0," It's another function call, right?"
+3981.02,8.0, So Calc is going to have to be put on hold because I have to figure out what add is going to return.
+3989.02,3.0, Okay. So what's add going to return for me?
+3992.02,6.0," Well add 2,3 is what I'm trying to figure out. So I'm going to map a to 2, b to 3."
+3998.02,10.0," It's going to do 5 as the return. So returns 5 to whoever called it and whoever called it was Calc, right here."
+4008.02,8.0," So this expression here, OP, x, y, which was add 2,3 is replaced with 5."
+4016.02,3.0, Everyone okay so far? Awesome.
+4019.02,5.0," Okay. And then Calc can now finish, right? Notice add finished its job. So it went away."
+4024.02,4.0, Now Calc can finally return its value. So it can finish as well.
+4028.02,6.0," So this one will return 5 to whoever called it, which was the main program."
+4034.02,7.0, And finally Calc has finished its job and it returned 5.
+4041.02,9.0," So step by step we just kind of trace through the code, you know, functions out to in and replacing variables wherever needed."
+4050.02,15.0, So it's your turn. Tell me what's the value of res given this function called a Calc and what's going to get printed.
+4065.02,15.0," So we can even write our functions. So in the main program, what do I have?"
+4080.02,9.0," Yep, Calc and div are my functions. That's it. Which one?"
+4089.02,7.000000000000455," Yeah, res will be the result. Yep. And there is we will have a question mark because we don't know what it is yet."
+4096.02,7.0," And what's the first thing I need to do? Yeah, make a new scope. Exactly."
+4103.02,7.0, So that's the scope of Calc and we're going to map OP to div.
+4110.02,8.0," What do I have x and y? 2, 2 and 0. Thank you."
+4118.02,10.0," So what's OP going to do? Yes, exactly. We make another scope for div."
+4128.02,16.0, A is 2 and B is 0. So we're kind of two scopes deep. What's div going to do?
+4144.02,14.0," Yep, so div prints out the thing. Denon was 0. And what's div returning? None. Perfect. So div returns none here to Calc."
+4158.02,10.0, And then div is gone. And then none gets returned from Calc here.
+4168.02,12.0, And then Calc is gone. And all I'm left with is res equals none. Exactly. The return of Calc.
+4180.02,8.0," One more example, showing scope. Just kind of showcasing these sort of the same idea."
+4188.02,7.0," So I've got three functions here. Funk A. Funk B and Funk C. Funk A takes in, you can see no parameters."
+4195.02,10.0," Funk B takes in one parameter. Funk C takes in two parameters. And if we scan the code, we see that one of them is weirdly doing something."
+4205.02,6.0," So it's actually going to be a function, right? Because you see we're calling it like a function inside here."
+4211.02,10.0," So we know F is going to have to be a function. So if we run this program, first three function definitions, basically put some code for us in the memory."
+4221.02,8.0," When we make Funk call, sorry, Funk A call, this creates a new scope."
+4229.02,12.0, A has no parameter. Or Funk A has no parameters. So there's nothing to bind. All this function is going to do is print inside Funk A. And then return none.
+4241.02,12.0," So that whole thing is going to print none. Next, Funk B is going to be another function call right here. So it creates a function scope right here."
+4253.02,15.0, We map the formal parameter Y to 2. And then we finish mapping all the parameters. And what we need to do next is do the body. So we print inside Funk B. And it just returns the value you passed into it.
+4268.02,12.0, So not a very smart or interesting function. So prints that and returns to back to whoever called it. Whoever called it was here. So this print statement becomes print 5 plus 2.
+4280.02,16.0," So that's going to print stuff into the console. And lastly, the interesting one is going to be Funk C. So Funk C notice I'm calling it with an actual function I have in hand Funk B, right. One of these that I've defined here."
+4296.02,14.0, So Funk C is a function call. So there's my scope. I am mapping formal parameter F to Funk B and Z to three. So just mapping one by one.
+4310.02,20.0," And then I'm doing the body of Funk C. So the body says now print this and return this. So we print the statement. And then the return basically says, well, what's F function call F Z. We have to figure out what the actual values are."
+4330.02,18.0," And it's Funk B parentheses three. So that's another function call, which means another function scope. Again, not a very smart or interesting function is Funk B. It just takes in the three prints inside Funk B. And it returns the three back to whoever called it."
+4348.02,11.0," So that function is done. And then the Funk C can terminate and return three to whoever called it, which was out here."
+4359.02,13.0," And notice as soon as a function called terminates and does a return, it immediately, you know, all of its variables, everything that got created inside that environment, go away. They get wiped out."
+4372.02,10.0, Okay. Give you about a minute to try this. So write a function that meets the following specifications. So I have a function named apply.
+4382.02,10.0," Criteria is a formal parameter, right? So at some point you're going to have a function that does this. It takes an integer, a number, an integer, and returns a Boolean."
+4392.02,12.0," So however a function does that, that's what's going to be passed in. And then an integer. And what I want you to do is tell me how many numbers from zero to N match that criteria."
+4404.02,7.0," So when I apply the function criteria to number zero through N, how many of those actually return true on that function?"
+4411.02,7.0," So just to show you something, you know, what this means concretely, here's my function apply."
+4418.02,8.0," Here's a function that I could call the apply with is even. Sorry, I lied. I guess we are seeing is even a few part times in this lecture."
+4426.02,8.0, So here's a function is even. And basically I run apply by saying I want to run function apply with the name is even.
+4434.02,6.0, Right. So here I'm mapping name to number zero through 10.
+4440.02,9.0, I'll give you about a minute to try it out. And then I can write it just so we have some. So we finish on time.
+4449.02,6.0, Does anyone have a start?
+4455.02,12.0, So we know we want to touch each number zero through through N to see whether this criteria applies to them. Right. So what's the start to get that going?
+4467.02,10.0, Yeah. For I and range N plus one because we want to include N.
+4477.02,10.0, How do we apply the function criteria to each one of these values?
+4487.02,10.0," Yeah, exactly. We just say criteria. And this name will be replaced with whatever function we're going to call apply with."
+4497.02,12.0, And this criteria I will basically be the return of criteria. What did I say criteria returns? It takes in a number and returns a Boolean.
+4509.02,10.0, So we know that this is a Boolean. What do I want to do with this Boolean?
+4519.02,12.0," If it's true, I want to count it. If it's not, I don't. So if criteria I count plus equals one."
+4531.02,9.0, Right. Put this up here. And let's remember to initialize our count.
+4540.02,8.0," And then that's it, right? If it doesn't match, then I don't care about doing anything with it. So then we just return count."
+4548.02,7.0," So notice I'm using my function here. That's just a parameter, kind of like a placeholder for any other function."
+4555.02,14.0," So this is even function when it's a parameter to apply will tell me six, right? 0, 2, 4, 6, 8, 10. That's six values that match this criteria."
+4569.02,9.0," And what's cool is that I can actually create any function. So if I want a function that's called is five, for example."
+4578.02,9.0, It takes in a number and returns true if that number is equal to five. It's still a function that takes in an integer and returns a Boolean.
+4587.02,9.0, All I need to do then is run this apply with the function is five. So I just changed that here.
+4596.02,12.0," And then if I run it, it should just give me one value, right? The five, of course, is one that matches this is five criteria between zero and ten."
+4608.02,7.0," Yeah, so that's basically it. So we saw some function a lot more. You can do with functions. They're basically objects and pythons."
+4615.02,9.0, They can be manipulated just like you would any other object. You can have them be parameters to a function. You can have them be returned from a function.
+4624.02,8.0," You can assign another name to this function body, things like that. I showed you what to how to think about environments, right?"
+4632.02,7.0," So that the naming doesn't get confusing, right? As soon as a function call is made, that means another environment is created."
+4639.02,9.0, So variables created within that environment have no influence on other variables created in other environments.
+4648.02,9.0," And functions are very nice, a very nice way for us to write code that can be easily built up on."
+4657.02,2.0, That's it. Thank you.

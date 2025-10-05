@@ -1,0 +1,1144 @@
+start,duration,text
+0.0,13.34, All right.
+13.34,1.8600000000000012, Let's begin today's lecture.
+15.200000000000001,6.4," So last class, we began our adventure with creating our own data types."
+21.6,5.199999999999999, Today we're going to start off with a little bit of a recap just to remind you some of the
+26.8,2.7600000000000016, details about creating our own data types.
+29.560000000000002,3.519999999999996, And then we're going to build upon that coordinate class.
+33.08,2.1600000000000037, We started in a last class.
+35.24,6.039999999999999, We'll build a circle class and then we'll build some fraction data types.
+41.28,0.1599999999999966, All right.
+41.44,7.240000000000002, So the first thing I'd like to mention is to remind you guys about sort of writing code from
+48.68,1.9200000000000017," these two different perspectives, right?"
+50.6,5.520000000000003," So just like when we wrote functions, we were kind of writing the definition of the function,"
+56.12,4.0, telling Python we have this function that we're defining abstractly and this is what
+60.12,1.0, it does.
+61.12,4.000000000000007," And then we were calling the function later on in a program many, many times."
+65.12,6.079999999999998, Well the same idea exists now that we're creating our own data types.
+71.2,3.8799999999999955, We have to write code from the point of view of somebody who's implementing the class.
+75.08,5.8799999999999955, So deciding all of these details that goes into creating the class itself versus somebody
+80.96,5.640000000000001, who's just using a class that's already been written where we create instances a bunch
+86.6,4.039999999999992, of different objects that just happen to be this data type.
+90.63999999999999,3.5600000000000023," So when we implement the class, what were some of the things we did?"
+94.19999999999999,4.0800000000000125," Well, we're telling Python that this object now exists."
+98.28,4.47999999999999," We're telling Python the name of the data type that we're creating, something we choose."
+102.75999999999999,4.480000000000004," We're deciding, we're making these design decisions where we decide what attributes"
+107.24,1.0799999999999983, make up our class.
+108.32,4.319999999999993," So the attributes are either data, like the properties, what are the variables that make"
+112.63999999999999,5.280000000000001," up your object, and the behaviors through methods."
+117.91999999999999,1.4000000000000057, So that's implementing the class.
+119.32,4.8799999999999955," And then when we're using the class, we're now saying, all right, let's assume that this"
+124.19999999999999,1.8000000000000114, class definition exists.
+126.0,4.079999999999984, There's this object that has these behaviors and these data attributes.
+130.07999999999998,4.760000000000019, Let's now create a whole bunch of objects that are of this type.
+134.84,3.759999999999991, And this is when we're creating these instances and then manipulating all of these instances
+138.6,2.920000000000016," by running methods on them, things like that."
+141.52,4.1200000000000045," So when we're implementing the class, right, this thing on the left-hand side, we're"
+145.64000000000001,6.759999999999991," basically telling Python in abstract terms, what are the common properties and behaviors"
+152.4,1.6399999999999864, of our data type.
+154.04,4.400000000000006," And then when we're using the class, the thing on the right-hand side here, we're creating"
+158.44,6.200000000000017, actual objects with very specific values for their data attributes that we can manipulate
+164.64,2.3600000000000136, in different ways.
+167.0,4.759999999999991, So let's remember this coordinate class that we wrote last lecture.
+171.76,3.719999999999999," This is not new, but I will just go over it real quick."
+175.48,4.47999999999999, So first line here tells Python we're creating a new data type.
+179.95999999999998,5.1200000000000045," Its name is coordinate, and this keyword class tells Python we're creating the data type."
+185.07999999999998,5.680000000000007," The parentheses here is object, which stands for the Python object data type."
+190.76,2.960000000000008, So it's something really generic.
+193.72,4.47999999999999, And this in the parentheses here is the parent of our class.
+198.2,5.560000000000002," So anything that a regular Python object can do, the very basic things our class can do"
+203.76,1.0, as well.
+204.76,5.0," Last lecture I mentioned, an example of such a basic thing is to take a variable name and"
+209.76,4.439999999999998, assign it to an object type that we create.
+214.2,5.039999999999992, The very first method that we should write for a new data type that we create is the init
+219.23999999999998,1.0, method.
+220.24,7.8799999999999955, This I called a dunder method because it starts with double underscores before the init and
+228.12,1.8400000000000034, ends with double underscores after the init.
+229.96,5.680000000000007," That's the actual name of this method, double underscore init, double underscore."
+235.64000000000001,2.719999999999999, So this method is like a constructor for the class.
+238.36,4.039999999999992, It tells Python how do you create an actual object of this type?
+242.4,3.039999999999992, So it's a function.
+245.44,3.640000000000015, It's just a function that works only with objects of type coordinates.
+249.08,3.4799999999999898," So as a function, it takes parameters."
+252.56,5.520000000000039," You can see it takes three parameters here, the self, the x and the y."
+258.08000000000004,5.0," Now when we're actually creating objects of type coordinate, we only pass in parameters"
+263.08000000000004,2.3999999999999773, for everything other than self.
+265.48,6.9599999999999795, Because self is a variable name that we use to describe having an instance of the class
+272.44,2.2800000000000296, without actually creating one yet.
+274.72,2.2799999999999727, Because remember what we're doing here in this definition.
+277.0,3.4399999999999977, We're telling Python that this object type now exists.
+280.44,2.1999999999999886, We're writing it as we speak.
+282.64,2.8000000000000114," But we don't have an actual instance to manipulate yet, right?"
+285.44,1.8000000000000114, This is just the definition.
+287.24,5.519999999999982," And so the self tells Python that when we're writing this code, we're going to use the"
+292.76,7.1200000000000045, self variable name as sort of a formal name to be able to run this method on.
+299.88,4.639999999999986, So we're going to see in the next slide exactly what maps to self when we run it.
+304.52,5.439999999999998, That's what the self means inside the parameter list here and here.
+309.96,6.480000000000018," And then beyond that, we use self within the init method to tell Python which one of these"
+316.44,4.919999999999959, variables are actually data attributes versus which of these variables are just plain old
+321.35999999999996,2.2800000000000296, variables as we've been working with.
+323.64,6.1200000000000045," So any variable that's defined using self dot, so here I got self dot x and self dot y,"
+329.76,2.1200000000000045, are data attributes.
+331.88,5.720000000000027," So that means any object I create that's of type coordinate, I know we'll have a variable"
+337.6,3.159999999999968," x and y associated with it, right?"
+340.76,4.079999999999984, Because I've defined these x and y is using self dot x and self dot y.
+344.84,4.8799999999999955," Now in the last lecture, I actually had these parameter lists, the parameters in this list"
+349.71999999999997,6.32000000000005," here be different in the next and y, I think I had x, y, y, and then I had self dot x equals"
+356.04,5.7999999999999545," x, y, where this x here to the right of the equal sign is the x from the parameter list."
+361.84,1.0, Right?
+362.84,4.600000000000023," But, you know, so in that sense, it doesn't matter what these variables are in the parameter"
+367.44,2.9599999999999795," list, they're just going to be the same over here on the right hand side of the equal"
+370.4,1.6000000000000227, sign.
+372.0,6.759999999999991," But the actual parameters, sorry, the actual data attributes are self dot x and self dot"
+378.76,3.680000000000007, y of my object.
+382.44,5.399999999999977," Okay, so then we had one method that we wrote last lecture, it was called distance and"
+387.84,1.1200000000000045, it took two parameters.
+388.96,5.560000000000002," So the first one of course is self and this self represents the thing, this object that"
+394.52,1.9599999999999795, you're going to call the method on.
+396.47999999999996,4.840000000000032," I don't have that object yet, so I'm just calling itself for now because this is the class"
+401.32,1.0, definition.
+402.32,5.399999999999977, And then this other parameter is some other coordinate object that I'm going to run this
+407.71999999999997,1.8000000000000114, method on.
+409.52,6.240000000000009," So the body of distance says, all right, well how do I find the distance between two points"
+415.76,1.0, in the 2D plane?
+416.76,2.0," It's just pathagoras, right?"
+418.76,4.600000000000023," So that means grab the x value of one of my points, subtract the x value of the other"
+423.36,5.479999999999961," point, square them, same with the y's, square them, add them, take the square root."
+428.84,2.1999999999999886, So what's the x value of one point?
+431.03999999999996,3.5600000000000023," Well, one of the points is going to be the thing that I'm calling the distance method"
+434.59999999999997,1.400000000000034, on self.
+436.0,4.839999999999975," So I grab the x value of self using this dot notation, self dot x."
+440.84,3.680000000000007, And then what's the x value of this other coordinate point?
+444.52,5.1200000000000045," Well, it's called other in my parameter list, so I'm going to grab the x value of other"
+449.64,3.2799999999999727, again using dot notation.
+452.91999999999996,2.8000000000000114, And then we just do the math.
+455.71999999999997,1.0, Yes?
+456.71999999999997,8.120000000000005, Can you call functions on a class that we're defining in like this?
+464.84,4.800000000000011," Yes, so you can make methods for a particular class."
+469.64,4.800000000000011," But you can only call those functions that you get to find, that you can't call another"
+474.44,1.0, one.
+475.44,1.0," Exactly, yeah."
+476.44,1.0, Yeah.
+477.44,8.120000000000005, Is there a way we could define a class as something other than an object?
+485.56,2.0, A class is something other than an object.
+487.56,4.439999999999998," Right, like there we put the coordinate in that object, we could do something else to"
+492.0,1.0, this one.
+493.0,1.0, In the parentheses?
+494.0,1.4399999999999977," Yes, we can put other things in the parentheses."
+495.44,2.8000000000000114, So that's actually what Monday's lecture will be about.
+498.24,5.600000000000023," In that case, the thing in the parentheses becomes the parent of the class that you're currently"
+503.84000000000003,1.1599999999999682, writing.
+505.0,5.720000000000027," So I won't go into too much detail, but to have this other object as a parent means that"
+510.72,4.960000000000036," everything that that object can do automatically, your object can do as well."
+515.6800000000001,5.8799999999999955," And then on top of that, you can decide a bunch of additional stuff your new object does,"
+521.5600000000001,6.039999999999964," but in a sense, your coordinate object is a, whatever this thing in the parentheses is,"
+527.6,3.0, and then it can do a bunch of other stuff as well.
+530.6,1.0, Yeah.
+531.6,6.0, Similar to how we can copy at least with this square brackets.
+537.6,1.0, Yeah.
+538.6,2.0, How can you do that?
+540.6,3.0," Oh, to make a copy of the object or."
+543.6,3.0, To make a copy of the class.
+546.6,5.399999999999977," Oh, so here, we're not, you can't make a copy of the class here specifically because we're"
+552.0,1.759999999999991, just defining the class.
+553.76,7.0," But when you're creating coordinate objects, then you could define a method that copies your"
+560.76,3.8799999999999955, object into another object.
+564.64,5.159999999999968," So in essence, it would return a new object of type coordinate with whatever parameters"
+569.8,2.9600000000000364, you'd want to do.
+572.76,4.440000000000055," So all, yeah, all these things are possible."
+577.2,2.6399999999999864, So let's add one more method to this class.
+579.84,4.399999999999977, Let's call it two underscore origin.
+584.24,4.720000000000027," So this distance method, just to remind ourselves, returned a number."
+588.96,4.399999999999977," So it just took the difference between these two points and it returned a number, just"
+593.36,2.0399999999999636, how far away they are.
+595.4,3.800000000000068, But this two origin method is going to do slightly different.
+599.2,4.519999999999982," Essentially, what I'm going to have this method do is to take my point from wherever it is"
+603.72,4.240000000000009, in my 2D plane that it has been initialized to.
+607.96,4.759999999999991," And say, I'm going to reset it back to the origin."
+612.72,7.360000000000014," So to do that, all that means is I'm going to make its x value and its y value be zero."
+620.08,6.360000000000014, So I can manipulate the x and y data attributes of this particular object to be whatever
+626.44,1.0, I want them to be.
+627.44,2.439999999999941, So I can reset them both to be zero.
+629.88,4.600000000000023, So if I ever call this method on an object whose x and y values are something other than
+634.48,2.759999999999991," zero, they'll be reset to zero."
+638.24,3.519999999999982, So let's actually run the code that we just wrote.
+641.76,2.9600000000000364, So here I've got two coordinate objects being created.
+644.72,4.639999999999986, So the beauty of writing this class for us is that now we can create as many coordinate
+649.36,1.5199999999999818, objects as we'd like.
+650.88,3.6000000000000227, They all will have an x value and a y value associated with them.
+654.48,4.2000000000000455, It's just that the specific values for x and y will be different.
+658.6800000000001,5.919999999999959, So here I've got a coordinate object with x3 and y4 being created and it's going to be
+664.6,2.2799999999999727, bound by the variable named c.
+666.88,5.0," And here a coordinate object with x and y values both zero, bound to a variable named"
+671.88,2.3600000000000136, origin.
+674.24,4.600000000000023, So then I can use this dot notation that we talked about last lecture to access either
+678.84,5.639999999999986, data or to run methods on the object.
+684.48,8.079999999999927," So in this print statement here, I'm using dot notation on c and origin to grab the"
+692.56,6.039999999999964, x values of c over here and origin over here.
+698.5999999999999,3.2800000000000864, And then I'm running the distance method on c.
+701.88,5.67999999999995, So remember dot notation says the thing before the dot is going to be an object.
+707.56,6.440000000000055, The thing after the dot is going to be the method name that can run on this object of type
+714.0,2.0, whatever this is coordinate.
+716.0,5.0, And then in the parentheses it's just a function we just pass in all the variables.
+721.0,3.7200000000000273, That method expects.
+724.72,4.8799999999999955," So c.distance will print whatever, however far away it is, I know five because those are"
+729.6,2.6000000000000227, nice numbers.
+732.2,4.919999999999959," So then if we run this function that we just wrote dot two origin, this function just"
+737.12,3.519999999999982, to remind you doesn't actually return anything.
+740.64,6.2000000000000455, It just resets the variables x and y for that particular object back to zero.
+746.84,6.240000000000009," So in here, when I call this method here, again dot notation, the thing before the dot"
+753.08,1.1599999999999682, is an object.
+754.24,1.32000000000005, It's c.
+755.5600000000001,4.039999999999964, It's x and y values are currently three and four.
+759.6,4.480000000000018," But after I run this function, it returns none, by the way."
+764.08,4.1200000000000045, It's x and y values will be changed to zero and zero.
+768.2,6.7999999999999545," So if I look at my code here, so here's this printf statement."
+775.0,6.440000000000055, So c's x values three and c's an origin's x is zero.
+781.44,4.4799999999999045," And then I've got these two calls here, so c dot two origin, right?"
+785.92,4.639999999999986," I'm making this function call before the function call c's x is three, c's y is four."
+790.56,4.160000000000082," And after the function call, you can see c's x is zero and c's y is zero."
+794.72,4.279999999999973, So I'm literally changing the x and y values of this object c.
+799.0,8.080000000000041," All right, so questions so far?"
+807.08,1.240000000000009, So far so good.
+808.32,1.3999999999999773, Hopefully recap.
+809.72,4.519999999999982," Okay, so again, sort of similar to the first slide we started with, right?"
+814.24,1.919999999999959," So we've got this class coordinate object, right?"
+816.16,1.8000000000000682, The class name is our type.
+817.96,2.919999999999959, So this object I'm creating is of type coordinate.
+820.88,4.2000000000000455," We're defining the class in a generic way and an abstract way, right?"
+825.08,6.960000000000036," So we have to use the self variable, either in the parameter list to tell Python what's"
+832.0400000000001,2.199999999999932, the thing before the dot going to map to?
+834.24,3.800000000000068," Well, it's going to map to self in my parameter list."
+838.0400000000001,4.7999999999999545," Or we use the self to tell Python what the data attributes of this object are, right?"
+842.84,5.2000000000000455, So anything defined with self dot some variable name will be a data attribute.
+848.0400000000001,4.839999999999918, That's common across all the instances I create from of this type.
+852.88,6.360000000000014," When we create actual instances, that's when our blueprint, our abstract definition now"
+859.24,2.3199999999999363, gets put into use.
+861.56,6.040000000000077," And now I'm creating actual objects that I can grab x values from, change x values from,"
+867.6,4.039999999999964, get distances between other objects and so on and so on.
+871.64,8.759999999999991," Okay, so what I'd like to do next is to take this coordinate class and build a circle"
+880.4,1.8799999999999955, class with it.
+882.28,6.159999999999968, So this comes sort of hand in hand with the idea of when you're deciding how to create
+888.4399999999999,2.4400000000000546," a class, you get to make the design decision, right?"
+890.88,5.959999999999923," So when the finger exercise for Monday's lecture, today's Wednesday, yes, Monday's lecture,"
+896.8399999999999,4.880000000000109," you guys had to create a center, sorry, a circle class, right?"
+901.72,5.319999999999936, But the way we defined the circle class in that finger exercise was basically by that
+907.04,1.5199999999999818, circle's radius.
+908.56,4.720000000000027," That's the only sort of way we abstracted that circle, right?"
+913.28,6.080000000000041," But now in this lecture, we're going to make a different design decision and say that,"
+919.36,4.639999999999986," let's say, and say that a circle will now be defined using two things."
+924.0,2.599999999999909," The first is the radius, right?"
+926.5999999999999,2.0400000000000773, So I'm going to say that that's an integer.
+928.64,3.67999999999995," And the second is going to be the center of the circle, right?"
+932.32,4.1200000000000045," So as in the picture there, I'm going to say that a circle is, you know, based on the"
+936.44,2.439999999999941, center and this radius.
+938.88,4.240000000000009," And the center is not going to be a float, it's not going to be a tuple, it's not going"
+943.12,4.680000000000064," to be an int, it's going to be a coordinate object, right?"
+947.8000000000001,3.840000000000032," The data type that we were just writing, okay?"
+951.6400000000001,2.0," All right, good."
+953.6400000000001,6.319999999999936," It's not a secret, but it didn't lower my voice on purpose, just wanted to let that sink"
+959.96,1.0," in, right?"
+961.12,5.440000000000055, One of our data attributes for the circle class is a coordinate object.
+966.5600000000001,5.840000000000032," So we're using an object that we just wrote to create a more complex object, a circle."
+972.4000000000001,3.2799999999999727," Okay, so here's my class definition."
+975.6800000000001,1.919999999999959, The data type is called circle.
+977.6,5.480000000000018," Again, it inherits all the parent of circle is just a generic Python object."
+983.08,3.840000000000032, First method we have to write is the init method.
+986.92,4.360000000000014," The first parameter is self, so this thing that I'm creating right now, and I say that"
+991.28,6.360000000000014," to create a circle, I have to give it a center, and I have to give it a radius."
+997.64,4.159999999999968," The data attributes of this circle class, right?"
+1001.8,6.600000000000023," So the two attributes that make up my circle are this self dot center, so this center variable"
+1008.4,2.439999999999941," here, and self dot radius."
+1010.8399999999999,5.0, So these two things together make up our circle object.
+1015.84,3.759999999999991," And initially, in the init method, right, and when we construct our object, we're just"
+1019.6,6.600000000000023, going to set these two things to be whatever is passed in as parameters in that in the constructor.
+1026.2,1.0, Okay.
+1027.2,3.519999999999982, All right.
+1030.72,8.120000000000118," So what I'd like to say is that this center parameter will be a coordinate object, and"
+1038.8400000000001,1.6799999999998363, radius will be an int.
+1040.52,3.3600000000001273," Now notice in this code, I'm not actually enforcing this, right?"
+1043.88,6.599999999999909," I could create a circle object by just passing in two strings, right?"
+1050.48,3.400000000000091," At this point, this code doesn't care, right?"
+1053.88,4.319999999999936," Nowhere am I enforcing the fact that center is a coordinate and radius will be in it, but"
+1058.2,3.6000000000001364," you know, that's just something that we know."
+1061.8000000000002,5.879999999999882," So then when we create the actual object down here, right?"
+1067.68,5.319999999999936, My underscore circle is going to be a variable that's bound to my circle object.
+1073.0,3.759999999999991, So here I'm invoking the name of my class circle.
+1076.76,2.519999999999982, And then what are the two parameters I'm passing in?
+1079.28,5.279999999999973," Well, the first one I said right up here that it should be a center, a, a, a, a, a, a, a, a, coordinate"
+1084.56,1.400000000000091, object.
+1085.96,3.0, So center is a variable name.
+1088.96,1.0, And what is it?
+1089.96,4.3599999999999," Well, I had to create this coordinate object, right?"
+1094.32,3.759999999999991," So I'm just invoking the name of coordinate, this class that creates for me a coordinate"
+1098.08,6.319999999999936," object, and I happen to put the center of the circle at two comma two."
+1104.3999999999999,1.0, Yeah.
+1105.3999999999999,2.0, Okay?
+1107.3999999999999,2.759999999999991," So this center thing is a coordinate object, right?"
+1110.1599999999999,1.759999999999991," It's not a two-puller, float, or whatever."
+1111.9199999999998,1.3200000000001637, It's a coordinate object.
+1113.24,6.720000000000027," And then the radius of this circle is two, an int."
+1119.96,1.9199999999998454, Everyone okay with that?
+1121.8799999999999,1.0, Okay.
+1122.8799999999999,4.080000000000155, So what I'd like you to do next is to modify this init method just slightly.
+1126.96,5.720000000000027, Just to show you that the init method doesn't just always set the data attributes and
+1132.68,1.0, it's done.
+1133.68,2.8799999999998818, It can do a lot of initialization code.
+1136.56,7.2000000000000455," One of the more important things it can do is to try to enforce the types on the, on the"
+1143.76,1.6800000000000637," parameters here, right?"
+1145.44,7.599999999999909, So what I'd like you to do is add to this code to check that the type of center is a coordinate
+1153.04,2.560000000000173, and the type of radius is an integer.
+1155.6,6.519999999999982," And only if those two things are true, then do you set the two data attributes?"
+1162.12,5.039999999999964, And otherwise raise for me a value error.
+1167.1599999999999,3.759999999999991, So that should be around line 48.
+1170.9199999999998,1.0, Okay.
+1171.9199999999998,5.0, Does anyone have some code for me?
+1176.9199999999998,2.0, Yeah.
+1178.92,7.0, Not equal coordinate.
+1185.92,1.0, Yep.
+1186.92,4.0, So that's raise value error.
+1190.92,1.0, Yep.
+1191.92,1.0, Cool.
+1192.92,4.0," So that takes care of one, yep."
+1196.92,7.0, And then the same for radius.
+1203.92,1.0, Yep.
+1204.92,6.0," So if the type of radius, because that's the parameter passed in, not equal to int raise"
+1210.92,6.0, value error.
+1216.92,5.559999999999945," So if we drop into each of any of these ifs, then we immediately raise the value error,"
+1222.48,1.0, right?
+1223.48,0.9200000000000728, The code doesn't complete.
+1224.4,5.480000000000018," And then only if we didn't drop into this one or this one, do we then go on to create"
+1229.88,2.0, my object.
+1231.88,1.2799999999999727, So then here we are.
+1233.16,3.1200000000001182," These two lines here will succeed, right?"
+1236.2800000000002,2.839999999999918, So there's no error raised or anything like that.
+1239.1200000000001,5.920000000000073," But then this line here, raised of our value error, because we tried to create a circle"
+1245.0400000000002,2.1599999999998545," where the center is an integer, right?"
+1247.2,1.6800000000000637, Obviously not a coordinate object.
+1248.88,4.7999999999999545," And then here, again, we raised our value error because we tried to pass in a string as"
+1253.68,1.5199999999999818, the radius.
+1255.2,2.2799999999999727, Any questions about this code?
+1257.48,1.0," Oh, yeah."
+1258.48,1.0, Sorry.
+1259.48,1.0, Yeah.
+1260.48,6.0, So just think that it's very important for these students to use this before.
+1266.48,1.0, Yeah.
+1267.48,2.119999999999891," So it's important to place them before you actually create the object, right?"
+1269.6,7.880000000000109, Because you don't want to create it unless everything's appropriate.
+1277.48,4.2000000000000455, Okay.
+1281.68,6.839999999999918, So now let's add one more useful method to our class circle.
+1288.52,5.960000000000036," Now that we've defined a circle using a center point in a radius, we can add this little"
+1294.48,8.759999999999991, function that checks if another coordinate object is inside our circle.
+1303.24,6.839999999999918," So again, I'm not going to be able to enforce that this point is a coordinate object, but"
+1310.08,3.6400000000001," you know, you could do it in the dox string or you could do a check or something like that."
+1313.72,3.7200000000000273," But you know, again, we're just going to assume the user using this method is going to follow"
+1317.44,1.0, the rules.
+1318.44,2.2799999999999727, So how is this method going to work?
+1320.72,5.2000000000000455," The idea here is that we're going to use the center, which is a coordinate object, and"
+1325.92,3.5599999999999454," some other point, you know, P, wherever it may be."
+1329.48,4.039999999999964, What we're going to do is we're going to say what's the distance between this point and
+1333.52,1.9600000000000364, the center of the circle.
+1335.48,3.7200000000000273," If it's greater than the radius, we know the point is outside the circle."
+1339.2,4.3599999999999," If it's smaller than the radius, we know the point is in the circle, right?"
+1343.56,2.7200000000000273, So this code is just enforcing that.
+1346.28,7.880000000000109," So we have just a simple return statement that's going to run the distance method, right?"
+1354.16,8.11999999999989," This is a method that we wrote back in the coordinate class, right?"
+1362.28,2.9600000000000364, That's fine because you know what?
+1365.24,4.759999999999991," Point is an object of type coordinate, and self dot center."
+1370.0,3.759999999999991," So the center of this circle object, I'm trying to manipulate, right?"
+1373.76,5.759999999999991," This, tell if another point is inside me or not, is also a coordinate object."
+1379.52,1.6800000000000637, So why not?
+1381.2,3.5599999999999454, We already wrote the code that calculates the distance between these two points.
+1384.76,1.0, So let's call it.
+1385.76,4.920000000000073," So here I've got the thing before the dot, a coordinate object, dot notation, the method"
+1390.68,4.319999999999936," I want to run on this coordinate object, and then in parentheses, this is another coordinate"
+1395.0,1.0, object.
+1396.0,3.519999999999982, So this will just tell me some number for how far these two points are.
+1399.52,4.160000000000082, And all we do is return whether that number is less than the radius.
+1403.68,6.1599999999998545, Does that make sense?
+1409.84,5.0," And again, this only works if point, the thing that's passed in here is a coordinate object,"
+1414.84,1.0, right?
+1415.84,4.240000000000009," Otherwise, this code will fail because it's going to try to pass in, it's going to try"
+1420.08,2.880000000000109," to run the distance method on a string, for example."
+1422.96,4.039999999999964," And of course, this string doesn't have a distance method, right?"
+1427.0,3.7999999999999545," So down here, these two lines are exactly as we had before."
+1430.8,5.600000000000136," We create a circle object whose center is at 2, 2 and radius is 2."
+1436.4,3.1599999999998545, And then I've got another coordinate object down here.
+1439.56,2.6000000000001364," It's at 1, 1, right?"
+1442.16,1.7999999999999545, So clearly within the circle.
+1443.96,3.7999999999999545, So that print statement will then print true.
+1447.76,2.0799999999999272," Right, so that's just basically what I wrote."
+1449.84,1.0, This is a coordinate object.
+1450.84,1.1200000000001182, This is the method.
+1451.96,1.9600000000000364, This is another coordinate object.
+1453.92,1.7999999999999545, All right.
+1455.72,4.2000000000000455, So let's run it.
+1459.92,1.6800000000000637, So this is exactly the code from the slide.
+1461.6000000000001,3.5599999999999454," So if I run this method on a coordinate object, that's 1, 1."
+1465.16,0.7999999999999545, So we're in here.
+1465.96,1.3599999999999, So true.
+1467.32,3.6400000000001," And otherwise, if I run it on coordinate object, right?"
+1470.96,4.400000000000091," Here, 10, 10, clearly outside the circle, it prints false."
+1479.88,0.5199999999999818, Questions?
+1486.72,3.0399999999999636," Yes, that's exactly what I said already."
+1489.76,2.240000000000009," OK, good."
+1492.0,2.160000000000082, So now I want you to answer this question.
+1494.16,1.9199999999998454, Nothing to code here.
+1496.08,3.4400000000000546, But I've got these two is inside methods.
+1499.52,4.080000000000155, So the first one here is inside 1 is exactly the one that we just saw.
+1503.6000000000001,0.2799999999999727, Right?
+1503.88,5.039999999999964, It runs this distance method with point and self dot center.
+1508.92,2.3999999999998636, Is inside 2 looks slightly different?
+1511.32,2.3600000000001273, The differences I've highlighted in this box.
+1513.68,2.0, What I'd like you to tell me we can do a show of hands.
+1515.68,4.240000000000009, And these two methods functionally equivalent.
+1519.92,5.759999999999991," That is, will they return the same thing given the same input?"
+1525.68,1.2000000000000455, So think about it.
+1526.88,4.119999999999891, And then I will do a show of hands.
+1535.6000000000001,5.0," So who things, yes, they are functionally equivalent."
+1540.6000000000001,3.5599999999999454," Like given the same input, they will both return true, right?"
+1544.16,1.5199999999999818, And variables.
+1545.68,1.0799999999999272," OK, who thinks no?"
+1546.76,2.880000000000109, They are not functionally equivalent.
+1549.64,2.7999999999999545," Some, half and half."
+1552.44,3.2799999999999727," OK, well, let's think about what the distance method is doing."
+1558.8000000000002,4.279999999999973," It's being run on an object of type, what?"
+1567.8000000000002,1.7999999999999545," Coordinate, exactly."
+1569.6000000000001,4.0," So in here, is point an object of type coordinate?"
+1573.6,1.240000000000009," Yes, OK."
+1574.84,4.559999999999945," And then here, what is the parameter to the distance method?"
+1579.3999999999999,3.4400000000000546, Is it object of type coordinate?
+1582.84,3.240000000000009," Self dot center, is it an object of type coordinate?"
+1586.08,0.7599999999999909, Yes.
+1586.84,2.6400000000001, So now let's look at is inside 2.
+1589.48,4.079999999999927, What is the type of self dot center?
+1593.56,0.6399999999998727, Coordinate.
+1594.1999999999998,2.519999999999982, And we're running the distance method on this object of type
+1596.7199999999998,0.9600000000000364, coordinate.
+1597.6799999999998,3.880000000000109, And what is the object in the parameter list here?
+1601.56,0.6800000000000637, What's its type?
+1603.76,1.4800000000000182, Coordinate.
+1605.24,1.9199999999998454," So when we wrote the distance method,"
+1607.1599999999999,4.080000000000155, does it matter which object we call the method on
+1611.24,3.3599999999999, to get the distance between these two points?
+1614.6,0.599999999999909," No, right?"
+1615.1999999999998,2.7200000000000273," Because the distance between saying,"
+1617.9199999999998,3.2000000000000455, I want the distance between this point and this point
+1621.12,3.2000000000000455," is the same as saying, I want the distance between this point"
+1624.32,0.7999999999999545," and this point, right?"
+1625.12,4.120000000000118, It's just the order is different.
+1629.24,2.9199999999998454," So just the way that this distance method works, right?"
+1632.16,3.9200000000000728," It doesn't actually matter which object I call the method on,"
+1636.0800000000002,1.9199999999998454, right?
+1638.0,2.759999999999991," As long as they're both coordinate objects, which they are."
+1644.0,0.8000000000001819, Does that make sense?
+1644.8000000000002,0.6399999999998727, Is that all right?
+1645.44,2.839999999999918, Any questions about this for those who are in the no path?
+1648.28,0.5200000000002092, Yeah.
+1648.8000000000002,5.3599999999999, So the most important thing is that a circle up to the wall.
+1654.16,1.4800000000000182, Self dot center?
+1655.64,4.7999999999999545," Self dot center is an object of type coordinate, not circle."
+1660.44,3.7200000000000273," Because self is a circle, right?"
+1664.16,4.559999999999945," Because self is talking about me, the class that I'm currently defining."
+1668.72,3.6400000000001, And the class I'm currently defining is a circle.
+1672.3600000000001,2.6799999999998363," But self dot center, right?"
+1675.04,1.0, We even wrote code.
+1676.04,4.880000000000109," We would like to enforce that it is a coordinate object, right?"
+1686.64,3.2799999999999727, So we could have put parentheses around the self dot center
+1689.92,2.7200000000000273, if we wanted to and then call the distance on that.
+1692.64,2.839999999999918, Does that make sense?
+1695.48,2.3600000000001273, OK.
+1697.8400000000001,0.8399999999999181, All right.
+1698.68,2.759999999999991, So that's all I had regarding the circle class.
+1701.44,1.6400000000001, Now we're going to switch gears and we're
+1703.0800000000002,2.0799999999999272," going to look at fractions, right?"
+1705.16,3.7200000000000273," So numerator, denominator, situation here."
+1708.88,6.599999999999909, So we're going to create a new data type to represent a number as a fraction.
+1715.48,3.0800000000001546, So first thing we need to do is make the design decision.
+1718.56,2.9600000000000364, What data will represent our fraction?
+1721.52,2.119999999999891, So think about it.
+1723.6399999999999,1.2000000000000455," You guys tell me, what do you think?"
+1724.84,7.279999999999973, What's a reasonable set of data that could represent our number as a fraction?
+1732.12,2.480000000000018," When you think of a, yeah."
+1734.6,4.120000000000118, Is it like a set of two things that are greater than the?
+1738.72,3.5599999999999454," Yeah, a set of two things, maybe integers, right?"
+1742.28,3.2000000000000455," One representing the numerator, the thing above the line,"
+1745.48,2.759999999999991," and one the denominator, the thing below the line."
+1748.24,0.5, Good.
+1748.74,2.4600000000000364, That's exactly what I had in mind.
+1751.2,3.2799999999999727, What are some behaviors of fractions?
+1754.48,2.2799999999999727, You guys tell me.
+1756.76,3.400000000000091, What things should fractions do?
+1760.16,1.0, Yeah.
+1761.16,1.0, Oh.
+1762.16,1.5599999999999454," Oh, you can have them."
+1763.72,1.6800000000000637, Yeah.
+1765.4,0.4800000000000182, Yes.
+1765.88,4.439999999999827," Adding them, multiplying fractions together, dividing them,"
+1770.32,2.8400000000001455," inverting a fraction, also something we could do, right?"
+1773.16,3.480000000000018," So one over what it currently is, things like that."
+1776.64,1.0, All right.
+1777.64,2.240000000000009," So one over what it's going to do is,"
+1779.88,3.0, we're going to have a fraction of the fraction.
+1782.88,4.680000000000064, So the first thing we're going to do is create this fraction class.
+1787.5600000000002,5.0," And I'm actually going to name it simple fraction instead of fraction,"
+1792.5600000000002,5.559999999999945, because we're going to improve upon this simple fraction object in a little bit.
+1798.1200000000001,4.079999999999927," So this one, I'm just going to call some of the numbers,"
+1802.2,4.0, and then we're going to have a fraction of the fraction of the fraction.
+1806.2,3.2799999999999727," So this one, I'm just going to call simple fraction."
+1809.48,5.2000000000000455," Like before, it's parent is the generic Python object."
+1814.68,2.2000000000000455," So again, very, very simple."
+1816.88,5.2000000000000455, It doesn't do anything special yet.
+1822.0800000000002,2.959999999999809, The first method we need to write is the init method.
+1825.04,2.2000000000000455, So how do we initialize a fraction object?
+1827.24,4.279999999999973," Obviously, we don't want the numerator or the denominator to be empty, right?"
+1831.52,2.160000000000082," So when we create a simple fraction object,"
+1833.68,5.039999999999964, we want the user to tell us the values for the numerator and the denominator.
+1838.72,7.160000000000082, So those are the two parameters that I would love the user to initiate this fraction with.
+1845.88,5.919999999999845, And then what will be the two data attributes that we had decided on?
+1851.8,6.400000000000091," Well, numerator, so self.num and self.dnum will be the two data attributes."
+1858.2,3.0399999999999636," So self.num and self.dnum are our data attributes,"
+1861.24,8.319999999999936, and they're going to be set initially to whatever is passed in that constructor call.
+1869.56,2.160000000000082," Okay, so far so good."
+1871.72,4.599999999999909, Let's write a method that helps us multiply two fraction objects together.
+1876.32,2.400000000000091, So we'll call it times.
+1878.72,5.559999999999945," So this times method will be called on an object, the thing before the dot."
+1884.28,4.079999999999927," That object, that thing before the dot, will get mapped to self."
+1888.36,6.3599999999999, And then the thing in the parentheses that one other parameter will be mapped to OTH.
+1894.7199999999998,4.520000000000209," Okay, so how do we multiply two fraction objects together?"
+1899.24,3.839999999999918," Take the numerators, multiply them, take the denominators, multiply them."
+1903.08,3.6399999999998727," You got your numerator and you got your new denominator, right?"
+1906.7199999999998,3.7200000000000273, So how do we grab the numerators of both of these objects?
+1910.4399999999998,5.759999999999991," So the numerator of the thing before the dot, right, that maps to self is self.num."
+1916.2,11.599999999999909," And the numerator of the other object that's going to be in the parameter list is the name of my parameter, OTH dot, their numerator."
+1927.8,2.7200000000000273, No.
+1930.52,3.519999999999982, Everyone okay so far?
+1934.04,0.8400000000001455," Yes, okay."
+1934.88,2.439999999999827," I saw some headnuts, that's good."
+1937.32,5.240000000000009," The denominator will be the same, so my new denominator is just multiplying my denominator,"
+1942.56,4.7999999999999545," the thing before the dot, what with the thing in the parameters denominator."
+1947.36,6.720000000000027," Okay, so I've got my new numerator, my new denominator, and all I'm going to do is do the division and return this value."
+1954.08,1.8800000000001091, What's the type of the return here?
+1955.96,1.2799999999999727, What's this method going to return?
+1957.24,1.8399999999999181, What type?
+1959.08,2.6400000000001," A float, exactly, yeah, good."
+1961.72,6.0," Yep, because all I'm doing is dividing one number by another number."
+1967.72,2.439999999999827, Okay.
+1970.16,4.0," Perfect, so that's what I've already said."
+1974.16,5.7999999999999545," Now, we can define another method, plus to add two fraction objects together."
+1979.96,3.6400000000001," Very similar thing, except the top is going to be slightly different, right?"
+1983.6000000000001,6.0," You take the numerator of one, times the denominator of the other, plus the numerator of other,"
+1989.6000000000001,3.240000000000009," times the denominator of the first one, right?"
+1992.8400000000001,2.7999999999999545," The crisscross thing, the denominator is the same, right?"
+1995.64,2.0, Just multiply the denombs together.
+1997.64,3.0," And again, we return the division, divided by bottom."
+2000.64,4.480000000000018," Again, the return of this method will be a float."
+2005.1200000000001,5.759999999999991," So even though I'm multiplying or adding these two fraction objects together, my return will be a float."
+2010.88,1.400000000000091, Fine.
+2012.2800000000002,2.119999999999891, So let's run the code.
+2014.4,3.240000000000009, I'm creating two simple fraction objects.
+2017.64,4.319999999999936, First one is going to be accessed using variable named f1.
+2021.96,4.0, So this one represents the number three over four.
+2025.96,3.9600000000000364, Second one is accessed by variable named f2.
+2029.92,3.0399999999999636, And this one represents the fraction one over four.
+2032.96,2.119999999999891, Okay.
+2035.08,6.680000000000064," So now, if I access the numerator of f1, Python says, well, what's the object before the dot?"
+2041.76,1.0399999999999636, It's f1.
+2042.8,1.3200000000001637, So what is your numerator?
+2044.1200000000001,3.0399999999999636," Well, I said it to three, so this one tells me it's three."
+2047.16,0.5, Right?
+2047.66,1.9399999999998272, Pretty simple.
+2049.6,2.2400000000002365, Same thing with the denominator of f1.
+2051.84,1.8800000000001091," Again, it looks at the thing before the dot."
+2053.7200000000003,1.2399999999997817, It's a fraction object.
+2054.96,7.239999999999782," It says, do you have a d-nom, a data attribute you do, and its value is four, so that's four."
+2062.2,3.7200000000002547," Now, what's the result of f1.plus f2?"
+2065.92,1.8400000000001455, Super weird way to write it.
+2067.76,2.6399999999998727, But it's what we've got so far.
+2070.4,0.5, Right?
+2070.9,3.900000000000091, So the thing before the dot is an object.
+2074.8,2.7199999999998, It's a simple fraction object.
+2077.52,5.639999999999873," And the thing before the dot, remember, maps to self in my parameter list."
+2083.16,0.7200000000002547, Right?
+2083.88,1.7600000000002183, It's just a function.
+2085.6400000000003,6.359999999999673," So like usual functions, a bunch of lectures ago, we basically mapped the actual parameters"
+2092.0,5.680000000000291," when we run the function to the formal parameters, the things for my function definition."
+2097.6800000000003,6.639999999999873," So the actual parameter here for self is the thing before the dot, f1, and the parameter"
+2104.32,2.599999999999909, f2 gets mapped to OTH.
+2106.92,1.0, Right?
+2107.92,2.9600000000000364, That's how we read that.
+2110.88,2.2800000000002," So this is just doing the addition, right?"
+2113.16,5.400000000000091," So this will give me 1.0, because it's a float."
+2118.56,4.400000000000091," Same with the times, the thing before the dot maps to self, and every other parameter in"
+2122.96,3.919999999999618, the parameter list maps to everything else except for self.
+2126.8799999999997,3.9600000000000364, So this one will do 3 over 16 to give me 0.1875.
+2130.8399999999997,2.0, Okay?
+2132.8399999999997,1.8400000000001455, Everyone okay so far?
+2134.68,1.0, Right?
+2135.68,6.760000000000218," The trick here is to remember that the thing before the dot maps to self in the method definition,"
+2142.44,4.599999999999909, then everything else maps to everything other than self.
+2147.04,2.519999999999982, Okay.
+2149.56,4.640000000000327," I'm glad everything's okay so far, because I'm going to get you to write this code here."
+2154.2000000000003,6.079999999999927," It looks like a lot, but the first half of it is just defining the init method for simple"
+2160.28,1.2399999999997817, fraction.
+2161.52,4.320000000000164," I want you to write these two methods, and they're going to be one liners basically."
+2165.84,8.519999999999982," So get inverse will return something, and it returns a float representing one over"
+2174.36,1.3200000000001637," myself, right?"
+2175.6800000000003,5.039999999999964," So if the input, as is in this example here, if I have a simple fraction object representing"
+2180.7200000000003,8.7199999999998," 3 over 4, if I call get inverse on it right here, f1 dot get inverse, self becomes f1,"
+2189.44,4.7199999999998, and I would like it to return and therefore print 4 over 3.
+2194.16,1.6000000000003638, So 1.33333333.
+2195.76,1.0, Okay?
+2196.76,6.519999999999982," That's get inverse, and then invert is a method that doesn't return anything, so returns"
+2203.28,7.440000000000055," none, and instead it just internally switches the numerator and the denominator of self."
+2210.7200000000003,1.0, Right?
+2211.7200000000003,4.879999999999654, So self's numerator becomes whatever its denominator is and the other way around.
+2216.6,5.0," So when you call it, this one doesn't print anything, but instead if we access f1's numerator"
+2221.6,5.360000000000127," and denominator, they will have been switched."
+2226.96,3.400000000000091, So this is down online.
+2230.36,4.199999999999818, 1.33?
+2234.56,2.7599999999997635," Give you a couple moments, and then we can write it together."
+2237.3199999999997,1.8800000000001091, Should not be a lot of code.
+2239.2,1.0, Okay.
+2240.2,2.0399999999999636, How do we write the get inverse?
+2242.24,3.0799999999999272, So remember you have to return something.
+2245.32,1.0, How do we return?
+2246.32,4.679999999999836," Yeah, 1 over."
+2251.0,2.680000000000291, 1 over self.
+2253.6800000000003,3.4400000000000546," So remember self is an object of type simple fraction, right?"
+2257.1200000000003,4.879999999999654, So we need to manipulate its numerator and the denominator if we want to do the return.
+2262.0,10.039999999999964," Because if we just do this, is this one here, then Python says, oops, sorry, it's trying"
+2272.04,5.760000000000218," to divide 1, an integer, by an object of type simple fraction, right?"
+2277.8,2.119999999999891, And that's the error that we get here.
+2279.92,3.9200000000000728, And it doesn't know how to do a division between an integer and a simple fraction.
+2283.84,8.319999999999709, So how can we do that by working with actual numbers that are part of my simple fraction?
+2292.16,7.0, Yeah.
+2299.16,9.440000000000055, Self.denom divided by self.nom.
+2308.6,2.0," Yeah, we can do that."
+2310.6,1.0, Yeah.
+2311.6,2.0, Or 1 over self.nom divided by self.denom.
+2313.6,1.0," That's also fine, yeah."
+2314.6,2.0, But this is a little bit cleaner.
+2316.6,2.400000000000091," So now, denom is an integer, right?"
+2319.0,3.8400000000001455," Because when we create it, we pass in int int."
+2322.84,4.399999999999636," So denom and num are integers, which means that Python knows how to do a division between"
+2327.24,2.1600000000003092, a number and another number.
+2329.4,2.519999999999982, Yeah.
+2331.92,5.8400000000001455," So if we run that, now it prints 1.33333, exactly."
+2337.76,1.6399999999998727, Okay.
+2339.4,2.7599999999997635, How do we do the invert function method?
+2342.16,2.0, Sorry.
+2344.16,1.4800000000000182, Sorry.
+2345.64,3.0, Go ahead.
+2348.64,7.0, Yeah.
+2355.64,7.0, Yeah.
+2362.64,1.0, Yeah.
+2363.64,18.0, That's one way to do it.
+2381.64,1.0, Yep.
+2382.64,5.0, So you can see now accessing the new numerator and denominator gives me 4 over 3.
+2387.64,2.0, Any other ways that you've done it?
+2389.64,1.0, Yeah.
+2390.64,7.0," The two-pole trick, I like it."
+2397.64,3.0," So I've done, yep."
+2400.64,1.0, Perfect.
+2401.64,1.0, Yes.
+2402.64,1.0," Oh, okay."
+2403.64,1.0, Yeah.
+2404.64,1.0, That also works.
+2405.64,1.0, Yeah.
+2406.64,1.0, Perfect.
+2407.64,1.0, Yeah.
+2408.64,1.0, Perfect.
+2409.64,1.0, Yes.
+2410.64,7.0, I guess it's all that now.
+2417.64,1.0," Oh, okay."
+2418.64,1.0, Yeah.
+2419.64,1.0, That also works.
+2420.64,2.0, Yeah.
+2422.64,1.0, Perfect.
+2423.64,2.0, All very valid ways of doing it.
+2425.64,1.0, Nice.
+2426.64,1.0, Yep.
+2427.64,2.0," So notice, there's no return for this one, right?"
+2429.64,1.0, I didn't want to return anything.
+2430.64,2.0, Python will automatically return none.
+2432.64,5.0, And these internal numerator and denominators will have been flipped.
+2437.64,1.0, Perfect.
+2438.64,5.0, Questions about this code?
+2443.64,3.0, Okay.
+2446.64,2.0, So let's try it out a little bit more.
+2448.64,4.0," So here I've got these two additions, right?"
+2452.64,5.0," So this is exactly what we had previously, the exact same code."
+2457.64,4.0," What's weird though, and you might have been weirded out by this too when we first"
+2461.64,7.0," ran it is I am doing operations with two fraction objects, and yet the plus and the"
+2468.64,5.0," times methods give me floats, which is a little weird, right?"
+2473.64,5.0," Ideally, if we're working with fraction objects, I would like the return to also be a"
+2478.64,4.0, fraction object so I can then work with more fraction objects later on.
+2482.64,2.0, That's one weird thing.
+2484.64,5.0," Another weird thing is if we then print one of our objects that we've created,"
+2489.64,5.0," F1 in this case, we use print statements often, right, to debug things like that."
+2494.64,5.0," If I use the print statement on an object of type that I've created, in this case a"
+2499.64,4.0," simple fraction, Python spits this out."
+2503.64,5.0," It says, hey, your object is an object of type simple fraction at this memory"
+2508.64,1.0, location.
+2509.64,4.0," No thank you, that's not very useful to me, right?"
+2513.64,4.0, What I'd like to know is maybe a nice representation of my fraction object like
+2517.64,3.0," 3 slash 4, right?"
+2520.64,3.0, I don't care about what memory location it's at.
+2523.64,6.0," And one more thing we'd like to try to do, this is a class that represents something"
+2529.64,1.0, numerical.
+2530.64,6.0, So something that people might instinctually want to do is to use operators like the star
+2536.64,6.0," or the plus or the slash to divide, add, multiply these fraction things."
+2543.64,5.0," But if we run the star operator between object of type simple fraction, right,"
+2548.64,6.0," times another object of type simple fraction, Python gives us an error."
+2554.64,3.0, And I'll even show you the error.
+2557.64,6.0, So here.
+2563.64,5.0," So here I am printing my object, right, so it spits this out, which is fine,"
+2568.64,2.0, but not what I want.
+2570.64,3.0," This one, you know, obviously we've seen this, it already prints this out."
+2573.64,4.0," And then if I try to multiply my two simple fraction objects together, it says,"
+2577.64,4.0, I don't know how to do that.
+2581.64,3.0," Right, so it's unsupported operand types."
+2584.64,4.0, So the operand simple fraction and simple fraction are not supported with the star operator.
+2588.64,6.0," Well, no surprise there, how is Python supposed to know how to multiply two simple fraction objects together?"
+2594.64,5.0," Right, right, before I even ran this program, I didn't even know what a simple fraction object was."
+2599.64,7.0," Right, so we need to tell it all of these details, and we will do just that."
+2606.64,8.0," So all of these operators print LEN that we've been using star, add, right,"
+2614.64,4.0, less than greater than even the square brackets to index into something.
+2618.64,3.0, These are actually shorthand notations.
+2621.64,4.0," Right, they're really common operations that you want to do."
+2625.64,9.0, And Python lets you use these common operations instead of writing these really verbose function names.
+2634.64,8.0," But really behind the scenes, all of these shorthand operations actually run a method."
+2642.64,5.0," Okay, again, not a secret, I'm not lowering my voice because it's a secret, but it's just, it's really cool."
+2647.64,8.0," So all of these operations, like the multiplication or the print statement, just gets replaced with a method."
+2655.64,3.0," Okay, and the method names look like this."
+2658.64,8.0," They are dunder methods, just like the init method was a special method that Python ran when something special happened, like you're creating an object."
+2666.64,7.0," Well, when something special happens, like you're using the plus operator between an object of your type and something else,"
+2673.64,5.0, Python will also run this special dunder method behind the scenes.
+2678.64,7.0," And same here, if I want to multiply my object with something else, Python will run this special dunder method behind the scenes."
+2685.64,7.0," If I want to print an object of my type, Python will run this special dunder method behind the scenes."
+2692.64,9.0," Even something like casting, if I want to cast my object to a float or to a string or something, Python will run this special dunder method behind the scenes."
+2701.64,7.0," And then, you know, there's a whole bunch of other ones, even indexing into a list, sorry, not a list, indexing into an object of your type."
+2708.64,13.0," So if you make an object like a queue or a stack, where you know you have a bunch of sequences of objects, you can tell Python how to index into an object of your type into an object that's a queue."
+2721.64,7.0," So all of these things, all of these methods need to be implemented somewhere."
+2728.64,7.0," Now, most of them are not implemented in the basic Python object, except for the STR."
+2735.64,4.0, So the STR method actually just prints the memory location of this object.
+2739.64,3.0," That's exactly what we had seen, right, by the default behavior."
+2742.64,19.0," But none of these other ones are really implemented. And so if you want the object that you're currently writing to work with the STR or the plus or the double equal sign to test for equality between this object and something else, you have to write the method in your class definition."
+2761.64,8.0, So you have to implement it to tell Python that this is what you want to do when somebody uses this special shorthand notation.
+2769.64,6.0," So let's start with the print, because it's the most basic thing you will probably want to implement when you create a new data type."
+2775.64,8.0," For debugging purposes, you'll find yourself instinctually saying, hey, print F1 to print this fraction object to see what it looks like."
+2783.64,7.0, And so the STR method is one of the really basic things you should implement right after the init method.
+2791.64,6.0," So let's look at it in the context of the coordinate object. So here I've got my coordinate object 3, 4."
+2797.64,11.0," And even when I print this coordinate object, Python tells me this still an informative message that this object is of type coordinate at this memory location."
+2808.64,15.0," Okay, I don't care. When instead what I would really like to do is say, hey, I want to represent a coordinate object by something like this, angle bracket, the value of the x coordinate comma, the value of the y coordinate, close angle bracket."
+2823.64,6.0, So that would be a far more informative print statement than what memory location this thing is at.
+2830.64,14.0," So let's do that. Well, here we are our coordinate object, the distance, the init like we had before. And here I'm defining my STR method."
+2844.64,9.0," So double underscore, STR double underscore. No other parameters except for self. So me calling this method on an object."
+2853.64,13.0," And what is this going to do? It will return not print, return a string. And the string is going to represent the thing you want to be printed out."
+2866.64,9.0, So it returns a string doesn't print it. However you want to make up the string is up to you. So here I've just used concatenation of a bunch of stuff.
+2875.64,15.0," So I'm concatenating the angle bracket with the x value of my current object, cast to a string, concatenated with the comma, concatenated with the y value of my current object, cast to a string, concatenated with the closed angle bracket."
+2890.64,10.0, That's the design decision we made for how a coordinate object should be printed. Everyone okay so far?
+2901.64,17.0," So if you want to use an f string to make up this thing to return, totally fine. If you want to make a variable in between the return and the definition here that you just keep concatenating with, you can concatenate it with new lines and things like that. Also totally fine."
+2918.64,7.0, At the end you just have to return that string that represents the thing you want to pre-print it out.
+2925.64,9.0, So now let's see what happens when we actually run the code. So here I'm creating a coordinate object and then I'm printing that coordinate object.
+2934.64,10.0, Well Python says hey you just called a special shorthand notation on an object of type coordinate. Let me see if you implemented the STR method.
+2944.64,13.0," It looks in the class definition, it sees the STR method implemented here and then it runs the code inside and says you want to grab C's x value and C's y value and concatenated with these things here."
+2957.64,12.0, Sure I can do that for you and then it goes and prints this out to the screen. Very cool right now we can decide how to print objects that we create.
+2969.64,12.0," So let's try to wrap our minds around types here. So if we print this C, C is an instance of a coordinate object."
+2981.64,12.0," It's an actual object that we're manipulating. It's not the class definition, it's not anything abstract like that. It's an actual object like the integer 3 is an actual object."
+2993.64,14.0," So if we print that C, Python uses the STR method. Well what if we print the type of C? Somebody tell me what's the type of C?"
+3007.64,15.0," Yeah it's the class name that we define. So when we print the type of C, Python says this is a class coordinate. Which makes sense because if we just replace type of C here with what it is coordinate, we'll get the same print statement."
+3022.64,8.0," If we just print coordinate, Python says this is a class of type coordinate. So those two lines are equivalent."
+3030.64,12.0, Then let me blow your minds a little bit more. What if we print the type of coordinate? Well what is coordinate? It's a type.
+3042.64,12.0, We're defining a new type in Python called a coordinate. So coordinate is a new data type in Python. So its type is type.
+3054.64,17.0," So everything in Python is an object, even types. One more thing. So we've used the type of something equals something else. When we checked that the type of the circles center was a coordinate, that's one way to check for types."
+3071.64,14.0, Another way is to use this instance function just as an aside. So you can check that C is an instance of type coordinate by using this instance method. And this will tell you true.
+3085.64,13.0, And just to draw parallel you can say is instance 3 comma int. That would also say true. Because 3 is an object of type integer. So just another way to check for types.
+3098.64,24.0," So the remainder of this class I would like to go back to our fraction class and make it better. Now that we know dunder methods, right, let's implement a whole bunch of dunder methods to help us to help us and people who want to use our class use it in a more efficient way."
+3122.64,11.0," So we're going to implement the star operator, the plus operator, we're going to implement the print, and then we're going to implement, implement converting to a float."
+3133.64,11.0, So the first thing that we should probably add is the str method. Because then it will help us in debugging when we print an object of type fraction.
+3144.64,12.0," So let's define double underscore str double underscore, right, again no parameters except for self because that's the method we're the object we're calling this method on."
+3156.64,23.0," And again, however you want to form this string is up to you, you can use f strings or a variable that you keep adding on to. I just did it straight in here with concatenation. So I've got the numerator slash the denominator as a very reasonable way to represent a string, right. So 3 slash 4 as 3 over 4."
+3179.64,10.0," So one thing I guess to keep keep track of is if you concatenating you just have to remember to cast a string, right, if it's a number or something that's not a string."
+3189.64,17.0," So let's try it out. I've got three fraction objects here, okay. So the first two we've already seen. So I've got a fraction representing 3 over 4, a fraction representing 1 over 4, and f3 is now going to be a fraction representing 5 over 1."
+3207.64,18.0," Okay, if we print f1 again Python asks, hey, did you implement an str method in your class definition? Yes, you did. Good job. Let me use it. So then it uses this, right. So grabs the numerator of f1 slash the numerator of sorry, the denominator of f1."
+3225.64,13.0," So this will print 3, the numerator of 1 slash the denominator of f1. Okay, same with f2, except that now it's going to grab f2's numerator and denominator 1 slash 4."
+3238.64,15.0," So notice now it's not doing the divisions like it did before or sorry, never mind, we're not there yet. There's nothing to divide. It's just grabbing the numerators and denominators and just printing them out, right. It's not doing any divisions."
+3254.64,20.0," Now when we print 5, the fraction object representing 5 over 1, it prints 5 slash 1. I don't like that because it looks weird, right. Do you like that? No. So then I'm going to have you fix it."
+3274.64,18.0," Change the str method just a little bit such that if the denominator is 1, just have it print the numerator, right. And otherwise the representation should be as before numerator slash denominator."
+3292.64,12.0," So this should be down line 140, where is it?"
+3304.64,18.0," Very far down, 265. Okay, anyone have some code for me?"
+3322.64,7.0, Yes.
+3329.64,9.0, Yep.
+3338.64,17.0," Yep, we can do an else. That else is not needed. I don't think because if we dropped into the f, we just immediately return. Otherwise we would just do the remaining thing."
+3355.64,8.0, Perfectly fine. Yep. And let's run it.
+3363.64,16.0," So the a is a fraction representing 1 over 4, so it nicely printed 1 over 4. And b, the fraction 3 over 1 is just printing 3. Good. Questions about this code."
+3379.64,13.0," For the remaining lecture, though, we're not going to use this modified this nicer better str method. So let's just forget what we just did and just remember that it looks like this."
+3392.64,12.0," Okay, so now let's implement the dunder methods for addition, multiplication, division, things like that. So I'm going to do the multiplication just because it's not as long for the numerator."
+3404.64,11.0," So just convenience factor here. The left hand side, I've got our old simple fraction code. And the right hand side has my new fraction code."
+3415.64,13.0," Okay, so the old simple fraction code. Remember, had this times method that took itself an OTH, a calculator, a new numerator, a new denominator, and returned this."
+3428.64,19.0," Okay. Now my new fraction code will no longer need to call times. Right. So we're not even implement a method called times. Instead, we're going to implement the method behind the scenes for the shorthand notation star to multiply two fraction, fraction objects."
+3447.64,13.0," So we need to implement df double underscore, multiple underscore parameter list is the same because we still have a thing before the star and a thing after the star as the two fraction object we'd like to multiply."
+3460.64,14.0," Within the code itself, the new calculations of the new numerator and the new denominator are the same as well. Right. We're still grabbing the numerators of self and other, the denominators of self and other multiplying those together."
+3474.64,22.0," What's different is in the returns, right. What was the return type for the times method? A decimal, yeah, a float, exactly. What's the return type of my new method, the mole, a fraction, exactly."
+3496.64,19.0," So yes, I am operating with fraction objects. So I'm expecting that the return type of this method, the star, double underscore, mole, is also a fraction object. So then I can just keep working with fraction objects throughout my code, not having to worry about whether this thing is now float or not."
+3515.64,14.0," So how are we creating this fraction object? Well, just like we would create a regular fraction object up in the previous slides, right. So here, right. Here's an example of us creating a new fraction object, right."
+3529.64,17.0," The numerator one denominator four. Well, same here. This method will return a new fraction object whose numerator is the thing that I just calculated the top and the denominator is the thing that I just calculated bottom."
+3546.64,4.0, Does that make sense?
+3550.64,21.0," Okay. So this one returns a float. This one returns a fraction. Let's run it. So a is fraction one over four, b is a fraction representing three over four. Good. Those are the numbers we've been working with. If we print a, the print statement says this is the fraction object one slash four, right."
+3571.64,9.0," The Pooh's representation is one slash four, now if I use the star operator between a and b, the thing before the star is, kind of like the thing before the dot."
+3580.64,10.0," It's, the self, it gets mapped to self in my double underscore, mole. The thing after the star, right, the second parameter, so to speak, is the, is the, is the, is the one parameter that my method takes, right."
+3590.64,3.400000000000091, the one parameter that my method takes.
+3594.04,2.0, Other.
+3596.04,4.400000000000091, So this will run the mole method behind the scenes.
+3600.44,1.9600000000000364," So Python, when it sees that star asks,"
+3602.4,3.8399999999996908, do you have a mole method implemented in your class fraction?
+3606.24,3.7600000000002183, Because the thing before the star is a fraction object.
+3610.0,1.0799999999999272," Yes, we do."
+3611.08,1.2799999999997453, What does it return?
+3612.3599999999997,1.9200000000000728," Well, it does the multiplication."
+3614.2799999999997,3.480000000000018," And in the end, the return of this method is this thing here."
+3617.76,3.400000000000091," So I literally just made this, I guess,"
+3621.1600000000003,3.6399999999998727, copied this from the return using the numbers of a and b.
+3624.8,3.2400000000002365," So it creates a new fraction object, whose numerator is 3,"
+3628.0400000000004,3.199999999999818, and denominator is 16.
+3631.2400000000002,5.880000000000109," So c equals fraction parentheses 3 comma 16, basically"
+3637.1200000000003,2.0, just another fraction object.
+3639.1200000000003,4.839999999999691," So now when I print c, it's going to use the STR method"
+3643.96,1.6400000000003274," for a fraction object, right?"
+3645.6,3.7600000000002183," Because c is a fraction object, right there."
+3649.36,2.199999999999818, That's exactly what c was.
+3651.56,3.400000000000091, So this will also print the way we ask to print fraction
+3654.96,5.400000000000091," objects, numerator slash denominator, 3 slash 16."
+3660.36,1.0, Everyone OK so far?
+3667.56,0.9200000000000728, OK.
+3668.48,2.5599999999999454, So the following lines are all equivalent.
+3671.88,1.9200000000000728, OK.
+3673.8,3.4799999999995634," Using the shorthand notation, very nice, very"
+3677.2799999999997,3.5200000000004366, pathonic way to multiply two fractions together.
+3680.8,4.599999999999909," But behind the scenes, this is just running a method."
+3685.4,2.480000000000018," So of course, if you really want to,"
+3687.88,5.0," you can just use the same old way of calling a method, right?"
+3692.88,4.480000000000018," Thing before the dot, dot method name, parentheses parameter"
+3697.36,1.5599999999999454, list.
+3698.92,3.400000000000091," So here, thing before the dot is a dot,"
+3702.32,1.9600000000000364," the name of my method, the bronze curve,"
+3704.28,2.3599999999996726," mole double underscore, parentheses, all"
+3706.64,3.880000000000109, of the parameter list except for the thing I'm calling it on.
+3710.52,1.680000000000291, So those two are equivalent.
+3712.2000000000003,2.799999999999727," And of course, last time I mentioned sort of a way"
+3715.0,3.680000000000291," to hopefully demystify running these methods,"
+3718.6800000000003,3.319999999999709," where the self becomes this thing before the dot,"
+3722.0,5.8400000000001455," you could call the method on the name of your data type,"
+3728.36,3.1599999999998545," the type that you're currently creating, fraction."
+3731.52,2.1600000000003092," So fraction is not an instance, right?"
+3733.6800000000003,2.599999999999909," A was an instance, it was an actual object that we created,"
+3736.28,3.0, but fraction is just the name of my class.
+3739.28,2.6399999999998727," So if you call the method on the name of your class,"
+3741.92,3.119999999999891," then Python expects the full parameter list, right?"
+3745.04,2.1200000000003456," So something for self, something for other,"
+3747.1600000000003,2.399999999999636, something for whatever parameters you have.
+3749.56,3.3600000000001273," And so there, we would explicitly pass in both A and B"
+3752.92,2.7600000000002183, as part of my parameter list because the thing before the dot
+3755.6800000000003,0.9200000000000728, is not an object.
+3756.6,3.0799999999999272," So there's not, it doesn't map it to self."
+3759.68,6.1599999999998545," But I would never, ever, ever run line of code like this,"
+3765.8399999999997,1.1200000000003456," this last one here, right?"
+3766.96,1.599999999999909, This is just for your information.
+3768.56,4.039999999999964," It's non-piphonic, it's just very verbose, right?"
+3772.6,6.1599999999998545," And so these, these dunder methods help us abstract away"
+3778.7599999999998,2.0," a bunch of these details, right?"
+3780.7599999999998,3.7600000000002183, So how annoying would it be to always use dot notation
+3784.52,2.0399999999999636," when we multiply an integer with another,"
+3787.0,2.5, can you imagine constantly writing three dot double
+3789.5,2.9400000000000546," and square, double and square four?"
+3792.44,3.6399999999998727," That would be very bad code, it would take forever to read, right?"
+3796.08,1.9600000000000364, And so we're abstracting away all the details
+3798.04,2.0, for calling these methods into these nice little
+3800.04,1.5599999999999454, shorthand notations.
+3801.6,2.0399999999999636," And as I said, the shorthand notations exist"
+3803.64,1.8800000000001091, for a lot of different operations.
+3805.52,4.1599999999998545," We saw print, you can do length, comparisons like equality,"
+3809.68,1.9600000000000364, even indexing into things.
+3811.64,3.200000000000273," You can always, you can abstract all of those away"
+3815.84,3.3200000000001637," with shorthand notations and behind the scenes,"
+3819.1600000000003,1.199999999999818, these methods will be run.
+3822.48,2.800000000000182," Okay, so big idea, right?"
+3825.28,2.1599999999998545," Exactly what I said, all these special operations"
+3827.44,4.160000000000309," that we've been using already, behind the scenes,"
+3831.6000000000004,1.4399999999995998, these methods get run.
+3833.04,3.8400000000001455, And these methods were written inside the class definition
+3836.88,2.119999999999891," for the types that we've been using, right?"
+3839.0,1.5799999999999272," So when we index into a list,"
+3840.58,3.180000000000291," L square brackets, three or whatever,"
+3843.76,2.599999999999909, there's a method being called behind the scenes
+3846.36,4.2400000000002365, in the list class to grab the element at index three.
+3850.6000000000004,2.1599999999998545," I don't remember the dunder method name for that,"
+3852.76,2.800000000000182," but probably like double and square index, double and square,"
+3855.5600000000004,3.4399999999996," I don't know, but there is some method behind the scenes."
+3860.0400000000004,1.7999999999997272," All right, let's do a couple more things."
+3863.88,0.8400000000001455, Sorry.
+3864.7200000000003,2.2399999999997817, You forget the dunder means something
+3866.96,2.080000000000382, to a way to ask Python.
+3869.0400000000004,3.119999999999891," You can't ask Python, but you can look at the documentation."
+3872.16,3.480000000000018," I think it's like in Python.org, there's a website"
+3875.64,2.2800000000002," that lists basically everything that you can,"
+3877.92,2.919999999999618," that's a dunder method, yeah, under categories,"
+3880.8399999999997,1.7200000000002547," like in all the indexing type stuff,"
+3882.56,1.599999999999909," all the numerical type stuff, yeah."
+3887.8799999999997,1.400000000000091," Okay, so let's do one more thing."
+3889.2799999999997,3.800000000000182, Let's say that we're working with fraction objects
+3893.08,3.4400000000000546, and so the dunder methods that we're writing
+3896.52,3.7599999999997635, are now returning other fraction objects.
+3900.28,3.3200000000001637, So let's allow the user the opportunity
+3903.6000000000004,3.7599999999997635, to cast one of these fraction objects to a float.
+3907.36,4.800000000000182, Just in case they would like to grab the float value
+3912.1600000000003,2.2399999999997817," of three slash 60, right?"
+3914.4,2.2800000000002, That's a very reasonable thing they might want to do.
+3916.6800000000003,2.8399999999996908, So let's get ahead of them and add that
+3919.52,2.6400000000003274, as part of our class definition.
+3922.1600000000003,3.599999999999909," So to cast things to a float in this particular case,"
+3925.76,2.6399999999998727," the dunder method for that is double underscore float,"
+3928.4,1.0, double underscore.
+3930.28,4.079999999999927, And all it's going to do is grab the numerator of self
+3934.36,2.5599999999999454," and divide it by the denominator of self, right?"
+3936.92,1.7600000000002183, So this will just do a division.
+3938.6800000000003,2.6799999999998363," Self dot nom is a number, self dot d nom is another number,"
+3941.36,4.039999999999964," it does the division and this returns a float, right?"
+3945.4,2.9600000000000364," So here when we multiply C is equal to A times B,"
+3948.36,4.440000000000055, remember that C became a fraction object
+3952.8,2.6799999999998363," with numerator three and denominator 16, right?"
+3955.48,1.6400000000003274, Remember that.
+3957.12,4.2800000000002," So then when we cast it to a float down here,"
+3961.4,3.6799999999998363," Python says, hey, did you implement the dunder method,"
+3965.08,2.0," double underscore float, double underscore?"
+3967.08,0.7599999999997635," Oh yeah, you did."
+3967.8399999999997,2.080000000000382, Let me just go ahead and do the thing
+3969.92,1.1599999999998545, that you want me to do inside it.
+3971.08,2.880000000000109," So it takes the three, divides it by the 16,"
+3973.96,1.5599999999999454, and it prints 0.1875.
+3980.52,1.9200000000000728," OK, let's try it out a little bit more."
+3982.44,3.599999999999909, So here I've got two fraction objects.
+3986.04,4.039999999999964," One representing 1 over 4, the other one representing 2 over 3."
+3990.08,1.6799999999998363, I multiply those two together.
+3991.7599999999998,2.3600000000001273," Again, this gives me a fraction object, right?"
+3994.12,2.8400000000001455, Because it's running the mold under method.
+3996.96,3.880000000000109, And the mold under method gives me a fraction object
+4000.84,2.0799999999999272, with a new numerator and denominator.
+4002.92,2.480000000000018," So when I print the return of that,"
+4005.4,2.7199999999998," when I print C, this prints the new numerator, which"
+4008.12,3.200000000000273," is 2 times 1, divided by the new denominator, which"
+4011.32,0.919999999999618, is 4 times 3.
+4012.24,3.2400000000002365, So it prints 2 over 12.
+4015.48,3.0799999999999272, Does that look OK to you?
+4018.56,1.400000000000091," I mean, it looks OK."
+4019.96,2.5599999999999454, But suppose you're doing calculations
+4022.52,1.2400000000002365, with a whole bunch of numbers.
+4023.76,2.9599999999995816," And at some point, you get to really big numerators"
+4026.72,2.4400000000000546, and really big denominators.
+4029.16,4.0, But then you stare it long enough and realize
+4033.16,2.7600000000002183," that that big numerator, divided by that big denominator,"
+4035.92,4.119999999999891, is actually something like 1 over 4.
+4040.04,4.2800000000002," So this is not reduced, which is fine."
+4044.32,2.8400000000001455, Our code is not doing the reduction.
+4047.1600000000003,4.1599999999998545, But it would be nice to write a method that
+4051.32,3.480000000000018, allows the user to reduce a fraction.
+4054.8,1.9600000000000364, That would be really nice.
+4056.76,1.7199999999998, So can we fix this?
+4058.48,0.680000000000291," Yes, we can."
+4059.1600000000003,1.8399999999996908," Otherwise, we wouldn't be here."
+4061.0,5.200000000000273, So let's write this method to reduce a fraction object.
+4066.2000000000003,2.599999999999909, It looks like a lot.
+4068.8,0.8000000000001819, But it's not.
+4069.6000000000004,0.7999999999997272, Trust me.
+4070.4,2.3600000000001273," OK, it's just a bunch of if-elses."
+4072.76,4.440000000000055," So the first part of it is a little helper function,"
+4077.2000000000003,1.6799999999998363, not a method.
+4078.88,4.2800000000002, Notice there's no self going on in this GCD function.
+4083.1600000000003,4.7199999999998, This is just a regular function that I will use to help me
+4087.88,3.599999999999909," get the greatest common divisor for the two parameters,"
+4091.48,3.3200000000001637, n and d.
+4094.8,3.5200000000004366," Because when I have two numbers, if I want to reduce them,"
+4098.320000000001,2.2399999999997817, I find the greatest common divisors.
+4100.56,1.8800000000001091, And I'm going to divide the top and bottom
+4102.44,1.680000000000291, by that divisor.
+4104.12,2.0399999999999636, And that will help me reduce it.
+4106.16,5.559999999999491, So this GCD function helps me find this greatest common divisor.
+4111.719999999999,1.6400000000003274," So here, I'm just defining the function."
+4113.36,1.9200000000000728, I'm not actually using it.
+4115.28,5.239999999999782, And then I've got an if and an L if.
+4120.5199999999995,2.600000000000364," So if the denominator is 0, something super weird."
+4123.12,1.519999999999527, So I'm just going to return none.
+4124.639999999999,2.800000000000182," Because having a fraction where the denominator is 0,"
+4127.44,2.0799999999999272, maybe something went wrong.
+4129.5199999999995,2.2399999999997817," Else, if the denominator is 1,"
+4131.76,2.2799999999997453, we don't need to do any reduction.
+4134.04,1.0799999999999272, No reducing is needed.
+4135.12,3.2000000000007276, So we just return the numerator.
+4138.320000000001,3.4799999999995634," And else, I do have two actual numbers"
+4141.8,3.1599999999998545, that I could maybe could potentially reduce.
+4144.96,3.0399999999999636, So let's just reduce them.
+4148.0,3.0799999999999272," The first line here runs this function, this helper function"
+4151.08,3.119999999999891," that I wrote, on the numerator and denominator"
+4154.2,2.6400000000003274, to grab the greatest common divisor.
+4156.84,4.520000000000437," So if it's 2 over 12, it'll find 2."
+4161.36,4.720000000000255, Then the next line here takes the numerator
+4166.08,2.4399999999996, and divides by that greatest common divisor
+4168.5199999999995,1.360000000000582," and casts it to an int, right?"
+4169.88,2.3599999999996726, Because I want my numerator to be an int
+4172.24,2.0399999999999636, and my denominator to be an int.
+4174.28,3.880000000000109," So I'll take the numerator and divide by, for example, 2."
+4178.16,1.3599999999996726, Same with the denominator.
+4179.5199999999995,3.199999999999818, I'm going to take my denominator and divide by that same GCD
+4182.719999999999,3.9200000000000728," I found, casting to an int."
+4186.639999999999,3.3200000000006185, So my new top and my new bottom will now
+4189.96,7.359999999999673, be used to create a new fraction object that is in reduced form.
+4197.32,4.760000000000218," So 1 slash 6 for the example, 2, 12."
+4202.08,0.9600000000000364, So here it is.
+4203.04,2.9200000000000728, This is my previous example where I multiplied that thing that
+4205.96,4.520000000000437, gave me 2 slash 12.
+4210.4800000000005,4.279999999999745," And then if I do c.reduce, Python will call the reduced method"
+4214.76,0.5599999999994907, on c.
+4215.32,4.680000000000291, So the object that's whose numerator is 2 and denominator is 12.
+4220.0,2.119999999999891, And then this will reduce it to 1 over 6.
+4222.12,5.6799999999993815, And we'll print call the STR method on an object of type
+4227.799999999999,1.7600000000002183, fraction to give me 1 over 6.
+4232.44,1.5600000000004002, Everyone OK?
+4234.0,0.5199999999995271, Yes.
+4239.5199999999995,2.119999999999891, You could put it outside the reduce.
+4241.639999999999,3.360000000000582," But since it's being used specifically in the reduce,"
+4245.0,3.0399999999999636, we'd like to just keep it within.
+4248.04,3.5600000000004, So it doesn't need to be used by other things.
+4251.6,4.759999999999309, We'll just keep it only to the scope where it needs to exist.
+4256.36,1.4400000000005093, But it can be outside.
+4263.64,3.7999999999992724," So one thing is weird here, though."
+4267.44,1.1200000000008004, This LF here.
+4269.280000000001,6.0, What is the type that gets returned from the else?
+4275.280000000001,1.0399999999999636, You guys tell me.
+4276.320000000001,3.1599999999998545, What's this type here that gets returned down in the else?
+4279.4800000000005,1.0, Fraction.
+4280.4800000000005,2.4799999999995634, What is the type being returned in the LF?
+4287.52,2.399999999999636," Yes, an int."
+4289.92,4.760000000000218," So if the denominator happens to be a 1, this method"
+4294.68,3.4000000000005457, reduce returns an integer.
+4298.08,2.7600000000002183," If it's not, it returns a fraction."
+4300.84,1.9600000000000364," So if at some point in the future,"
+4302.8,3.519999999999527," you're mixing, you happen to reduce something that"
+4306.32,3.480000000000473," has a denominator of 1, you're now working with integers."
+4309.8,3.5599999999994907," And then, potentially, you'd be doing further operations"
+4313.36,3.0399999999999636, by mixing that with fraction object.
+4316.4,3.7200000000002547," So as an example here, I've got a fraction object,"
+4320.12,3.199999999999818," a, 4 over 1, b, 3 over 9."
+4323.32,2.2399999999997817, Reducing a gives me a 4.
+4325.5599999999995,1.800000000000182," Fine, it's the integer 4."
+4327.36,2.0399999999999636, And reducing b gives me 1 over 3.
+4329.4,2.6400000000003274, It's a fraction 1 over 3.
+4332.04,5.1599999999998545," So the type, just to show you exactly that I'm not lying,"
+4337.2,2.680000000000291, the type of the a reduced is an int.
+4339.88,1.5999999999994543, That's what the code is doing.
+4341.48,3.480000000000473, And the type of b reduced is a fraction.
+4344.96,3.6799999999993815," So then, when we do the star operator between a, r and b r,"
+4348.639999999999,1.9200000000000728," Python's going to say, you're trying"
+4350.5599999999995,2.9600000000000364, to multiply an int with a fraction.
+4353.5199999999995,2.2399999999997817, Did you ever tell me how to do that?
+4355.759999999999,1.5600000000004002, No.
+4357.32,3.1599999999998545," We told it how to multiply a fraction and another fraction,"
+4360.48,2.5200000000004366, but not an int with a fraction.
+4363.0,4.199999999999818, And so Python will fail here.
+4367.2,3.7200000000002547, So one thing that you can do to fix it
+4370.92,4.599999999999454, is to change this L of here.
+4375.5199999999995,1.8400000000001455, So let's have everything consistent.
+4377.36,1.8400000000001455, So I want you to do this change.
+4379.2,3.0399999999999636," Instead of returning self.num, return for me"
+4382.24,2.9600000000000364, a fraction object representing the numerator.
+4387.92,1.4399999999995998," All right, does anyone know?"
+4389.36,1.199999999999818, Just a small change.
+4390.5599999999995,4.3200000000006185," Instead of returning self.num, what should I return?"
+4394.88,2.3599999999996726, How do I make a fraction object?
+4397.24,3.199999999999818," Just invoke the name of fraction, right?"
+4400.44,4.079999999999927, What's the numerator of this fraction object supposed to be?
+4404.5199999999995,1.3200000000006185, It's already there.
+4405.84,1.2399999999997817, Self.num.
+4407.08,3.5999999999994543, What's the denominator of this fraction object?
+4410.679999999999,1.7200000000002547," Yeah, exactly."
+4412.4,3.880000000000109, So it just returns a fraction object whose numerator is self.num
+4416.28,3.5600000000004," denominator is 1, exactly."
+4419.84,3.4799999999995634," So now all the different cases, except for this randomly"
+4423.32,2.1599999999998545," weird denominator being 0, right?"
+4425.48,3.680000000000291," In case that happens, something's gone wrong maybe."
+4429.16,2.680000000000291," All the other cases are returning a fraction object, which"
+4431.84,1.4799999999995634," is good, because now it's consistent."
+4440.32,1.0," Oh, yeah, exactly."
+4441.32,2.399999999999636, So we did say we didn't want it to be 5 or 1.
+4443.8,3.480000000000473," But this is actually using the old STR method,"
+4447.280000000001,1.7999999999992724, where we didn't do that check.
+4449.08,1.6000000000003638, So it will print 5 or 1.
+4450.68,4.399999999999636," But if we do the check, if self.dynamicwecal1,"
+4455.08,2.6400000000003274, then returnsterself.num.
+4457.72,3.399999999999636," Like if we add that, then it won't do that."
+4461.12,0.5600000000004002, Yeah.
+4461.68,2.3599999999996726, But this is just using the old STR method
+4464.04,4.800000000000182, that doesn't do that nice formatting for us.
+4468.84,0.6000000000003638, Questions?
+4469.44,5.239999999999782, We've been working a lot with returning new objects
+4474.679999999999,2.9600000000000364, of the same type that we're writing.
+4477.639999999999,4.600000000000364, That's sort of a new thing today.
+4482.24,2.800000000000182, OK.
+4485.04,5.119999999999891, So what's the purpose of these two lectures?
+4490.16,8.840000000000146, So hopefully it shows that it's very useful to bundle data.
+4499.44,2.7600000000002183, And behaviors together.
+4502.2,2.4799999999995634, So the ultimate goal when we're writing programs
+4504.679999999999,5.079999999999927," is to write code that's modular, organized,"
+4509.759999999999,3.1599999999998545," because in the future, you might want to build upon this code."
+4512.919999999999,2.240000000000691," In the future, you might want to read this code"
+4515.16,1.199999999999818, to use it for something else.
+4516.36,3.1599999999998545," In the future, other people might want to read this code"
+4519.5199999999995,2.3599999999996726," or use this code, this class that you wrote,"
+4521.879999999999,2.0399999999999636, to build more complex classes.
+4523.919999999999,2.7600000000002183, Like we use the coordinate class to build a circle class.
+4526.68,2.8400000000001455," Other people might use your circle class to build,"
+4529.52,1.9600000000000364," I don't know, a sphere class or something like that,"
+4531.4800000000005,1.7200000000002547, something more complicated.
+4533.200000000001,3.119999999999891, And so it's really nice to create these little data types
+4536.320000000001,2.519999999999527," that aren't organized, modular."
+4538.84,4.760000000000218," And so we're basically bundling together these data,"
+4543.6,2.8400000000001455, so what makes up your object and behaviors together.
+4546.4400000000005,3.7600000000002183, So we can use these objects in a nicely consistent way.
+4550.200000000001,3.6799999999993815," So remember, back when we were learning about functions,"
+4553.88,2.2799999999997453, the ideas of decomposition and abstraction
+4556.16,1.5600000000004002, were very important.
+4557.72,2.9199999999991633, Functions basically took a chunk of code
+4560.639999999999,2.0, and decomposed them into one module
+4562.639999999999,3.3200000000006185," that we could reuse many, many different places."
+4565.96,3.3599999999996726, And we abstracted away the details of the function
+4569.32,0.8400000000001455, through doc string.
+4570.16,2.600000000000364, So people didn't have to slog through a whole bunch of code
+4572.76,1.319999999999709, to figure out what the function did.
+4574.08,1.6000000000003638, All they did was read the doc string
+4575.68,2.8799999999991996, and they knew exactly what we wanted.
+4578.5599999999995,3.280000000000655," Now, object-oriented programming and Python classes"
+4581.84,3.880000000000109," have that same big decomposition abstraction energy, right?"
+4585.72,3.319999999999709," They've got a bunch of modules that we're creating here,"
+4589.04,2.9600000000000364," where we're bundling together data and behaviors, right?"
+4592.0,2.3200000000006185, So we can create a whole bunch of objects
+4594.320000000001,3.639999999999418," that behave in the exact same way, nicely consistent."
+4597.96,2.9200000000000728," So that we know that if I create a coordinate object here,"
+4600.88,1.5200000000004366, it's going to have an x and a y value.
+4602.400000000001,1.5999999999994543," And if I create another coordinate object,"
+4604.0,2.119999999999891, it's also going to have an x and a y value.
+4606.12,3.240000000000691," It's not suddenly going to have an x, y, and z value, right?"
+4609.360000000001,3.319999999999709, So creating these objects that work in a consistent way
+4612.68,7.0," is a very decomposition and abstraction,"
+4620.52,3.2799999999997453," are working with the ideas of decomposition abstraction,"
+4623.8,2.0799999999999272, just like functions did.
+4625.88,4.279999999999745," Okay, so next lecture, we will be starting on,"
+4630.16,2.240000000000691, we'll do a little bit more of these classes
+4632.400000000001,1.8800000000001091, and then we'll start on inheritance.
+4634.280000000001,3.319999999999709, So having parents be objects that we created.
+4637.6,0.8400000000001455, All right.
+4642.8,4.520000000000437," DiRetHow,"
+4647.320000000001,3.719999999999345," that was,"""
+4651.04,8.800000000000182, understand me.
+4662.04,2.800000000000182, Well.
+4664.84,4.1599999999998545, That's so cool.

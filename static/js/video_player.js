@@ -28,4 +28,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Make the player instance available globally so notes.js can access it
     window.videoPlayer = player;
+
+    // --- START: New Transcript Interactivity Code ---
+    const transcriptContainer = document.getElementById('transcript-container');
+
+    if (transcriptContainer && window.videoPlayer) {
+        transcriptContainer.addEventListener('click', function(event) {
+            const line = event.target.closest('.transcript-line');
+            if (line) {
+                const startTime = parseFloat(line.dataset.start);
+                if (!isNaN(startTime)) {
+                    window.videoPlayer.currentTime = startTime;
+                    window.videoPlayer.play(); // Optional: auto-play when a line is clicked
+                }
+            }
+        });
+    }
+    // --- END: New Transcript Interactivity Code ---
 });

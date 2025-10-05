@@ -1,0 +1,555 @@
+start,duration,text
+0.0,13.44, Let's get started.
+13.44,2.8400000000000016, So today's lecture will be super short.
+16.28,5.559999999999999, So I wanted to give you guys an extra bit of time to work through three programming problems.
+21.84,6.080000000000002," But the actual lecture part, we're going to switch gears a little bit and we're going"
+27.92,7.0," to start talking about something more theoretical, which is how to figure out whether the programs"
+34.92,3.759999999999998, we write are efficient and how efficient are they.
+38.68,5.480000000000004, So we're going to do that today using the idea of timing our programs and accounting
+44.160000000000004,2.3200000000000003, number of operations as I'll describe it in a little bit.
+46.480000000000004,2.3599999999999994," But first of all, a little bit of motivation."
+48.84,4.0, So why do we actually care about this topic?
+52.84,5.32, It's a topic that's a high research area on computer science.
+58.160000000000004,3.039999999999999," So far in this class though, we've emphasized correctness, right?"
+61.2,6.0," In problem sets, the unit tests check whether the programs you wrote were correct."
+67.2,6.400000000000006," In quizzes, we basically look at how many test cases you pass to determine the grade."
+73.60000000000001,4.920000000000002," But these days, we actually have a whole bunch of data coming at us."
+78.52000000000001,2.759999999999991, So we have a lot of data that we need to analyze.
+81.28,5.319999999999993," We need to read, we need to visualize, we need to make sense of."
+86.6,4.560000000000002," And so the programs that we write, yes, they have to be correct, which is a large part"
+91.16,3.280000000000001," of it, but they also have to be fast, right?"
+94.44,6.680000000000007," So if it takes a year to analyze a bunch of information on YouTube videos, nobody's"
+101.12,2.4399999999999977," going to really want to wait that long, right?"
+103.56,5.640000000000001," And so we're going to emphasize in the next three or four lectures, I forget exactly"
+109.2,5.239999999999995," how many, but the next little section in this class, the idea of how to determine the"
+114.44,2.719999999999999, efficiency of our programs.
+117.16,4.719999999999999," So when we're talking about efficiency, we can talk about the time efficiency of programs"
+121.88,3.0400000000000063, and also the space efficiency of programs.
+124.92,3.0799999999999983, And usually there's going to be a trade-off between these two.
+128.0,4.840000000000003," So very rarely these days, can you come up with an algorithm that's both efficient in"
+132.84,4.240000000000009, time and space compared to algorithms that are already out there.
+137.08,4.800000000000011," So usually there's a trade-off, and the most, the best example is the one that we saw"
+141.88000000000002,1.3599999999999852, with Fibonacci.
+143.24,4.560000000000002, So we saw a code that was recursive to calculate Fibonacci.
+147.8,4.0800000000000125," So Fibonacci of N was Fibonacci of N minus 1 plus Fibonacci of N minus 2, right?"
+151.88000000000002,3.0, That was our recursive step.
+154.88000000000002,7.119999999999976, That program that was recursive took something like 30 million steps to calculate Fibonacci
+162.0,1.240000000000009," of 30 something, right?"
+163.24,2.680000000000007, It was 30 million recursive calls.
+165.92,1.5999999999999943, Which was pretty slow.
+167.51999999999998,2.4399999999999977, It took a couple seconds for it to run.
+169.95999999999998,3.0, But then we saw a version with memoization.
+172.95999999999998,1.200000000000017, There's no arm missing there.
+174.16,4.199999999999989," It's just memoization, sort of the process of keeping a memo through a dictionary in"
+178.35999999999999,2.0800000000000125, that particular case.
+180.44,5.8799999999999955," And the memoization idea was that we would take some values that we calculate, and as we"
+186.32,2.4799999999999898," calculate them, store them in the memo."
+188.8,8.719999999999999," So in the memoization example, we had given up some of our memory to store these values"
+197.52,1.6400000000000148, so that we didn't have to compute them.
+199.16000000000003,5.199999999999989," And in the process of doing so, we had a program that ran really, really quick, right?"
+204.36,4.439999999999998, Much quicker than the plain recursive version that we had originally seen.
+208.8,1.3600000000000136," So there's this trade-off, right?"
+210.16000000000003,4.47999999999999," Where you have a program that's fast, but might store some values and take up more memory,"
+214.64,4.9199999999999875," or a program that doesn't store anything, but then is not going to be as fast."
+219.55999999999997,5.360000000000014, It's going to be slower because it needs to keep computing a bunch of different values.
+224.92,5.599999999999994, So what we're going to do in this lecture is kind of show you a very simple way of figuring
+230.51999999999998,3.480000000000018," out how efficient our programs are, which is we're just going to time them."
+234.0,4.279999999999973, And then we're going to count the number of operations that these programs take.
+238.27999999999997,3.440000000000026," But we're going to do so, sort of with the idea in the back of our mind that there's going"
+241.72,4.1200000000000045, to be a better way to figure out the efficiency of these programs.
+245.84,4.960000000000008," And ultimately, we don't really want to figure out the efficiency of an implementation, right?"
+250.8,7.759999999999991, An implementation means you implement a program that finds us some using a while loop.
+258.56,3.2799999999999727," I implement the program to find us some using a for loop, right?"
+261.84,4.2000000000000455," Those are two different implementations, but at their core, the algorithms or behind"
+266.04,2.2399999999999523, the scenes is going to be the same.
+268.28,4.9599999999999795, And so what we want to do is to try to figure out how to evaluate algorithms as opposed
+273.23999999999995,1.6000000000000227," to these different implementations, right?"
+274.84,3.480000000000018, Because each one of you is going to come up with a completely different implementation
+278.32,1.599999999999966," for today's quiz, right?"
+279.91999999999996,1.080000000000041, But I don't want to evaluate that.
+281.0,3.5599999999999454, I would like to evaluate sort of the algorithms behind the scenes.
+284.55999999999995,1.0, Okay.
+285.55999999999995,5.400000000000034," So we're going to do, like I mentioned, we're going to today look at measuring how long"
+290.96,3.0, our program takes with an actual timer.
+293.96,5.319999999999993, And then we're going to also count how many operations our program takes.
+299.28,2.8000000000000114, And then we're not going to look at this other abstract notion.
+302.08,3.839999999999975, We're going to look at that next lecture.
+305.91999999999996,3.1200000000000045," So today's lecture, we're going to use another module."
+309.03999999999996,4.0," We've been looking at modules in the past couple lectures already, right?"
+313.03999999999996,4.920000000000016," We've seen the random module, which helps us deal with random numbers."
+317.96,6.360000000000014," We've seen the date time module, which helps us deal with, or was it date you'd tell,"
+324.32,7.0," something like that, which helps us deal with date time objects and converting dates into"
+331.32,3.680000000000007, objects that were nice and usable.
+335.0,6.159999999999968," Today we're going to use the time module, right here, which will help us deal with the system"
+341.15999999999997,1.0, clock.
+342.15999999999997,1.0, Okay.
+343.15999999999997,3.0," So if we're timing functions that we run, we're going to want to access the system clock"
+346.16,5.519999999999982, to figure out exactly what time we started this function and what time we ended the function.
+351.68,5.2000000000000455," So just a little thing on, you probably already know this, how to call these functions within"
+356.88000000000005,1.0, these modules.
+357.88000000000005,4.439999999999998, So the modules basically bring in a whole bunch of functions and maybe objects and things
+362.32000000000005,4.559999999999945, like that related to one topic or subject into your code.
+366.88,5.680000000000007," And then to run the, the, the functions in your code, you just use this annotation on"
+372.56,1.0, the module name.
+373.56,5.319999999999993," So if I wanted to use the sine function from the math module, I would just say math.sine"
+378.88,4.160000000000025, and then I have access to that sine function.
+383.04,1.0, Okay.
+384.04,2.8000000000000114, So let's start looking at timing a program.
+386.84000000000003,3.7999999999999545, The simplest way to figure out how fast the program runs.
+390.64,2.5200000000000387, So we're going to use the time module.
+393.16,1.1999999999999886, So I'm importing it here.
+394.36,4.919999999999959," And when I do that, Python is going to bring in all of these functions related to the time."
+399.28,3.480000000000018, Now we're going to look in this particular lecture at three different functions and we're
+402.76,2.8799999999999955," going to time them, each of them."
+405.64,3.0," Next lecture, we're going to look at a whole bunch more functions just to give you a little"
+408.64,3.1200000000000045, bit more practice with timing and counting operations.
+411.76,4.240000000000009, And then we'll introduce a more abstract notion of this order of growth.
+416.0,3.2799999999999727, So the three functions we're going to look at are these ones.
+419.28,3.840000000000032," So Celsius to Fahrenheit, My Sum, and Square."
+423.12,3.0399999999999636," So Celsius to Fahrenheit, pretty self-explanatory."
+426.15999999999997,4.840000000000032, It takes in one parameter the number for Celsius temperature and converts it to Fahrenheit.
+431.0,4.160000000000025, So we did this lecture one just using the formula.
+435.16,4.439999999999998," This function, My Sum, will take it a number x."
+439.6,3.5600000000000023," So seven or ten or a hundred, whatever it is."
+443.16,2.4799999999999613, And it uses a loop.
+445.64,4.78000000000003, So computationally uses this loop that iterates the each number from zero all the way up to
+450.42,3.5, including x and keeps the running total.
+453.92,4.159999999999968, So it adds i to itself to the total and returns it.
+458.08,4.160000000000025," So of course we could have rewritten this in a more efficient way by using the formula,"
+462.24,3.599999999999966, to calculate the sum and times n plus 1 over 2.
+465.84,3.3600000000000136, But here we're just doing it using this for loop.
+469.2,5.399999999999977," And then lastly, is this function called square?"
+474.59999999999997,3.1999999999999886, And this one's going to be even more inefficient.
+477.79999999999995,2.0, We're going to calculate n squared.
+479.79999999999995,3.5200000000000387, So the parameter here n will be squared.
+483.32,5.279999999999973, So we're not doing return n times n or return n star star 2.
+488.59999999999997,1.2800000000000296, We're not doing any of that.
+489.88,3.5600000000000023, We're actually going to use two nested loops.
+493.44,5.199999999999989," So I've got an outer four loop that goes through the number zero to n, not including,"
+498.64,3.3600000000000136," an inner four loop that goes through the number zero to n, not including."
+502.0,4.839999999999975, And this square sum here adds one to itself every time.
+506.84,6.439999999999998, So effectively we're going through and adding one to that sum n squared times.
+513.72,3.8799999999999955," So super inefficient, but this is where we're at."
+517.6,2.9599999999999227, And so how do we actually time these functions?
+521.8,4.080000000000041," So here's the, this is basically, you know,"
+525.88,1.3199999999999363, some lines of code in a file.
+527.1999999999999,3.2000000000000455, So I've got the time module imported here.
+530.4,2.0399999999999636, I've got the function here.
+532.4399999999999,7.720000000000027, I'm going to call the time module and the time function within the time module.
+540.16,5.8799999999999955," So this tells me the number of seconds that have passed since January 1st, 1970."
+546.04,2.2799999999999727, That's called the epoch.
+548.3199999999999,1.0, OK.
+549.3199999999999,2.4400000000000546, So the beginning of time and computer speak.
+551.76,4.67999999999995," So if I grab how many seconds have passed since that time,"
+556.4399999999999,2.32000000000005, then T start stores that number of seconds.
+558.76,4.399999999999977," Then I'm going to run my function, Celsius to fan height 37."
+563.16,5.32000000000005, And then I'm going to get the time again down here and subtract the time right now
+568.48,4.720000000000027, after the function has finished minus the time it was right before I started my function.
+574.2,0.1999999999999318, OK.
+574.4,2.2800000000000864," So that gives me the, the DT."
+576.6800000000001,1.1999999999999318, And then I just print that out.
+579.88,2.3600000000000136, So we can run it together.
+582.24,6.720000000000027, The way I'm going to run it is by actually doing a little bit of modularization to this code.
+588.96,1.7999999999999545, So I'm at this function.
+590.76,3.4400000000000546, And this is the only function I'm actually going to run down here.
+594.2,2.9599999999999227," It's my, I call it a time wrapper."
+597.16,2.7200000000000273, It's a wrapper function.
+599.88,2.159999999999968, And it takes in two parameters.
+602.04,2.8799999999999955, The first is the actual function I want to run.
+604.92,1.2000000000000455, So I'll show you down here.
+606.12,5.0," You can see I'm running the time wrapper with the name, literally the name of the function"
+611.12,0.5599999999999454, I want to run.
+611.68,1.1599999999999682, This is not a function call.
+612.8399999999999,2.7200000000000273, It's just the name of my function.
+615.56,1.1599999999999682, So that's the first parameter.
+616.7199999999999,5.6400000000001, And the second parameter is a whole bunch of different inputs I want to run the function with.
+622.36,4.039999999999964, So this Ln is created up here.
+626.4,2.519999999999982, And it just makes for me the list of all of these inputs.
+628.92,3.759999999999991, So I'm going to run Celsius to Fahrenheit with a number one.
+632.68,1.9200000000000728, Celsius to Fahrenheit with a number 10.
+634.6,1.599999999999909, Celsius to Fahrenheit with a hundred and so on.
+636.1999999999999,5.32000000000005, So these will be all my inputs to my function.
+641.52,4.840000000000032," And so when I call this wrapper, Python's just going to replace f with the function that"
+646.36,0.8399999999999181, I'm actually running.
+647.1999999999999,3.080000000000041, So Celsius to Fahrenheit or My Sum or Square.
+650.28,4.8799999999999955," And you can see here for each one of the different inputs, I'm going to grab the time,"
+655.16,7.2000000000000455," run the function, grab the time again to get the dt and then print how long it took."
+662.36,1.6399999999999864, So I'll show you what that looks like.
+664.0,10.480000000000018," So here I ran Celsius to Fahrenheit with inputs 1,100,000, 10,000, so on."
+674.48,3.0399999999999636, It was really fast.
+677.52,2.6000000000000227, It took zero seconds every single time.
+680.12,2.3999999999999773," So no matter what the input, zero seconds."
+682.52,4.399999999999977, So fast that Python didn't even tell me exactly how slow it was.
+686.92,4.560000000000059," And I'll tend to the negative 9 or whatever, just zero seconds."
+691.48,2.7999999999999545," And that's in part to the time function, but we'll leave it at that."
+694.28,2.080000000000041, It's just very fast.
+696.36,3.759999999999991," OK, how about the next function?"
+700.12,3.159999999999968, Let's do My Sum.
+703.28,4.480000000000018," So My Sum is not just doing calculations, it has a loop, right?"
+707.76,2.2799999999999727, That's a function of the input.
+710.04,5.1200000000000045," So our input changes, and you might have noticed that as our input got bigger, we actually had"
+715.16,3.840000000000032, to wait a little while for this result to come by.
+719.0,6.079999999999927," So we see down here, right, or up here, when the input's pretty small, yes, it took zero"
+725.0799999999999,1.0, seconds.
+726.0799999999999,2.400000000000091, It's so fast that it didn't even register it.
+728.48,3.0399999999999636," But at some point, we started to get actual numbers."
+731.52,10.600000000000023," So with 10,000, it took 0.0099 seconds, with 100,000, it took 0.01, with what is this?"
+742.12,1.0, A million?
+743.12,4.039999999999964," Yeah, with a million, it took 0.05 seconds."
+747.16,5.2000000000000455," So we can actually see a little pattern, right, if we stare it long enough, especially for"
+752.36,1.7199999999999136," the bigger numbers, right?"
+754.0799999999999,4.360000000000014," So down here, right, these first two are iffy."
+758.44,4.840000000000032," So when we get to a big number, like a million, we say it took 0.05 seconds."
+763.2800000000001,5.600000000000023," When we increase the input by 10 to 10 million, the input took 0.5 seconds."
+768.8800000000001,4.439999999999941," And when we increase the input by 10 again, it took 5 seconds."
+773.32,6.039999999999964," So we could guess that when we increase the input again by 10, it will take about 50"
+779.36,1.2000000000000455," seconds to run, right?"
+780.5600000000001,6.519999999999982, And you can even try that out if you'd like to wait for 50 seconds.
+787.08,2.159999999999968," All right, that's the MySum function."
+789.24,2.0," Now, what about the square?"
+791.24,5.360000000000014," Remember, the square had the two nested four loops, four, four, and then just a regular"
+796.6,1.0, addition in there.
+797.6,2.0, So let's run that.
+799.6,3.840000000000032," All right, pretty fast, pretty fast."
+803.44,6.0," Square of 1,000 is already taking 0.06 seconds."
+809.44,5.960000000000036," Square of 10,000 is now taking 6 seconds."
+815.4,9.32000000000005," And we notice, with one more round, if we waited for square of 100,000, we might be able"
+824.72,1.0, to see a pattern.
+825.72,1.0, Or we can guess the pattern.
+826.72,4.0, Does anyone want to wager a guess what the next number should be here?
+830.72,3.0, Can you think about it?
+833.72,1.7999999999999545, About 600?
+835.52,4.67999999999995," Yeah, about 600, right?"
+840.1999999999999,3.3600000000000136, We're going from 0.06 to maybe about 6.
+843.56,3.0, So we could say about 600.
+846.56,2.8799999999999955, I'm certainly not going to wait for 600 seconds.
+849.4399999999999,5.279999999999973," And I'm actually not going to make my computer do that, just in case it crashes."
+854.7199999999999,5.800000000000068," But yeah, we could guess something like, on the order of some hundreds, 600, something"
+860.52,2.3600000000000136, like that.
+862.88,1.67999999999995, So that's one thing to notice.
+864.56,6.519999999999982," The other thing to notice is that already at 10,000, where the input is just 10,000, this"
+871.08,3.080000000000041, took 5 seconds already.
+874.1600000000001,7.759999999999991," In the previous function here, my sum, we had to get to 100 million as my input to run"
+881.9200000000001,2.0799999999999272, for 5 seconds.
+884.0,1.9200000000000728, So that's also a big difference here.
+885.9200000000001,5.7999999999999545," Already, this program square is taking a really long time to run when the input is not"
+891.72,3.0, very big.
+894.72,2.2000000000000455, All right.
+896.92,3.480000000000018, So some things to notice about timing.
+900.4,2.6000000000000227," And as I said, we're going to look at some more programs next lecture."
+903.0,4.399999999999977, I just wanted to give you a general sense of timing programs.
+907.4,3.2799999999999727," First of all, the green check is good."
+910.68,2.0, We want all these to be green checks.
+912.68,3.519999999999982," The green check is good because if we have different algorithms, they're going to take"
+916.1999999999999,1.240000000000009," a different amount of time, right?"
+917.4399999999999,5.600000000000023," That time that it takes for these algorithms to run will be different, which is good."
+923.56,4.600000000000023," If we have different implementations for the same sort of program, for the same algorithm,"
+928.16,2.5599999999999454, that's also going to give us different timings.
+930.7199999999999,2.9600000000000364," And really, in the long run, I don't really care about that."
+933.68,4.240000000000009, What I would really like to evaluate is just the algorithm itself.
+937.92,4.919999999999959," Because when we're talking about algorithms, it's probably only a handful of algorithms"
+942.8399999999999,3.759999999999991," out there in the world, right, that we can apply to a given problem."
+946.5999999999999,4.5200000000000955, Whereas there's probably thousands of different implementations we can apply to a problem.
+951.12,3.3600000000000136," So for example, you could have a for loop versus a while loop, right?"
+954.48,5.159999999999968," You could have creating intermediate variables as an implementation, or you could have a"
+959.64,3.080000000000041, list comprehension version of an implementation.
+962.72,5.039999999999964, But underlying all that is going to be just some algorithm that you're trying to implement.
+967.76,1.0, Okay?
+968.76,3.919999999999959," So the running time will vary between different implementations, which is not really something"
+972.68,1.400000000000091, I want.
+974.08,2.3600000000000136, The running time will also vary between computers.
+976.44,6.039999999999964," If I ran the same programs on an older computer, it's probably not going to take five seconds,"
+982.48,2.0400000000000773, to run with an input of 100 million.
+984.5200000000001,2.240000000000009, It might take 10 or it might take 11.
+986.7600000000001,3.3999999999999773, So the timing is also going to differ between different computers.
+990.1600000000001,3.159999999999968," It will also differ between different languages, right?"
+993.32,5.440000000000055, So Java versus Python versus C. C is very efficient at memory.
+998.7600000000001,2.0399999999999636," Management, it's going to run very fast."
+1000.8000000000001,3.6000000000000227," Whereas if Python's a little bit slower, it's going to run slower."
+1004.4,6.720000000000027," So again, we're actually capturing, the timing is capturing variations between languages."
+1011.12,3.199999999999932, And the timing is not very predictable for small inputs.
+1014.3199999999999,6.680000000000064," So if for some reason, right, when I was running the square function here with one, I was"
+1021.0,4.839999999999918," also running Netflix in the background, where my computer decided to update something and"
+1025.84,4.680000000000064, decided to just dedicate resources to doing that task at that moment when I'm trying to
+1030.52,2.160000000000082, run the square of one.
+1032.96,3.519999999999982, 0.0 seconds might not be 0.0 seconds.
+1036.48,5.360000000000127, It might take away from the time it takes the time it allocates to running my square
+1041.8400000000001,1.3199999999999363, program.
+1043.16,4.879999999999882," And then what we'll see is that this will no longer be 0.0, might be 0.1 or something"
+1048.04,1.6000000000001364, like that.
+1049.64,4.079999999999927, So timing programs is not very good.
+1053.72,4.600000000000136," It's not very consistent with our goal here, which is to evaluate algorithms."
+1058.3200000000002,1.0, All right.
+1059.32,0.8399999999999181, All right.
+1060.1599999999999,1.8400000000001455, Let's see if we can do better with the idea
+1062.0,3.3199999999999363, of counting the number of operations.
+1065.32,5.6400000000001, So rather than focusing on describing our program
+1070.96,4.319999999999936," in terms of human time, one second, 0.5 seconds,"
+1075.28,4.839999999999918," things like that, let's come up with some operations in Python"
+1080.12,3.6400000000001, that take one time unit.
+1083.76,3.480000000000018, And we're going to say that all of these really basic operations
+1087.24,2.240000000000009, can say that they take the same amount of time.
+1089.48,2.7999999999999545, I don't care if they're like 10 to the negative 9 seconds
+1092.28,2.240000000000009, or 2 times 10 to the negative 9 seconds.
+1094.52,1.1200000000001182, I don't care about that.
+1095.64,2.439999999999827, I just know that they're really fast.
+1098.08,2.240000000000009," And if they're really fast, I can say that each of them"
+1100.32,1.3600000000001273, just take one unit of time.
+1101.68,3.4400000000000546, So I'll just count them all as one unit of time.
+1105.1200000000001,3.3199999999999363, So the examples of those are mathematical operations.
+1108.44,0.7999999999999545, They're pretty fast.
+1109.24,2.0," So no matter whether I'm multiplying, dividing,"
+1111.24,1.599999999999909," adding, subtracting, taking something"
+1112.84,1.2800000000002," to the power of something else, I'm"
+1114.12,4.720000000000027, going to say that each one of those takes one unit of time.
+1118.84,2.240000000000009," Comparing something, so a less than b,"
+1121.08,2.8799999999998818," 3 greater than 4, things like that, equality,"
+1123.9599999999998,3.6800000000000637," also super fast to do, also takes one unit of time."
+1127.6399999999999,2.2799999999999727," Assigning something, so a is equal to 3."
+1129.9199999999998,3.5599999999999454," That assignment statement right there, also pretty fast to do,"
+1133.4799999999998,4.0," takes one unit of time, and then accessing objects in memory."
+1137.4799999999998,4.720000000000027, Also pretty fast takes one unit of time.
+1142.2,3.480000000000018," So with this new definition of time, quote unquote,"
+1145.68,2.2799999999999727," where we have these units of time,"
+1147.96,6.2000000000000455, let's figure out how long these functions actually take.
+1154.16,2.6399999999998727, So our Celsius to Fahrenheit function
+1156.8,3.3200000000001637, has three operations in it.
+1160.1200000000001,3.1599999999998545," I got a multiplication, a division, and an addition."
+1163.28,2.160000000000082, I don't care the little variations
+1165.44,2.5599999999999454, that each one of these take to actually do inside computer
+1168.0,0.6800000000000637, memory.
+1168.68,2.400000000000091, I'm going to say that the Celsius to Fahrenheit program
+1171.08,4.240000000000009, takes three units of time.
+1175.32,3.7200000000000273," So no matter what the input is, if I'm converting zero Celsius"
+1179.04,4.1599999999998545," or a million Celsius, the program will still just take"
+1183.1999999999998,3.7200000000000273, three units of time to complete.
+1186.9199999999998,2.6800000000000637, How about my sum?
+1189.6,2.0399999999999636, So we'll go through step by step.
+1191.6399999999999,3.9600000000000364," So in my sum, I've got one assignment statement here."
+1195.6,3.3199999999999363, So that's going to be one operation.
+1198.92,3.839999999999918, The for loop here is going to take i and assign it
+1202.76,1.759999999999991, to one of the values in the range.
+1204.52,1.5199999999999818, That's just internally what it does.
+1206.04,3.9200000000000728, So that's going to be one operation each time through the loop.
+1209.96,4.720000000000027, And then total plus equals i is going to be two operations
+1214.68,6.440000000000055, because I have total plus i on the right-hand side.
+1221.1200000000001,1.6399999999998727, That's one operation.
+1222.76,3.160000000000082, And then assigning that back to total
+1225.92,3.7200000000000273, is my second operation.
+1229.64,2.2799999999999727, So that's two operations there.
+1231.92,1.6800000000000637, And that's it.
+1233.6000000000001,3.240000000000009, But notice our for loop.
+1236.8400000000001,3.6799999999998363," These three operations here, the one for assigning i"
+1240.52,0.9600000000000364, to be a value here.
+1241.48,5.360000000000127, And these two operations here repeat x plus 1 times.
+1246.8400000000001,1.6399999999998727, Zero all the way up to x.
+1248.48,2.6000000000001364, That's x plus 1 total times.
+1251.08,5.839999999999918, So how long does this program actually take?
+1256.9199999999998,1.2000000000000455," Well, we count all that up."
+1258.12,3.6400000000001, So the one for the total equals zero plus.
+1261.76,3.3999999999998636, And we're multiplying x plus 1 times what?
+1265.1599999999999,4.600000000000136," The one plus the two, which gives us 3x plus 4 total operations."
+1269.76,3.3999999999998636," So now we're noting this in terms of the input, which"
+1273.1599999999999,2.2799999999999727, is kind of cool.
+1275.4399999999998,4.120000000000118," So now I have this nice little formula where if I know my input is 10,"
+1279.56,4.279999999999973, I can actually tell you how many units of time this program
+1283.84,2.7200000000000273, will take.
+1286.56,1.1600000000000819," All right, how about the square?"
+1287.72,1.199999999999818, It's going to be very similar.
+1288.9199999999998,3.040000000000191, So I've got one operation for assignment here.
+1291.96,2.959999999999809, This is one operation for grabbing the i
+1294.9199999999998,2.4400000000000546, and making it one of the values in the range.
+1297.36,2.9600000000000364," Similarly for the inner loop, one operation there."
+1300.32,2.6400000000001, And then square sum plus equals 1 for the same reason
+1302.96,3.0399999999999636, as this is two operations.
+1306.0,2.480000000000018," One for the right-hand side, doing the addition,"
+1308.76,2.839999999999918, and two for making the assignment.
+1311.6,1.6400000000001, Let's not forget our four loops.
+1313.24,1.3599999999999, We've got two four loops here.
+1314.6,3.8400000000001455, So the inner one will repeat n times.
+1318.44,3.4400000000000546," And for each one of those outer n times,"
+1321.88,3.6399999999998727, we do the inner n times.
+1325.52,2.2799999999999727, This nested four loop situation here.
+1327.8,3.9200000000000728, So the total number of time units that this square will take
+1331.72,4.879999999999882, is the one over here for this square sum equals zero plus.
+1336.6,1.6800000000000637, And then I've got these nested four loops.
+1338.28,3.400000000000091," So the other one goes through n times,"
+1341.68,3.759999999999991," sorry, n times, the one operation,"
+1345.44,3.8799999999998818," multiplied by the inner four loop also n times times,"
+1349.32,2.400000000000091, what is the operations done in the inner four loop?
+1351.72,2.6399999999998727," Well, it's this one plus these two."
+1354.36,1.8800000000001091, So the one plus the two.
+1356.24,2.5599999999999454," So in total, 3n squared plus one operations."
+1362.8,2.7200000000000273, OK.
+1365.52,2.7200000000000273, So let's run this.
+1368.24,2.0," And now that we're counting operations,"
+1370.24,4.279999999999973, we should be able to see a better pattern.
+1374.52,3.5599999999999454," So here's my Celsius to Fahrenheit, my sum and square,"
+1378.08,4.519999999999982, slightly changed because I've got this little counter variable
+1382.6,3.759999999999991, within each function that is going to increment
+1386.36,1.759999999999991, each time I see an operation.
+1388.12,4.400000000000091," So obviously for Celsius to Fahrenheit, it's always 3."
+1392.52,1.8399999999999181," So when I do my return, I'm just going"
+1394.36,2.7200000000000273, to return the counter variable and then the regular thing
+1397.08,3.9200000000000728, that this function should return as a two-ball.
+1401.0,2.439999999999827," For my sum, this counter equals one"
+1403.4399999999998,3.1200000000001182, is a stands for this assignment statement.
+1406.56,2.0799999999999272," And then each time through the loop,"
+1408.6399999999999,4.0," I'm going to increment my counter for the three operations,"
+1412.6399999999999,3.3600000000001273, assigning the i to be one of the values in the range
+1416.0,3.479999999999791, and then two more for this total plus equals i.
+1419.4799999999998,3.400000000000091, So that's going to get incremented each time through the loop.
+1422.88,1.7999999999999545, And then the square similarly.
+1424.68,3.6000000000001364," So here's my counter equals one for this statement here,"
+1428.2800000000002,4.0," counter plus equals one for grabbing the i as one of these values,"
+1432.2800000000002,2.839999999999918, and then counter plus equals three for grabbing the j
+1435.1200000000001,5.440000000000055, to be one of these values and incrementing this my sum.
+1440.5600000000002,2.3199999999999363," So because of where I place these counters,"
+1442.88,2.5599999999999454, Python will automatically count it all up
+1445.44,2.9600000000000364, for no matter how many loops I've got.
+1448.4,3.880000000000109, So here's my wrapper for counting slightly different
+1452.28,2.160000000000082," than the timing one, because now I'm actually"
+1454.44,5.199999999999818, going to also keep track of how many more operations
+1459.6399999999999,4.320000000000164, I've done compared to the previous input.
+1463.96,1.8399999999999181, So let me show you what that means.
+1465.8,4.559999999999945, Let's run Celsius to Fahrenheit with the following inputs.
+1470.36,3.6000000000001364," So I'm, first of all, reporting the total number of operations,"
+1473.96,1.240000000000009, just like I did with timing.
+1475.2,2.3199999999999363," So always three operations, no surprise there."
+1477.52,2.519999999999982, That's what we coded up basically.
+1480.04,2.119999999999891," But then I'm also reporting here,"
+1482.1599999999999,3.2800000000002," and that's done inside the wrapper function, the count wrapper,"
+1485.44,4.240000000000009, how many more operations is this based on the previous one?
+1489.68,1.6799999999998363, So the first one's a little weird.
+1491.36,5.279999999999973," But when my input is 10 times more, I went from 100 to 1,000."
+1496.6399999999999,3.0, I've done one more operation.
+1499.6399999999999,1.1200000000001182," No change, obviously, right?"
+1500.76,4.480000000000018, Because it's always three operations done in total.
+1505.24,4.2000000000000455," So just for station sake, this is the slide."
+1509.44,3.0399999999999636," So no matter what happens to the input here,"
+1512.48,4.360000000000127," the number of operations in these units of time, which"
+1516.8400000000001,4.399999999999864, we're just counting the number of operations is three.
+1521.24,1.7200000000000273, What about the sum?
+1522.96,3.0399999999999636," So remember, the sum had that for loop in it."
+1526.0,4.519999999999982, Let's run that and see how many operations are here.
+1530.52,3.7200000000000273," So first, I'm going to report the number of operations."
+1534.24,2.2799999999999727," So when the input is 100, it's 304."
+1536.52,2.400000000000091," When the input is 1,000, it's 3,0004."
+1538.92,2.7200000000000273," When the input is 10,000, it's 30,0004."
+1541.64,2.3199999999999363," So that matches up the formula we came up with, right?"
+1543.96,1.5599999999999454, 3x plus 4.
+1545.52,1.4800000000000182, That's pretty cool.
+1547.0,2.2000000000000455," And then you can see now here, I'm"
+1549.2,4.160000000000082, reporting how many more operations is this line based
+1553.3600000000001,1.759999999999991, on the previous line.
+1555.1200000000001,2.119999999999891," So it's about 9.8 times more, right?"
+1557.24,3.9600000000000364," So when my input increases by 10 from 100 to 1,000,"
+1561.2,4.880000000000109, I am doing approximately 9.88 times more operations.
+1566.28,4.319999999999936," When my input increases by 1,000 to 10,000, again by 10,"
+1570.6,5.920000000000073, I'm doing 9.98 times more operations.
+1576.52,4.919999999999845," So we see a nice little steady state going on here, right?"
+1581.4399999999998,3.7200000000000273," Where when my input gets really, really big,"
+1585.1599999999999,3.0, it looks like I'm approaching approximately 10 times as
+1588.1599999999999,4.680000000000064, many operations when my input is 10 times more.
+1592.84,2.880000000000109," This is obviously more apparent when the input is big,"
+1595.72,4.480000000000018," because the tiny variations in my formula, the plus 4,"
+1600.2,4.400000000000091," specifically, makes less of an impact when my input is really"
+1604.6000000000001,1.8399999999999181, large.
+1606.44,2.839999999999918, And this is kind of going in line with our motivation.
+1609.28,2.7200000000000273," When the input data is really, really big, what I'd like to"
+1612.0,3.400000000000091, report is sort of the algorithm and how long it takes.
+1615.4,6.079999999999927," I don't care that the algorithm takes 3x plus 4, or 3x times"
+1621.48,4.0, 3x as operations.
+1625.48,2.9600000000000364," When the input is really big, all I care is that it's sort of"
+1628.44,1.6800000000000637," on the order of x, right?"
+1630.1200000000001,3.240000000000009, That's something we'll get at next lecture.
+1633.3600000000001,1.6399999999998727, But this is the big idea here.
+1635.0,5.240000000000009," When the input increases by 10, it seems like at steady state,"
+1640.24,2.6800000000000637, our number of operations increases by 10 as well.
+1642.92,4.1599999999998545, So it's sort of this linear relationship.
+1647.08,6.2800000000002," All right, what about the last function, the square?"
+1653.36,2.759999999999991, So I'm doing something a little special here.
+1656.12,3.599999999999909, I have two different inputs I'm going to run the square with.
+1659.7199999999998,3.800000000000182, So the first one is L2A.
+1663.52,4.919999999999845," So I'm going to run square with input 128, 256, 512, 1024."
+1668.4399999999998,3.9600000000000364," So I'm basically increasing my input by 2, right?"
+1672.3999999999999,5.279999999999973, I'm multiplying my input by 2 each time.
+1677.6799999999998,4.2000000000000455," And then I'm going to run it with L2B, where my input increases"
+1681.88,2.2799999999999727, by 10 each time.
+1684.16,2.1200000000001182, So we're going to see if we can figure out a relationship
+1686.2800000000002,2.3599999999999, between these for the square.
+1688.64,2.4400000000000546, Because that one was a little hard to figure out in just pure
+1691.0800000000002,4.240000000000009, timing without actually waiting for minutes or days.
+1695.3200000000002,3.0, Or OK.
+1698.3200000000002,2.519999999999982, So we've got something to work with here.
+1700.8400000000001,1.3999999999998636, So here I've got my square.
+1702.24,5.440000000000055, So this first bit here is when my input increased by 2.
+1707.68,4.160000000000082," And down here, just finished, is when my input increases by 10."
+1712.8,6.0, So number of operations when my input increases by 2
+1718.8,1.8799999999998818, are not so important.
+1720.6799999999998,1.4400000000000546," Yes, they're big."
+1722.12,2.160000000000082," But what I'm really interested in, just"
+1724.28,2.5599999999999454," like what we saw in the miceome example,"
+1726.84,3.5599999999999454, is what happens to the steady state as the input gets really big.
+1730.3999999999999,3.3600000000001273, How many more operations are we doing?
+1733.76,3.199999999999818, And what we can see is that the number of operations
+1736.9599999999998,4.680000000000064, as the input gets really big is a 4 times
+1741.64,4.680000000000064," more, in the case where I increase my input by 2 every round."
+1750.0,7.080000000000155," So when I increase my input by 2, the number of operations"
+1757.0800000000002,1.9600000000000364, are going to be 4 times more.
+1759.0400000000002,3.3999999999998636," Well, what about when I increase my input by 10, 1, 10,"
+1762.44,1.9200000000000728," 100, 1,000, and so on?"
+1764.3600000000001,3.4400000000000546," Again, I'm not so much interested in number of operations,"
+1767.8000000000002,2.240000000000009, but what happens to the steady state?
+1770.04,2.6400000000001," With very few operations, it's hard to tell."
+1772.68,2.199999999999818," But as we increase it, we see that it"
+1774.8799999999999,3.4400000000000546, goes towards approximately 100.
+1778.32,3.160000000000082," So when my input increases by 10, that"
+1781.48,6.679999999999836, takes me to about 100-fold increase in the number of operations.
+1788.1599999999999,3.9200000000000728," So now, can you guys see the relationship between the input"
+1792.08,3.6400000000001, for the square and the number of operations?
+1795.72,0.7200000000000273," You can, right?"
+1796.44,4.400000000000091," So it's approximately an n-squared relationship, right?"
+1800.8400000000001,4.959999999999809," When my input increases by, you know, my input is n,"
+1805.8,2.9200000000000728, the number of operations is going to be on the order of n-squared
+1808.72,0.2400000000000091, more.
+1813.8,3.6400000000001," So counting operations is actually a lot better than timing,"
+1817.44,1.0," as we can see, right?"
+1818.44,3.119999999999891," We've eliminated a bunch of those red X's, right?"
+1821.56,3.9200000000000728, We no longer have to deal with variations
+1825.48,4.440000000000055," between computers, because before counting this on the computer,"
+1829.92,1.0, that's slower fast.
+1830.92,2.759999999999991, We're still counting the same amount of stuff.
+1833.68,2.119999999999891," Languages, again, it's not going to matter,"
+1835.8,2.880000000000109, because you'll implement it in a similar way.
+1838.68,2.8799999999998818," Small inputs is still sort of iffy, right?"
+1841.56,2.560000000000173, We saw the square was a little bit unpredictable when
+1844.1200000000001,3.199999999999818," the input was pretty small, right down here, you know,"
+1847.32,2.040000000000191," 60, then straight up to 90."
+1849.3600000000001,3.0, But we didn't take long to see the steady state.
+1852.3600000000001,2.479999999999791," So it's actually better than before, better than timing."
+1854.84,2.4400000000000546," It's not zero, at least."
+1857.28,2.2000000000000455, But now the problem becomes sort of what's
+1859.48,2.959999999999809, the definition of which operations to count?
+1862.4399999999998,3.240000000000009, Notice our functions have a return value.
+1865.6799999999998,2.6800000000000637, Do we count the return as an operation?
+1868.36,1.1200000000001182," Technically, you should, right?"
+1869.48,2.439999999999827, That's a value that's being passed between functions.
+1871.9199999999998,2.560000000000173, So that's going to take some time to run.
+1874.48,2.6399999999998727," But we didn't actually count it in our example, right?"
+1877.12,2.3600000000001273, But you could if you wanted to.
+1879.48,2.7999999999999545," So that's where we stand, right?"
+1882.28,6.920000000000073," We've got timing and counting, just as an initial example."
+1889.2,2.3999999999998636," Next lecture, we're going to look at a few more examples"
+1891.6,2.560000000000173," with lists and things like that, just again,"
+1894.16,2.6399999999998727, timing and counting those functions.
+1896.8,2.240000000000009," But again, the big idea here is that we're"
+1899.04,2.480000000000018, trying to get at evaluating just a handful
+1901.52,1.5199999999999818," of different algorithms, sort of what's"
+1903.04,4.599999999999909," the order of growth as the input becomes really, really big,"
+1907.6399999999999,0.2800000000002001, right?
+1907.92,3.119999999999891, Because all we're interested in is how scalable are these programs
+1911.04,2.2799999999999727," that we're running when the input is really big, right?"
+1913.32,1.8399999999999181, When we're dealing with big data.
+1915.1599999999999,4.400000000000091, And so that's what we're going to start talking about next lecture.
+1919.56,1.0, OK.

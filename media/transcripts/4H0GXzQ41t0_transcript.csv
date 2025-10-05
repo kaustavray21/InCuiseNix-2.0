@@ -1,0 +1,610 @@
+start,duration,text
+0.0,14.120000000000001, So welcome to the last class.
+14.120000000000001,1.1199999999999992, Please don't come on Wednesday.
+15.24,1.7599999999999998, I will not be here.
+17.0,4.48, Today we will just be tying up some loose ends regarding some topics that we've seen
+21.48,1.8399999999999999, throughout the course.
+23.32,5.84, And then I'm going to do just a wrap up of things we've learned and potential courses that
+29.16,2.0, you might want to take after this.
+31.16,6.320000000000004," Okay, so today, as I mentioned, we're going to tie up some loose ends regarding lists,"
+37.480000000000004,1.0, dictionaries.
+38.480000000000004,6.399999999999999, So those two topics are kind of going to be combined into one sort of kind of one part
+44.88,1.759999999999998, of this lecture.
+46.64,2.719999999999999, It's going to also include a little bit about complexity.
+49.36,4.480000000000004, So just some things that we've learned kind of demystifying some details that I kind of
+53.84,3.5600000000000023, skipped throughout the past few lectures.
+57.4,2.479999999999997, And then we're going to talk about simulations.
+59.879999999999995,6.040000000000006," So simulations are very, very useful, is a very useful idea that you can already do with"
+65.92,1.3199999999999932, what you've learned in this class.
+67.24,4.840000000000003, And I'll show you some useful places where you can apply computation and simulation
+72.08,3.0799999999999983, to do some interesting things.
+75.16,2.240000000000009, And then we'll do the wrap up.
+77.4,3.759999999999991, So let's first start talking about lists.
+81.16,5.8799999999999955," So lists were the first data structure that we encountered that was really useful, right?"
+87.04,4.040000000000006, We did see strings and we did see two pulls and things like that.
+91.08000000000001,5.239999999999995," But once we saw lists, it opened up a whole new world of possibilities for how we can manipulate"
+96.32000000000001,1.0," data, right?"
+97.32000000000001,2.6799999999999926, So lists are sequences of objects.
+100.0,3.280000000000001, I kind of skipped past how they're actually implemented in memory.
+103.28,2.4399999999999977, So I do want to talk about that a little bit.
+105.72,8.760000000000005," But what we did talk about was the complexity, the asymptotic complexity of list operations."
+114.48,1.9200000000000017," So some of these are, we're pretty obvious."
+116.4,5.159999999999997," So the ones that are theta of n down here were obvious because, well, to check for equality"
+121.56,3.4000000000000057," between two lists, you of course have to look at each element in the list, right?"
+124.96000000000001,2.039999999999992, So that's theta of the length of the list.
+127.0,4.719999999999999," To check whether an item is in a list or to iterate over list, obviously it's theta of n"
+131.72,2.480000000000018, because you have to look at each element in the list.
+134.20000000000002,4.199999999999989, But we didn't really talk about the complexities up here.
+138.4,4.199999999999989, So accessing an item in the list specifically is theta of 1.
+142.6,4.800000000000011, So that means if you have a list with a whole bunch of elements in it to grab the element
+147.4,4.199999999999989," at a specific memory location, it's constant time complexity, right?"
+151.6,3.0800000000000125, So it's basically doesn't depend on the length of the list.
+154.68,1.2399999999999807, It's instant.
+155.92,2.5200000000000102, So we're going to see why that is.
+158.44,5.439999999999998," Let's first, for simplicity's sake, assume that we're storing a list in memory of just"
+163.88,1.0," integers, right?"
+164.88,4.319999999999993," So I know lists can store other lists, and dictionaries, and things like that."
+169.2,5.360000000000014," But just for this first slide, let's assume all we're doing is storing integers."
+174.56,5.799999999999983," So the way Python does this is when you create a list, let's say you're initially populated"
+180.35999999999999,8.640000000000015," with length L, Python initially allocates a contiguous memory block with length L memory"
+189.0,2.1999999999999886, locations.
+191.2,4.47999999999999," So if you have a list with 100 elements in it, initially populated with 100 elements,"
+195.68,5.319999999999993, then Python will initially create for US sequence of memory locations that are reserved for
+201.0,1.8000000000000114, this list.
+202.8,5.560000000000002," Then it says, well, if this is going to contain just integers, I'm going to say each one"
+208.36,4.799999999999983, of these memory locations will hold four bytes for that integer.
+213.16,1.920000000000016, That's kind of how we represent an integer.
+215.08,3.4000000000000057," And it could be, you know, eight bytes, something else for different machines."
+218.48000000000002,4.0," But in this particular example, let's just say each one of those memory locations will"
+222.48000000000002,2.6799999999999784," store an integer, and that's four bytes long."
+225.48,7.0800000000000125," Well, if this list is contiguous, right, a bunch of blocks of memory in all in order,"
+232.56,5.9199999999999875," then to access the Ith element, all you need to do is a little bit of math."
+238.48,4.439999999999998, So here I've got an integer in one position in my contiguous block.
+242.92,3.5200000000000102," Then I have maybe another integer at the next position, and so on, and so on,"
+246.44,3.5600000000000023, until I have another integer at the Ith position.
+250.08,7.239999999999981," So since these are consecutive to access the location of the element in this Ith spot,"
+257.32,6.840000000000032, all I need to do is look up that many memory locations from the start of my list.
+264.16,0.7599999999999909, Okay?
+264.92,1.1999999999999886, So that's just pure math.
+266.12,2.9599999999999795, So one byte is eight bits.
+269.08,10.800000000000011," So if I have four times eight bits multiplied by I, plus the first location,"
+280.15999999999997,3.400000000000034, that will tell me exactly the location of the Ith integer.
+286.36,5.240000000000009, So this is all made possible because these memory locations are allocated in order.
+291.6,4.71999999999997," If they were allocated not in order, then maybe this would not be as easy."
+296.32,0.6800000000000068, Yeah.
+297.0,1.4800000000000182, Why is it so easy?
+298.48,5.439999999999998," 32, because so if I say an integer is stored as four bytes,"
+304.92,4.439999999999998," in bits that's four times eight, because eight bits is in one byte."
+309.36,2.4399999999999977, So eight times four is 32 bits.
+311.8,1.1200000000000045," So for one byte, yeah."
+315.36,4.639999999999986," All right, but this is assuming that I'm storing integers,"
+320.0,3.2800000000000296, and obviously lists can contain other lists.
+323.28000000000003,1.240000000000009, They can contain two pulls.
+324.52000000000004,7.439999999999998," They can contain dictionaries, and some of those objects might not fit within this set number of bytes,"
+331.96,4.480000000000018," because some of those objects might be very, very large themselves."
+336.44,7.839999999999975," So in that particular case, let's say the list is heterogeneous, that doesn't face us."
+344.28,7.0," Because we can say, well, instead of storing the object itself at each memory location,"
+351.28,4.240000000000009," that worked for integers, but might not work when we have to store a list of, you know,"
+355.52,2.6000000000000227," a thousand elements at a particular memory location,"
+359.12,4.680000000000007," let's instead of storing the element itself, let's store a pointer."
+363.8,6.759999999999991," And a pointer is just a number that tells you which memory location that list might be stored at,"
+370.56,2.920000000000016," or that dictionary might be stored at, right?"
+373.48,3.7199999999999704," So if we store a pointer at a particular memory location,"
+377.2,7.480000000000018, then that means that this is my again contiguous memory allocated for a list of length L or something like that.
+384.68,7.759999999999991," Then here, I'm storing and still an integer, and that integer tells Python which memory location to jump to"
+392.44,4.480000000000018," to grab the integer that's stored there, or something like that, okay?"
+396.92,6.680000000000007," And here, I might have another list that I'm storing, but I'm not storing it exactly in that memory location."
+403.6,6.519999999999982," It's pointed to by this pointer that tells Python again to jump to a different memory location,"
+410.12,3.680000000000007," where that list might be contiguously stored itself, right?"
+413.8,6.759999999999991," So here in this example, I'm still storing numbers."
+420.56,8.480000000000018," There's just that these numbers correspond to a memory location that tells Python where to go to get my element in that list, right?"
+429.04,6.159999999999968," So in terms of the computation to get the Ith element in the list, it's going to be the same."
+435.2,7.1200000000000045," I'm still allocating in my original list four bytes to store my pointer, again, just a number."
+442.32,9.600000000000023," And so to get the Ith location, all I need to do is tell Python to go the start of this list plus 32 times I"
+451.92,4.159999999999968, locations down to get to that element.
+456.08,4.400000000000034," So this formula here, right?"
+460.48,7.71999999999997, Adding the start of this memory location of the list plus 32 times I is just math.
+468.2,4.240000000000009," There's nothing here that depends on the length of the list, right?"
+472.44,3.4399999999999977," So to grab the element at the Ith location, right?"
+475.88,3.8799999999999955," Somewhere within here, all we're doing is some math, right?"
+479.76,2.5600000000000023, An addition and a multiplication.
+482.32,5.480000000000018," And since that is just, you know, none of that depends on the length of the list."
+487.8,4.399999999999977," The complexity to access the Ith element in the list is constant, right?"
+492.2,1.2800000000000296, Just math.
+493.48,8.319999999999993," And we're using this idea that we are, we know exactly how many memory locations we need to jump to get to the Ith location."
+501.8,2.519999999999982, Does that make sense?
+504.32,1.5600000000000023, Okay.
+505.88,7.920000000000073," So that leads us to the question, well, okay, we're storing a list of elements."
+513.8000000000001,4.919999999999959," And we're using the idea that a list has indices, right?"
+518.72,7.759999999999991," To tell us the value, there's an element at index zero, an element at index one, an element at index two, and so on."
+526.48,3.4400000000000546," So there's an order to the list, right?"
+529.9200000000001,7.439999999999941," And because of that order, we're able to index an element at the Ith location in constant time."
+537.36,2.3999999999999773, But let's say we wanted to store a dictionary.
+540.96,4.159999999999968," Addictionary does not have an order to it, right?"
+545.12,1.4800000000000182, And what is a dictionary store?
+546.6,1.6399999999999864, It stores a key value pair.
+548.24,7.439999999999941," In a list, you could think of the quote unquote key as the index zero, one, two, three, four, and so on."
+555.68,2.9200000000000728, And the value was the element at that index.
+558.6,4.360000000000014," But in a dictionary, the key is not ordered, right?"
+562.96,1.1599999999999682, The key can be anything.
+564.12,4.7999999999999545," So here, I've got an dictionary that maps maybe a name to a Boolean."
+568.92,3.840000000000032," Maybe, you know, the student is in this class, true or false?"
+572.76,7.67999999999995," So a naive implementation of a dictionary could be to say, well, let's implement elements of the dictionary."
+580.4399999999999,3.6000000000000227, So a key value pair as a list.
+584.04,1.240000000000009, So just two elements.
+585.28,2.6399999999999864, The first element that list is my key.
+587.92,3.0," And the second element in my list is my value, right?"
+590.92,3.4400000000000546," So here, I really naive implementation uses the list."
+594.36,3.0799999999999272, And I've got four entries in my dictionary.
+597.44,2.1200000000000045, The element at index zero are all strings.
+599.5600000000001,7.240000000000009, The element at index one in each location is my value associated with that key.
+606.8000000000001,8.879999999999995," Well, if I were to index into this list, right, to grab the value associated with Eric, for example,"
+615.6800000000001,3.6000000000000227, can I do that in constant time?
+619.2800000000001,1.5599999999999454," No, right?"
+620.84,3.2000000000000455, Because there's no numerical index here.
+624.0400000000001,3.3199999999999363," There's no order to this set of values, right?"
+627.36,4.399999999999977," It's not even an alphabetical order, right?"
+631.76,2.159999999999968," So a, then j, then e, then s."
+633.92,3.240000000000009, And there's no order guaranteed for dictionaries anyway.
+637.16,3.9600000000000364," So in order to look up an item in this naive implementation of a dictionary,"
+641.12,5.32000000000005," where you're just putting all the elements in order in a list, it's theta of n,"
+646.44,3.3600000000000136," where n is the length of our list, right?"
+649.8000000000001,4.559999999999945, And so this implementation of a dictionary doesn't work.
+655.32,6.599999999999909," And yet, when I showed you this slide a few lectures ago, we saw something interesting."
+661.92,7.840000000000032," So this is what we just kind of proved, quote unquote, the access time in a list is constant."
+671.48,6.519999999999982, But the access time in a dictionary is constant as well in the average case.
+679.12,3.4400000000000546," In the worst case, it is theta of n, right?"
+682.56,4.159999999999968," Accessing an item in a dictionary is theta of n, because in the worst case,"
+686.7199999999999,2.6399999999999864," we might store the dictionary like this, right?"
+689.3599999999999,4.1200000000000045," It's just a list of all of our dictionary entries, all in order."
+693.4799999999999,4.920000000000073," So to look up one index, we'd have to go through the entire list"
+698.4,3.67999999999995, and check if the element at index zero is the one we're looking for
+702.0799999999999,2.240000000000009, and then grab the element at index one as its value.
+705.3199999999999,2.8799999999999955," But in the average case, and this is what we're going to see next,"
+708.2,7.080000000000041," in the average case, the access, the time it takes to do a look up for a key in a dictionary"
+715.2800000000001,0.9199999999999591, is constant.
+716.2,4.759999999999991," It's actually theta of one, which makes dictionaries really powerful data structures"
+720.96,2.159999999999968, to use in a lot of situations.
+723.12,2.080000000000041, So why is this?
+725.2,4.159999999999968," Well, it has to do with the idea of hashing, okay?"
+729.36,6.960000000000036," So the way that dictionaries are actually stored in memory is not as a list of a bunch of entries, right?"
+736.32,3.9600000000000364," We just showed that that is not feasible, that leads to a theta of n look up time."
+741.4000000000001,2.7999999999999545," So instead, they use something called a hash table."
+744.2,1.67999999999995, We briefly spoke about this.
+747.36,9.0," A hash table is just like a long list, and the indices of the hash table are actually"
+756.36,2.6399999999999864, things that you look up using a hash function.
+760.6800000000001,1.4800000000000182, So how does this work?
+762.16,8.0," Well, any key that you'd like to add to a dictionary can actually, actually has a hash function run on it."
+770.9599999999999,6.920000000000073," And this hash function takes in maybe an integer, maybe a float, maybe a string, maybe a tuple,"
+777.88,5.759999999999991," any sort of, any hashable object, hashes it, which means it takes that object,"
+783.64,4.1200000000000045," if it's a string, it'll give us an integer, if it's a tuple, it'll give us an integer."
+787.76,5.639999999999986," So if it hashes it, that means it takes it in as an input and gives us back a number, an integer."
+794.72,5.399999999999977," And that integer is what is used as the index to look it up in the hash table,"
+800.12,2.1200000000000045, to look up the value associated with it in a hash table.
+803.24,6.0," So in that sense, the lookup itself is constant time, because we just showed looking up an item in a dictionary"
+809.24,2.519999999999982, using the index is constant time.
+811.76,7.639999999999986," And if that hash function is also constant time, then the time it takes to look up an item in a dictionary is also constant time."
+821.04,6.680000000000064, So here's some examples of the Python hash function actually being run on different objects.
+827.72,6.0," So up here, if I run, it's literally a function in Python hash of some parameters."
+833.72,3.1200000000000045," So in this case, 123, it just gives me the value back."
+836.84,2.3199999999999363, So the hash of some number is the number itself.
+840.16,2.2799999999999727, We can hash a string.
+843.92,2.3600000000000136, That'll give us this particular number.
+846.28,5.360000000000014," So again, an integer, the hash of a tuple also gives us some number back."
+851.64,9.039999999999964, So these are all just some function running behind the scenes that takes in this hashable object and gives us back a number.
+860.68,0.4800000000000182, That's it.
+862.12,6.079999999999927, Now we can't run a hash function on a list because a list is mutable and therefore unhashable.
+868.2,5.720000000000027," If the object changes, then the hash function run on this object will give us a different value."
+876.9200000000001,5.519999999999982," So if you actually run this on your own computer, you might get different answers or if you run it at different times,"
+882.44,6.0, you might get different answers because Python adds a little bit of randomness to the hash values.
+888.44,2.3199999999999363, Just in case you want to encrypt data and things like that.
+890.76,7.519999999999982," But generally, you will always get some integer back if you run the hash function on a mutable object."
+900.28,4.440000000000055," So then that makes the question, how big should a hash table be?"
+904.72,9.360000000000014," So if a hash table is basically just a long list and if I run a function on some object to give me the value of an index within that list,"
+914.08,1.6399999999999864, how big should this table be?
+915.72,1.8399999999999181, How many indices should I have?
+917.56,2.3999999999999773," A thousand, a million, ten million?"
+919.9599999999999,1.0400000000000773, What's a good number?
+922.28,2.5599999999999454," Well, let's take this example of a string."
+926.04,12.360000000000014," So first string, what we can do is, and we can use my name as an example, if we want to hash my name such that every single name hashes to something unique,"
+939.16,1.3600000000000136, what we can do is the following.
+940.52,14.0," So we can take each character in somebody's name and behind the scenes, each one of these characters actually has an ASCII code associated with it,"
+954.52,1.9600000000000364, which is something numeric.
+956.48,3.67999999999995, And what we can do is just convert that number to binary.
+960.16,5.440000000000055," So the letter capital A happens to be this binary value, right?"
+965.6,2.2799999999999727," 0, 1, 0, 0, 0, 0, 0, 1."
+968.12,5.600000000000023," The lower case N is this value, the lower case A is this value, and so on."
+973.72,7.7999999999999545, So I've got seven different sort of groups of eight bits here for corresponding to each letter in my name.
+981.52,7.720000000000027," Now if I take those bits and now just smoosh them together, concatenate them to give me one really, really big number, right?"
+989.24,2.080000000000041, So this is all going to be one really big number.
+993.0,4.1200000000000045, The corresponding number in base 10 is this really long thing.
+998.72,1.0, Okay.
+999.72,9.639999999999986," And so if I do this, as long as someone's name is unique, they will end up with a unique number associated with their name, right?"
+1009.36,5.840000000000032, And therefore that unique number can be used as a unique index into a really big hash table.
+1016.6,5.759999999999991," So let's think about hashing the names of MIT's 4,000 undergrads, right?"
+1023.36,5.719999999999914," Let's assume that the longest name is 20 characters long, right?"
+1029.08,5.240000000000009, So there's going to be 20 of these different letters that we need to hash.
+1034.32,2.480000000000018, So we use the same process here.
+1036.8,5.240000000000009, Each one of those 20 characters gets its own eight bit representation.
+1043.2,8.0," So in total, the number of bits that I'm going to use to represent that 20 long character is going to be 8 times 20."
+1051.2,2.0, So 160 different bits.
+1054.56,1.040000000000191, That's a lot of bits.
+1055.6000000000001,9.0," And if I concatenate all those together, the number that that corresponds to is 2 to the 160, which is this thing here."
+1066.2,10.759999999999991," So if I want every single combination of letters in the alphabet to be a unique value in this long list,"
+1076.96,3.839999999999918, then I will need to have a list that is this long.
+1080.8,5.400000000000091," I'm not even going to try to figure out or to say how big this number is, but it's really, really big."
+1088.3999999999999,12.400000000000091," And having a list, a K hash table that has this many entries, will guarantee for me that names that are 20 characters long will each hash to something unique."
+1102.1599999999999,3.6000000000001364," But I only have 4,000 names that I'd like to put in my table."
+1106.76,6.0," So I have 4,000 names that I'd like to put in a table that has this many spots."
+1112.76,3.0, So that's a lot of wasted space.
+1115.76,1.0, Yeah.
+1116.76,3.0, Is it the 160 because it's a binary?
+1119.76,2.0," Yeah, so exactly."
+1121.76,4.0, So each one of the characters has 8 bits associated with it.
+1125.76,4.0, So there's going to be 160 of these 0s or 1s in a row.
+1130.76,12.0," So to tell the number that's associated with, we basically say we basically calculate 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20 with 20 zeros at the end."
+1142.76,4.0, And that gives me 2 to the 160.
+1146.76,3.0, That's going to be how big my number is.
+1149.76,7.0, That is going to be for one.
+1156.76,10.0, That's going to be how many slots I'll need in order to have unique combinations of letters be mapped to one slot.
+1166.76,3.0," So 0s, 0s, 0, 1 will map to one thing."
+1169.76,2.0," 0s, 0s, 0, 1, 0 will map to another thing."
+1171.76,2.0," 0s, 0s, 0, 1, 1 will map to another thing."
+1173.76,4.0, So like all these combinations of letters will each map to something unique.
+1177.76,4.0," And in order to guarantee that, I need this many slots."
+1182.76,5.0," But since, again, since I only have 4,000 undergrads, well, that's a lot of wasted space."
+1187.76,4.0," I'm only using 4,000 of these slots to hold students' names."
+1191.76,5.0," And that's because a lot of those combinations of letters aren't really valid, right?"
+1196.76,2.0, So what's the solution?
+1198.76,5.0," There's a lot of wasted space there, so the solution would be to say, well, you know what?"
+1203.76,4.0, I would be fine with having a smaller hash table.
+1207.76,3.0, I don't need that giant number of entries in my hash table.
+1210.76,5.0," I would be fine with maybe having, you know, 10,000 spots."
+1215.76,4.0, And then having some names that happen to hash to the same thing.
+1219.76,4.0," Or saying, I'm fine with having a hash table that has a million spots."
+1223.76,4.0," And you know, out of those 4,000, some will be used, some will be unused,"
+1227.76,3.0, and some might collide to the same hash value.
+1230.76,2.0, And that's totally okay.
+1232.76,4.0," Okay, so if we allow collisions, what is this going to look like?"
+1236.76,4.0, So here's a visualization of our hash table.
+1240.76,2.0, So think of the hash table like a list.
+1242.76,5.0, The reason why we think of it as a list is because indexing into a list is constant time.
+1247.76,7.0," Right? We're taking advantage of the idea that if we index into a list, that's going to be constant."
+1254.76,5.0, So let's say we're adding some names and grades into our hash table.
+1259.76,4.0, Right? So this is our representation of a dictionary.
+1264.76,6.0, The values here says that I have a hash table that has 16 different entries.
+1270.76,2.0, Right? 0 to 15.
+1272.76,5.0, And 0 to 15 corresponds to like the list index.
+1277.76,7.0," Okay. So if I have a name and a grade that I'd like to add to my hash table,"
+1284.76,3.0, I need to run a hash function on the key.
+1288.76,6.0," So the key is the name, and the grade is the value associated with the name."
+1294.76,4.0," So to add Anna with the grade of C to my hash table,"
+1298.76,5.0," I need to take my Anna, which is the key, and run a hash function on it,"
+1303.76,4.0," such that when I run the hash function on this name A and A,"
+1307.76,5.0," it'll give me a number, an integer between 0 and 15."
+1313.76,7.0," Okay? And if I can do that, then I know I've added my entry here into one of these buckets."
+1320.76,3.0," So a reasonable hash function to run on the name,"
+1323.76,3.0," and we saw this in the dictionary lectures to say,"
+1326.76,5.0," well, let's have A mapped to 1, B mapped to 2, C mapped to 3, and so on."
+1331.76,6.0," So in, for my name, I've got 1 plus 14 plus 1 equals 16."
+1337.76,7.0," But since I want to ensure that this hash function gives me a number between 0 and 15,"
+1344.76,3.0, let's mod that with 16.
+1347.76,3.0," Right? So I can sum all the letters in my name just fine,"
+1350.76,4.0," and then let's finalize it by saying mod 16 to give me the remainder,"
+1354.76,3.0," either 0, 1, 2, or 15."
+1357.76,8.0," And if I do that, I'm ensured that this key value pair will be added to one of these buckets from 0 to 15."
+1366.76,4.0," Okay? So in this particular case, Anna with a grade of C maps to 0, right?"
+1370.76,4.0," That's what the hash function on my name told me to add,"
+1374.76,3.0, the location that the hash function on my name told me to add to.
+1377.76,2.0, So there I am putting my name in there.
+1379.76,2.0, Let's add a couple more people.
+1381.76,5.0," So here's Eric. His name hashes to 35, mod 16."
+1386.76,6.0, So that's 3. So I'm going to add Eric and his grade to bucket number 3.
+1392.76,6.0," Then we can add John with a grade of B. His name hashes to 47, mod 16."
+1398.76,4.0, So that's 15. So we can add John down in bucket 15.
+1402.76,4.0, Okay? And then let's add Eve with a grade of B.
+1406.76,5.0," So she hashes to 32, mod 16, which is also 0."
+1411.76,4.0, And you know what? Anna was already in the bucket 0.
+1415.76,2.0, But that's fine.
+1418.76,3.0, Because you know what? I have four names here.
+1421.76,4.0," So four entries that I want to add to my hash table, dictionary."
+1425.76,3.0, And two of them collided.
+1428.76,4.0, That's fine. I still have many other buckets that are empty here.
+1432.76,5.0," So if I have, you know, 10 students in my class,"
+1437.76,3.0, probably they won't all hash to 0.
+1440.76,4.0," They'll probably hash, you know, somewhere within here so that it's nicely balanced."
+1444.76,5.0," And so maybe out of 10 students in my class, only two collided."
+1449.76,5.0," And that's way better than having all of the students in the class be, you know,"
+1454.76,3.0, enumerated in one long list. Right?
+1457.76,4.0," So when I look up Anna, the way that this works is you hash the name Anna against."
+1461.76,4.0," Right? So when you want to look up the grade of Anna, you, that's the key."
+1465.76,5.0," You hash the value Anna again. You say, hey, Anna hash to 0."
+1470.76,4.0," So then I'm going to look in bucket 0 and say, all right,"
+1474.76,5.0, let me enumerate everybody who's in bucket 0 and see if I can find Anna with her grade.
+1479.76,3.0," Happens to be the first one. But you know, if it was later on,"
+1482.76,5.0, then I'd still be able to grab it much faster than if I had everybody in one long list.
+1487.76,4.0," Does that make sense? Like the idea of, yeah, go ahead."
+1491.76,4.0," So you can still like access the machine set, like you might get two answers."
+1495.76,2.0," Exactly. Yeah, you can still access them."
+1497.76,3.0," You just might have to look through a list of two, right?"
+1500.76,4.0," So here at bucket 0, I'm effectively storing a list of these,"
+1504.76,3.0," everything that hash to a 0, right?"
+1507.76,4.0," Which is, it's fine. Yes, that's, that's two that I have to look through."
+1511.76,3.0," It's not four. It's not 10. It's not, you know, a hundred."
+1514.76,5.0, It's not everybody all in a row. Right? Yeah.
+1519.76,6.0," So the complexity of this is actually going to be smaller than theta of n, right?"
+1525.76,3.0, And it will depend on the hash function that we use.
+1528.76,3.0, Right? This hash function needs to be nicely balanced.
+1531.76,3.0," It shouldn't put everyone in bucket 0, right?"
+1534.76,2.0, Then that's a useless hash function.
+1536.76,3.0, And it depends on the size of the hash table.
+1539.76,5.0," Right? If I have maybe, you know, a thousand people that I'm storing in 15 buckets,"
+1544.76,2.0," I'm going to have a lot of collisions, right?"
+1546.76,4.0," But if I'm only storing these four, or maybe, you know, eight or ten,"
+1550.76,3.0," or something smaller than the size of my table,"
+1553.76,3.0, then there will be far fewer collisions. It'll be more nicely balanced.
+1556.76,1.0, Yeah.
+1557.76,2.0," I've had like theta, and it like the base in 0."
+1559.76,3.0," Oh, theta of n for the things in 0. Yes."
+1562.76,6.0," And that's fine, because usually what we care about is theta of the length of the input, right?"
+1568.76,5.0," So in this case, it's theta of, if I have four students in my class, right?"
+1573.76,4.0," I've got only two that, that mapped to 0."
+1577.76,3.0," So here, it's, you know, length over 2."
+1580.76,4.0," But if I had more students, then it would be far fewer, right?"
+1584.76,4.0," It would be 2 out of 10, or maybe 2 out of 15, that hash to the same thing."
+1588.76,3.0, Yeah.
+1591.76,7.0," So, yeah. So as the question said, what makes a good hash table and hash function pair?"
+1598.76,5.0, Right? Because this only works if you have a really good hash function
+1603.76,3.0, and a nice hash table to go along with it.
+1606.76,5.0," So this is actually a problem in computer science, you know, a research problem all by itself."
+1611.76,7.0," So people actually study this for their lives, coming up with good hash functions and hash tables."
+1618.76,6.0," So some base rules, you want to have the domain of interest."
+1624.76,6.0," So in this particular case, you know, a tuple or a string or whatever it is,"
+1630.76,4.0, map to integers between 0 and the size of the hash table.
+1634.76,5.0," So in the previous example, we don't want to have a hash function that mods 2."
+1639.76,5.0," Because then everything will either hash to 0 or 1, right?"
+1644.76,7.0," If our hash table has 15 things, well, we better make sure that our hash function is going to give us a number between 0 and 15."
+1651.76,8.0," Second, you want the hash value to be fully determined by the value being hashed."
+1659.76,5.0," So in this case, we don't want any sort of randomness to go on."
+1664.76,8.0," For the reason that, well, if I want to look up Eves grade later on in, you know, in the code or whatever,"
+1672.76,5.0, then I need to run the exact same hash function on her name to determine the grade.
+1677.76,8.0," So if there's randomness involved in this hash function, then you might not get back the same value that it hashed to originally."
+1685.76,9.0," Right? So you'll be looking in the wrong bucket and you'll, you know, incorrectly say she doesn't have a value or she's not there."
+1694.76,9.0," Third, you want to use the whole input to hash the function, she used the whole input to run the hash function."
+1703.76,6.0," So again, in this example, we don't just want to use the first letters of people's names."
+1709.76,11.0," Because then that will lead to a lot more collisions than if we use the entire, you know, the sum of all the letters in the alphabet or all the letters in their name."
+1720.76,2.0," Okay, so those are really big ideas."
+1722.76,7.0, And then what we want out of our hash function is all the values.
+1729.76,7.0," Right? If you run this hash function on a bunch of different inputs for your storing names or your storing, I don't know, two bowls or whatever you're storing,"
+1736.76,5.0, you want this function to give you a nice uniform distribution of values. Right?
+1741.76,11.0," So in our hash table previously here, if I add more names to my hash table, I want to ensure that they're going to land in buckets, you know, two, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen."
+1752.76,6.0, I don't want everything to hash to the number zero. Right? That would be very bad.
+1758.76,17.0," So as a side reminder, back in the lecture on dictionaries, I actually said something like, for now, think of the objects that can be keys to a dictionary as immutable objects."
+1775.76,3.0," Right? And I said technically hashable, but we don't need to know what that is."
+1778.76,12.0," Well, hashable means just this. You can run a hash function on the object and you'll get the same value back no matter how many times you run the hash function on that object. Right?"
+1790.76,8.0," So we looked at this example. What happens if we add a student whose name is not immutable, not hashable?"
+1798.76,14.0," So lists are mutable objects. So as such, they are not hashable. That means if we run a hash function on a list today, and then we potentially mutate the list, tomorrow, that list will not hash to the same thing. Right?"
+1812.76,13.0," So we saw this example. Let's say Kate with a K is added to our hash table. So her name currently hashes to 37 Mod 16, which is a five. Right? So we added her there."
+1825.76,10.0," Now, let's say tomorrow we want to look up her grades to do whatever to integrate it into a bigger spreadsheet. She had changed her name between yesterday and today."
+1835.76,10.0," Now she's Kate with a C. If we run the same hash function again on her name, that leads us to look in a different bucket. Right?"
+1845.76,12.0, She's still there. She's Kate with a K as we had originally added her. But now her name is Kate with a C. We run the same hash function tells us to look bucket 13 and she's not there. Right?
+1857.76,14.0, So that's why we only want hashable objects to be added to be keys to the dictionary because we want the same value to come back to us when we run the hash function on. Right?
+1871.76,15.0," So now we can see in the worst case scenario, everything maps to the same bucket in my hash table, my list. Right? Every single thing I add is it has a really bad hash function on it."
+1886.76,14.0," Let's say the hash function always returns three. Right? If my hash function always returns three, no matter what I'm adding to my addiction, no matter what I'm hashing, then every single item essentially gets put in a really long list at bucket."
+1900.76,14.0," Number three. So when I look up a value, we'll surprise it hashes to three. And now I need to look through every single thing in that bucket number three to find the one I'm looking for. Right? So it's just very, very bad."
+1914.76,11.0," And in the worst case scenario, this is the complexity. It's theta of n where n is the length of whatever items we have that we're adding to our buckets to our hash table."
+1925.76,15.0," But in the average case, and this is only when we have a hash table that's pretty big relative to the things that we're adding to it. And when we have a hash function that's good enough, right? That has a nice uniform distribution of values."
+1940.76,10.0," Only in that case in the average in the average case, the time it takes for us to grab a value from a dictionary is theta of one constant."
+1951.76,13.0," And so that's why dictionaries are really, really useful data structures to store things and to retrieve things from. Back when I was doing a little project, I didn't know about Python dictionaries."
+1964.76,10.0, I had just learned about the language. And I was actually using lists to read in genomic data files. And I was storing everything in lists like genomic names and things like that.
+1974.76,11.0," And it was really slow. Like, you know, my advisor would be like, you know, is the code done yet? I'm like, no, it's been a couple days still waiting."
+1985.76,9.0," And then, you know, someone told me, hey, just use a dictionary to store the values. And then the lookup is going to be a lot faster. It was done, you know, within a couple of seconds."
+1994.76,19.0," So very, very useful, the time complex, because it's genomic data. It's huge amounts of data. So the theta van versus theta of one is really, it makes a really big difference when you deal with large data sets. Right. It's not just paper. It's actually makes a big difference."
+2013.76,5.0, Okay. Questions about this. I hope this ties in. Yeah.
+2018.76,4.0," So, Python uses a specific cash function. Yeah."
+2022.76,6.0," Python, I think, can they change that function enough? It would change. Or is it?"
+2028.76,7.0," So, you don't. Yeah. So Python right now uses specific hash function in a future version. They might use a different hash function."
+2035.76,10.0," And we don't really use the numbers associated with the hash functions. I mean, you could for your programs, but it would be, I guess, relative to whatever value you get. Right."
+2045.76,9.000000000000227," So you wouldn't kind of hard code the value for, you know, the, the two, one, two, three as something. Right. You just get what you get."
+2054.76,3.0," And, and, and that's what it is. Right."
+2057.76,8.0," It could give you a different hash function. If you ran out of your computer, actually, you might get a different hash value than mine."
+2065.76,3.0, Yeah.
+2068.76,6.0, So this topic kind of ties in data structures. We've seen lists and dictionaries.
+2074.76,8.0," Some of the behind the scenes look at how things are stored, puts a little complexity in there, talking about algorithms and, and run times."
+2082.76,6.0," And it ties in a bunch of the topics that we've seen in this class really, really nicely."
+2088.76,5.0, So one other thing that I'd like to now talk about is the idea of a simulation.
+2093.76,10.0, And this hopefully is going to be a little bit more useful to you if you decide to take another computer science course or computation course in a different field.
+2103.76,7.0," You know, whatever you'd like. Computation simulations are very useful tools in computer science."
+2110.76,8.0," So it allows you to computationally describe the world. So if you see an event in the world, you can actually simulate it computationally."
+2118.76,5.0," What you've learned so, with what you've learned so far, you can totally simulate a whole bunch of things."
+2123.76,5.0, And we're using randomness to simulate these events that you might see in the real world.
+2128.76,12.0," So for example, you might have seen sort of the hurricane paths, right, when you see on the news or whatever, the most likely path that a hurricane might take."
+2140.76,4.0," But then they also have the little models that show, you know, other likely paths."
+2144.76,8.0," They simulated, right, using a bunch of data that they have the most likely path for that hurricane, right."
+2152.76,22.0," Another place where simulation is useful is if you see a real world event that's actually kind of complex, you can take a simpler set of rules and simulate those and then add in more rules, you know, to make it closer and closer to the thing that you actually observe in the real world."
+2174.76,7.0, So the idea of a simulation is that you have some event in the real world and you want to calculate something about it.
+2181.76,7.0," We're going to use a computation to design an experiment, right, and we're going to use randomness for that."
+2188.76,6.0," Once we've done that, we're going to repeat the experiment a whole bunch of times, computationally."
+2194.76,6.0, And that just means we're going to put a for loop around whatever experiment we've designed computationally.
+2200.76,12.0," And if you're interested in some outcome, some particular outcome, like as we're going to see, we're going to roll a die, and we're interested in how many times, you know, a for comes up, then we're going to keep track of that outcome."
+2212.76,15.0," And you keep track of it however many times that outcome happened in your whole bunch of repetitions, and then after the end of the repetitions, you can report some value of interest, maybe the probability that a for comes up on a diural."
+2227.76,12.0," So here's the example. It's going to be very simple because it's something we can calculate already right off the bat, but it'll give you a sense of how you can write code around such a real world event."
+2239.76,15.0," So here we're interested in just rolling a dice and seeing the probability to get a dot dot dot dot, right, to get a for on the dice, on one of the dice rolls, or the probability to get a dot, whichever."
+2255.76,13.0," So here the event is that we're rolling a dice, and then we're interested in getting the probability of some face. So we're going to design an experiment for that dice roll."
+2268.76,14.0, And this is just one way to design the experiment. There are a whole other many many other ways to design it. This is just one that I chose that felt illustrated most how we can take a real world example and put it into code.
+2282.76,12.0, So a die has six faces. So what I have done here is I've created a list of each one of those faces. Right? You could have used numbers as the elements in the list.
+2294.76,10.0," In this case, I just use strings to be a little bit cuter or cuter, but you know, whatever, however you'd like to represent each one of those die faces, here's a list of six things in it."
+2305.76,13.0," And then I'm using this choice function from this random library, again, the random library, super duper useful library. Random dot choice will effectively select one of the elements in this list for me."
+2318.76,12.0," So if I type in random dot choice in the console now, it might give me the dot dot. If I type it in right after, it might give me the dot dot dot dot, whatever. It's going to be random each time I run this function."
+2330.76,17.0," But this line of code effectively simulates me taking a dice and rolling it. And then we can repeat this experiment a whole lot of times. Right? If I'm taking a dice and rolling it, that's like what one or two seconds per roll."
+2347.76,12.0," I don't think I have time to repeat that experiment 10,000 times. But with simulation with computation, right? With programming, we can simulate it 10,000 times or a million times and then just wait a couple seconds."
+2360.76,12.0," So very, very useful application of programming. So how do you simulate this dice or 10,000 times? Just slap a for loop around that line of code."
+2372.76,13.0," So for some number and range 10,000, that means I'm going to get this run this line of code 10,000 times. All of a sudden, I've just rolled a dice 10,000 times."
+2386.76,8.0," As I'm doing so, I'm interested in the outcome of some event. So let's say how many times did a dot dot dot dot come up? Right before."
+2394.76,14.0," Well, each time in my for loop, I can keep track of the value of roll. If it was a four, increment a counter. If it was not a four, I don't care. Do nothing."
+2408.76,13.0," So each time I have a counter that tells me how many times four came up. And then after the for loop is done, I've repeated my experiment 10,000 times and I can report the probability to get a four. Right?"
+2421.76,8.0," So the counter divided by 10,000. So this is the code. That's it. It's super simple."
+2429.76,15.0," I wrote a function and it actually takes it a parameter. So if we're interested in the probability for a dot dot dot dot to come up, then we pass in the value of that particular of that side."
+2444.76,6.0," If I'm interested in the probability that a dot comes up, then I pass in the dot as a string."
+2450.76,9.0," So what does it do? Well, just like in the previous slide, I've got this for loop here that tells Python how many times to repeat the experiment."
+2459.76,11.0, I have the experiment number here as a variable. So I can easily just change it to be something else. And then I've got my role here. So this is me actually doing the experiment.
+2470.76,9.0, So just here's me rolling the dice. Here's role value. And then I check what the value of the role was and increment the counter if it was the side of interest.
+2479.76,8.0," Right thing I've passed in as a parameter. And then at the end, I just do a print, but you could imagine doing a return or something like that."
+2487.76,12.0," So if I run it, we're going to get the probability that the side dot came up was 0.167 and the probability that dot dot dot dot came up was 0.1602."
+2499.76,13.0," Intuition says they should be the same, but you know what? That's that's our intuition. Right. We already know the problem if we didn't know how to calculate the probability of, you know, one of these sides coming up."
+2512.76,13.0," This would be pretty good. Right. The beauty of computation is we can just add two more zeros on there, run it. Right. And maybe uncomment it. So we actually see the values."
+2525.76,15.0," Run it. We wait a couple seconds, but now the probability is getting closer and closer to the true probability. Right. So the more experiments I do, the better my answer becomes. And I just had to wait a couple seconds."
+2540.76,10.0," If I increase it by 10 more, I would have to wait 10 more times, right. 10 times as long. So maybe 20 seconds. I'm not going to do it."
+2550.76,15.0," So it's still a guesstimate, but it's a pretty close guesstimate. Now the other beauty of writing code is that we can now ask, well, this is a fair die. Right. Every single one of these sides comes up with an equal probability."
+2565.76,12.0, What do you guys think the change I should make to make an unfair die? Let's say it's weighted unfairly towards the dot. Right. The one. Yeah.
+2577.76,12.0," Yeah, exactly. Let me just add another dot here here. I've got another dot. And now the die is weighted unfairly, right. It comes up more times on the one than on anything else."
+2589.76,14.0," So if I run the code again, wait a couple seconds, probability to get a one twice as high as probability to get a four. Right. So a really easy change. It helped me answer another question, a small variation of my original problem."
+2603.76,7.0," And I didn't have to roll a dice 10,000 times in the real world."
+2610.76,14.0," Okay. So that was really easy simulation, right. The probability of getting one of calculating sides of dies coming up is pretty simple."
+2624.76,8.0," So why did we bother with the code, right? Because we could just do it mathematically. The side question that I asked was also kind of simple to figure out."
+2632.76,6.0, Because we can actually ask harder questions and harder variations of our original problem.
+2638.76,12.0, We could certainly come up with mathematical solutions to these harder problems as well. But I wouldn't be as certain about my answers to those as I would be just writing code.
+2650.76,9.0," For me, it was a little bit easier to debug code than it would be to answer to mathematically write probabilities to so much harder questions."
+2659.76,10.0," And you can see once you've written the code, right, once you've kind of framed your experiment in this way, it's really easy to just go ahead and change it a little bit."
+2669.76,8.0, Right. So the code is easy to change once it's written. So let's look at a new question. This one says.
+2677.76,10.0, One experiment is no longer to just roll a die once. One experiment is now that we're rolling a die seven times.
+2687.76,9.0, And I'm interested to know the probability to get the dot dot dot dot at least three times out of those seven rules.
+2696.76,9.0," Much harder question, right, than before it would require a little bit of thinking, some paper, right, to figure out."
+2705.76,11.0," But in terms of code, it's going to be really simple. So now one experiment is no longer just one choice from my list of of dice faces."
+2716.76,9.0," But it's going to be seven choices from my list of die faces, right, representing the seven rules that I have for one experiment."
+2725.76,12.0," And out of those seven rules, what I'm interested to do is keeping track of, right, incrementing a counter whenever I see a four dot dot dot dot."
+2737.76,7.0," And then just like before, slap a four loop around it, repeat that experiment 10,000 a million times, however many times you'd like."
+2744.76,8.0," And then keep track of how many times that four came up, three or more times out of the seven rules."
+2752.76,13.0," So this is our event count how many times out of the 10,000 in that case, but it could be a million, whatever it is, the we incremented our counter to be more than three, more than or equal to three."
+2765.76,10.0," And then our value of interest is the probability of that happening. So take that counter and divide by 10,000 because that's how many times we repeated our experiment."
+2775.76,10.0," Okay, so this is the code slightly longer and I've actually divided it into two parts. This one up here and then this one down here."
+2785.76,17.0," So the code up here is going to do the simulation 10,000 times. So I've got one four loop here that goes through 10,000 or a million, however many times you want to repeat the experiment."
+2802.76,10.0," Within here, sorry, and I forgot to mention that here I have a function where I've kind of generalized a bunch of stuff so we could run it with different values."
+2812.76,8.0," So instead of three times out of seven rules, we could have 15 times out of 3,000 rules. So we can generalize this."
+2820.76,14.0," So here inside this for loop, I've got the simulation of rolling seven times. Right? So here I've got range of n rules in the previous slide. I said it seven, but it could be anything you'd like."
+2834.76,12.0," And then I've got choosing one of the faces seven times and keeping track of how many times out of those seven, I got a dot, dot, dot, dot."
+2846.76,14.0," So at the end of this for loop here, I've counted how many times I got a dot, dot, dot, dot. And then I'm going to keep track of that number in this list how many matched."
+2860.76,8.0," So how many matched will be a list of 10,000 elements, right? 10,000 elements."
+2868.76,12.0," One element for each one of my experiments. So the first time maybe three dot, dot, dot, dot, dot came up out of seven, then the next time one, then the next time five, then the next time four, however many."
+2880.76,6.0," Right? So now I've got a list of how many times the dot, dot, dot, dot came up out of seven rules."
+2886.76,6.0," So the code down here, that's why I split it up because it's a little bit easier for me to think about it."
+2892.76,9.0," The code down here is now going to iterate through this list of 10,000 experiments and say which one of these is greater or equal to three."
+2901.76,20.0," This one, this one, this one. So I'm incrementing a counter anytime that is true. And at the end of this loop down there, I'm going to know how many times out of those 10,000 trials, I had three or more times out of seven come up on the dot, dot, dot, dot."
+2921.76,14.0," So I can run the code and here I've got the exact problem on the previous slide. So if I'm interested in the probability of the four coming up at least three or more times out of seven rules, that's 0.0955."
+2935.76,13.0, And then I also down here wrote it like this and this probability is 0.16. What is this problem down here? Is it look familiar?
+2949.76,6.0," So the probability of dot, dot, dot, dot coming up at least once out of one rule."
+2958.76,8.0," That's just the previous problem, right, on the previous slide. I just have one rule and I count the probability to get the four."
+2967.76,13.0," So this matches what I got with the previous function that I wrote. But hey, now I wrote a better function that can actually, that's more general and I can also run it to get the probability that I, from the previous code, right."
+2980.76,12.0," So this is actually a much better code to run. Okay, questions about this. Interesting. I mean, it's dice rolls. How interesting can it be?"
+2993.76,15.0," So let's look at a more interesting problem, something that you might apply to the real world. So you might see this in a calculus course, might not. But it is more of a calculus problem."
+3008.76,12.0, So I've got water that runs through a faucet at random somewhere between one gallons per minute and three gallons per minute. This is the setup.
+3020.76,13.0," What is the time it takes to fill the 600 gallon pool? Does anyone have an intuition for how we could solve this? If not, I can just click next."
+3034.76,10.0," Yeah, definitely between the lowest rate and the highest rate, right. So between 200 gallons per minute, sorry, between 200 minutes and 600 minutes, right."
+3044.76,11.0," 200 at best if the water flows at three gallon per minute and 600 minutes at worst if the water flows super slowly, one gallon per minute."
+3055.76,15.0," So we could say, well, let's take the average of the flow, one, but the average between one and three gallons is two, right. So if we take 600 gallons divided by two gallons per minute, that would give us 300 minutes."
+3071.76,21.0," It's a reasonable guess, but that's not actually the right answer. Another way we could say is, well, let's take the slowest and the fastest it could run, right. So it could take. So here I've got 600 minutes and 200 minutes and average those numbers out, right, divided by two. So that's 400 minutes."
+3092.76,3.0, But that's actually not right either. Yeah.
+3101.76,12.0," You could, yeah, I don't want to do integrals though. Yeah, but that's exactly the right answer. Yeah, you have to do an integral. And yeah, we're teaching computer science here."
+3114.76,10.0," So we're not going to do integrals in this class. Instead, we're going to do code. And the code is going to be like five lines to do the, to find the answer to this."
+3124.76,13.0," So all we're going to do is grab a whole bunch of numbers between one and three, a million of them if you want. These will represent a bunch of random values you could have the water flow, right."
+3138.76,10.0," And then we're going to say for each one of these numbers chosen at random, how long would it take to fill the pool. So you do 600 divided by that rate, right."
+3148.76,14.0," It's just just how long it takes. And then we're going to average all of these rates. Right. So we have a million of these numbers, potential times that it could take to fill the pool. Some of them all average them."
+3163.76,16.0," This is the code. It looks like a lot, but down here, the bottom half of this is just us reporting the results. This is, you know, here's two print statements. And here I'm actually also plotting what the, what the dots look like, right. All the flow rates."
+3179.76,16.0," The actual code to do the simulation is these, okay, I lied seven lines of code, not five. So I've got a function fill pool. It can take in a size parameter. We could even do a lower range and not a per range if we wanted to for the flow rate."
+3195.76,12.0," For now, we'll just hard code it to be between one and three. I've got two lists that I'm going to populate with a bunch of different random numbers. So the flow rate will be chosen between one and three."
+3207.76,11.0, So here I've got random dot random is another useful random function from the random library that gives me a number between zero and one.
+3218.76,13.0," So to get a number between one and three at random, I'll just multiply by two and add one. Right. So bottom case, it'll be one. Top case will be two times one plus one. Three."
+3231.76,7.0, Right. So our all we need to know will be a random number between one and three. A float. Right. So it could be anything.
+3238.76,18.0," So we'll just append that random number to our list of flow rates. And then using that flow rate that we just randomly chose, figure out how long it takes to fill the pool size, the pool of size size. So size divided by the rate. Right."
+3256.76,9.0, So we'll just do a math. And then we now have a list that's populated with all of these times that it takes to fill the pool.
+3265.76,14.0," And that's the stuff inside the loop. The for loop here is one experiment. Right. So I grabbed one random number. I figured out how long it takes for me to fill my pool. And then I repeated that 10,000 times. Right."
+3279.76,13.0," So down here, I'm going to report the average flow rate, which should be two. Right. Because if we're choosing a random number between one and three, the average of those numbers better be two."
+3292.76,10.0," And then I'm reporting the thing that we're actually interested in, which is the average fill time, right. Which was not either of those two things we had the intuition for, but it is the integral."
+3302.76,14.0," And down here, I'm doing some plots. So these are the things that I've plotted. So on the left side, I've got on the x-axis apologies. I forgot to label my axes and put a title on this. So I'm just going to talk about it."
+3316.76,16.0," So the x-axis is number zero through 10,000, representing each, basically, like, you know, zero, one, two, three, four represents one of my experiments, right, choosing a random number. And the y-axis is the random number that was chosen. Right."
+3332.76,14.0," So this is, looks like a nice smattering of randomness here, which is what we wanted. And then for each one of these values, I'm going to have a corresponding fill rate. Right."
+3346.76,17.0," So for example, here, if at point zero, the fill rate happened to be one, right, then that means a time it took for me to fill the pool should be up there at about 600, right. It could be that little point right there."
+3364.76,12.0," So this is a graph of random numbers between one and three, 10,000 of the chosen. And this is the graph of the corresponding times it took for me to fill the pool with each one of these dots that we randomly chose."
+3377.76,13.0," We notice that the plot on the right is not uniformly scattered. Right. In fact, it's more kind of densely populated down towards the bottom."
+3394.76,10.0, So our two guesses were that the fill rate was either 300 or 400 on average. Right. And neither of those were right.
+3405.76,12.0," Let's view these graphs in a slightly different way. I'm actually going to sort the values. So right now, right, it was just a random number gotten between one and three."
+3417.76,11.0," But I can sort them. It doesn't matter the order that I got these random numbers. I can sort them. And if I sort them, I get something that looks like this. So again, I've got randomly chosen numbers, 10,000 of them."
+3429.76,7.0," And with equal probability, right, that's why we see this nice line. I chose a number between one and three."
+3438.76,8.0, Does that make sense? Okay. And so then the corresponding time it took for me to fill my pool for each one of these numbers.
+3447.76,19.0," Right. Is a number between 200 and 600 as we had guessed. Now the average of the time it takes of the fill rate is two, which is true. Right. That is not a surprise for us because it's a random number between one and three."
+3466.76,10.0," But the actual average time it takes to fill my pool is down here. If I were to average every single one of these values, it's down here at around 330."
+3477.76,12.0," So it's not 300. It's not 400. It's definitely between, you know, between those two. But it's not really close to one or the other. That's because I've got more points kind of dense, more densely populated down towards the bottom than the top."
+3489.76,13.0," Okay. So the actual values that I got for 10,000 different randomly chosen numbers is 331. I think the actual value if we do the integral is like 329 point something rather."
+3503.76,7.0," So we're pretty close. But then again, we only did 10,000. We could do a million and we would get pretty close to the actual value. Right."
+3511.76,17.0," So it's not 300 or 400. And that's because as was mentioned from one of your fellow students, there is an inverse relationship between the fill time. Right. And the pool rate. Right. It's a size of the pool divided by the rate."
+3528.76,11.0," So what we actually need to do if we wanted to figure out the value is to solve the integral between 1 and 3 of, you know, dx over x, whatever that would be. Right."
+3541.76,14.0," So I don't want to bother with that. But I will bother with seven lines of code and then just wait, you know, wait five seconds for that code to repeat, you know, five million times or a million times or 10 million times. Right."
+3556.76,18.0," Is that cool? And this is totally within your reach, right. It's not hard code to do. It's just for loops. It's using a random library, right, to just randomly grab a whole bunch of numbers and then just knowing the problem at hand, filling a pool, you know, at a certain rate."
+3575.76,6.0," Simple math. And then you get a nice, a nice answer, a nice approximation, but still an answer to the question."
+3582.76,11.0, So hopefully this shows you how powerful computation can be. This is just another example of how you can just apply computation programming to a problem that you see in real life.
+3594.76,14.0," If you choose to do like a, you know, a Europe or take future courses in, you know, a different field, maybe not in CS, you will probably apply computation to concepts and ideas and problems in those fields."
+3609.76,12.0," And it'll be something similar to this. You observe something, you try to think of it computationally, model it with a bunch of, you know, randomness and then calculate an idea of something of interest."
+3622.76,11.0, Okay. So that's the end of 600 L. I've got a little wrap up to remind ourselves where we've been and where we will go.
+3634.76,8.0," So what did we learn? Oh, also this is also these slides will be kind of like a meme dump of every remaining meme that I have."
+3643.76,8.0," So this is going to be very meme happy. Okay. So what did we learn? We've got, of course, we learned Python programming, right?"
+3652.76,8.0," We learned a lot of Python syntax. Some lectures were heavier on Python syntax than others, but hopefully you've got a handle on that."
+3660.76,22.0," And we learned, of course, flow of control, right, with branches, if statements, Ls, L, sorry, heliffs, L statements, right, allow us to either do one thing or another in the code, make a decision point, loops for loops and while loops as well as exceptions, as a way for us to deal with unexpected things coming up in the course."
+3682.76,18.0," So the ideas here flow of control are actually transferable to any other programming language. So, you know, if you know the ideas, if you have the intuition for what kind of flow of control you'd like to use, all you'd have to do is change the syntax and then suddenly you can write some code in another language."
+3700.76,17.0," So, first we learned about data structures. So we did lists, right, really useful data structures, dictionaries, super useful data structures, tuples, things like that. So you can learn about more advanced data structures in a future course, if you'd like."
+3718.76,5.0," But those are really the top, you know, two or three most useful data structures."
+3723.76,8.0," So, a lot, actually it was a common, we didn't talk a lot specifically, but it was a common theme in this class organization of code, right."
+3732.76,6.0," So these ideas of decomposition and abstraction, they came up a lot when we talked about functions, that's our first introduction."
+3739.76,11.0," So functions helped us take some functional piece of code, like some code that does something, abstracted away into a nice little module, right, decomposed into one little module."
+3750.76,11.0," You have to write it one, maybe write it a few times, but debug it a few times, and then use it a whole bunch of times without worrying that it's going to change."
+3762.76,8.0," So it's just a very nice way for us to decompose functional pieces of code. And then we saw it come up again when we did classes, object-oriented programming, right."
+3770.76,12.0," We were able to bundle behaviors and data together into one nice little object, right, that we could then create many of in many different parts of the code and then manipulate individually."
+3784.76,9.0," Another common theme throughout this class was algorithms. So we talked about bisection search algorithm way at the beginning of the lectures, right."
+3793.76,8.0," We talked about it in piece at one, and it came up again towards the end when we talked about complexity and searching and sorting algorithms, things like that."
+3802.76,14.0," So that was kind of your only big algorithm that you saw in this class, but it shows you just how you can implement, you know, some code in a completely different way to behave in a completely different way, right."
+3816.76,9.0," To be a lot faster, you know, with some conditions like being sorted and things like that. And then lastly, the last part of the class was a little bit more theory-heavy."
+3825.76,10.0," We talked about computational complexity and that big theta notation. So that gave you a sense of how to maybe design algorithms, right."
+3835.76,10.0," So if you have a first crack of pseudo code on piece of paper, you can see, well, if I need to run this code on a really large data set, it's not going to work because it's too slow."
+3845.76,9.0," You've got three nested loops or something like that. So it might force you to rethink the design of the algorithm sooner than, you know, having already implemented it."
+3854.76,9.0," But, you know, if you're dealing with small data sets, maybe you wouldn't care that you've got three nested four loops or, you know, a really inefficient recursion algorithm."
+3863.76,5.0," So that's, those are the big things that we learned in this class."
+3868.76,12.0," Your experience, I kind of categorized in three different ways. So you might have been a natural if you kind of joined this class and immediately got logic, immediately learned, you know, knew how to do the problem sets."
+3880.76,6.0," That's totally fine. I still hope you got something out of this class and you learned some, some, something."
+3886.76,15.0," You might have joined the class late, right? If you found six, one hundred eight to be too fast or too challenging, you might have joined it, joined it late, kicked it to the curb and said, let me join 100 L. I welcomed you."
+3901.76,9.0," We did it a little bit of research and found that even if you join late, it does not actually hinder your performance in the class. So hopefully that was your experience."
+3910.76,11.0, Did you work hard? So maybe you didn't get all the concepts right away. Maybe you struggled a little bit with the problem sets. Maybe you struggled a little bit on the pieces or on the quizzes.
+3921.76,9.0, But I still think that you learned a lot and the test is always to go back and look at the first problem set.
+3930.76,10.0," So if you do that when you go home tonight, you look back at the first problem set in this class, you look back at the code that you wrote, it will seem so easy."
+3940.76,14.0," I promise you this and that's because I think you all did such a good job. You tried your hardest in this class. I know it's not easy. I know it's slower paced, but it's still not, you know, not an easy class."
+3954.76,7.0, And I think you've learned a lot looking back at the first problem set. We'll just show you that for sure.
+3961.76,11.0," So what's next? There have been some questions about what are some future classes that you might want to take or what can you do once you've, you know, once you've finished here."
+3972.76,13.0, Here we go. So we've got six 100 B is kind of the most natural next step. It's a half semester class in the second half of the semester. So they're finishing up right now basically.
+3985.76,7.0, It's an overview of really interesting topics in computer science and with a focus on data science though.
+3992.76,17.0," So what we talk of and I actually run that class as well. So what we talk about there is optimization algorithms. So for example, let's say you want to create a schedule for your classes next semester and you will have some constraints, right?"
+4009.76,8.0," So you don't want to have classes at 8 a.m., or 9 a.m., or 10 a.m., or 11 a.m., and you want it to all be within, you know, some time limit or things like that."
+4017.76,6.0, Optimization algorithm could be something that you write and you could just apply it to something that you have.
+4023.76,2.0, Simulations.
+4025.76,12.0," Exactly what we saw today of the, you know, the physics filling the pool thing. You'll see more examples of that and ask different questions about it as well."
+4037.76,10.0," So you'll see things like you calculate, you know, things like standard deviations. How many times do we need to repeat this experiment in order to be within some confidence interval, right?"
+4047.76,15.0, So how confident are you about your answers? So we'll be doing more things like that. And then there's of course the machine learning aspect of it. So if you have a bunch of experiments that you do that you get a whole bunch of data from.
+4062.76,21.0," How can you fit a curve to those experiments and then you know for a future experiment what's the expected value, right? So that's a little bit of machine learning on experimental data and then some more machine learning in sort of a more classical sense is dealing with clustering algorithms and classification of data and things like that."
+4083.76,12.0," So 600 be I know a lot about because I also teach it. It's a really good next class if you want to kind of be employable for an internship. If you take this, I think you'll be good to go."
+4096.76,20.0, 6101 is also a really nice class to take next if you really enjoyed the programming in this class 6101 will be your next step. It's called fundamentals of programming and it isn't Python. That one has it's it's pretty fast pace so there will be problem sets every week and they're going to be pretty hardcore.
+4116.76,11.0, There's going to be a lot of debugging involved in those problem sets and I actually was a recitation instructor for that class and to get a first.
+4128.76,16.0, For the problem sets at least to get something working doesn't take that long but to make it work according to the specifications that they have will take a little bit of debugging and reworking that's because they deal with a lot of real world data.
+4144.76,21.0, So writing code that's really efficient is very important. So again writing nested for loops of course we can totally do that but making it efficient using data structures like sets to make the code efficient using proper algorithms that are efficient is a very important part of this class.
+4165.76,9.0, But you learn a lot if you take this class you'll be very employable for an internship in some computer science or some computer science company.
+4176.76,11.0, 6102 is also a nice next class if you're interested in software construction. It is actually in a different language it's in TypeScript these days used to be in Java.
+4187.76,7.0, You can take what you've learned here and if you're interested in learning a different language this is a nice one to try.
+4195.76,6.0, Their motto is you're writing code that is safe from bugs easy to understand and ready for change.
+4202.76,13.0," So they have also lots of problem sets but you're also working in a team so you get to learn how to work in a team well with other students how to code together, how to write code that has nice documentation."
+4215.76,12.0, Lots of debugging and things like that. So more of that ideas of decomposition abstraction that we learned in this class will definitely be prominent in this class in 6102.
+4228.76,16.0, And then of course we've got other classes I'm happy to chat about. So machine learning is a nice one if again if you have a handle on programming really well and want to try some just applying programming to machine learning.
+4245.76,13.0, An algorithm's class is also a fine next step if you're more interested in the complexity part of this class that we saw also very very reasonable things to try to do next to do after this class.
+4258.76,12.0," Yes, last slide. If you're not going to code for a while but think you might code in a couple semesters or something like that."
+4271.76,10.0, You want to take a more computational class in some desired field. I would say that you should try to practice coding at least once a week.
+4281.76,10.0, So in our website we've got a little help menu where you can go to the we've listed some other websites. There's a little bit of coding practice you can do. It doesn't need to be a lot.
+4291.76,15.0," 30 minutes, you know once a week something like that just so you don't forget to code can go a really long way because I know you know over the summer sometimes I don't code for a month or so because I do other stuff besides coding in my life."
+4306.76,10.0, And you know coming back into it takes a little bit of time and it's just without practice like with anything else it's just easy to forget and it's hard to get back into it.
+4316.76,8.0, So even if you just do a little bit of coding right a really simple program once a week it's going to go a long way.
+4324.76,9.0, So that's it. I want to thank you all for being in this class and thank you for coming to this last lecture. I know you didn't have to but I do appreciate it.
+4333.76,7.0, Happy coding and you know good luck with exams and have a good break everyone. Thank you.

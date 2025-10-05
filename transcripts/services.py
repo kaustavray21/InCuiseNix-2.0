@@ -1,16 +1,16 @@
 import os
 import csv
 from urllib.parse import urlparse, parse_qs
-from youtube_transcript_api import YouTubeTranscriptApi, NoTranscriptFound
 from django.conf import settings
+# Import the library in a way that avoids the Windows bug
+from youtube_transcript_api._api import YouTubeTranscriptApi
+from youtube_transcript_api import NoTranscriptFound
 
 def get_video_id(url):
     """Extract video ID from YouTube URLs."""
     try:
-        # The video URLs in your courses.json are in 'embed' format
         if 'embed/' in url:
             return url.split('embed/')[1].split('?')[0]
-
         parsed_url = urlparse(url)
         if parsed_url.netloc == 'youtu.be':
             return parsed_url.path[1:]
@@ -21,20 +21,18 @@ def get_video_id(url):
         return None
 
 def get_transcript(video_url):
-    """Retrieve transcript using youtube_transcript_api."""
+    """Retrieve transcript using the local youtube-transcript-api library."""
     video_id = get_video_id(video_url)
     if not video_id:
-        raise ValueError("Invalid YouTube video URL")
+        return None
     
     try:
-        # This is a more robust way to find and fetch the transcript
         transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
         transcript = transcript_list.find_transcript(['en'])
         return transcript.fetch()
     except NoTranscriptFound:
         print(f"No English transcript found for {video_id}. Trying first available.")
         try:
-            # If English isn't found, try getting the first transcript in the list
             transcript = transcript_list[0]
             return transcript.fetch()
         except Exception as e:
@@ -55,5 +53,5 @@ def save_transcript_to_csv(transcript, video_id):
         writer = csv.writer(csvfile)
         writer.writerow(['start', 'duration', 'text'])
         for entry in transcript:
-            writer.writerow([entry['start'], entry['duration'], entry['text']])
+            writer.writerow([entry.get('start', ''), entry.get('duration', ''), entry.get('text', '')])
     return file_path

@@ -9,6 +9,7 @@ from .models import Enrollment, Course, Video, Note
 from django.template.defaultfilters import date as _date
 import google.generativeai as genai
 from django.conf import settings
+from transcripts.services import get_transcript 
 
 
 # --- User Authentication and Static Pages ---
@@ -118,6 +119,8 @@ def video_player_view(request, course_id):
     
     # Pass an empty form instance for the "Add Note" modal
     form = NoteForm()
+    # Get the transcript for the current video
+    transcript = get_transcript(current_video.video_url)
 
     context = {
         'course': course,
@@ -125,6 +128,7 @@ def video_player_view(request, course_id):
         'current_video': current_video,
         'notes': notes,
         'form': form,
+        'transcript': transcript,
     }
     return render(request, 'core/video_player.html', context)
 

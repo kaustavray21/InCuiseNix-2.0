@@ -1,0 +1,21 @@
+<div class="transcript-wrapper mt-4 shadow-sm rounded border p-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">Transcript</h4>
+        <a href="{% url 'download_transcript' current_video.id %}" class="btn btn-primary btn-sm">
+            Download <i class="fas fa-download ms-1"></i>
+        </a>
+    </div>
+
+    <div id="transcript-container" class="transcript-box p-3 bg-light rounded">
+        {% if transcript %}
+            {% for line in transcript %}
+                <p class="transcript-line" data-start="{{ line.start }}">
+                    <span class="timestamp fw-bold me-2">[{{ line.start|floatformat:2 }}s]</span>
+                    {{ line.text }}
+                </p>
+            {% endfor %}
+        {% else %}
+            <p class="text-muted">Transcript is not available for this video.</p>
+        {% endif %}
+    </div>
+</div>

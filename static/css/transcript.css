@@ -1,0 +1,29 @@
+/* static/css/transcript.css */
+
+.transcript-wrapper {
+    background-color: #ffffff;
+}
+
+.transcript-box {
+    max-height: 400px;
+    overflow-y: auto;
+    font-family: monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.transcript-line {
+    margin-bottom: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.transcript-line:hover {
+    background-color: #e9ecef;
+}
+
+.transcript-line .timestamp {
+    color: #0d6efd;
+}

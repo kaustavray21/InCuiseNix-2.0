@@ -1,4 +1,5 @@
 import json
+import math
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
@@ -9,7 +10,7 @@ from .models import Enrollment, Course, Video, Note
 from django.template.defaultfilters import date as _date
 import google.generativeai as genai
 from django.conf import settings
-from transcripts.services import get_transcript 
+from transcripts.models import Transcript
 
 
 # --- User Authentication and Static Pages ---
@@ -121,30 +122,50 @@ def video_player_view(request, course_id):
     """
     course = get_object_or_404(Course, id=course_id)
     
-    # Ensure the user is enrolled in the course
     if not Enrollment.objects.filter(user=request.user, course=course).exists():
         return redirect('dashboard')
     
     all_videos = course.videos.all().order_by('id')
     current_video = None
-    transcript = "This course doesn't have any videos yet."
-
-    # Determine which video to display based on the 'vid' URL parameter
+    
     video_id_from_url = request.GET.get('vid')
     if video_id_from_url:
         current_video = get_object_or_404(Video, id=video_id_from_url, course=course)
     elif all_videos.exists():
-        # If no specific video is requested, default to the first one
         current_video = all_videos.first()
 
-    # If a video is loaded, fetch its transcript
+    # --- UPDATED TRANSCRIPT LOGIC ---
+    
+    transcript_lines = []
+    
     if current_video:
-        transcript = get_transcript(current_video)
-    
-    # Fetch notes for the current video, or an empty list if no video is loaded
+        try:
+            transcript_obj = current_video.transcript 
+            if transcript_obj and transcript_obj.content:
+                lines = transcript_obj.content.strip().split('\n')
+                for line in lines:
+                    parts = line.split(' - ', 1)
+                    if len(parts) == 2:
+                        try:
+                            start_seconds = float(parts[0])
+                            
+                            # --- Time formatting logic is now here ---
+                            
+                            m = math.floor(start_seconds / 60)
+                            s = math.floor(start_seconds % 60)
+                            formatted_time = f"{int(m):02}:{int(s):02}"
+                            
+                            transcript_lines.append({
+                                'start': start_seconds,
+                                'text': parts[1],
+                                'formatted_time': formatted_time # Add the formatted time to the dictionary
+                            })
+                        except ValueError:
+                            continue
+        except Transcript.DoesNotExist:
+            pass
+            
     notes = Note.objects.filter(user=request.user, video=current_video) if current_video else []
-    
-    # Prepare an empty form for the 'Add Note' modal
     form = NoteForm()
 
     context = {
@@ -153,9 +174,10 @@ def video_player_view(request, course_id):
         'current_video': current_video,
         'notes': notes,
         'form': form,
-        'transcript': transcript,
+        'transcript_lines': transcript_lines, 
     }
     return render(request, 'core/video_player.html', context)
+
 # --- AJAX Views for Note Management ---
 
 @login_required

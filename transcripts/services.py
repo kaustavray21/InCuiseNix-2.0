@@ -5,6 +5,12 @@ import whisper
 from django.conf import settings
 from youtube_transcript_api import YouTubeTranscriptApi
 import yt_dlp
+from core.models import Video, Course
+from .models import Transcript
+
+from core.models import Video
+from .models import Transcript
+
 
 def sanitize_filename(title):
     # This is now only used for creating directory names from course titles
@@ -29,19 +35,23 @@ def save_transcript_to_csv(transcript, video):
         for item in transcript:
             writer.writerow([item['start'], item['text']])
 
-def get_transcript(video):
-    """Fetches transcript from YouTube API or generates it using Whisper."""
-    try:
-        transcript_list = YouTubeTranscriptApi.get_transcript(video.video_id)
-        return [{'start': item['start'], 'text': item['text']} for item in transcript_list]
-    except Exception as e:
-        print(f"Could not fetch transcript from YouTube API: {e}. Trying Whisper.")
-        video_path = download_video(video)
-        if video_path:
-            transcript = transcribe_with_whisper(video_path)
-            return transcript
-        return None
+def get_transcript(video: Video):
+    """
+    Fetches a transcript for a given video only from the local database.
 
+    This function does not make any external API calls. It will return the
+    transcript content if it exists, otherwise, it returns a message
+    indicating that it's not available.
+    """
+    try:
+        # Attempt to retrieve the transcript associated with the video
+        transcript_obj = Transcript.objects.get(video=video)
+        print(f"Transcript for '{video.title}' found in the database.")
+        return transcript_obj.content
+    except Transcript.DoesNotExist:
+        # If no transcript is found in the database, return a clear message
+        print(f"No transcript found in the database for '{video.title}'.")
+        return "Transcript not available for this video."
 def download_video(video):
     """Downloads a video, naming the file after the video_id."""
     sanitized_course_title = sanitize_filename(video.course.title)

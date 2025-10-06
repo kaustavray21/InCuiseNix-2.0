@@ -1,5 +1,5 @@
 <div class="container-fluid mt-4 pb-5" id="player-data-container" 
-     data-video-id="{{ current_video.id }}"
+     data-video-id="{% if current_video %}{{ current_video.id }}{% endif %}"
      data-csrf-token="{{ csrf_token }}">
 
     <div class="row">
@@ -7,8 +7,9 @@
             <h4 class="mb-3">Course Playlist</h4>
             <div class="list-group" style="max-height: 80vh; overflow-y: auto;">
                 {% for video in all_videos %}
-                <a href="{% url 'video_player' course.id %}?vid={{ video.video_id }}" 
-                   class="list-group-item list-group-item-action {% if video.id == current_video.id %}active{% endif %}">
+                {# FIX: The link now uses video.id, which is the correct numeric primary key. #}
+                <a href="{% url 'video_player' course.id %}?vid={{ video.id }}" 
+                   class="list-group-item list-group-item-action {% if current_video and video.id == current_video.id %}active{% endif %}">
                     {{ video.title }}
                 </a>
                 {% endfor %}
@@ -18,6 +19,7 @@
         <div class="col-lg-9">
             <h2 class="mb-4">{{ course.title }}</h2>
             
+            {% if current_video %}
             <div class="video-section-wrapper shadow-sm rounded border p-3 mb-4">
             
                 <div class="plyr-container">
@@ -29,14 +31,17 @@
                     <div class="ms-3">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNoteModal">Add Note</button>
                         <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#notesOffcanvas">View Notes</button>
-                        <a href="{% url 'download_transcript' current_video.id %}" class="btn btn-info">Download Transcript</a>
-
                     </div>
                 </div>
 
             </div>
             {% include 'core/components/video_player/_transcript_viewer.html' %}
             {% include 'core/components/video_player/_assistant_chat.html' %}
+            {% else %}
+            <div class="alert alert-info">
+                <p class="mb-0">Please select a video from the playlist to begin.</p>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>

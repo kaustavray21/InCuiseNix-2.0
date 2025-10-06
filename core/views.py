@@ -116,33 +116,36 @@ def roadmap_view(request, course_id):
 @login_required
 def video_player_view(request, course_id):
     """
-    Renders the video player page. The form for adding notes is passed to the context,
-    but the submission is now handled by a separate AJAX view.
+    Renders the video player page, fetches the correct video and its transcript,
+    and prepares the note-taking forms.
     """
     course = get_object_or_404(Course, id=course_id)
     
     # Ensure the user is enrolled in the course
-    is_enrolled = Enrollment.objects.filter(user=request.user, course=course).exists()
-    if not is_enrolled:
+    if not Enrollment.objects.filter(user=request.user, course=course).exists():
         return redirect('dashboard')
-
-    # Get all videos for the course playlist
-    all_videos = course.videos.all().order_by('id')
     
-    # Determine which video to display
+    all_videos = course.videos.all().order_by('id')
+    current_video = None
+    transcript = "This course doesn't have any videos yet."
+
+    # Determine which video to display based on the 'vid' URL parameter
     video_id_from_url = request.GET.get('vid')
     if video_id_from_url:
-        current_video = get_object_or_404(Video, video_id=video_id_from_url, course=course)
-    else:
+        current_video = get_object_or_404(Video, id=video_id_from_url, course=course)
+    elif all_videos.exists():
+        # If no specific video is requested, default to the first one
         current_video = all_videos.first()
 
-    # Get notes for the current video
-    notes = Note.objects.filter(user=request.user, video=current_video)
+    # If a video is loaded, fetch its transcript
+    if current_video:
+        transcript = get_transcript(current_video)
     
-    # Pass an empty form instance for the "Add Note" modal
+    # Fetch notes for the current video, or an empty list if no video is loaded
+    notes = Note.objects.filter(user=request.user, video=current_video) if current_video else []
+    
+    # Prepare an empty form for the 'Add Note' modal
     form = NoteForm()
-    # Get the transcript for the current video
-    transcript = get_transcript(current_video.video_url)
 
     context = {
         'course': course,
@@ -153,7 +156,6 @@ def video_player_view(request, course_id):
         'transcript': transcript,
     }
     return render(request, 'core/video_player.html', context)
-
 # --- AJAX Views for Note Management ---
 
 @login_required

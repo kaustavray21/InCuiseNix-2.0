@@ -11,6 +11,7 @@ from django.template.defaultfilters import date as _date
 import google.generativeai as genai
 from django.conf import settings
 from transcripts.models import Transcript
+from transcripts.models import TranscriptLine
 
 
 # --- User Authentication and Static Pages ---
@@ -114,10 +115,11 @@ def roadmap_view(request, course_id):
     return JsonResponse(course_data)
 
 
+
 @login_required
 def video_player_view(request, course_id):
     """
-    Renders the video player page, fetches the correct video and its transcript,
+    Renders the video player page, fetches the correct video and its transcript lines,
     and prepares the note-taking forms.
     """
     course = get_object_or_404(Course, id=course_id)
@@ -134,37 +136,22 @@ def video_player_view(request, course_id):
     elif all_videos.exists():
         current_video = all_videos.first()
 
-    # --- UPDATED TRANSCRIPT LOGIC ---
-    
-    transcript_lines = []
-    
+    # --- UPDATED LOGIC: Formatting is done here ---
+    transcript_lines_processed = []
     if current_video:
-        try:
-            transcript_obj = current_video.transcript 
-            if transcript_obj and transcript_obj.content:
-                lines = transcript_obj.content.strip().split('\n')
-                for line in lines:
-                    parts = line.split(' - ', 1)
-                    if len(parts) == 2:
-                        try:
-                            start_seconds = float(parts[0])
-                            
-                            # --- Time formatting logic is now here ---
-                            
-                            m = math.floor(start_seconds / 60)
-                            s = math.floor(start_seconds % 60)
-                            formatted_time = f"{int(m):02}:{int(s):02}"
-                            
-                            transcript_lines.append({
-                                'start': start_seconds,
-                                'text': parts[1],
-                                'formatted_time': formatted_time # Add the formatted time to the dictionary
-                            })
-                        except ValueError:
-                            continue
-        except Transcript.DoesNotExist:
-            pass
+        # 1. Fetch the raw data from the database
+        transcript_lines_qs = TranscriptLine.objects.filter(transcript__video=current_video)
+        
+        # 2. Process each line to add the formatted time
+        for line in transcript_lines_qs:
+            start_seconds = line.start_time
+            minutes = math.floor(start_seconds / 60)
+            seconds = math.floor(start_seconds % 60)
             
+            # 3. Add a new attribute to the object for the template to use
+            line.formatted_time = f"{int(minutes):02}:{int(seconds):02}"
+            transcript_lines_processed.append(line)
+
     notes = Note.objects.filter(user=request.user, video=current_video) if current_video else []
     form = NoteForm()
 
@@ -174,7 +161,8 @@ def video_player_view(request, course_id):
         'current_video': current_video,
         'notes': notes,
         'form': form,
-        'transcript_lines': transcript_lines, 
+        # Pass the processed list to the template
+        'transcript_lines': transcript_lines_processed, 
     }
     return render(request, 'core/video_player.html', context)
 

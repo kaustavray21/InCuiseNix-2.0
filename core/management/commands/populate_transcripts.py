@@ -3,23 +3,19 @@ import csv
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from core.models import Video
-from transcripts.models import Transcript
+from transcripts.models import Transcript, TranscriptLine
 
 class Command(BaseCommand):
-    help = 'Populates the database with cleaned transcripts from local CSV files, handling CSV format errors.'
+    help = 'Populates the database with detailed transcript lines (start and end times).'
 
     def handle(self, *args, **options):
-        # Clears previously populated transcripts to ensure a clean import.
-        populated_videos = Video.objects.filter(transcript__isnull=False)
-        if populated_videos.exists():
-            for video in populated_videos:
-                video.transcript.delete()
-            self.stdout.write(self.style.SUCCESS('Cleared previously populated transcripts to ensure a clean import.'))
+        # Clear all old transcript data to ensure a fresh start
+        Transcript.objects.all().delete()
+        self.stdout.write(self.style.SUCCESS('Cleared all previously populated transcripts.'))
 
         videos_to_process = Video.objects.all()
-        self.stdout.write(f'Found {videos_to_process.count()} total videos. Populating with cleaned data...')
+        self.stdout.write(f'Found {videos_to_process.count()} total videos. Populating transcripts...')
         
-        populated_count = 0
         for video in videos_to_process:
             file_path = os.path.join(settings.MEDIA_ROOT, 'transcripts', video.course.title, f'{video.video_id}.csv')
             
@@ -28,39 +24,41 @@ class Command(BaseCommand):
                 continue
 
             try:
-                full_transcript_content = []
+                # Create a single Transcript container for the video
+                transcript_container = Transcript.objects.create(video=video)
+                
+                lines_to_create = []
                 with open(file_path, 'r', encoding='utf-8') as f:
                     reader = csv.reader(f)
                     next(reader) # Skip header
-                    for i, row in enumerate(reader):
-                        
+                    for row in reader:
                         if len(row) < 2:
-                            self.stdout.write(self.style.WARNING(f'Skipping malformed row {i+2} in {file_path}'))
                             continue
                         
-                        # --- CORRECTED LOGIC: Extract ONLY the start time ---
-                        timestamp_data = row[0]
-                        start_time = timestamp_data.split('-')[0].strip()
-                        
-                        raw_text = ",".join(row[1:])
-                        
-                        clean_text = raw_text
-                        if ']' in raw_text:
-                            clean_text = raw_text.split(']', 1)[-1].strip()
-                        
-                        full_transcript_content.append(f"{start_time} - {clean_text}")
-                
-                transcript_content_str = "\n".join(full_transcript_content)
+                        # Parse start and end times
+                        timestamps = row[0].split('-')
+                        start_time = float(timestamps[0].strip())
+                        end_time = float(timestamps[1].strip()) if len(timestamps) > 1 else None
 
-                Transcript.objects.create(
-                    video=video,
-                    content=transcript_content_str
-                )
+                        # Clean the text
+                        raw_text = ",".join(row[1:])
+                        clean_text = raw_text.split(']', 1)[-1].strip() if ']' in raw_text else raw_text
+                        
+                        lines_to_create.append(
+                            TranscriptLine(
+                                transcript=transcript_container,
+                                start_time=start_time,
+                                end_time=end_time,
+                                text=clean_text
+                            )
+                        )
                 
-                self.stdout.write(self.style.SUCCESS(f'Successfully populated cleaned transcript for "{video.title}".'))
-                populated_count += 1
+                # Create all lines for this video in one efficient database query
+                if lines_to_create:
+                    TranscriptLine.objects.bulk_create(lines_to_create)
+                    self.stdout.write(self.style.SUCCESS(f'Successfully populated transcript for "{video.title}".'))
 
             except Exception as e:
                 self.stdout.write(self.style.ERROR(f'Failed to process transcript for "{video.title}": {e}'))
 
-        self.stdout.write(self.style.SUCCESS(f'Finished populating transcripts. Populated {populated_count} new transcripts.'))
+        self.stdout.write(self.style.SUCCESS('Finished populating all transcripts.'))

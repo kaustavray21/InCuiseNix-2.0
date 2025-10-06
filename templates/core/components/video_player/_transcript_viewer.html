@@ -6,8 +6,11 @@
     <div id="transcript-container" class="transcript-box p-3 bg-light rounded">
         {% if transcript_lines %}
             {% for line in transcript_lines %}
-                <p class="transcript-line" data-start="{{ line.start }}">
-                    <span class="timestamp fw-bold me-2">[{{ line.formatted_time }}]</span>
+                <p class="transcript-line" data-start="{{ line.start_time }}">
+                    <span class="timestamp fw-bold me-2">
+                        {# Use the pre-formatted time from the view #}
+                        [{{ line.formatted_time }}]
+                    </span>
                     {{ line.text }}
                 </p>
             {% endfor %}

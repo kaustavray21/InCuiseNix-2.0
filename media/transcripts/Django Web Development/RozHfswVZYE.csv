@@ -1,0 +1,99 @@
+start,text
+0.0, Hey guys and welcome back. In the last video we have seen how to create different records
+5.12, using the Django shell. But that's not our goal. Our goal is not only to display text
+10.200000000000001," in the shell, but also to render these records on the webpage. And that's what we're going"
+14.56, to be doing today. And let me copy this project. I'm going to paste it here. And I'm going
+21.48, to change the name. The name of our lesson today is render HTML template. Make sure that
+30.48, you're inside the world tour. Let's do ppnv shell to activate the virtual environment. Make
+38.16, sure that you have managed the Pycam in line in your project. And let's go ahead and run
+43.36, the server. Now let me head over the world tour. Let's go to Asia tours agency. And let's try
+52.8," to render the HTML template. So to do that, I'm going to go to views.py. Let me just minimize this"
+59.36, a little bit. So what I want to change here is that I'm not really happy with that HTTP
+65.12, response method that's going to return a simple string on the page. So we're going to do things
+71.2," a little bit differently. First of all, I'm going to get rid of that HTTP response method. And"
+77.2," also I want to get rid of that return statement. Instead, I'm going to utilize the render function."
+84.48, The render function is imported from Django.chortcuts as you can see. And the purpose of the render function
+90.24000000000001, simply is to render HTML on the page. So let's go ahead and do return like we have done previously
+96.88," with the HTTP response method. Instead, I'm going to do render. Now the render method takes two"
+103.6, different arguments. The first one is the HTTP request. And the HTTP request is whatever is the
+108.88," request being passed to the index function. Okay, that's the first one. So naturally, I'm going to"
+114.72," leave it as the input, you know, the input is dynamic, whether it's a get request, post request,"
+120.08, or whatever HTTP request is going to be the second argument is the template's name. So the
+125.44," template's name is your HTML page. Traditionally, any website has a homepage. And by convention,"
+131.35999999999999, that homepage has a name of index.html. You can change that name to home.html if you want. But
+138.07999999999998," I'm telling you that by convention, it's index.html. So what I'm going to do is I'm going to just"
+143.76," render that index.html. But I'm not just going to leave it like that. Instead, I'm going to put it"
+148.88, inside a Tours folder. So that Tours folder actually is going to be inside my Asia Tours agency
+156.16, application. And let me create a folder. I'm going to call it templates inside templates. I'm
+161.92, going to have a different folder. I'm going to call it tours. That's the one that we have just
+167.35999999999999," specified here. That Tours folder. So inside the Tours folder, I'm going to have my index.html"
+175.84," file. Now, this is going to be an HTML file. But I'm going to utilize the special syntax,"
+181.76," which is called the Django template language. Now, as you may know, HTML is a scripting language."
+188.07999999999998," It's a static language. There is no logic. You cannot add any variables to it, for example."
+193.44, You can do looping or conditionals. You can do any kind of logic. So to elevate the HTML and
+199.84," add some logic to it, we're going to use the Django template language. So with Django template"
+205.11999999999998," language, we can add looping. We can add conditionals. You can create functions and add variables and so on."
+211.44," And it's very similar, centratically speaking, of course, to Dj2 in Flask. So if you've developed"
+216.72," in Flask, you know already Dj2 and Django template language is very similar to that. Right. So I'm"
+222.07999999999998," going to change the titles name, Asia Tours. And in the body, let's have H1 tag. And let's say,"
+230.8," for instance, Asia Tours schedule for June 2024. Now, if we'll get back to the page that's now"
+240.48000000000002," empty because, you know, we created the index.html and I've refreshed and the page was empty."
+246.72," Now, if you refresh again, you will have everything rendered properly in your web browser."
+252.88000000000002," You have the title, which is Asia Tours. And you have the H1 tag Asia Tours schedule for June 2024."
+259.28, And let me show you just let's maximize this a little bit. Let's open the web dev tools to inspect
+265.2, elements. So take a look here. This is a proper HTML page. We have indeed written this page inside
+272.96, our Tours folder. That's in contrast to the HTTP response method through which we have rendered a
+278.88, simple string. Here we have a proper HTML page. That's awesome that we can render HTML page and
+285.12," everything. But basically, we want to display all of the Tours stored in our database that we've"
+290.08," created in the last video. First of all, I will go back to views the pie and I will do some changes"
+295.76," here. So let's see together how we can do that. First of all, I want to create Tours variable."
+301.92, That Tours variable basically that's going to be all of the Tours stored in the database.
+308.08, How to fetch them? Simply you will type tour. That's the tour class dot objects dot all.
+316.24," This way you're telling Django, hey, listen Django, I want all of the objects or all of the instances"
+322.47999999999996, created from that tour class. And I want to store them in a variable called Tours.
+328.88, Next we're going to require passing a context dictionary from our view to our template.
+335.76," So from our views here to the template, I want to create a dictionary to add inside it all of the"
+342.08, Tours. So let's create that context that's going to be a dictionary in a form of key value pairs.
+348.32, So the key here that's going to be the Tours and the value of that key is going to be whatever
+355.28000000000003, the Tours are being fetched from the tour class. Now you can see here that Django is complaining with
+361.52, that's quickly lying under the tour because we need to import tour class. So I'm going to import
+368.4, from the current directory models. I want to import that tour class. Now you can see that that's
+374.56," quickly lying has disappeared. And the last thing before we leave views the pie, you need to pass"
+380.88," that context dictionary in your render function. Right, let's now go to index.html one more time"
+388.48," and let's loop over all of the Tours stored in the database. To do that, I'm going to come here"
+394.88, under the h1 tag and I'm going to add ul or unordered list. I'm going to display all of the
+402.08000000000004, records or all of the Tours in an unordered list to be rendered on the page. Now I want to iterate
+408.32," over that Tours variable that I've created. So I can say for Tours in Tours, that's a normal Python"
+416.0," code. That's what you would do in Python. But in Django template language, that's going to be"
+422.4, a little bit different. So the way to do that is we're going to put curly braces around our
+429.28, for loop. And also I want to add ampersand after the first curly brace and ampersand
+439.44, before the second curly brace. So you're actually plugging your loop inside this curly
+444.8, brace with ampersand. And make sure that the ampersand should be attached to the curly brace
+450.08000000000004, if there is a small space you're going to get an error. So you need to be very careful in your syntax.
+456.0," Next, I want to display each record in a list item. So I'm going to add a list item."
+461.68," In that list item, I want to print or display that Tours. And this time, I'm not going to put"
+467.68, around this curly brace with ampersand instead that's going to be plugged inside double curly
+474.79999999999995," braces. And finally, as you have started the for loop, you need to end the for loop."
+480.56," And again, we need to put that inside curly braces ampersand."
+488.0, Awesome. Let's hit control as to save. Let's get back to our page. Let's refresh beautiful.
+494.88," Now we have our page properly rendered with the proper title, with h1 tag and all of our records"
+502.96," stored in the database. So all of that thanks to that beautiful method that we've created,"
+508.71999999999997, the stir method that we've created inside our tour class. So this approach that we have followed
+514.88," demonstrates how efficiently Django interacts with databases and templates, providing a powerful"
+520.96," toolkit for web development. If you want to create more records or more tours, you can do that by"
+526.8," accessing the shell, add the tour that you want, and then again, display it on your web page."
+532.08," And by the way, you can improve upon this application to make it a proper AsiaTour's agency website."
+537.6, Let me actually show you if I want to add a new record. So I'm going to do control C to exit that.
+544.0," Let me do Python manage dot by shell. Let's open the shell. That's okay. If it's open this way,"
+553.52, no problem. And let's import from AsiaTour's agency.models. I want to import a tour class.
+564.0," Then I will create the third tool and take origin, origin country. Let's say for example, Malaysia,"
+572.88," destination country. Let's say Japan, number of nights. Let's say for instance seven nights."
+584.24," And the price, let's make it $1000. Now let's save the tour, t03.safe. And if you will do t03,"
+595.68," you will have your ID3 from Malaysia to Japan, seven nights costs $1000. Now let's go ahead and quit that."
+605.12," Let's do, let's run the server one more time. Let's refresh the page. And immediately you see here that"
+613.1999999999999, ID3 from Malaysia to Japan seven nights costs $1000. You see this approach demonstrates how
+620.4," efficiently Django interacts with databases and templates, providing you a powerful toolkit for web"
+626.4," development. In the next video, I'm going to introduce you to Django's admin tool that's going to"
+631.76, be the admin dashboard. And I'm going to show you how to manage records not just through the shell
+637.04," like we have done, but also using the robust interface of the Django admin dashboard. Thanks a lot"
+642.96, for watching and I will see you in the next video.

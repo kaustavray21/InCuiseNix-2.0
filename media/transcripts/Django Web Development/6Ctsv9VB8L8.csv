@@ -1,0 +1,223 @@
+start,text
+0.0, Hello and welcome back.
+2.0," What we have done so far is that we have launched the Django server,"
+6.0, but we haven't actually created any applications yet.
+9.0, And that's exactly what we're going to be doing today.
+12.0, Creating a new project where we will build an Asian Tours Agency Management System using Django.
+18.0," This application, by the way, will help us manage tours, destinations, and bookings across Asia."
+23.0, So let's dive in and set up our project.
+25.0, And the first thing that I want to do is I want to go to the location where I want to create my project.
+30.0, And that's going to be inside lesson 2 Django app.
+34.0, So I'm going to CD to that or to change directory to that folder.
+42.0, And then I want to activate the virtual environment.
+45.0, Now we have discussed the last time that virtual environment is very important.
+49.0," So in order to activate my virtual environment, I will do pipian v shell."
+55.0," Okay, you can see that it's successfully created virtual environment."
+61.0, Now we can easily install any third party libraries inside our project
+66.0, without worrying too much whether this dependency is going to be mixed up in the global file system or not.
+72.0, That's one of the best practices in Django and in projects management in general.
+76.0, And if you will open lesson 2 you will find that pip file has been created.
+81.0, This is very similar to config.json or cargo.tomal.
+85.0, Basically it's a file that keeps all of your configuration inside.
+88.0," All of the dependencies, the packages that you want to install, your Python version for example, and so on."
+94.0, So that's very important and it's not a good idea to touch that.
+98.0, It's auto-generated and we'll keep it this way.
+100.0, So I'm going to shut it for now and I'm maximizing the integrated terminal.
+105.0," Next I want to pipian v install Django, which means that I'm going to install Django only inside my virtual environment."
+113.0, So I will type this command pipian v install Django.
+122.0, Fantastic.
+123.0," Now with that out of the way, let's go ahead and start creating our project."
+127.0," To do that like we have seen the last time, we need to use the Django admin command tool."
+132.0," So I will say Django admin, then the command is start project followed by the name of the project that you want to create."
+144.0, And I'm going to call that world tour.
+146.0, That's going to be our project.
+148.0," Inside my project, I want to create an application."
+151.0, So I will need to cd to that or change directory to that folder world tour.
+159.0," And inside world tour, you can create as many applications as you want."
+163.0," But for the sake of simplicity, we're going to create only one application and we'll attempt to render an HTML page on the browser."
+170.0," Alright, so let's go ahead and do that."
+173.0," Take a look here inside world tour, you'll find our manage.py."
+177.0," Remember, it's crucial not to tamper with manage.py."
+180.0, The manage.py file in this case is going to help us creating our application.
+185.0, So the command to create our application will be Python manage.py start app followed by the name of the application.
+194.0, I'm going to call our application Asia tours agency.
+203.0, This Asia tours agency right here is going to handle all of the operations related to agent tours.
+209.0," You can create African tours, you can create European tours, American tours, you can create as many applications as you want."
+216.0," Now, let me give you a brief description of each file inside our application."
+222.0," The first file is in a dot by and as you can see, it's an empty file."
+226.0, This is a Python way to treat a directory as a package.
+230.0, And it's okay if it's empty like in this case.
+232.0, And it's used basically to import the app modules elsewhere in your Django project.
+238.0, This file right here is used to register your apps models with Django's admin panel.
+243.0," So by registering your modules here, Django is going to provide a user friendly interface to interact with the data model directly from the admin interface."
+252.0," And don't worry, there is a whole chapter dedicated to the Django admin interface."
+256.0, The next file we have in our folder is apps.py.
+259.0, This file contains a configuration class for your application.
+264.0," As you can see, it's called AsiaTour's Agency Config."
+267.0, And the main parameter or the main input here is app config that we have imported from Django.apps.
+273.0," And notice online number six, the name of the application is AsiaTour's Agency, and exactly the name of our folder here."
+280.0," And actually, each Django application has this configuration class."
+284.0, And the reason simply is to store each application specific settings in that file.
+289.0," For example, this class is particularly useful for pluggable applications, because it allows them to specify metadata or configuration hooks."
+298.0," And after showing you the rest of the files, I will need to get back to this file to explain to you a very important configuration step that we need to take before running our server."
+307.0," Now, Models.py is one of the most important files inside your application."
+312.0, So here you can define the data models for your app.
+315.0," Basically, each class in Models.py file represents a database table."
+320.0, And the attributes of the classes represent database fields.
+324.0, So that's the file through which we're going to create our database essentially.
+328.0," Next, we have tests.py. And tests.py simply is used for writing unit tests for your application's functionality."
+336.0, And the last file in our application's folder is views.py.
+340.0," Now, views.py handles the request response logic for your application."
+345.0," If you recall from our first lesson, the MVT architecture, the model view template architecture, the view in the architecture is represented by views.py file."
+354.0, So you can define your functions or classes here.
+357.0, And these functions or classes will receive web requests and return web responses.
+362.0, So views are going to access the data needed to satisfy the requests via the models.py.
+369.0, And it's going to delegate formatting to the templates.
+372.0," And that's why if you remember in our first lesson, the diagram showed view model template and not MVT."
+379.0, But that really doesn't matter.
+381.0," The most important thing here is that you understand the relation between views, models, and templates when we're going to create templates folder."
+388.0," That's all for the files, but be careful that we have a folder that we haven't discovered yet."
+393.0, It's called migrations.
+396.0, So migrations folder contains the migrations files for your application.
+400.0, Migrations simply are the way how Django stores changes to your models.
+405.0," And thus your database schema, of course, because we said that models.py is essentially your database."
+411.0," And in the next lesson, I'm going to show you how to apply migrations."
+415.0," But for now, you need to understand that each migration file here is timestamped and contains details about the changes being made to the database."
+424.0," Now that you've been introduced to each component of your application, let's go again to the apps.py file."
+431.0, Now I told you that apps.py is very important because we will need to link inside our project in settings.py.
+439.0, We need to add the name of our application.
+442.0, That's the name of our application.
+444.0, So there are two ways to store the name of the application in settings.py.
+449.0, So let me close the integrated terminal.
+451.0," In settings.py, you will need to go to installed apps."
+454.0," In installed apps, and it doesn't matter if you will enter it at the top or at the bottom of the list."
+461.0, Doesn't matter.
+462.0," Alright, so I'm going to add it actually at the bottom of the installed apps list."
+467.0, What you need to add is simply the name of your application.
+471.0, And the name is AsiaTour's Agency.
+474.0," So in single quotes, you will type AsiaTour's Agency."
+478.0, That is one way to do it.
+480.0," If you will go again to apps.py, you will need to access apps.py, access the AsiaTour's AgencyConfig class."
+488.0, That's the proper way to do it.
+490.0," Anyways, if you will leave it like that, it's going to be fine."
+493.0, But I prefer to show you the proper way.
+495.0," So you can do apps.and the name of the class, which was, let's get back to apps."
+502.0," I'm going to copy this, get back to settings, and paste that here."
+508.0," This way, Django knows that your application is already inside the installed apps."
+514.0," Alright, so I will do control as to save."
+517.0," I'm going to close that tab, close that."
+520.0, Now we need to go to views.py inside our application.
+523.0," So inside views.py, I need to import a very important function."
+527.0, The function is HTTP response.
+529.0," So when the client will send the HTTP request to the server requesting data,"
+534.0, the server is going to send an HTTP response.
+537.0," And when the client will receive the response, the page is going to be rendered."
+540.0, So I will need from Django.http to import the HTTP response.
+549.0," Next up, I want to create a function and I'm going to call it index."
+553.0, The index is going to take the request.
+555.0," Whether the request is get, post, put, delete, the HTTP requests are more than those four."
+562.0, But these are the four most common.
+564.0," A very important note here, if you're not going to define your HTTP request,"
+569.0," by default, the request is a get request."
+571.0, So sending a request to fetch data or retrieve data and rendering them on the page.
+576.0, So this function simply is going to return HTTP response with the string that we want to render on the page.
+583.0," So HTTP response is going to, let's say for instance, Asia towards agency."
+590.0, Right? That's what we want to render on the page.
+594.0," Traditionally, that's not the proper way because we need to create templates folder."
+598.0," Inside it, we need to create index.html."
+601.0, We need to write HTML with the Django template language.
+604.0," And don't worry, we're going to do that, but not in this lesson."
+607.0, So simply we typed Asia towards agency.
+610.0," Next, we need to handle the URL routing."
+613.0, So the routing here is essential.
+615.0, We will need to create a urls.py.
+618.0, Notice that we have a urls.py file down here.
+622.0, This is the main urls.py for the project.
+626.0, We will need to create manually a urls.py on the applications level.
+630.0," So all in all, we will have more than urls.file."
+634.0," If you have more than an application, you will need to create in each application a urls.py file."
+640.0, So let me actually create that here.
+643.0, urls.py.
+645.0, So what I want is from Django.urls to import path.
+651.0, And also I want from the current directory.
+655.0, I want to import views.py.
+658.0, Because I will need to map to that index function.
+662.0, And that index function returns HTTP response with the Asia towards agency to be rendered on the page.
+669.0," Alright, so let's get back here."
+672.0," From the current directory, I want to import views."
+676.0, So the next thing that I want is to define a list of urls patterns.
+682.0, And this is simply a list for all of the urls that the user wants to navigate to.
+686.0, All of the routes that are going to be available in our application.
+691.0, So I'm going to define that by typing urls patterns.
+696.0, And that's immediately going to open an empty list.
+699.0, Inside that empty list will have different path.
+702.0," So the path here, which we have imported from Django.urls."
+707.0," Inside that path, I will need two arguments."
+710.0," As you can see here, we have a route and we have a view."
+714.0, So those are the two main arguments for that path function.
+718.0, The first argument is the route.
+720.0, The route I wanted initially to be empty a route.
+724.0, So simply you will enter an empty string.
+727.0, And the second argument is the view.
+730.0," Now the view, we said that we want the views.index."
+733.0, That's why we have imported it.
+735.0," Again, we want to go to views.py and we want to access the index function"
+741.0, to trigger it to invoke it in order to return the HTTP response
+746.0, to render Asia towards agency on the web browser.
+749.0, Fantastic.
+750.0," With our urls and views set up, it's time to wire these"
+753.0, into the main world tour project to render our application.
+757.0, So I will need to go to urls.py file.
+760.0," That's the project level, right?"
+763.0, Because we said we have to urls.
+765.0," So this one here is very similar, right?"
+768.0, It has path.
+769.0, Okay.
+770.0," The other one doesn't have admin, but it has path."
+773.0, Right? And path is a function that is used inside the url patterns.
+777.0," So for the first path right here, this is very important."
+780.0, This is the path for the admin dashboard.
+783.0, And we're going to explore the admin dashboard in a separate lesson.
+786.0, The second path that we want to create is actually the path that includes the Asia
+791.0, towards agency application where we can access the urls.py.
+796.0, And why we want to access the urls.py?
+798.0, Because we have the url patterns.
+800.0, This url patterns have views.index.
+803.0, The views.index goes to views.
+806.0," And inside views, we have the function that's going to be triggered"
+809.0, to return an HTTP response with the message that we want to render.
+814.0, All right.
+815.0, So let's have the second path.
+817.0, This path right here again is going to be on empty route.
+821.0, And the views here is going to include.
+825.0," And inside single quotes, I want the Asia towards agency application."
+831.0, And I want to access the urls.py file.
+838.0, Now notice that Django is complaining here.
+841.0, It doesn't know what is include.
+843.0, That's simply because I will need to import it.
+847.0, So you can import include function from Django.urls.
+853.0," Now the moment that I hit control as to save the changes,"
+856.0, there is db.esql.3 that has been auto generated
+860.0, in the World Tour project.
+862.0, Now let me close the explorer by hitting control b.
+865.0, Let me open integrated terminal by hitting control till day.
+868.0," And you need to make sure before running the server that you are in the right folder,"
+872.0, where you have your manage.py file.
+874.0, Essentially manage.py file is going to be responsible for running our server.
+879.0, So to run our server simply we'll say python manage.py run server.
+886.0, And we have our server running on the local host port 8000.
+893.0," Alright, so for now I will press control and click on that link."
+897.0," And there we go, Asia towards agency."
+900.0," Now if you will take a look to the inspector,"
+903.0, you'll find that this is an HTML page with HTML tags with head with body tags.
+908.0, But it doesn't look like it's a proper HTML page.
+912.0, And that's simply because we are rendering a string.
+915.0, So we are rendering text.
+917.0, What you would want to do is to create templates folder inside the templates folder.
+921.0, You will have your index.html which is going to play the role of the home page.
+925.0, And eventually you can create other HTML pages.
+928.0, Right? That's going to play the role of different routes.
+931.0," Alright, so we have our agency up and running."
+934.0, So in the next time we will dive deeper into expanding our agency by talking about databases and migrations
+940.0, and how we can add tours to our database and display them in the shell and also on the browser.
+944.0, Thanks so much for watching and we'll see you in the next video.

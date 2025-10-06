@@ -1,0 +1,74 @@
+start,text
+0.0, Hello and welcome to the first video tutorial of this Django web framework course for beginners.
+5.44, My name is Amir from BecBrashe channel and I will be your instructor for the upcoming videos.
+10.64," Throughout this course we will delve into various aspects of Django,"
+14.24, starting from the basics and gradually progressing towards more advanced topics.
+18.88," And at the end of the course we're going to build a real-life application like this one,"
+23.04, an inventory management system.
+25.2," This final project will give you hands-on experience with Django,"
+28.96, where we're going to use function-based views and implement clean and simple styles.
+34.160000000000004, Our inventory management system will enable you to add products where you can enter the name of the
+40.08," product, the stockkeeping unit, the price, the quantity and of course the supplier."
+46.72, Once you're done from adding the product you can save that product and now you can have a list
+51.36," of the products saved on your website. You have your product ID, the name, the SKU, the price,"
+56.72," the quantity, the supplier and the actions where you can actually update your product or if you"
+61.68, want to delete it altogether you can do that as well. And you will be redirected to a confirmation
+66.88," message asking you if you want to delete this product. If you're hesitant you can click on cancel,"
+72.08," you can go to the inventory app where you have your homepage, you can display all of your products"
+78.4, and again you can delete the product that you don't want. This project is going to help you
+83.44, consolidate everything that you're going to learn in this course and see how it all comes together
+88.16, in a practical application. And I just want to take a moment here to express my gratitude to NetNinja
+93.52, for giving me the incredible opportunity to become a host content creator. It's a great pleasure
+98.56, indeed to be part of such an amazing team and I'm excited to bring you engaging and entertaining
+103.52, content. Now let's move to the prerequisites. Before diving into Django it's essential to have a
+110.48, good understanding of Python. So if you consider yourself an intermediate Python programmer
+116.0, you'll find it easier to follow along with Django. Additionally familiarity with HTML and CSS is
+121.84, going to be very beneficial. And even if you don't know Python that's no problem at all because NetNinja
+127.76, got you covered. NetNinja has a lot of great courses for Python as well as HTML and CSS crash courses.
+135.52, And in this first part I'm going to cover three main questions. What is Django? Why is Django
+142.72, and what is MVT architecture? So the first question is what is Django? Django is a Python-based
+150.32, web framework designed for rapid development of efficient web applications. It is often referred to
+156.24, as batteries included framework because it provides built-in features for various aspects of web
+162.4," development. These features include the Django admin interface, default database management system"
+168.56, which is SQLite3 and many others streamlining the development process. Okay that's great and
+174.96, all but why using Django? Why not using any other web framework? The first reason is rapid development.
+182.0, Django enables the creation of fully-fledged web applications in a short time. Database flexibility.
+189.2, While SQLite3 is the default database Django allows easy switching to other databases like
+196.08, Post-CrisQL or SQL alchemy for example. Also you have built-in admin interface. And this
+202.72, indeed simplifies administrative tasks related to website management. And don't worry we're going
+208.64, to see all of that in practice. And the last reason is extensive ecosystem. So Django has a vast
+216.24, collection of additional packages that are available for extended functionality which is if you
+222.32000000000002, think about it very handy for rapid development. So Django follows the model view template architecture.
+230.24, NVT separates the logic of your application into three different components. So the first component
+237.20000000000002, is the model if we're going to respect the NVT order put by Django. So the model in Django
+243.76000000000002, represents the data structure of your application. It's your database essentially. It defies the
+249.6, scheme of your database tables and encapsulates the logic for interacting with the database.
+255.36, Now let's move to view. A view simply is a Python function or class that receives HTTP requests
+262.32," and returns HTTP responses. So views are responsible for processing the incoming requests,"
+269.12, interacting with the database through models and preparing data to be rendered in a response.
+275.2, And finally the template. Templates in Django are HTML files that contain the structure
+280.8, of your application's user interface essentially. And templates can include placeholders and
+286.4, template tags which are replaced with dynamic content when rendered by Django. Django uses the Django
+293.12, template language. It's very similar to Django in Flask for example. Okay now you've been
+298.64, introduced to the components of the NVT architecture. Let's see how it works. So this is a diagram
+305.2, that shows you how the NVT actually works. First of all the user interacts with the Django
+311.03999999999996," application by sending HTTP requests to specific URLs. These requests can be for various actions,"
+318.15999999999997," such as viewing a page, submitting a form or performing some other operation. And here comes the"
+324.32, role of the view function or class which processes the request interacts with the database and
+330.96, prepares data to be rendered in the response. So when the view interacts with the model to fetch
+336.32, data from the database it does so by using Django's ORM or object relational mapping.
+343.12, And ORM simply allows you to interact with database using Python objects. So instead of writing
+350.16, SQL queries directly you define your database structure using the Python classes called models.
+356.88, So instead of writing SQL queries directly you define your database structure using Python classes
+362.96, which are models. These models represent database tables and each attribute of the model class
+369.76, corresponds to a column in that table. Don't worry we're going to see that when we're going to
+374.64, practice. The interaction between the view and the model not only for retrieving data but it also
+380.71999999999997, could be for creating updating or deleting records as needed. So after processing the request and
+387.12, interacting with the database the view prepares data to be rendered in a response as you can see.
+392.56, This data is typically passed to a template using the Django template language as I mentioned earlier.
+398.47999999999996, The Django template language uses template tags and placeholders to dynamically generate HTML
+404.56, content. And finally the view returns an HTTP response containing the HTML content generated
+410.79999999999995, by the template. This response is sent back to the user's browser which then renders the page
+416.71999999999997, and displays it to the user. I understand that everything might seem theoretical for now but once
+422.16, we dive deeper into Django and start practicing everything will begin to make sense and fall into place.
+428.56," In the next video we're going to setup our environment, install Django and create our first Django project."

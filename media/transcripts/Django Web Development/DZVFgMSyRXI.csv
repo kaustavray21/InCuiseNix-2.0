@@ -1,0 +1,174 @@
+start,text
+0.0, Hello and welcome back.
+2.0," So far we have learned how to create a project, how to run the server, how to create a basic application, which didn't really do much."
+10.5, It has just rendered text to the web browser.
+13.0," But don't worry, we are going to get to the exciting parts soon enough."
+16.0, But the basics are very important to have a solid foundation.
+20.0," Today we are going to expand a little bit, and we will set up the database for our Django application."
+26.0, And we are going to focus on using models to represent the data we want to store within our agent towards agency application.
+32.0," So if you have noticed, I have a new folder here, lesson 3, my grade SQL like 3."
+37.0, I am going to repeat the exact same steps I took the last lesson.
+41.0, Actually it is going to be the same structure as the world tour.
+44.0, We are going to repeat the same exact steps.
+47.0," But first I want to change the directory to lesson 3, my grade, SQL like 3."
+55.0, Then I will do a PIP and V shell to activate the virtual environment.
+63.0," Alright, perfect."
+65.0, Now I want to again install Django.
+72.0, Very good.
+73.0, Now I want to create the world tour project.
+75.0," So I will say Django, Admin, Star, Project, World Tour."
+80.0, Then I will see the world tour.
+83.0," Oops, world tour."
+86.0," Inside world tour, I want to create the application."
+89.0, So take a look down here below.
+91.0," In lesson 3, my grade SQL like 3."
+93.0," If I will click on that, we have world tour."
+95.0," Again, we have the project which is world tour."
+100.0, And we have the manage.py.
+103.0, So we will create our application.
+105.0, Python manage.py startapp AsiaTour's agency.
+109.0, Great.
+110.0, So we have again our project and our application.
+115.0," Alright, so we have the exact same structure as lesson 2."
+120.0, And the files are exactly the same.
+122.0," I've copied everything, so don't worry about any changes."
+126.0, But let's go to the important part.
+128.0," Initially in AsiaTour's agency application, the model stoppy is empty."
+133.0, And you can see that Django tells you here to create your models here.
+137.0, So Django encourages us to create our models there.
+140.0, Let's say we want to model a tour that includes various destinations across Asia.
+145.0, So what we can do is we can define a class called tour.
+149.0, Let's do a class tour.
+153.0, That's going to inheritmodels.model.
+157.0, And models.model basically is providing a structured way to define the fields and behaviors of our database objects.
+164.0, So that's the reason why we need to enter models.model as a parameter in the tour class.
+171.0," Alright, so next we need an origin country."
+175.0, We need a destination.
+177.0, So we need a origin country.
+184.0, We need a destination.
+187.0, We need the number of nights.
+190.0, And we need the price for that tour.
+197.0," Okay, so these are the fields that we need to create."
+202.0, And Django makes it so easy.
+204.0, So what I will do is I will declare a variable.
+206.0, I'm going to call it origin country.
+208.0, And that's going to be the origin country field.
+211.0, Right?
+212.0, So I will need the models.
+214.0, And I will want to access Car field.
+217.0, And the character field here has a maximum length.
+221.0," So the maximum length for the origin country, I'm going to make it 64."
+226.0, Right?
+227.0, So maximum length is 64.
+230.0, And that means simply that the maximum length of the origin country that's going to be entered is 64 characters.
+237.0, Not more.
+238.0, So that's an SQL constraint.
+240.0," Also, I want the destination country."
+243.0, So I'm going just to change that destination country.
+248.0, And also it's going to be most dot character field.
+251.0," And again, I'm going to leave it to the maximum 64."
+256.0," Similarly, I need number of nights and price."
+259.0, So I'm going to change that to number of nights.
+266.0, So number of nights here is an integer field.
+269.0, So an integer field here is used to store the number of nights for the tour.
+274.0, We don't need any characters.
+275.0, We need an integer.
+277.0, So that's going to be integer field.
+281.0, And I'm going to leave it empty.
+284.0," And finally, I need the price."
+286.0, So that's going to be the price.
+289.0, Models dot again integer field.
+296.0," And again, I'm going to leave it empty."
+301.0, All right.
+302.0, So this is our tour class.
+304.0, And it's actually going to act as a blueprint for our database table.
+308.0, It's going to enable you to manage the tour records without manually handling the database operations.
+314.0, So that's a little bit of object oriented programming here.
+317.0, We can instantiate the class by creating any object.
+321.0, So we can create tour one.
+323.0, The tour one can have an origin country.
+325.0," Let's say Japan, destination country, China, number of nights."
+329.0, Let's say seven nights and the price.
+332.0," Let's say arbitrarily, $1,500 for example."
+336.0, So that's going to be tour one.
+338.0, This is the object.
+340.0, And the Django's object relational mapping or ORM takes care of all of the crowd operations.
+346.0," Like create, read, update, and delete on this table."
+349.0," So you can create a record, you can read a record, you can update it, and you can delete it."
+354.0," And it's very possible that your application gets bigger in size due to increasing number of tours, for example."
+359.0, You probably would want to change in your code.
+362.0," And as a result, your database also should be modified."
+365.0," Quite frankly, it's going to be a big headache to manage those changes manually."
+370.0," And here comes migrations to the rescue, which has one empty file called init.py."
+376.0, So migrations are Django's way of propagating changes we make to our models.
+381.0, Like adding a new field or changing a field type into the database schema.
+386.0, You don't have to do this manually.
+388.0, Django is going to take care of that for you.
+390.0, How to make migrations?
+391.0," Well, before I show you that, we need to make sure that in our World Tour project in Settings.py,"
+398.0," we have in our installed apps, we have our application."
+403.0," And indeed, we have AsiaTour's agency apps.AgeTour's agency config."
+408.0," In the future, when you're going to create your Django projects,"
+411.0, the first thing you need to do is to add your application to install apps list.
+415.0, So I want to create and apply migrations now.
+418.0, You will need to type the following command.
+420.0," And again, make sure you are in the proper folder."
+423.0, And maybe I will open the explorer just to show you that there's going to be a file that's going to be generated when we apply in migrations.
+431.0, So maybe I can make this a little bit smaller.
+434.0, All right.
+435.0," Okay, so to apply migrations, we'll do python manage.py make migrations."
+446.0, Perfect. Migrations for AsiaTour's agency is complete.
+451.0, We have created a model tour.
+453.0," If you'll see here in migrations, we'll have the triple-zero-one underscore initial.py created for us."
+459.0, Let's click on that and let's see what we have.
+462.0," So first of all, you have the migrations and models imported from Django.db."
+467.0, We have a migration class that takes migrations.migration.
+471.0, The initial state of the migration has a Boolean value which is true.
+475.0, Dependencies is an empty list.
+477.0, And we have the operations.
+479.0, So the operations is a list.
+481.0," And inside operations, we have migrations.createModelFunction."
+486.0, And it has actually created a tour.
+488.0," Why tour? Simply because in the models.py, we have our class which is tour."
+494.0, This is the name of the class and the name of the table.
+497.0," And inside that class or that table, we will have different fields."
+500.0, So let's get back to triple-zero-one initial.
+504.0, We have ID and notice that we haven't added the ID when we created our models.
+509.0, This is auto-generated and auto-incremented.
+513.0," So every time you're going to add a record to your table, Django is going to add automatically an ID."
+519.0, So the first record will have an ID of one for example.
+522.0, The second record will have an ID of two and so on.
+525.0," Next we have origin country, destination country, number of nights and price."
+529.0, This is actually the database schema.
+531.0, We haven't created anything in that migration.
+534.0, It was auto-generated when we did make migrations command.
+538.0," So as we're happy with our table in fields, now we can go ahead and apply the migrations."
+542.0, To the database.
+544.0," And for that, we'll have a different command."
+547.0," The command is going to be Python, manage.py, migrate."
+551.0, So the first command was make migrations.
+553.0, The second command to apply these migrations is migrate.
+557.0," Hit enter, perfect."
+560.0, Migrations were all applied successfully.
+563.0," The admin, the agitours agency which is our application,"
+567.0, of content types and sessions.
+569.0, So what actually Django did here is that it applied all of the pending migrations to the database.
+576.0," And we have established a new table called tour, which is essentially the class."
+581.0, So that's the class or the table with the different fields.
+584.0, And this setup means that each tour record will have a unique ID as we said.
+588.0, And the fields will adhere to the constraints defined in our model.
+592.0, Like the max length for example.
+595.0," Alright, in the next part we're going to explore how to interact with this database directly through Django's shell."
+601.0, And also how to add tours in our tour records.
+604.0, Also one very important thing you need to be aware of is the database inside your settings.py.
+610.0, So the default engine for your database is here is SQLite 3 database management system.
+616.0, This is the default DBS.
+618.0," And when we have applied migrations via the migrate command,"
+621.0, we have actually created a table via SQLite 3.
+625.0, Now as I mentioned in the first lesson Django is very flexible.
+629.0, You can change that to push Crescuel or SQL alchemy.
+633.0, Or even MongoDB if you prefer no SQL database management systems.
+637.0," Alright, so in the next part we're going to explore how to interact with this database directly through Django's shell."
+644.0, And how to add tours to our tour records.
+647.0, Thanks for following along and I will see you in the next video.
+651.0, Thanks for watching.

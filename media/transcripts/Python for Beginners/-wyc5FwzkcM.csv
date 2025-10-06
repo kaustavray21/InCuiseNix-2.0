@@ -1,0 +1,991 @@
+start,text
+0.0," Okay, so let's get started."
+20.28, Today's lecture will be the last one we have on object-oriented programming and creating
+26.36, our own data types with Python classes.
+30.0," So in today's lecture, we're going to go through an example that's sort of more involved."
+35.84, We're going to be creating our own fitness tracker object and specifically we're going
+40.96, to create a class for that implements the idea of a workout.
+46.16, And the slides for today are going to feel very similar to the slides from Monday's lecture.
+51.2, A lot of them are just kind of reinforcing the same ideas we saw last lecture on creating
+58.6," getters and setters, creating class variables and the idea of inheritance."
+63.6," But we're just going to do it in the context of this more involved example, the fitness tracker."
+71.08, So let me remind you first of all something we've been talking about and hopefully you
+76.2, understand at this point in our lectures on object-oriented programming.
+81.60000000000001," And that's the idea that when we write our own object types, we're writing code from"
+86.44," two different perspectives, right?"
+88.52000000000001, The first perspective is the one on the left-hand side here where we are making design decisions
+93.2," for how we want to implement this new object, this new data type."
+97.96000000000001," And when we make these design decisions, we decide the name of the object, we decide"
+101.88," the attributes, which are either data or procedures, that we want the object to have."
+108.24," And then once we've decided on this and we've implemented our data type, then we can"
+112.96," start to use the data type and to use it, we are creating a whole bunch of objects of"
+119.8, this type.
+121.24, And we're manipulating these objects in some interesting and useful way.
+125.64," So the left-hand side we're creating is blueprint, this abstract notion of an object, and"
+130.6," the right-hand side we are creating actual instances that we manipulate, right?"
+135.07999999999998," So up until this object-oriented set of lectures, we've really just been working with the right-hand"
+140.6," side, right?"
+141.6, We've been working with objects that other people have created.
+144.28, But the big idea of these set of lectures is that we now get to create our own object
+148.64, types so we get to write this code here.
+151.44," Okay, so we're going to write code to create a tracker for workouts."
+159.12," And today's lecture, there's going to be a sequence of things that we're going to do."
+163.92000000000002, We're going to start out with a really simple workout object and then we're going to improve
+167.24, on it.
+168.24, So I've actually set out a little roadmap here on the board that we can follow.
+172.48000000000002," So every time we finish a little section, we'll check it off so it's just easier to understand"
+176.96, where we are in today's lecture.
+179.68," So we're going to create first just a very simple workout object, sort of in the same"
+183.88," spirit that we've created, we've been creating objects."
+187.32, Then we're going to improve on it a little bit by adding nicer methods and things like
+192.68, that.
+193.68, And then we're going to go through the idea of inheritance to create very specific types
+197.35999999999999, of workouts.
+198.35999999999999," So if we think about workouts, we have many different kinds of workouts, right?"
+203.51999999999998," We've got biking, swimming, running."
+206.96," But really at the core of all these workouts, right?"
+210.08," If we think about sort of the information related to just a very generic workout, not"
+214.56," a running or swimming specific one or biking one, just a generic workout, there are some"
+220.4," common properties that all of these workouts have, right?"
+224.28," So I've listed them here, right?"
+227.08," The workout might have an icon associated with it, right?"
+230.04000000000002," So this, this, this, but whatever it may be, there is an icon sort of property for a workout,"
+237.24," the kind of workouts, so biking, swimming, running, things like that."
+241.24," A date, so maybe a start date and an end date, start time, end time, that kind of information."
+246.88," The heart rate, maybe average heart rate throughout that entire activity, the distance, and"
+253.64000000000001," the number of calories burned, right?"
+255.56, All of these properties are common to any kind of workout that we might want to create.
+261.64," But now that we have specific kinds of workouts that we might want to create, we can"
+267.2," actually think, well, in addition to these common properties, a swimming specific workout"
+272.08," might actually have some more information that we'd like to save, right?"
+276.44, And we'd like to allow the user to work with.
+279.08," So the swimming pace, maybe the stroke type, the hundred-year splits, things like that"
+282.59999999999997, for swimming.
+284.15999999999997," And for running, we might want to show the user the cadence, the running pace, the mild"
+288.0," splits, and maybe the total elevation throughout that run."
+292.96, But the idea here is that we have some core set of properties that no matter what kind
+297.12," of workout we're creating, we would like to save and we would like to allow the user"
+303.0, to store and to do operations with.
+307.2," Now when we implement our workout class, we're not going to implement all of these."
+310.8, They're not all necessary.
+311.8, We're going to just keep some of the core ones.
+314.32," So the ones we're actually going to implement in this class are italicized, right?"
+318.88," So we're going to keep the icon and the kind of workout, the start time, end times, and"
+324.16, then the number of calories burned.
+325.84, That's something that we're going to just save as a really common set of attributes for
+331.15999999999997, a workout.
+332.15999999999997," But of course, you can see that if you make the design decision to improve upon this workout"
+336.2," class, you might include a bunch of these other ones as well."
+340.67999999999995," Okay, so we're going to have to decide the data attributes."
+345.91999999999996," So we just mentioned on the previous slide, right?"
+348.08," When we make design decisions, we figure out the attributes that we'd like to have for"
+352.44, our object type.
+353.72, So that's the data and the behaviors.
+356.04," For the data for a workout, we've decided it would be the start time, the end time, and"
+360.44000000000005, the number of calories burned.
+362.16," So those three things together, maybe start time is a string and time is a string and"
+366.84000000000003," calories is a number, right?"
+368.36," Either a float or a hint, whatever."
+370.68, Those three things together make up the object a workout.
+376.20000000000005," And then in terms of functional attributes, so these are the methods that our object might"
+380.68, have.
+381.68," So we can have, of course, the ability to tell us the number of calories burned, so"
+387.0, something like a getter method to set the number of calories burned if we accidentally
+391.76," inputted the wrong number, reset it, and then maybe something like displaying an information"
+397.44," card, right?"
+398.44," So something like this, if the user asks us to print a workout object, we might display"
+404.4, information in this nice manner here.
+407.4, Okay.
+409.23999999999995, All right.
+409.91999999999996, So let's start defining our class.
+411.96," So this is a very simple workout class, so we're going to do the box number one up there"
+416.76, before we improve on it.
+418.12, So this is in the same spirit as we have been defining classes in the past three lectures.
+424.0," So we tell Python, we're creating a new object by saying this is a class, and the name of this"
+430.08," object, so the type of this object is workout."
+432.84, Okay.
+433.84, And the parent of this object is the generic Python object.
+437.44," So far so good, right?"
+439.56," Now the first method we have to implement is the init method, right?"
+442.76," It tells Python how to create an object of type workout, the constructor, and we've got"
+448.4," a bunch of parameters in here because it's just a regular function, that's a little bit"
+452.48, special.
+453.64," The first parameter of every method is, of course, self, right?"
+457.48," Because when we call a method, we call it on an object, right?"
+461.64," So some object dot this method name, the thing before the dot effectively gets mapped"
+467.96," to the variable self, which is why every one of these methods has self as the first parameter."
+474.03999999999996, And then we've got a whole bunch of other parameters for how we would like to initialize
+477.52, a workout object.
+479.0," So we're going to say when we create a workout object, we're going to tell it the start"
+484.12," time, the end time, and the number of calories burned."
+487.88, Okay.
+489.88," So that's the function stub, I guess, that's how you create the object."
+495.76, And then what does this function actually do?
+497.92, What does this method actually do?
+499.92," Well, it does some of the usual things that we know at this point."
+504.56," So it basically maps every one of these input parameters to data attributes, self dot start,"
+510.44," self dot end, and self dot calories."
+514.76," But in addition to just saving these as data attributes, the things that are passed in"
+519.64," when you create the object, we would like to do two more things."
+522.76," We're creating two more data attributes, right?"
+525.52," So in total, a workout object is defined by five data attributes."
+530.28," These last two data attributes, we don't need to pass in, right?"
+533.84," We're just going to, by default, make them two strings."
+538.32," The icon is going to be the string, this sweating person emoji, right?"
+544.28," And you can have emojis inside strings, which is actually pretty cool."
+548.28, The kind is going to be just the kind of workout.
+550.8399999999999, So we're just going to set it to be the string workout.
+553.0," When we create running workouts, it'll just be the string running."
+555.88," When we create biking workouts, it'll be a string biking, right?"
+558.4, Whatever you want it to be.
+560.12," And we're going to see where these, where these shrub later on."
+563.64," Okay, so that's the definition of my class workout."
+566.8399999999999," And then for now, that's it."
+569.28, That's all we have in terms of the class definition.
+571.8, Now what happens when we create an actual workout object?
+574.92," Well, we invoke the name of the class."
+577.36," So we say here, workout, right?"
+580.88, And we're going to save this object to the right-hand side of the equal sign
+584.88," as variable my underscore workout, so far review."
+589.48, We pass in the parameters that the workout object expects.
+593.6800000000001," So here's a string representing the start time, a string representing the end time,"
+597.96," and the calories burned for this particular workout, 200."
+604.6," Yes, good."
+606.72, Okay.
+608.52," So then we can add a whole bunch more methods to our class, right?"
+612.9200000000001, That was just the init method.
+614.6," But last lecture, I mentioned that it's important to add getters and setter methods"
+620.4, to allow the user to grab or set various data attributes.
+625.84, So here I've got three getter methods to grab for me the calories start time and end time.
+630.8, And three setter methods to set the calories start time and end time.
+638.8, All right.
+641.3599999999999," So what I wanted to show you, and this is not something we've actually seen before,"
+645.3199999999999," I wanted to show you that every time you create an object of some type,"
+650.56," or even an object that already exists, you can actually look into sort of where"
+655.88," this object is stored in memory, which is kind of cool."
+659.76," So if we think about the class definition that we've done so far,"
+663.4399999999999," so not creating an actual instance, just defining the class, right?"
+667.88," This class definition is actually kind of like an object stored away in Python memory, right?"
+674.16," So here I have my workout class and associated with my workout class definition,"
+679.68, Python known was about all of these methods that you're allowed to do with this Python class.
+686.2, And this is called the class state dictionary.
+688.64, So it's a dictionary that basically holds the state of your object.
+692.88, So I wanted to show you what that looks like in code.
+696.4, So this is my workout class.
+698.68, And the way you access the state dictionary is by invoking the name of your class.
+704.04," So not an instance, the name of the actual class dot this dunder method,"
+709.24," double underscore, double underscore."
+711.48," So this holds the dictionary, the state dictionary."
+714.96," And if we just access the keys, we're going to see here every single method"
+720.0400000000001," we've defined in our class, right?"
+722.8000000000001," So you see here, here's my dictionary."
+724.48," I could cast it to a list if I wanted to, but not necessary."
+727.6800000000001," But you can see every single method that we've defined, right?"
+730.4000000000001," So all getters, all our setters, the init method, the double underscore doc,"
+735.96, actually grabs for us this doc string that you've put right under the class definition.
+745.36, Right?
+745.8000000000001, So that's kind of cool.
+747.2800000000001, So that's the dictionary keys.
+748.84," And of course, as we know, keys have values associated with them."
+752.32," So the values associated with each one of these keys is going to be, and we can see here."
+758.8000000000001," So for example, the value associated with the doc string is going to be literally"
+765.8000000000001," the thing that I printed out, right, the little doc string that I put right underneath my class definition."
+773.2, So now it knows the doc string for this class that I just created.
+777.08, And the values associated with my getter methods and my setter methods and
+781.1600000000001, init method and all the methods I created are just the locations and memory
+785.32, where Python can find these methods to run.
+788.08," Right? They don't have actual values with them, of course, associated with them."
+791.2," Of course, because they're just method definitions."
+794.0400000000001, But Python just knows where to go in which memory location to actually run this function.
+799.96, Okay?
+801.84, So that's kind of cool to know.
+807.9200000000001," Okay, so that's the state dictionary of my definition, right?"
+811.76, The implementation of my class.
+814.48," Now, what happens when I create an actual instance?"
+817.2," Right? So here I've got my workout equals, and now I've got this actual instance of this class type workout."
+825.4," When Python sees this line, it says, okay, what kind of object do you want to create?"
+830.68, So it's a workout object.
+832.28, It looks at the init method of that workout object.
+835.64, And then it runs all the lines associated with that workout object.
+838.5999999999999," So now it creates a new object in memory, puts that at some memory location."
+844.4399999999999, This object is going to be of type workout class.
+848.7199999999999, And now this object is going to have its own state dictionary.
+852.8399999999999," Where in the object state dictionary, we're not storing methods or things like that."
+857.56, So storing the actual data attributes associated with this object.
+862.1199999999999, Right?
+862.9599999999999," So this object of the data attributes are all the things that you access via the self.keyword, right?"
+868.3599999999999," Self.icons, self.kind, self.start, self.end, and self.calories."
+873.3599999999999, So we can actually go in the code just like we did when we looked at the class state dictionary.
+878.68," And look at the state dictionary for one specific object, one instance."
+883.88," So again, we can call the double underscore, dict method on this instance."
+889.64, So now I have an actual object that has some values associated with it.
+893.88," And if I look at just the keys, we see these are the data attributes associated with an object of type workout."
+901.08, Right?
+902.08, I've got my five data attributes.
+904.08, And then the values associated with those keys are going to be the values that are specific to this object.
+911.08, Right?
+911.8," So my start is this date here, my end is this date here."
+915.8," Calories was 200, the icon was the low sweaty person emoji, and the kind of workout is to work."
+921.0, Right?
+923.0," So it's kind of neat to be able to look into that sort of detail of where things are stored inside, inside memory."
+933.8, Okay.
+935.0," So we saw how to create an instance of an object, and we can create a whole bunch of workouts that we then store."
+941.4, Right?
+942.4, And then we can use Donotation to access all of these attributes.
+946.1999999999999, Right?
+947.1999999999999," So we can either access attributes directly, or we can access methods."
+950.4, Right?
+951.4, We already know this.
+952.4," So last lecture, I said that you can use Donotation to access data attributes."
+958.0, So here we're accessing the Calories value.
+961.0, Right?
+962.0, And that's fine.
+963.0, But what's preferred is to use the getter methods.
+966.6, Right?
+967.6," So the calories will, in this particular case, return the exact same value as just accessing the Calories data attribute."
+974.2, Okay?
+975.2, But the note that I made last lecture was that it was better to use a getter method because the implementation behind the scenes might change.
+984.6, Right?
+985.6," And if the implementation changes, then if you access the calories method directly, or sorry, the Calories data attribute directly, your code might crash."
+995.6," Not only that, somebody who's writing a getter method for this workout function might actually make that method be a lot more complex, complex than just returning that data attribute."
+1008.0, And that's what we're going to see in the next slide.
+1010.0, Right?
+1011.0, So the idea behind using these consistent methods instead of accessing using data attributes is that you want to keep information hidden.
+1021.2, Right?
+1022.0," So I want to start messing around with looking at how something is implemented because that goes against the principle of abstraction, modularity, and information hiding."
+1030.6, Right?
+1031.6, You want to keep things hidden because you want to use the objects that somebody else has created in an isoconsistent manner.
+1038.6, The way we use them in a consistent manner is by always using methods that are associated with that object type.
+1046.2, Okay?
+1047.2," So using getter methods might have seemed inconsequential when we wrote like the animal class last lecture, but it's going to seem, it's going to be a lot more important in this particular lecture."
+1058.0, Okay?
+1059.0," So with that, we finished our simple workout class."
+1064.2, And now we're going to change the implementation just a little bit.
+1068.8, Right?
+1069.8, And what we're going to do is we're going to make a change to the way that we store the information.
+1076.6," We're going to use a class variable, and I'll remind you what a class variable is in the next slide."
+1081.3999999999999, And we're going to make a change to the get calories method.
+1084.6," And we're going to allow the user to say, hey, I'm going to create this workout object."
+1092.2, But I don't know about you.
+1093.8, I don't know how many calories I burn.
+1096.2, Right?
+1096.3999999999999," When I do a workout for, you know, 40 minutes."
+1098.8, Right? I don't know that right off the bat.
+1101.0," So if the user doesn't supply the number of calories burned, we're going to have our get calories method kind of estimate those calories burned based on the duration of that workout."
+1115.0, Right?
+1116.0," So we're going to allow the user to either supply the number of calories, in which case they probably know what they're doing."
+1122.4," And then when they ask us to get the calories, we're going to use those."
+1127.8000000000002, Or we're going to allow the user to not supply the number of calories and instead estimate those calories based on the duration that they said this workout lasted.
+1139.6000000000001, All right.
+1140.1000000000001, So that's the big change that we're going to do here in the workout class.
+1144.2, Right?
+1144.4, So we're going to do a better get calories method.
+1147.3999999999999, All right.
+1147.8, So this is the new implementation of my workout class.
+1153.0, First thing you'll notice is we're using this class variable.
+1158.3, Right?
+1158.5, We talked about this last lecture when we did the rabbit's example.
+1163.3," In the rabbits example, we had each rabbit change this class variable value."
+1169.8999999999999," In this example, I'm not going to change this class variable value."
+1173.8, I'm actually just going to use it as a variable that's that every one of these instances is going to be able to access.
+1180.6, Right?
+1180.8," And I'm just not going to change it, which is fine."
+1183.5, You don't have to change this class variable.
+1187.3999999999999, So this class variable will represent how many calories per hour are are burnt.
+1192.3999999999999, Okay.
+1192.8999999999999, So just a number.
+1194.8," And then the init method and again, we're going to make a different init method than what we saw in the previous slides."
+1201.1, The init method is going to be new and improved.
+1203.8," We're going to take in still the same number of parameters, but the calories are going to have a default value."
+1211.1999999999998, Right?
+1211.6999999999998," So if the user actually passes in the number of calories, the value for calories here, self-dot calories will be whatever the user passed in."
+1220.1999999999998," But if the user doesn't pass in the number of calories, then this parameter here, self-dot calories will be none."
+1228.6999999999998, Right?
+1229.7," And then we're going to be using, being used to represent the absence of a value."
+1234.4, Okay?
+1235.4, So two options here when we create the object.
+1239.5," Other things you might notice is that the self-dot starts, so the start time and the end time are no longer just start and end."
+1248.3, Okay.
+1250.4, I'm going to talk about this on the next slide.
+1252.4, But essentially what I'm doing here is I'm saying the start and end will be passed in as strings.
+1259.3," That's like we have been in the past, right?"
+1261.1," Like September 1st, 2022, 1.35 pm."
+1264.3999999999999, That's fine.
+1264.8999999999999, We can still pass in the start time as a string.
+1268.2," But when I'm storing it inside my object, I'm actually going to store it as whatever this thing gives me."
+1275.2," And this thing is actually going to be returning or parsing the string as a new data type, something we've not worked with before called a date time object."
+1286.8999999999999, We're going to look at this on the next slide in a little bit more detail.
+1289.7," But for now, all we need to know is that the self-dot start and self-dot end will be a new data type, a date time object."
+1297.7, Okay.
+1299.7, So that's my knit method.
+1301.0, So a few changes.
+1303.1," Now my get calories method will look a little bit different as well, right?"
+1307.8999999999999," We're not just returning self-dot calories like we had in that simple workout class, right?"
+1314.5, We're going to do a little switch.
+1316.8000000000002," So if the user supplies the number of calories, so if the calories here were actually passed in, then we don't resort to the calories being done, right?"
+1329.5, Calories will be 100 or 450 or whatever it is.
+1333.0," And then this if statement is false, so we go on the else and we just return that value."
+1338.3000000000002, So it's exactly the same behavior as in my simple workout class from back there.
+1344.1," But if the user does not supply the number of calories when they create an object, then the calories will be none here."
+1351.7," When I create my object, the data attribute self-dot calories will be none here."
+1356.2," So when I ask the workout to tell me how many calories I burned, we're going to go inside the if statement and we're going to do something."
+1368.0, The thing we're going to do is subtract the end time minus the start time.
+1374.1, Okay.
+1375.9," And something like this is allowed on a date time object, but obviously not allowed on strings, which is why I'm converting these strings representing a date and a time into this date time object."
+1389.6," This date time, this subtraction here gives me something like something that's called a time delta object."
+1397.9, And it's just a new type of object.
+1399.8000000000002," We haven't really worked with before, but it's an object type that we can run a method on."
+1406.1000000000001, And the method is going to be the total seconds.
+1409.6000000000001," So for this time delta object, so 10 minutes or 18 minutes or whatever it may be, if we run this method called total seconds, it will tell us how many seconds are in that time delta object."
+1420.5, Divide by 360 to tell us the number of hours and then multiply by the class variable calpere hour will tell us how many calories were burned in that elapsed time.
+1434.5, Okay.
+1437.0, Yeah.
+1441.5," Oh, workout dot is just this thing here."
+1444.0," Workout dot calpere hour, that's just this."
+1446.5," And then we multiply by that, yeah, that number."
+1450.5, Questions about that?
+1457.5, Okay.
+1458.5, So essentially this is going to do the estimation for us for how many calories were burned in some number of hours or some number of minutes.
+1466.0, Now let's demystify this start and end time stuff.
+1469.5, Okay.
+1470.5, So the way that we are converting to this string to a date time object is by using this library up here.
+1480.5," So a library is a collection of objects, a collection of maybe also functions that all deal with the same type of things."
+1489.5," So in this particular case, they all deal with dates and times and manipulating dates and times and things like that."
+1495.5," In the last lecture, we saw an example of a library, that random library that allowed us to do operations with random numbers."
+1502.0, So it's just a nice collection of functions and objects that deal with one sort of common thing.
+1508.0," So in this particular case, there is a function inside that library, this parser dot parse function that takes in a string and can parse it to this date time object."
+1522.0, Okay.
+1523.0," So if we print the type of start date and the type of end date, it will show us that it's this type date time thing."
+1530.0, Okay.
+1530.5," So it's a new object type, we haven't worked with it yet, but it's an object type like a list is, like a dictionary is, like our workout is."
+1538.0, Right.
+1539.0, And so the reason why we're doing the kind of version is because we don't want to deal with the messy part of grabbing in a string and then figuring out how long the lapse time is based on date time.
+1551.0, Based on just parsing characters throughout this string.
+1554.0, Right.
+1555.0, I certainly don't want to do that.
+1556.0, But you know what?
+1557.0, Somebody who was passionate about doing that did it in this nice little library for us.
+1562.0," So all we're doing is just reusing the work that they've done, right, to save it as this object."
+1568.0," And then they basically said, let me implement the minus sign to work with objects of type date time."
+1576.0, And it makes things like this very easy.
+1578.0, We can just subtract two dates from each other.
+1581.0, Right.
+1582.0, And it'll tell us the elapsed time.
+1584.0, We can run a method on that elapsed time to tell us how many seconds that elapsed time is.
+1589.0, So pretty cool.
+1590.0, Yeah.
+1591.0, That's the total seconds.
+1592.0, It's a different part of the parser.
+1594.0, Yeah.
+1595.0, Yes. The total seconds gets imported with the date you tell parser thing.
+1599.0, Yeah. Exactly.
+1601.0," It's an operation that can be run on this date time delta, I think, type object here."
+1606.0," It's like total hours, total minutes."
+1609.0, I think there might be like total minutes and total hours also.
+1612.0, Yeah.
+1613.0, Yeah.
+1614.0," So is parser a lot of loss and then like that parser, not total seconds or not?"
+1618.0," Yeah, exactly."
+1619.0, Yeah.
+1620.0, Exactly.
+1623.0, Yeah.
+1624.0, So yeah.
+1625.0, So what did the code should be important to them?
+1628.0, Yeah. So we usually import all our stuff right at the top.
+1631.0, So I was just going to show the code.
+1632.0, So here I've got everything that I need to import way at the beginning.
+1636.0, So it's kind of like Python goes and copies and pastes everything in those files.
+1640.0, And puts them in your file.
+1641.0, So now everything that's defined in those files is now accessible in your file.
+1645.0," You just have to sort of do this, the dot notation on these libraries here."
+1653.0, So I just wanted to show you down here.
+1658.0," So here I shouldn't have imported again, but it's just part of this exercise."
+1662.0, So here I've got the parser being imported.
+1665.0, I've got the start time.
+1666.0," These are just strings, right?"
+1668.0, Nothing special about them.
+1670.0, And we can parse them.
+1673.0, So I've got these strings parsed and the types of these objects.
+1678.0," Again, are not strings anymore."
+1679.0," Now that I've parsed them, right?"
+1681.0," Start date and end date are now these date time objects, date time dot date time."
+1688.0, And then we can do operations like this.
+1690.0," So if I just simply subtract one time from the other and print that time delta object,"
+1697.0, Python puts it in this nice little format for me.
+1700.0, I should just comment these out.
+1701.0, It's hard to see.
+1702.0, It puts it in this nice little format for me.
+1704.0, So here's number of seconds.
+1706.0, The hours colon number of minutes colon number of seconds.
+1709.0, So this is the STR method that was implemented for that kind of object.
+1713.0," It prints it in this nice little form, right?"
+1715.0, Hours colon minutes colon seconds.
+1718.0," And then we can do this useful thing, which is what we're doing in our code."
+1723.0, We can run the total seconds function on an object of this time delta.
+1728.0, And it tells us that this 10 minutes is equivalent to 600 seconds.
+1734.0," It's very, very cool, very useful."
+1736.0, And we don't even need to know how any of that is implemented.
+1739.0, We just make use of these functions.
+1741.0, What's cool about the parser though?
+1743.0," And this will be really, really cool."
+1746.0, You can actually write the time and the date in any format.
+1751.0," It doesn't have to be month slash day slash year space this, right?"
+1757.0, So this is kind of how I wrote this one.
+1759.0," We can actually write it something like set 30, 2021, right, like that."
+1765.0, And it knows how to read that.
+1767.0, Or we can write out September all the way.
+1770.0," Put the comma there, put the comma there, put the PM lower case, and closer to the time."
+1774.0, And it knows how to read that as well.
+1776.0, So it knows how to parse all these different ways of writing the dates
+1780.0," and save them as these daytime objects for using in this very nice, very readable way."
+1787.0, Isn't that cool?
+1790.0, Okay.
+1791.0, So very useful if you ever want to work with date times.
+1798.0, Okay.
+1799.0," So now, okay."
+1803.0, So now this is our state dictionary sort of for how we ended up with our simple work out class.
+1810.0, But what are the changes we made to improve it?
+1814.0," Well, in my state dictionary, I added my class variable, calories per hour."
+1819.0," So now this calorie per hour is available for any instance that I create, right?"
+1826.0," We already knew this, but this is kind of the representation of that."
+1832.0," And we didn't add anything to the instances, those haven't changed, right?"
+1838.0, Okay.
+1839.0," So little aside on class variables, right?"
+1842.0, So this cal per hour here is available for all of these instances.
+1847.0," Now, a class variable, right, is just like an instance variable."
+1851.0," We can access it from within the class definition, which is how it should always be done."
+1857.0," But Python being Python, they allow you to access that class variable from outside the class definition as well."
+1866.0," So we can do something like this so we can call the cal per hour class variable on the name of this class, right?"
+1875.0," Outside of the definition, right?"
+1877.0," This is my class definition. It ended here, right?"
+1880.0, And this is just code that's outside of the definition.
+1883.0, And Python will be happy to tell you what that value is.
+1887.0, Python will also be happy to tell you what that value is if you access it through an instance.
+1892.0, So here I've created an actual instance of type workout.
+1895.0, So I'm not calling the cal per hour on the name of my class.
+1899.0, I'm just grabbing it through one of my instances.
+1902.0," And if I print instance.cal per hour, Python will also happily tell me what that value is."
+1909.0," And Python being Python, they're going to allow you to change the value of that cal per hour outside of the class definition as well."
+1916.0," So here outside the class definition, I'm going to say workout.cal per hour equals 250."
+1922.0," So now the cal per hour is changed permanently to 250, no matter how I access it, either by calling the name of my class directly or by calling the class variable through one of the instances."
+1937.0, Okay.
+1940.0, So no good.
+1941.0, Never ever work with these data attributes or access class variables outside the class definition.
+1950.0," If you really want the user to be able to do something like this, right, then write a method for it."
+1955.0," And then they can change it or access it in a consistent way, the way that you want them to access it."
+1963.0, Okay. So just a little bit of practice for you guys to create a couple of workout objects just to make sure everyone's on the same page we understand what a workout object is.
+1973.0, So just create for me two objects and then print the calories for these workout objects.
+1979.0, So the first one I would like you to create name the variable W underscore one.
+1984.0," It started this workout started in January, one, two, three, thirty and it went till four p.m."
+1990.0, And you want to estimate the calories from this workout.
+1993.0," You don't know how many calories you burned, right?"
+1996.0, And then print the value for that calories.
+1999.0," And then the second object, same start date, same end date, but you know that you burned 300 calories."
+2005.0, So create these two objects and then print the number of calories burned.
+2010.0," This is online, one ninety nine."
+2017.0," And it's okay to scroll back up, right, to the init method of workout just to see how it's implemented."
+2023.0," No reason you should have memorized it by now, right?"
+2027.0," All right, how do we create these two objects? What's W one equal to?"
+2033.0, Yep.
+2042.0, Yep.
+2044.0," Yep, the start date would be first."
+2046.0, So I can just...
+2048.0," As a string, perfect."
+2050.0, Yep.
+2052.0, Yep.
+2053.0, I'm not saying this.
+2054.0," I don't think I'll say, yeah, I don't know if that works."
+2058.0," And then the end date, right, is the next one."
+2061.0, So this one's 4 p.m.
+2065.0," Right, like that."
+2066.0, I'm gonna do that.
+2068.0, And then what else do I put?
+2072.0, Or do I put anything else?
+2079.0, Exactly.
+2080.0," Yep. In this particular case, I'm gonna let it default to none."
+2083.0, And then how do I grab the number of calories burned for this object?
+2087.0, For this workout object.
+2089.0, How do I print that out?
+2097.0, Yep.
+2098.0, So I just call the get calories method on W one and let's slap a print statement around that.
+2103.0, Like that.
+2105.0, Okay.
+2109.0, Yep.
+2110.0, Why do I do that by the way I can use that?
+2116.0, Perfect.
+2118.0, So what is it? A 30 minute workout at 200 calories per hour.
+2122.0," It's 100 calories, right, burned."
+2127.0," Second one will be pretty similar, right?"
+2130.0, So I'm just gonna copy and paste.
+2132.0, What's the difference between this one and the previous one?
+2143.0," When I create my object, what's the one difference?"
+2147.0, Yeah.
+2150.0, Yep. Exactly.
+2152.0, We will pass in 300 as the last program.
+2156.0," And so then if we run that,"
+2159.0," 100 was my first print statement and 300 is my second one, right?"
+2163.0, So it relies on the number that was passed in as opposed to calculating it by estimating it based on the start.
+2174.0, Alright. Everyone okay with this?
+2177.0, We all sort of understand get calories method.
+2180.0, Perfect.
+2181.0, So we finished our improved method here.
+2183.0," We saw this better get calories method, very neat method that allows estimation."
+2189.0, And we saw a little bit about using these daytime objects.
+2195.0," Okay. So the next stop, the rest of this lecture will be implementing one subclass of this"
+2202.0, workout object called a run workout class.
+2208.0, Okay.
+2209.0, And so we're going to use the idea of hierarchies and class inheritance to do this.
+2215.0, So let's remember a little bit about hierarchies in terms of Python.
+2220.0," So when we create a class that we know will be sort of this parent class,"
+2228.0," that's a base class, right?"
+2230.0, It's the most basic thing that we'd like to work off of.
+2234.0, We call that the parent class or the super class.
+2237.0," And this one parent class can have many subclasses associated with it, right?"
+2243.0," So in this particular case, just as an example, we can have two types of workouts, right?"
+2249.0, One outdoor workout and one kind is an outdoor workout and the other kind is an indoor workout.
+2255.0," And both of these are workouts, right?"
+2260.0," So everything that a workout has and everything that we can do with a workout,"
+2264.0," we will be able to, we'll, will exist in outdoor workout and indoor workout and we'll be able to do with outdoor workout and indoor workout, right?"
+2273.0, So a child class is a parent class.
+2276.0," So subclass is a super class, right?"
+2280.0," But these subclasses can bring about some of their own, quote unquote ideas, right?"
+2289.0, Their own attributes.
+2291.0," So for an outdoor workout, we might add more information, right?"
+2296.0," So add more attributes, maybe location, something like that."
+2300.0," For indoor workout, you know, you might not need a location, you might not add any extra data attributes."
+2307.0," We might add more behaviors, right?"
+2309.0," So for outdoor workout, I don't know, you'd add some different, some different behavior than just a regular workout."
+2317.0, Same for indoor workout or you might override behaviors.
+2320.0, So you might change something that workout does to be specific to an outdoor workout.
+2325.0," And of course, we can create as many of these subclasses as we'd like."
+2329.0," So for outdoor workouts, we can now have two different types of outdoor workouts are running or swimming."
+2335.0," And for indoor workouts, we might have treadmill or weights types of workouts, right?"
+2339.0," And whenever you create these child classes, they inherit everything that their parents has."
+2344.0," So a running class is an outdoor workout and by default, it's also going to be a workout, right?"
+2350.0, Because outdoor workout was a workout.
+2353.0, So what we're going to do in this run workout class is I'm going to show you three sort of methods implemented.
+2361.0, The first one is going to be just reusing something that our parent can do.
+2366.0, The second one is going to be overriding a method that our parent already can do to make it better and more specific to the child class.
+2375.0, And the third one is to add a method that our parent didn't even have.
+2380.0, So we're going to do these three things in the run workout object.
+2386.0," So let's remember this example here about common properties that all of our workouts have, right?"
+2393.0, So this is basically us implementing our workout super class.
+2397.0," So I know we did implement all of these, but in theory, we can implement all of the things that are highlighted in yellow in our parent class."
+2404.0, And these are common no matter what kinds of workouts we create.
+2407.0," Now in the Python file, I actually have a swimming subclass."
+2411.0," We're not going to go over the swimming subclass in the lecture, but please feel free to go through it in the Python file for this lecture."
+2418.0, And I think you'll also be working with it in recitation on Friday as well.
+2422.0," In lecture, we're going to be creating some subclass that's specific to running."
+2429.0, And this running class will of course inherit all of these properties that our parent workout class has.
+2436.0, But we're also going to add our own data.
+2441.0, And we're going to override some data that the workout class has and things like that.
+2446.0," So specifically, the only thing we're actually going to implement that's different than a regular workout is to add an elevation."
+2454.0, An elevation attribute.
+2457.0," So beyond that, start time and time calories."
+2460.0, An icon will also exist and the kind of workout will also exist.
+2463.0, Those are our five data attributes from workout.
+2466.0, And we're going to add elevation for running workout to make six.
+2471.0, Okay. So this was our parent class.
+2474.0," Right? Just as a reminder, this is what it looked like."
+2477.0," We had our class attribute here, a class variable, and this init method here."
+2484.0, The class workout is their parent was the generic Python object.
+2489.0," Now when we create our run workout, our parent will be the workout class."
+2494.0, Right? So we don't just want it to be a Python object.
+2497.0, We want it to be a workout object.
+2501.0," So as soon as we do that inside our code, Python says, all right, let me just grab all of this stuff."
+2507.0, I love anything that's defined inside your parent class.
+2510.0," This workout and quote unquote, copy and paste it into this class."
+2515.0," So right off the bat, we've got all of the things that workout has."
+2520.0," But that's not, that doesn't quite work with our run workout."
+2527.0," Because when we create a run workout, and again, this is a design decision,"
+2531.0, we would like the user to be able to pass in an extra parameter here.
+2536.0, The elevation value.
+2539.0," So in addition to the start time and time and the calories burned,"
+2542.0, I'm going to slip in this elevation value right before the calories burned parameter.
+2550.0," So when I initialize my run workout, I could theoretically pass in four values."
+2557.0, String string number number.
+2560.0," Or since elevation is zero, elevation has a default parameter in calories, has a default parameter,"
+2566.0, I could pass in just string string.
+2569.0, And those other two will default.
+2573.0," Okay, so what is this init method doing?"
+2575.0, It's calling the super function.
+2580.0," I know we haven't done this before, but I just wanted to show you this."
+2583.0, This is another way to ask Python to tell you who your parent is.
+2590.0," So when you run this function super inside a class definition,"
+2596.0," Python effectively returns, so the replacement of this function, right?"
+2601.0, This is just a function. It has a return value.
+2604.0, The return will be the thing in the parentheses here.
+2608.0," So effectively, that line becomes workout.double underscore init, double underscore."
+2613.0," Exactly what, as we saw in last lecture, when we did animal, right?"
+2616.0, Rabbits and all those stuff.
+2619.0," All right, so what we're doing here is we're saying,"
+2622.0," well, I know workout can do all those initializations for me."
+2626.0," So let me just take advantage of that, not copy and paste it,"
+2630.0," and just let workout, you know, do the job and initialize all that stuff for me."
+2635.0," So this line of code here initializes the start and times, right,"
+2639.0," by parsing them, the calories and the icon to the sweaty person emoji"
+2646.0, and the kind to workout string.
+2649.0," But since this is a run workout, I would like to replace the icon"
+2655.0, with the little running person emoji.
+2657.0, And the kind of workout this is is no longer just a workout.
+2661.0," Let's say it's a running workout, right?"
+2664.0, So it becomes a string running.
+2666.0, So I'm overriding those data attributes to be the strings.
+2671.0," And then the thing that run workout has, that workout didn't have at all,"
+2676.0, is this elevation data attribute.
+2679.0, So self.elev is now a new data attribute that did not exist in the regular workout.
+2688.0," And then I've got these two functions, methods down here,"
+2692.0, a getter for the elevation and a setter for the elevation.
+2695.0," Nothing fancy with them, they just return and set."
+2698.0, Yeah.
+2701.0," Yeah, so the super init calls the parents init method."
+2705.0, And the reason I do that is because I know the parent can just initialize all that stuff for me.
+2711.0," So I'm just taking advantage of the fact that it does all that stuff for me, right?"
+2716.0," Imagine the init method maybe it also checked the types, right,"
+2720.0," to make sure that the person who created this, you know, to kind of enforce that start as a string."
+2725.0," And as a string, like all that extra code that would happen in the init method of workout,"
+2729.0, we would just let run with this line here.
+2733.0, So we don't have to copy and paste it.
+2736.0, Yes.
+2739.0," So the line up after, right, in people's preferences."
+2743.0, Yes. You mean from these two?
+2747.0, Yeah.
+2750.0, To have start and the calories.
+2754.0, And the super needs to have at least start and calories.
+2759.0," Yes, exactly, actually. Yes, you're right."
+2761.0," So the reason this works is because the init method of my workout takes in the start and the end and the calories, right?"
+2768.0," If I said that the init method of run workout doesn't need start and end or something like that,"
+2774.0, I wouldn't be able to run this init method exactly.
+2777.0," Or maybe I would run it with some defaults or something like, like if you actually want to run it,"
+2781.0," you have to pass it. You still have to follow the stub of that init method, right?"
+2787.0, Yeah. That's a great point.
+2791.0, Yeah.
+2793.0, So the fillet before passing the init of the parent into this one without having to write the super thing.
+2801.0, Yes. So you're right.
+2803.0, I wasn't writing the super thing. I was just naming the parent directly.
+2809.0," So in the animal one, I said animal dot double underscore init, double underscore."
+2814.0," And in this particular case, I'm just showing you a different way to do it."
+2818.0, Maybe you don't know who your parent is.
+2821.0," Question mark. In that case, you can just run this function and it tells you who your parent is."
+2827.0," But this line would work just as well if I said workout, right?"
+2832.0," This thing dot double underscore init, double underscore."
+2835.0, And that would be exactly the same as I had done last lecture.
+2839.0," So let's look at the state dictionary for this one, right? For this new addition here."
+2844.0," So this is the state dictionary of just my planaled workout class, right?"
+2848.0," We've done, we saw this before. It's all my getters, all my setters, the init, and this calpere hour from the new and improved workout class."
+2858.0," Now my subclass, the run workout, the super method basically says, hey, this is you are a workout."
+2869.0," The super method, the state dictionary for it will additionally have these two getters, sorry, this getter in the center, these two methods, right?"
+2879.0," We're not copying all the stuff all over again down in the run workout state dictionary because that already exists up here, right?"
+2888.0," But in addition, the run workout has this get elevation and set elevation method."
+2892.0," Those are the only things that we've defined in this class, right?"
+2896.0," So then when I create a run workout instance, so this is an instance of run workout, not workout Python points to this run workout class."
+2905.0," And the data attributes for run workout instance are going to be, of course, all the data attributes of a regular workout."
+2914.0," The five plus the elevation, the new data attribute that I just added."
+2929.0," So we're using inheritance in this particular case, right, in the spirit of modularity, in the spirit of abstraction, in the spirit of writing code that's reusable, that's readable, that's understandable in the future, right?"
+2943.0," So we're not, if we were writing the run workout by basically copying and pasting everything in there all over again, it would be a really long class where most of it was just a copy and paste off of the workout, right?"
+2955.0," So now in this particular, if we define it in this way, we can easily see new functionality, right?"
+2962.0," And new data attributes that run workout has in addition to just being a workout object, okay?"
+2969.0," So all those good things for writing, very nice clear code."
+2974.0," Okay, so now we're going to look at a function, sorry, a method that's being reused from our parent."
+2981.0," And that's this double underscore STR method, okay?"
+2985.0," So this STR method, it looks like a beast, right? It's very, very long, but I promise you it's not so bad."
+2995.0," So this STR method, let's remember what it does."
+2998.0," It tells Python what to do when you print an object of type workout, right?"
+3005.0, Because it's defined inside the workout class here.
+3008.0," So I'll show you what it actually looks like in the actual workout class. So here's my workout, right?"
+3015.0," There's my class variable, my init, my getters, my setters, all that."
+3020.0, And then here's my STR method.
+3022.0," It's long, right? It takes an entire page."
+3025.0," This is not a method that I would like to copy and paste in every single one of my subclasses, right?"
+3031.0," Because that would be a lot of code, again, against the spirit of abstraction, modularity, all that good stuff."
+3038.0, So what we're doing is we're just defining it once in our parent class workout.
+3045.0, And it's going to do the following.
+3050.0," So a STR method has to return a string, right?"
+3055.0," It doesn't print the string, right? This is a very important distinction."
+3059.0, It returns a string that will eventually be printed when you call the print method.
+3065.0, So the thing that I'm doing throughout this whole method is to basically just build up my string to return.
+3074.0," Return, return, return is return string."
+3076.0, And I'm building it just by concatenating it piece by piece with more and more stuff that I want to eventually print out.
+3083.0," So the output would look something like this, right?"
+3086.0," I'm basically printing out on the console, sort of like the little square of a watch, right?"
+3092.0, Very cute.
+3094.0, So what are my composing here?
+3096.0," The first bit, right, this thing in the red box, prints this line over here."
+3101.0, Just horizontal line that's some width long.
+3105.0," The next bit here, you notice, it grabs the icon, data attribute, puts it here on a line,"
+3114.0, along with the vertical bar and a bunch of spaces and a vertical bar.
+3118.0," The next bit here prints the kind of workout by accessing the kind data attribute, right?"
+3124.0," So either workout or running or swimming, whatever that string is, prints it right underneath the emoji."
+3131.0, The next bit here is composing the duration.
+3136.0," So remember when we did the daytime object just over here, right?"
+3140.0," When we were printing the duration where we just simply subtracted an n-start time, it looked like this, right?"
+3148.0, I'm perfectly happy with that. That looks really nice.
+3151.0, So let's just use that.
+3154.0," So the duration here, the get duration just does the subtraction."
+3158.0, It's a method inside my workout class.
+3161.0, And then we just sort of keep composing that to our return string.
+3167.0," Next, we are going to figure out how many calories were burned in this workout object."
+3173.0," So again, we're grabbing the get calories method, right?"
+3178.0, The return value from that method.
+3180.0," However, it may be calculated, right?"
+3182.0," So for this workout type, either we gave the value directly or we let it estimate it from the first time."
+3187.0, Let it estimate it from the duration of the workout.
+3190.0," However, it decides to calculate it according to how this workout object was made."
+3194.0, That value gets put right there.
+3198.0, And then the last bit is this last line down at the bottom.
+3204.0," So then we can create any kind of workout, right?"
+3208.0, Because all the child classes inherit all of the methods from the parent class.
+3213.0," Of course, all these child classes will inherit the STR method of workout."
+3218.0," So no matter what kind of workout I'm creating, so here I'm just creating a regular workout,"
+3223.0," here I'm running workout, and here I swim workout."
+3226.0," No matter how I'm creating it, they'll use the same STR method."
+3230.0," So all of these will print it in this really nice format, right?"
+3233.0," The first bit will be specific to the kind of workout we have, right?"
+3237.0," The little emojis will be different because I've set those separately, right, within the subclasses."
+3243.0," The kind as well, the label, right?"
+3245.0, It workout or running or swimming.
+3248.0," The calories burned and the duration will be you, will be calculated using the calories method and then the get duration method."
+3259.0," So again, in a nicely consistent way."
+3262.0, So I'll show you what this looks like in the actual code.
+3269.0, Let me just comment that.
+3276.0, So here I've got three workouts created and then I'm just printing these three different kinds of workouts.
+3282.0," And just to show you I'm not lying, see the swim workout doesn't have an STR method defined, right?"
+3289.0," And neither does the run workout, right?"
+3291.0," It just has a bunch of other stuff defined, but no STR methods."
+3295.0," So we're just using the STR method of our parent and then when we run it, it looks like this."
+3301.0," Right, so I've got a regular workout with their icon and label running workout with their icon and label and the swimming workout with their icon and label."
+3310.0, Isn't that cute?
+3313.0," Right, so we've made our own little digital thing."
+3317.0, Okay.
+3322.0," So this begs the question, right, when can we use an instance of a class, right, of a subclass?"
+3334.0," Well, you can use an instance of this run workout anywhere where you can use workout, right?"
+3340.0," Because again, the way I think about it is you say, well, a run workout is a workout."
+3345.0," If anything I can do with a workout, I should be able to do with a run workout or swim workout or any of the subclasses."
+3352.0," Right, but the opposite is not true."
+3354.0," If I can do something with a run workout, will run workout has a bunch of other specific things that it can do."
+3359.0," Of course, a regular workout is not going to be able to do those specific things."
+3364.0," Right, so let's think about these two helper functions."
+3367.0," So, the one calculates the total calories given a list of workouts and this one calculates the total elevation given a list of workouts."
+3376.0, The code looks very similar for both.
+3378.0," We're just iterating through the loop, grabbing each workout object and then we're calling the get calories or the get elevation on that workout object."
+3390.0," So, this will give me a number and then I'm just keeping a running sum for the total elevation and the total calories and at the end I returned."
+3399.0," So again, the list here is important."
+3401.0, These are workout objects and workout objects.
+3405.0," So, what if I have a bunch of..."
+3409.0, So here I've got two workout objects and two running workout objects.
+3413.0," So, these workout objects are 30 minutes long, right?"
+3419.0," So, using 200 calories per hour, these ones will each be 100 calories."
+3426.0, These running workouts are two hours long.
+3431.0," So, they will..."
+3434.0," It doesn't actually matter, right?"
+3437.0," Sorry, sorry."
+3438.0," These running workouts are two hours long, so they're going to be 400 calories, right?"
+3443.0, Because these parameters here correspond to the elevation.
+3450.0," And they correspond to the elevation because if we look at the way we define the running workout right here, right?"
+3457.0, This is the order of the parameters.
+3459.0, Start time and time elevation value calories.
+3463.0," So, when I pass in very parameters, they need to go in that order."
+3469.0," And I can't skip around, right?"
+3471.0," If I want one of them to be the default variable, then that has to be at the end."
+3476.0," So, in this particular case, I've got these two running workouts at 400 calories because by default,"
+3484.0, I didn't actually pass in the number of calories.
+3486.0, And then the elevation is 100 and 200.
+3488.0, Yeah.
+3489.0, What is the model of the default elevation and the verticality?
+3494.0, Will we put a comma comma?
+3497.0, Then you would just put...
+3499.0," If you wanted both to be default, then you just put nothing."
+3502.0, You can't just leave an empty comma.
+3504.0, What if we want to do default elevation and verticality?
+3508.0," Yeah. So then you would have to actually explicitly say, like, calories equals whatever you want."
+3515.0," So at that point, yeah."
+3517.0," Now that we're working with default variables, it becomes a little bit tricky."
+3521.0," You can't go wrong with just saying, like, LF equals whatever you want it to be,"
+3525.0, calories equals whatever you want.
+3527.0, And then you can do whatever you'd like.
+3530.0," But in this particular case, our workouts are 400 and elevation is those values."
+3537.0," So when we run total calories on all of the workouts, no matter what kind of workout I have,"
+3543.0," it doesn't actually matter, right?"
+3545.0, Because Python will just grab calories for all of these workout types.
+3551.0, So it just sums that up.
+3552.0," Elevation, if I run it only on running workouts, Python will know what to do."
+3558.0, Here's 100 and 200 because those running workouts have an elevation data attribute.
+3564.0," But if I ask for the elevation for running workout and adjust a regular workout,"
+3571.0, Python will spit out an error.
+3573.0," Because as soon as it sees this workout one, it says, well, what's the workout dot get LF method?"
+3580.0," And it's going to say, I don't have a get LF method for a regular workout."
+3585.0," That's not something I know, right?"
+3587.0, Because that's something that we implemented in the child class.
+3590.0, So let's go through these together.
+3593.0, And it's actually nothing to code just to sort of run.
+3601.0, It's just down here.
+3603.0, So this is just kind of making sure you understand sort of the order of operations.
+3606.0," And I think one of the ones that was questioned here, where we actually passed in the number of calories, is at the end."
+3613.0," So when I create a regular workout, oops, let me just remove that over here."
+3619.0, What is the value when I ask Python to tubby the calories?
+3623.0," Right, for this workout."
+3625.0," At 200 calories an hour, what's the value here?"
+3632.0, Just the LL.
+3637.0, 30 minutes.
+3640.0," 100, right?"
+3644.0, What's the elevation when I ask Python to tell me the elevation for this object?
+3654.0," Yeah, exactly."
+3657.0, Yep.
+3660.0," The workout object has no attribute, right?"
+3662.0, Has no method get LF.
+3664.0, That's something specific to a running workout.
+3667.0," Okay, how about this one?"
+3668.0, Run workout here.
+3669.0," So here I'm actually, oops, I didn't mean to do that."
+3673.0, What happens if I grab the calories for W2?
+3685.0," Yep, 450."
+3686.0," Yep, pretty."
+3687.0," It just grabs whatever's passed in, right?"
+3689.0, Doesn't estimate.
+3690.0, How about the elevation?
+3692.0," Yep, error again, perfect."
+3696.0, Now let's create three kinds of running workouts.
+3699.0, So here's one.
+3701.0, What's the calories and elevation for this one?
+3704.0, I'll just do both together.
+3706.0," Right, so RW1."
+3708.0, This parameter is the only one passed in.
+3711.0, What does that correspond to?
+3713.0, Calories are elevation.
+3717.0," Yeah, elevation."
+3718.0, Remember our parameter list?
+3719.0, Elevation comes before calories.
+3721.0," So the elevation is 250 and the calories will be estimated, right?"
+3726.0, Based on whatever this is.
+3728.0," Right, so calories is first at 100 elevations, 250."
+3734.0, How about running workout 2?
+3736.0, So here I've got 450 and 700 in that order.
+3740.0, Which one is the elevation?
+3746.0," Yep, 450 and calories is 700."
+3749.0," So when we print it, I print it them backward just to confuse us all."
+3753.0," And then lastly, how about this run workout 3?"
+3757.0," So here, this is to answer the question,"
+3761.0," what if I wanted elevation to be default,"
+3763.0, but I wanted to pass in calories?
+3766.0," So here I just say the name of my parameter there,"
+3769.0, and I give it an actual value.
+3772.0," Right, so clearly here calories will be 300 and elevation defaults to zero."
+3778.0, So just a little practice reading the specifications.
+3786.0," Okay, so that finishes reusing the STR method from the parent."
+3790.0, Now let's override our superclass.
+3794.0, So our improved workout class.
+3797.0," Remember, it has a get calories method that estimates the calories based on the time that it took you to do this workout."
+3806.0, Whether it was a running workout or a regular workout.
+3810.0, But what I'm doing in this method is I'm going to actually implement my own get calories method inside the class definition for a run workout.
+3821.0," Right, so here's my run workout class definition."
+3824.0, And I've got my own get calories method.
+3827.0," So when I run get calories on a run workout, Python will use this one."
+3832.0, What is this one going to do?
+3834.0, So we're going to do something really cool.
+3837.0," We're going to estimate the number of calories burned for run workout based on a set of points, latitude, longitude points."
+3847.0," So what we can actually do is we're going to pass in a list of two pulls like this, which represent sort of the route that we take."
+3858.0," Right, so from point A, so in this particular case, I've got sort of four places that I have jogged between."
+3866.0," So these are my four latitude, longitude points."
+3869.0," So each two pull is latitude, longitude."
+3874.0, So I can make this as precise as I'd like.
+3877.0," But what I want this method to do is to potentially, if the user does give me a set of long latitude, longitude points that they actually went through, to calculate the calories burned based on a class variable called calories per kilometer."
+3893.0," Right, so given a set of these points, what I'd like to do is to calculate the total kilometers traveled between all of these latitude, longitude points."
+3903.0," Multiply that distance, those that kilometer distance by the calories per kilometer, and use that as the estimate for the calories burned in this particular run workout."
+3915.0, So this is how the code achieves that.
+3918.0, So I've got another class variable that's only specific to this run workout.
+3922.0, So workout does not know about this calories per kilometer is a hundred.
+3926.0, And now I've got my own get calories method here.
+3929.0," It's overridden. So if we run this get calories on a run workout, it will use this one."
+3936.0," And what does it do? Well, if we don't give it any GPS points, if we don't give it a list of two pulls there, Python will default to the else."
+3946.0," What does the else do? Well, it says, hey, who's your parent? Run there, get calories method."
+3952.0," So that's just estimating it based on the total time elapsed in this workout. Right, that's our default parent."
+3960.0," But if the user got fancy and gave us a bunch of two pulls representing latitude and longitude points for all of their workouts, then we're going to do the following stuff."
+3973.0," We're going to iterate through all of these pairs of GPS points, right, pair by pair."
+3979.0," We're going to calculate the distance, right, given this latitude, longitude value."
+3986.0," Add on to this running total for the total distance pass, total distance ran."
+3991.0," And then return that total distance multiplied by this data attribute, sorry, class variable, calories per kilometer."
+4001.0," Okay, so let me show you what this actually looks like, because the only thing that is sort of still mystifying here is this GPS distance."
+4013.0," And this GPS distance is actually a function that's in this lecture helpers file, which is included in today's Python zip file."
+4026.0," And it's just, you know, from the internet, it's how it's a way to calculate the kilometers, the kilometer, the distance, right, traveled between two latitude, longitude pairs."
+4038.0, That's all it is. So does some fancy stuff with signs and cosines and things like that to figure out the distance between these two lat long pairs.
+4047.0," Okay, that's all it is."
+4049.0," So we're just running that function nicely down here to help us calculate that total distance, right, beyond that, everything is pretty simple."
+4058.0," It's just looking at consecutive pairs of these of these tuples, right, getting that distance plus this distance plus distance and then multiplying by the calperecline."
+4072.0," So in the end, what we get is something like this. So here, let me show you, here are two points, latitude, longitude points. So I've got Boston and Newton."
+4084.0," So here I've just got a straight shot, right, so not counting, you know, getting very precise with blocks and things like that."
+4091.0," But if I create a running workout here with the start time and time elevation value, and now I pass in the root GPS points."
+4100.0, Now there are a piece to my init method. I forgot to show you that. Sorry about that.
+4106.0, So here's my init method for run workout. I skipped that little bit.
+4113.0, Last parameter here is to actually pass in some root GPS points.
+4119.0," And if I actually pass in those root GPS points, when I run the get calories method, it tells me that I burned this many, right, and it calculates it based on that distance between Boston and Newton."
+4131.0," In the second example here, I don't actually pass in the value for the GPS points. So we're defaulting to just our regular calories function from workout, which is to calculate it based on the start time and the end time."
+4144.0," So I think that's also really cool, you guys. This function here."
+4162.0," Okay, so these overwritten methods just to show you sort of for completion, say how this run workout class looks."
+4169.0," Everything is the same as what we ended up before, but now I'm going to re-implement my get calories method, right."
+4175.0," So now run workout knows about a calories method. And I've also got this data attribute. Sorry, class variable."
+4183.0," Okay, who's got mess up this class variable, calz per kilometer, right. And any run workout instance will know about, of course, the calz per kilometer, as well as the cal per hour from our parent."
+4197.0, Questions about that.
+4203.0," We're building something really nice here, right. So I guess the question is, and I think you've probably figured this out, how do you know which method to call."
+4212.0," Well, you just look at the object before the dot, right. You run out method, your object dot method name. What's the thing before the dot?"
+4222.0," What is its type? If the type, like for example, get calories, if the type is running, you look to see if that class definition has a get calories method."
+4233.0," If it does, you use that. If it doesn't, and only if it doesn't, you look at your parent and say does your parent have a get calories method."
+4242.0," If it does, you use that. And if it doesn't, you look at the parent's parent. Does the parent's parent have a get calories method?"
+4250.0," If it does use that, if it doesn't, you look at the parent's parent's parent, all the way up, you keep going all the way up the chain until you get to the generic Python object."
+4259.0," If the Python object type has a function, a method named what you'd like to call, you use that. Otherwise error, right. No such method was found anywhere within our chain of hierarchies up until the Python object."
+4275.0," All right. So that finishes overriding our get calories method. And now we're going to do one more thing, which is to add something new to run workout that didn't actually exist in workout."
+4290.0," Although I guess I am implementing it in workout. So it's not actually adding new, but we're going to override it anyway. So the class workout, let's say that we want to compare two workouts together."
+4304.0," So to do that, we're going to implement the dunder method, double underscore, EQ, double underscore. This will allow us to compare two running workout objects or two workout objects or running and workout objects using the double equal sign."
+4320.0," So w1, equi equal, run, w2, or whatever. So we can use the double equal sign to compare objects of our type."
+4331.0," So again, my decision for comparing these objects types for comparing these two objects workout objects is to say, well, first, let's compare the types."
+4343.0," So if I'm comparing a workout versus a running workout right off the bat, they're not going to be equal."
+4350.0," So first of all, the type of this object should be the same. So I should be comparing workouts with workouts running workouts with running workouts or swims with swims."
+4358.0," And I also want every one of the other data attributes to be the same, right? So the start time and times, the kind and the get calories."
+4369.0," So as long as all of these things are the same, I'm going to say that these workouts are the same, are equivalent."
+4378.0," So this is the equal method in my workout. And then in my class workout, I can actually override that method."
+4386.0," So this should actually be, um, add override, right? Just like the other one."
+4396.0," Um, and then run workout, I'm going to override the equal method, but I'm going to do it in a very modular, pathonic way."
+4404.0, I'm going to say that a run workout is going to be the same as another workout. If everything in my parent is the same.
+4419.0," So here, I'm just calling the super method, right, saying workout dot double underscore equal double underscore other."
+4427.0," So with this little bit here, right, this line here, just the super dot double underscore equal, double underscore other."
+4434.0, This compares all of these things.
+4440.0, So I don't need to rewrite that in the EQ method of run workout.
+4445.0," And I can clearly see what else in addition to regular workout comparison, I need to have happen for them to be equal."
+4454.0," I also want the elevations to be equal, right? That's the other data attribute."
+4462.0," So you can see now how nicely modular this code looks, right? It's very clear what different shades of run workout to a regular workout, right?"
+4471.0, With this line.
+4474.0, Questions about this.
+4478.0, Okay.
+4481.0," Yeah, exactly. Yeah. So this, uh, this should all be on one line, right?"
+4488.0, So the backslash actually just breaks up the line into multiple lines for visibility.
+4495.0," So in the code, here's a bunch of workouts, right? And I mean, we can run some of them, but you can see why they're true or false."
+4504.0," So here, W1 and W2 are not the same because the calories are burned are different, right?"
+4513.0," They're both regular workouts. They both have the same start and end times, but the calories burned are different."
+4518.0," So this prints false, right? Just equality on these workouts."
+4525.0," Right? And then here's a true one, right? W2 is equivalent to W3 because the start and end times are the same, the length of the same, right?"
+4534.0," And the calories burned are the same. W1, W3."
+4538.0," You're sorry, W2 and W3 can't do so."
+4542.0," This one just used the default value, but that default calculated values were calculated to be 100 because it's a 30 minute workout anyway."
+4553.0, So you can go through some of the other ones on your own.
+4559.0, I guess the other interesting one is this W1 with RW1?
+4564.0," Everything about this is the same. Calories burned, right? Everything is the same except for the fact that they are different kinds of workouts."
+4573.0," Right? One is a run, one is a regular. So I run that that's false."
+4581.0, Other questions? Or any questions?
+4586.0, Okay. So last slide.
+4593.0, This is the last lecture on object-oriented programming.
+4600.0, Hopefully it gave you an idea for how to create your own object.
+4603.0," And this last example specifically showed how we can just improve it a little bit at a time to make it be, you know, this really cool thing, right?"
+4612.0, We added a way to estimate calories. We added a way to estimate calories using GPS points.
+4618.0," And we just did it incrementally, right? So you don't want to do that right off the bat."
+4622.0," Just write a little bit at a time. And in the end, you can write a really cool object type."
+4627.0," Now that you know how to create your own object types, you can create objects using other objects."
+4634.0," Right? So some of the data attributes for something more complex could be a workout object, right? Something like that."
+4641.0," But it's possible to overdo it, right? Especially now that we're not writing super complex classes."
+4648.0," It's possible to over-engineer, right? And when you over-engineer, it becomes kind of annoying to just keep scrolling back and forth, right?"
+4657.0," To this in it, to that in it, to figure out what methods were in this class, what methods were in the other class."
+4664.0," And so if you can achieve it using just one object type or maybe just a function, no need to create your own, you know, all these complicated object types that build upon object types."
+4677.0," But I just wanted to show you that it is possible, especially as you might be building more complex things in future classes, things like that."
+4686.0," But it is possible to write really complex classes that don't look so bad, right? Because you're building upon code that you've already written, right?"
+4695.0," So now we've got these ideas of abstraction, modularity, information hiding that all work together to help you achieve this really cool object or cool class or cool program."
+4708.0," Okay, so the next set of lectures, we're going to leave programming for a little bit."
+4714.0, And we're going to look at figuring out how to write efficient programs and how to figure out whether our programs are efficient or not and things like that.
+4727.0, So we're going to go into a more theoretical side of computer science.

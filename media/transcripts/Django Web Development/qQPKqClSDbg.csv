@@ -1,0 +1,116 @@
+start,text
+0.0, Hey guys and welcome back! In the last video we have set up our models and applied migrations to
+5.6000000000000005," the database, including this triple-zero-one initial file. In this video we are going to add some"
+12.0," records to our database, so let's close the browser for now. And actually Django allows us to"
+19.04," access something called the shell, which is very similar to the Python interpreter. Actually you"
+23.84," can go ahead and open it, so if you're running on Microsoft Windows like me, if you will type"
+28.72," Python only you will get this interpreter of Python, right? Where you can type code 1 plus 1,"
+35.36," 2 plus 2, 3 divided by 2 for instance, and so on. You can print things, you can create functions,"
+49.76," you can call functions, so this is the normal Python interpreter. But actually there is another"
+58.4, way to run Python code. You can go ahead and try that. Again if you're running on Microsoft Windows
+65.12, you can do I Python. If you're running on Linux or Mac you will just add 3. So let's go ahead and
+71.68, run I Python. Okay that's very interesting. At first glance you will find that it's very similar to
+79.75999999999999," the Python interpreter, except that it tells you here that this is an enhanced interactive Python."
+85.84, So you might be asking yourself why enhanced? Well as a matter of fact there are a lot of things
+91.76, that are different from the normal Python interpreter. For example you have this green beautiful
+97.52000000000001, in with one inside brackets and this simply means that it needs an input from you. So if you will do
+104.64," 1 plus 1, this is an input, if you will hit enter, you will get an output also with one index."
+111.44, But take a look at that. If I will do depth for example and I will open parentheses and if I will
+118.08, hit tab now I have different things that you know are allowed for me to do. So it's actually
+124.96," making things simpler and easier for me. Providing different classes, different methods and so on"
+131.2, and so on. So it's actually helping me. That's why it's enhanced. It's a better version that the
+136.24, normal Python interpreter. Also you can do other commands. So for instance you can do ls or you can
+142.8, do dur. Durr doesn't work. Okay so it works only on ls which is a unique system command and actually
+150.72, tells you here that durr is a function. Alright that's interesting. So you can do different things.
+156.4, You can actually run Java code. You can run JavaScript code. You can run SQL code and so on and so on.
+163.6, There is also something called the magic functions and magic functions simply are special
+168.79999999999998, commands that provide enhanced features not available in standard Python. And let me show you one
+174.95999999999998, magic function. So it will start by this ampersand and then following by time and we want the sum
+184.24, then we want the range of whatever. A big number. If you will hit enter it will tell you that the CPU
+192.96," times total of 0 nanosecond, all time 2 milliseconds and output is 49 whatever. The ampersand time"
+201.20000000000002, actually provides a quick way to measure the execution time of a single command. That's what it does.
+207.76000000000002, So we have actually applied the ampersand time on the sum function. Now the reason why I showed you
+213.44, ipython that's very important for you as a Python programmer to understand that there is something
+218.88, called ipython and you can read more about ipython in their website ipython.org.
+225.44, Also Django allows us to access something called the shell which is the ipython in essence.
+230.56, But in this case it's going to be very specifically tied to our Django application and again it will
+235.44, allow us to directly modify the database without much hassle. So to exit ipython you will hit
+241.44, control D. It's going to ask you do you really want to exit you will tell it just yes.
+246.72, And that's it. We're again inside our world tour project. So let's go ahead and run our shell.
+252.39999999999998, You can do it from the integrated terminal in your VS code and if you're coding on any other code
+256.96," editor like VIM, Adam, sublime text no problem. You can open your terminal and run from within"
+263.28, the terminal. So as you can see I've opened my PowerShell command prompt and I've activated
+268.15999999999997," the virtual environment. Now let me show you how to open the shell. You can go ahead and type python,"
+274.48, manage.py shell. That's going to open to you the same interface like we have seen in the ipython.
+283.6, So I'm going to do control L to clear the terminal. Now the first thing that we need to do is to
+288.56, import the tour class from models.py. Now what I want to do actually is I want to instantiate
+295.44," the tour class by creating tour object. So I'm going to create basically some records,"
+301.44, some rows in our database table. So each tour is going to represent a record in our database
+306.48," table. Each tour will have an origin country, will have a destination country, it will have a number"
+311.6, of nights and it will have a price. So let's say that I want to create the first tracker which is
+315.84," going to be tour one. Tour one is going to have a origin country. Let's say Japan, the destination"
+320.8, country is going to be China and the price let's say 1500 dollars. So that's the main idea.
+326.88," Now to do that I will need to import from the models.py the tour class. All right, let's go ahead"
+332.8," and do that. So I'm going to say from AsiaTour's agency application dot models.py file, I want to import"
+342.0, the tour class and you can see that we didn't get any errors and we have the second line ready to be
+347.36, instructed on what to do. Now what I want to do is I want to instantiate from that tour class
+353.04," a tour object. So I'm going to call my tour object, T01, that's going to be tour one and that's"
+359.84000000000003, going to be equal to the tour class. This is object oriented programming by the way guys.
+364.8, So we have our tour class. This is a blueprint through which we can create different instances
+370.24, or different objects and essentially each object is going to play the role of the record inside
+375.28000000000003," our database table. All right, so the first attribute is the origin country and we need to do it"
+381.92, in the same order origin destination number and price. So the origin country here let's say for
+389.28000000000003, instance Japan. The destination country I'm going to make it China. Let's say the number of nights
+403.20000000000005," we're going to make it 10 nights and for the price I'm going to make it $1,500. It enter in this"
+410.4," way we have successfully created our first tour in the table. Right, so what you can do is you can"
+417.03999999999996, access different attributes of that tour one. So you can say T01 dot origin country you should get
+425.28, Japan if you will do T01 dot destination country you should get China you will do T01 dot price
+433.84," $1,500 and T01 dot number of nights you should get 10 nights. Now take a look if you will do T01 only"
+444.08, you will get an output of tour object. This actually doesn't tell us much. We know already that T01
+450.4, is an object of that tour class or an instance of that tour class. So what I was hoping for is to get
+456.08, a better string representation of that tour one. In order to do that we need to use a method called
+462.4, stir method. We're going to enter the stir method inside the tour class. So make sure that you're
+467.76, properly invented and you're inside your tour class. So let's go ahead and do that together. So
+473.12, let me just add a comment here. This is a string representation of the tours in general because
+484.08, that's going to be applied on all of the tours or all of the records that we're going to add to our
+489.04, table or to our class rather. So we will start by defining that function and that's called underscore
+495.12, underscore stir underscore underscore underscore and this is a special function brought to you by
+500.08000000000004, Python. The main purpose of this tour function is to bring you a nice string representation of
+505.12, whatever you want to display. So also there is by the way underscore underscore wrapper underscore
+511.76," underscore. So you can use both if you want, but I prefer the stir method. So the stir method takes"
+518.16, self of course. Then I want to return a formatted string and let's say that I want to display the
+524.56," ID first. So I'm going to say, let's say for instance, ID, whatever the ID is. So that's going to be"
+532.7199999999999, the tour with the ID. That's the ID number. And notice that I haven't specified the ID in the
+539.4399999999999, tour class. And that's simply because Django is going to take care of that for us. You don't have
+543.6, to worry about adding ID manually and even incrementing it. So Django is going to add an
+549.6, increment for you each time you add a record to your table. So that's the ID number. And I want
+555.84," also the origin country, the origin country, let's say from, so let's say for instance, let's do"
+562.5600000000001, it this way from and we'll put here to and we want the self dot destination country. And we'll say
+572.24," for instance, self dot number of nights, that's going to be how many nights,"
+579.6800000000001," coasts or let's do it this way, coasts and whatever the price is, self dot price. And let's put"
+586.88, the dollar sign here just like that to formatted this way. You can format it the way you want actually.
+595.36, But that for me makes sense. So you have the ID first. You have from the origin country to the
+600.96," destination country. You have the number of nights and whatever number of nights are, coasts"
+606.72, and whatever the price is going to be for that tour. Good. Let's save and let's get back to our
+612.4000000000001, shell. Now the changes are not going to be applied immediately. I need to get outside of the shell
+620.8000000000001," and get inside the shell one more time. Now again, I want to import from the AsiaTour's"
+627.2," agency dot models. I want to import the tour. And again, I want to create the T01 that's going to be"
+633.76," equal to the tour class origin country, Japan, destination country, China, number of nights,"
+638.72," 10,000,000,000,000,000. It enter now you can do save by the way. You can save that tour in the database."
+648.0, This is very analogous to the commit statement that you enter in my SQL for example. So you can
+653.6, commit the changes. You tell the database that I'm happy with the changes and I want to save them.
+657.84," And that's exactly the same thing you do here. T01.Save. Now again, we can do T01.Destination"
+664.72, country. We get China. We can do T01.Orgene country. Right? You got the same thing for the price
+672.64," and number of nights. Now the new thing here, if you will do T01, you will get a proper representation"
+679.04," of your tour tour. You have ID number one from Japan to China tight, 10 nights costs $1,500."
+687.92, And this is thanks to this stir method that we've created inside our tour class.
+693.28," Let me go ahead and create another tour, T02. Let's make the origin country to be Vietnam."
+702.0, Let's do the destination country. Let's say South Korea. Let's also make number of nights.
+713.92," Let's make them 15 nights. And let's make the price $2,500. Let's close that."
+722.2399999999999," Now we have T02. If you'll do T02, you will get a nice representation of that tour. So you have T01."
+731.92, And you have T02. Perfect. Now we have two tours. I made that deliberately to show you that
+738.56, the tour here has an ID of none while the first tour has an ID of one. Why is that? The reason why
+745.04, the output was this way is that we didn't save the tour too. So if you will do T02.Save.
+752.8," Now if you will display the T02 again, now you can see that Django has added the second ID to that"
+758.56," record. In the next video, I'm going to show you how to render all of these records on the web page."
+764.2399999999999, Thank you for watching and I will see you in the next video.

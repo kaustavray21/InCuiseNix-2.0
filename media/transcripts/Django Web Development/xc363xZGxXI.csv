@@ -1,0 +1,115 @@
+start,text
+0.0, Hey guys and welcome back! In this video we are going to discover the Django
+4.2, Admin dashboard and we're going to create a super user for you as an
+8.88, administrator of your dashboard. But first let's have a quick recap on what we
+13.200000000000001, have covered in the last parts. We started by launching the Django server to host
+17.48, our web application. We created a basic application within our Django project.
+22.32, We learned how to manage migrations. Also we have learned how to store data in
+26.84, the database. We've also learned how to use the SQL shell to add and add the
+31.28, trackers in database table. And finally we have understood how to render HTML
+36.72, templates using the Django template language. And in this video we're going to
+41.04, focus on a more efficient way to add or edit data in our database without
+45.56, using the shell every time. So what we're going to take a look at now is how to
+50.2, add and edit data in our database. But not through typing commands in shell.
+55.36, Because I don't want to do that each time I have to add a record in our database
+59.8, table. That's not going to be time effective if every time I have to go to the
+64.6," shell, import the model and you know do the changes and then save the changes"
+70.03999999999999, and you know it's a very time-consuming process. But instead I would like to go
+73.96000000000001, to a part on my website where I can click and add a new tour from the origin
+78.2, country to the destination country specifying the number of nights and
+82.32, determining the price for that tour or even if I want to update existing tours.
+86.75999999999999, So Django is designed in a way that it allows the interaction of different
+91.75999999999999, data types and input very easy using a built-in app called admin which makes
+96.96, it very easy to add and modify data. So what you will need to do is you will go
+102.08, to the Asia tours agency application to that file called admin.py. That's the
+108.76," first time that we're going to interact with that file. And as you can see,"
+112.28, Django tells you to register your models here. So I'm going to do that but first I
+117.4, want to import the tour class from models.py file. So from the current directory
+123.04, .models I want to import the tour class. And the syntax for that is going to be
+129.12, admin.site.register and you can see that the register function takes the
+135.64, model or itchable admin class. That's going to be our tour class essentially to
+140.44, iterate over all of the tours that we've created inside our tour model. So
+146.0, in parentheses I'm going to just pass that tour class. The admin here this is an
+152.11999999999998, app that it's built in Django and it's used to update the existing models. And
+156.95999999999998, what I've done actually is that I've registered this tour class in the admin
+161.28, app. And this essentially is going to allow the administrator to manipulate the
+166.2, tours to add tours to add the tours. So let's see if we want to access the
+171.12," admin dashboard what we can do. Again, we're going to use the manage.py command"
+176.12, line. So I'm going to say Python manage.py create super user. That's going to
+183.52, create a super user with a login password. Your email also is going to be
+188.0, required. So if you're going to hit enter you can see here that the user name is
+192.08, asked. So I'm going to type my name. I'm here. The email address. Let's say I'm
+198.24, near at back brace.com. That's not a real email by the way. The password because
+205.0, I'm very creative. I'm going to leave it at 1 2 3. And notice here it's warning
+210.88, you that this password is too short. It must contain at least eight characters.
+214.52, It's too common and it's entirely numeric bypass password validation and
+219.72," create user anyway. Yes, because that's for demonstration purposes. So I'm"
+223.64000000000001, going to say yes. And now super user is created successfully. Now let's go ahead
+229.68," and run the server by thon manage.py run server. Okay, let's click on the link"
+239.28, the local host port 8000 and we'll have here our site. You see the local host port 8000
+246.28, in the URL here. What you want to do is you want to enter forward slash and type admin.
+252.12, Hit enter and now you're inside that form Django administration with the user name required
+257.68, and password required of course. So the username is a mere and the password 1 2 3. And now
+265.28," we are inside our Django admin dashboard. And to be honest, this is awesome. Django"
+271.2, provides us this Django administration dashboard out of the box. We can create tours. We can
+277.11999999999995, edit tours. We can create different applications. That's the name of the application here Asia
+283.03999999999996, tours agency. And below here we have our tours and we have all of our data that we have created
+289.8, in the shell. And take a look at that. You can take an action. You can delete the selected
+294.88," tours. You can select tours. If you don't want them, if you're if they're not valid anymore"
+300.8, and you can delete them. We don't want to do that. We can actually add a tour. So we can
+306.36, add the origin country destination country number of nights and price the exact same
+311.08000000000004, fields that we have designed in our tour class. Let's create an origin country. Let's
+315.72, say for instance that we want to go from South Korea. The destination country. Let's say
+323.16, China number of nights. You can see you can change that here by those errors. That's awesome.
+331.16," We can choose to be seven nights and we can have a price of $1,250. Okay. Just to be precise."
+340.44, Now you have the option to save or save and add another or save and continue editing. Now
+346.32, I'm going to hit on save and now you have a success message telling you that the tour
+350.52," with ID number four from South Korea to China. Seven nights cost $1,500 was added successfully."
+358.36, This is really awesome. You can add users if you want. So you can have that's instead of
+363.72, create super user in the command line interface here. You can do it here. You can add another
+369.56, user. Let's say for instance that we have a new user that's going to be called Nancy. Our
+375.16, assistant password also because I'm very creative. I'm going to leave it at 123. Also password
+380.76, confirmation 123 and I'm going to save. Please correct the error below. Now it's forcing me to
+387.0, have a stronger password. So I'm going to say Nancy dollar sign 123 for example. Nancy dollar sign 123.
+396.92, Let's save that again. That's similar to the user name. So you see that's a part of the
+403.16, authentication and authorization. So let's say nano 123. Nano 123. Right. Hope that will not
+415.0, have any errors. Okay. So the user Nancy was added successfully. You may edit again. You may
+420.36," edit it again below. All right. So we have a mere and we have Nancy. So if you'll click on users,"
+427.0, you can see that those are the two users available to you in the Django administration dashboard.
+433.64," If you will click on groups, we have zero groups. You can add groups by the way. So you can choose a"
+438.84000000000003, name for your group. You can change the permissions for that group. So if you will take a look to the
+444.52," available permissions, you can add change delete and view for the log entry. That's in what"
+450.68," concerns the administration. But for our Asia tours agency, we have our tour for each tour. We"
+456.84, can add a tour change delete and view. I can say my group. I'm going just to choose what they can do.
+467.88, They can actually do everything in our tours. And I'm going to save that. And now the group
+475.88," my group was added successfully. And if we'll click on Django administration again, we will be"
+481.4," redirected to the home page. And notice here, the recent actions that we have done is that we have"
+486.84000000000003, created my group group. We have created a new user called Nancy and we have created a new tour with
+493.40000000000003," ID for if you want to edit in the tours, you can click on change and you can modify whatever you want."
+499.72, You can click on that ID and you can delete it if you want. You can add tours. You can click on
+506.36," that ID and you can modify any type of field that you have. So let's say from seven, I want to"
+511.64000000000004, increase it to 10 and I want to increase the price from 1000 to 500 to 1600 50 dollars.
+521.0," Right, I can save that. And now the tour ID for from South Korea to China was changed successfully."
+529.0799999999999," So as you have seen by utilizing the Django's admin app, we can easily manage and manipulate"
+535.0799999999999," data within our database without the need for manual commands in the shell. By the way, if you"
+540.36," will click on Nancy, you can check the history. So first of all, I've added her. Then I changed"
+546.36, super user and user permissions and then I changed the super user and user permissions again.
+553.0799999999999, So I've done that very easily by just clicking on super user status here and it says here that
+560.36, this ignites that this user has all permissions without explicitly assigning them. So if you will
+565.64," click here, you don't have to take all of that, for example, and do like that. You don't have to do"
+571.48," this because that's already a super user status. Right, you can change the name. You can do, for"
+578.4399999999999," example, Nancy, you white, Nancy at back brace dot com. Again, that's not a real email address."
+586.76," And if you will save here, you'll find that the user 90 was changed successfully. And if you will"
+592.12," notice here, Nancy now has a first name, a last name, but she actually doesn't have a staff status."
+599.64, And what does this mean for us? This means that Nancy cannot access to the dashboard. She cannot
+605.0," access to the admin dashboard. So let's go ahead and change that. So if I'll click on Nancy,"
+611.8," go down here below, I will click on staff status. Take a look, it says here that this designates whether"
+618.4399999999999," the user can log into this admin site. All right, so let's go ahead and save that."
+625.64," Now, let's try to log out. Let's log in again. And let's type her username, which is Nancy,"
+633.08," and the password nano with the dollar sign 1, 2, 3 enter. And we have actually access the Django"
+641.8," admin dashboard. If you want to take the access again from Nancy, you can go to users, you can go to"
+650.2, Nancy and you can unclick that staff status. If you will save. And now you are authenticated as
+659.4000000000001," Nancy, but are not authorized to access this page. Would you like to log in in a different account?"
+665.48," You see immediately Django threw you out of the Django admin dashboard. Now, if I will access"
+671.8000000000001," with my username and password, I will enter no problems because I'm the main admin. So that's it for"
+677.96, this video. Thank you so much for watching and I will see you in the next video.

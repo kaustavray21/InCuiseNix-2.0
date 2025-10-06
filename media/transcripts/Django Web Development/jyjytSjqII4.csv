@@ -1,0 +1,276 @@
+start,text
+0.0, Hey guys and welcome back.
+4.84, In the last part we have created our database table through our models.py file.
+10.200000000000001, We have also created our form through forms.py file.
+13.68, In this part we are going to create our views and our URLs.
+18.04," Alright, let's go ahead and start by our views."
+20.88, The first thing that I want to do in my views.py file is that I want to import the product
+26.12," form and the product class from both the form file, form.py file and the models.py file."
+34.120000000000005, So I'm going to say here from the current directory forms I want to import the product
+40.08, form and also from the current directory models I want.
+46.52, I want to import the product class.
+49.760000000000005," Alright, now I need different views."
+53.24, This application is applying what we call the crud router.
+57.760000000000005, So that's going to be a crud router application.
+60.6," Crud CRUDD crud stands for create, treat, update and delete."
+65.92," So you're going to create a product, you're going to read a product or view a product,"
+71.6, you can update your product and you can delete your product.
+76.24000000000001, This is the story of any other application that you can use.
+80.16000000000001," You can, for example, in any of your social media websites you can create posts."
+85.88000000000001," For example, you can read other people's posts, you can update your posts and you can"
+90.36, delete your posts.
+91.64," So essentially we will need a create view, read view, right?"
+99.72, We will need update view and we will need also a delete view.
+107.24000000000001," Right, these are the components of our application and also I will need a home view."
+114.72, That's going to be only for the home page.
+118.76," Okay, so let's go ahead and start by the home page."
+124.08, That's the simplest one.
+125.32000000000001," So I'm going to create a function, I'm going to call it home underscore view and that's"
+130.08, taking the request of course and we're going to render the request and the template's name.
+139.08," Now I want to create here in my application's folder, I will create a folder."
+144.92000000000002," I'm going to call it templates and inside that templates folder, I will create in app."
+152.32000000000002," Okay, inside in app, I'm going to create five different HTML pages."
+157.6, The first one is home.html.
+161.16, The second one is going to be for the general layout and I'm going to explain that later.
+168.56, Also I will need product form.
+171.12, So that's very important.
+175.84, Also I will need a product confirmed delete.
+179.6," So whenever you're going to delete your product, you will have a page, you will be redirected"
+184.64, to that product confirmed delete.
+186.48, It's going to tell you are you sure you want to delete this item or not?
+190.44, So I'm going to call this one product underscore confirm underscore delete.
+196.12, That's a long name I know.
+198.64, What it makes sense for me.
+200.92," By the way, you're free to change all of the names as you want."
+205.51999999999998, Just create the names that makes sense for you.
+208.04," Also the last one that's going to be the product list, just to view all of the items."
+215.6, So these are essentially the four HTML pages that we will create together.
+220.72," All right, so let me just close them all and let's get back to our views of pi."
+227.92," So for the home view, I will need to go to the in app inside that folder, we have our home.html"
+236.72, file.
+237.72," All right, and that's essentially my home view function."
+242.04, This is going to render the home.html template.
+245.52, Now let's go ahead and tackle the next one.
+248.12, The next view is of course the create view function.
+251.4, This function simply is going to add the product.
+254.88, So I'm going to just call it product underscore create view.
+265.88, And here I want to instantiate an empty product form.
+269.08, Right?
+270.08000000000004, So we have our product form that we have imported from the forms file.
+274.76, I'm going to use that here and that's going to be a form variable.
+280.59999999999997, That's the form object instantiate it from that product form class.
+288.08," Next I want to check out if the request method is post, right?"
+291.36, So we have done that before together.
+294.28, If request.method is equal to post.
+299.71999999999997, I want to buy the form data from the request.
+304.16," So the form here is equal to the product form taking in the argument, the request dot"
+311.28000000000003, the post method.
+312.96000000000004," Now once we have this form ready, we want to check out if the form data is valid or not."
+317.64000000000004, So I'm going to check out if form dot is underscore valid.
+324.12," In this case, I want to save the new product to the database."
+328.52000000000004, So form dot save.
+331.6, And then we're going to redirect the user to the product list view.
+336.44," For that, I will need to import the redirect method."
+342.8, So let's get back.
+345.0, And here I will return redirect the product list.
+353.44," And finally here, I'm going to render with the request in the app, forward slash the"
+363.08, product underscore form dot hml.
+371.68," And let's not forget the context, of course."
+373.96," So the context, that's our dictionary."
+376.92," So that's going to be the form, which is equal to the form."
+381.6," In this return statement, simply says that if the request method is not equal to post,"
+386.8, we will redirect the user to go to the product form template with the form.
+392.36, All right.
+393.36, And this is simply our create view function.
+396.16, The next function that we want to create is the read view function.
+399.76000000000005, Now the read view is very simple.
+402.16, We're going to query all of the products from the database and render the product list
+407.0, hml template with the products.
+409.88," So to do that, I'm going to create this product underscore list underscore view function."
+417.44," That's taking, of course, the request as usual."
+422.56, And I want a variable called products.
+426.04, This product is going to take the product class.
+429.71999999999997," And we're going to say dot objects dot all, right."
+433.92, We are selecting all of the products in the database table.
+438.16, And we're going to render inside the folder in app for slash product underscore lists dot
+451.52000000000004," hml, right."
+454.0," And of course, the context here is the product."
+456.20000000000005, So the products is set to the products in the database table.
+464.24, Now this is as far as the read view.
+468.32," Now for the update view, that's going to be a little bit longer."
+472.64," So basically what we want is, first of all, we want to get the product by the product"
+478.04," ID because we want to update a certain product, right."
+482.08, So we need to target it by its unique identifier by its ID number.
+487.28000000000003," Now to do that, let me create a function."
+490.28, And I'm going to call it product underscore update underscore view.
+495.52," And that's taking the request, but also it's taking our unique identifier."
+499.79999999999995, It's taking the product ID number.
+502.59999999999997, So the product ID as second parameter.
+506.28, And now I want to take the product class.
+508.84, And I want to go to the objects.
+514.08, And I want to go to the objects here.
+517.96, And we're going to select.
+521.64, Now I want to take the product class dot all of the objects dot get.
+527.6800000000001, Now get is a special method that's going to target the product ID number.
+533.4000000000001, So the product underscore ID is set to whatever the product ID that we are looking for.
+542.52," And of course, I'm going to assign that to a variable called product."
+547.48, Now the second variable is going to be the form that's going to be the form object
+551.92, instantiated from the product form with the product instance.
+556.0799999999999, So whatever the product instance here is going to be that's going to be passed as a parameter
+561.36, in the product form class.
+563.4399999999999, And we're going to assign that to a variable called form.
+567.04, So that's the product form class.
+569.52, And we will pass here the parameter.
+572.48, We're going to set the instance to be the product itself.
+576.0," Now as always, I want to check out if the request method is equal to post."
+583.36," In this case, I want to buy the form data from the request to the existing product instance."
+590.4399999999999, So that's going to be a little bit different from what we have done here.
+595.4, When we have binded this form data from the request.
+598.8, So we're going to do that a bit different here because we're going to just to take the
+603.12, existing product instance.
+604.88," If that's true, I want to bind the form data from the request to the existing product"
+610.8399999999999, instance.
+612.3199999999999, So I'm going to take the product form and the product form is taking two different arguments.
+618.8399999999999, The first one is the post request.
+621.3599999999999, So that's the dot post.
+624.88, And the second argument is the instance which is set to the product itself.
+630.0, So that's going to be exactly like here.
+633.4399999999999, We're going to pass that as a second parameter in that product form method.
+640.12, And I'm going to save that again in the form.
+644.12, So I'm actually overriding the form if the request dot method is equal to post.
+649.16," And of course, the next thing we need to do is to check if the form data is valid."
+653.52," So if form dot is underscore valid in this case, I want to save the updated product to the"
+664.0, database.
+665.28," So form dot save exactly the same thing that we have done here guys, right?"
+672.12, But that's a bit different even for the form.
+675.16, We have binded here the form data from the request.
+678.16, And here we have binded the form data from the request to the existing product instance.
+684.1999999999999," So I added here a second parameter, which is the product instance to update our product"
+689.0, in our database table.
+691.0," So if the form is valid, we're going to save that updated product."
+694.9599999999999, And I want to redirect the user to the product list.
+698.8399999999999, So I'm going to return redirect the user to the product underscore list.
+707.52," And again, if the request dot method is not equal to post, I'm going to render the product"
+713.28, form template with the form.
+715.88, So that's basically going to be the same exact line here.
+721.84," All right guys, so we have created together for different views, the update view, the"
+729.3199999999999," read view, create view, and of course, the home view."
+734.0, The last view that's remaining is the delete view.
+737.48," Basically what we want, that's going to be very close to update because we want again"
+742.44, to target a certain product by its unique identifier or product ID.
+748.08, We want to get the product by the product ID.
+751.0," We will check if the request method is post, then we're going to delete the product from"
+754.9200000000001," the database table, then we're going to redirect the user to the product list view."
+759.72," And finally, we're going to render the product confirm the lead page, this one that we haven't"
+765.9200000000001, created yet.
+767.12," What's going to tell the user, are you sure you want to delete this product or not?"
+771.12," All right, so let's go ahead and write that."
+775.32, So I'm going to create a function.
+777.88," I'm going to call it product underscore, delete underscore view that's taking again,"
+782.8," request and the product ID, a second parameter, second input."
+788.76, So I want to get the product by the product ID.
+793.08, So I'm going to access the product class dot objects dot get.
+798.1600000000001, So that's going to be the product ID.
+801.5600000000001, And that's equal to whatever the product ID that the user is selecting.
+806.6, Next I want to check out if the request method is post.
+811.12," So if the request, I think this is cemented in your head now, guys, we have repeated this"
+817.6," many, many times."
+819.36," So if the request method is equal to post, I want to delete the product."
+824.96, So simply product dot delete.
+828.2," And yet again, we will redirect the user to the product's list."
+836.52," And then finally, I want to render this product confirm the lead template with the product."
+841.8," So we're going to render, we're going to return render the request as first parameter"
+850.0, of course.
+851.0," And in the app forward slash, let's check out product underscore confirm underscore"
+857.04, delete.
+858.04, That's the one product underscore confirm underscore delete dot HTML of course.
+865.3599999999999," And the context here is set to the product itself, the product in question, the product"
+870.92, that we want to delete.
+872.64," And that's it basically guys, we have created all of our views, our home view, our create"
+878.0799999999999," view, our read, our update and our delete view."
+882.92," Now very quickly, let's go ahead and create our URLs.py file."
+887.4," So we will have here our dispatcher or our router from Django dot URLs, I want to import"
+896.64, the path that's going to import the path function of course from the Django URLs model.
+903.0," And of course, the path is very important to route the user to whatever the route that"
+907.84, the user should be directed to.
+909.68," So from the current directory, I want to import the views."
+916.68, Then I will have the URL patterns list.
+920.3199999999999," In that list, I will have my path."
+922.64, So the first path is going to be on an empty route.
+926.24, I want to go to the views and access the home view that's going to be our home page.
+931.56, And I'm going to give it a name of home.
+937.36, Let's not forget the comma.
+939.6," Now I will need four more path, want to create the product, want to list the product, want"
+945.04, to update and want to delete.
+947.0," So one, two, three, four."
+949.96, So the first one is going to the create route.
+954.52," And for the views, I will need the product underscore create view."
+960.6800000000001, Right?
+961.6800000000001, And I'm going to give it a different name that's going to be product underscore create.
+969.2," The next route, I need to list all of the products."
+973.12, So list for slash.
+975.8, And that's going to go to the product list view.
+982.88," And I'm going to change the name of course, I'm going to give it a name of product list."
+991.24," For updating and deleting the products, it's going to be a little bit tricky."
+996.0, So take a look at that.
+997.4, We want a route called update for slash.
+1001.28, Then I will need the product ID.
+1004.04, Slide those brackets here.
+1006.64, I need this product ID.
+1011.4399999999999," But I need to identify that this product ID is going to be an integer, right?"
+1016.4399999999999," And at the end of the route, I need to enter a forward slash, right?"
+1021.8399999999999, So this is the correct path that's going to appear whenever you want to update a product
+1026.84, in your products list.
+1028.6399999999999, Then I will access a different view of course.
+1031.4," So the view here is the product update view, product update view."
+1038.5600000000002, That's the first one.
+1039.92, And I'm changing the name to product underscore update.
+1046.52, For the delete that's going to be essentially the same thing.
+1049.3600000000001," So on the lead for slash, then in those brackets, I need my product underscore ID."
+1056.4," And I'm identifying that this is an integer, right?"
+1059.72, So the product ID should be an integer here.
+1063.64, And do not forget the forward slash at the end of the route.
+1067.28," And finally, I will need to change the views that's going to be the product delete view."
+1078.64, And I will change the name to also product delete.
+1082.92," All right, guys."
+1085.44, So these are our path that will help us to be redirected from one page to the other.
+1093.96," On an empty route, we'll go to the homepage, create that's going to create our product."
+1101.04," To list, we're going to list all of the products inside our database table to update a certain"
+1106.3200000000002, product.
+1107.3200000000002, We're going to target it by its ID number.
+1109.56," And the same exact thing for the delete if we want to delete a certain product, we'll"
+1114.16, need to target it by its product ID.
+1116.96," And in case we want to delete that, we're going to be redirected to a page for the confirmation."
+1122.76, It's going simply to ask you if you're sure that you want to delete that product.
+1126.52," All right, we are almost there."
+1128.28," The last step that we need to take in our back and setup, we need to go to our project"
+1133.52, to our URL file and setup our path here.
+1138.0800000000002," So our usual path, of course, on an empty route."
+1141.24, So single quotes.
+1143.92," I want to include the URL file, which is in our application."
+1147.72, So include URLs.
+1151.88, Or in app.yourl's.
+1156.0," And for that, I will need to import include function as well."
+1160.28, Now one final step that I want to take just as a confirmation step is to make migrations
+1166.6000000000001, and apply migrations again.
+1168.96," So I'm going to do, again, Python manage.py make migrations."
+1173.28," Okay, new changes detected."
+1175.44, That's fine.
+1177.28, And I will do my great.
+1179.48," All right, fine, no migrations to apply."
+1182.8, This is simply going to tell me if there is anything that I made by error.
+1186.72, It's going to detect it.
+1188.3600000000001, And this is basically a guide for the backhand.
+1190.88, We have setup our server.
+1192.52, We have setup our database.
+1194.84, Let me actually run the server by thumb manage.py run server.
+1200.4399999999998, All right.
+1202.6399999999999," And of course, we don't have anything because the home.html is empty."
+1207.76," Now just the test, I'm going to type this is a test."
+1211.6399999999999, I'm going to save that.
+1213.6, I'm going to get back here refresh.
+1215.84, And this is a test.
+1217.32, So everything is being rendered properly.
+1219.84," So yeah, that's it guys for this part."
+1221.76," In the next part, we're going to setup our front-hand design."
+1225.08, So thank you so much for watching and I will see you shortly in the next part.

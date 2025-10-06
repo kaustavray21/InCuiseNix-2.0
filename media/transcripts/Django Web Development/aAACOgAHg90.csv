@@ -1,0 +1,177 @@
+start,text
+0.0, Hello there my friends and welcome back.
+3.18, In the last video we've been introduced to Django and what is the MVT architecture?
+8.64, And as Django is Python web framework you will need Python installed on your system.
+13.88, And in this video series I'm going to be using Microsoft Windows.
+17.740000000000002, So installing Python is pretty straightforward.
+20.6, You will need to go to Python.org website.
+23.32, You will need to go to the download section and you can see download for Windows we have
+27.32, Python 3.12.3.
+29.92, Just the latest Python version.
+32.04," So you will click on that, it's downloaded, you will install it very easily, it's pretty"
+36.52, straightforward.
+38.0," And in order to verify that Python is successfully installed on your machine, open your terminal"
+43.480000000000004," and type Python, hyphen hyphen version."
+47.32000000000001, Just the verification step that Python is installed.
+50.64, And within Python there is the Python package manager that it's already installed with Python.
+56.36, So pip helps you to install different packages and libraries that can help you building
+61.2, your applications.
+62.519999999999996, So don't worry if you've installed Python that means that you already have pip.
+66.12," And to check out the version of pip you can type pip-dash version, it enter."
+71.92, And that's the pip version that we have.
+74.08, pip24.0 that comes with Python 3.10.
+78.03999999999999," You can also do pip help, pip hyphen hyphen help."
+83.0, So that's going to give you help flags if you are going to use pip to install third party
+87.6, libraries as we said.
+89.4, Some of the most important pip commands is pip install that's very important we're going
+93.56, to install different packages using that command.
+97.56," Also you can download packages via pip download, you can uninstall, you can do freeze."
+102.96000000000001, That's going simply to output the installed packages that you already have installed on
+106.88, your machine.
+108.16, And you can see that there are a lot of commands that you can use indeed with pip.
+112.68, Now Django you can download the latest release which is 5.0.4.
+118.52000000000001, Simply by going to Djangoproject.com you will click on download the latest release.
+125.04, And that's basically how to get the latest release official version.
+129.04000000000002, If you're using Linux or macOS you can use this command.
+132.4, However if you're using Windows you can use this command by or Python hyphen M and the
+137.96, M flag in Python is used to run a module as a script.
+142.04, So in this command Python hyphen M we tell Python basically to run this given module as
+147.72, the main program.
+148.92, pip install Django and then you define the Django's version that you want to install.
+153.23999999999998, This explicitly tells Python I want to grab the specific version of Django and install
+158.12, it on my machine.
+159.51999999999998," Alright then so what I'm going to do is I'm going to copy this, doing control, see to copy"
+166.04, and I'm inside my PowerShell terminal here.
+169.0, Then I will hit control V to paste that.
+170.92, I already have it installed so most probably we're going to have the message that requirement
+175.6, already satisfied.
+177.08, Alright so to verify that Django is already installed on your computer you can go ahead
+181.6, and do Django hyphen admin dash dash version.
+186.4, And here you can see that we have indeed the latest version 5.0.4.
+191.92000000000002, Alright guys so I'm inside an empty folder here and as we've installed already Python
+196.84, and Django on our local machine this might not be the best practice.
+201.32, The best practice is you create a virtual environment where you can install your libraries
+206.36, only inside your project.
+208.32, All of the dependencies inside your project are going to be isolated from your global file
+212.92000000000002, system and that's the best practice you want to follow every time you create a Django
+217.24, project.
+218.24, So I'm inside that empty folder I'm going to right click show more options open with Visual
+224.6, Studio Code.
+225.92, Now Visual Studio Code is the best option for beginners and even advanced users it's lightweight
+232.23999999999998, versatile and you know has a lot of extensions that you can use in your development.
+237.67999999999998, So as you can see I'm inside the Django course directory and I want to open the integrated
+242.6, terminal in VS Code.
+244.64, One way to do that is by going to terminal new terminal.
+248.95999999999998, So you have here your integrated terminal open for you.
+252.36, However the other way that I prefer personally is by hitting control till day.
+258.16, It's going to open the integrated terminal for you immediately.
+261.40000000000003, The shortcuts are really handy especially when you work in big projects you don't want
+265.6, to waste time clicking different buttons and opening different menus and eventually you're
+269.44, going to have the same result.
+271.24, Alright then so I want to create a virtual environment inside that Django course project.
+276.68, So there are actually different ways the way that I really prefer is through ppnv.
+282.16, Now you can install ppnv simply by typing pip install ppnv.
+288.68, Of course I have it so the requirement already is satisfied.
+292.44, Now once you have that installed you can simply activate the virtual environment by typing
+297.28000000000003, ppnv shell.
+307.64000000000004, Fantastic now we have the virtual environment activated inside our Django course project
+312.48, we can now install Django using the same keyword ppnv.
+316.68, So the way to do that simply is by typing ppnv install Django.
+329.36, That's awesome.
+330.2, Now we can check out if Django has successfully been installed inside our virtual environment
+335.48, and the way to do that is by typing pip freeze that's going to list all of the modules
+339.52, and frameworks installed virtually inside our project.
+347.92, And indeed we have Django version 5.0.4 and other packages as well needed with Django
+353.6, like SQL parse or typing extensions.
+357.24, Now we can create our first project by typing Django hyphen admin start project and I'm
+363.24, going to give the name of the project which is going to be my project simply.
+367.92, So once I will hit enter notice on the left side there is a project initiated called
+373.0, my project that Django has created for me.
+376.04, Alright so let's take a look what we have.
+378.16, The second my project folder has different files in it.py asgi settings URLs and with
+386.04, g plus the manage.py which is in the root folder.
+390.28000000000003, Let's start by the first file in it.py.
+392.88, So for that I'm going to just minimize this a little bit.
+396.6, This file is present in each Python package.
+399.4, It can be empty as you can see but its presence indicates that the directory should be treated
+404.44, as a Python package.
+406.24, The next file which is asgi.py asgi stands for synchronous server gateway interface.
+412.28," So this is a standard interface between the synchronous Python web servers, frameworks"
+417.92, and applications.
+419.28, It's like a bridge between Django and asynchronous features like web sockets and long lived
+424.64, connections.
+426.03999999999996, Simply put it what allows Django to handle real time interactions like for instance chat
+431.64, applications or live updates and this is done by connecting with asynchronous Python web
+436.47999999999996, servers and frameworks.
+438.2, So you can think of it as the technology that enables Django to stay responsive and handle
+444.32, multiple requests in the same time.
+447.03999999999996, Next we have the settings.py.
+448.76, This file is very important.
+450.58, It contains configuration settings for your Django project.
+454.0, It includes database settings.
+456.44, It has your secret key.
+457.92, You don't want to share that with anyone.
+459.84, The debug here is set to true.
+461.64, This is for development.
+463.32, The installed application so when you will install different applications you need to add
+467.68, these applications inside that installed apps list.
+471.68, You have middleware.
+472.68, This is basically for the incoming HTTP requests and the outgoing responses.
+478.92, The templates you have the databases here which is SQL 3 by default but you can change
+485.36, the engine if you want.
+486.52, You can change that to SQL alchemy to MongoDB if you prefer no SQL database management systems.
+492.88, You can really play around here.
+494.64, So you can see that Django is really flexible.
+496.8, That's why a lot of web developers love working with Django.
+500.56," The static URL, this is very important for your static assets from images."
+505.48, Also if you want to render CSS and embed JavaScript in your code.
+510.32, So all in all settings.py is customizable.
+513.28, You can change different aspects of your project by modifying the settings.py.
+517.92, The next file is URL.py and this in Django serves as a URL dispatcher.
+523.76, Basically it's going to map the URLs to view functions or classes.
+528.56," If you recall from the previous lesson when we discussed the MVT architecture, well the"
+533.1199999999999," request goes from the user to the views, but before that it passes on URL dispatcher."
+539.4799999999999, And that's exactly the URL.py function.
+542.4, You can see here for example in the URL patterns list that we defined the URL path for our
+548.0799999999999, project.
+549.0799999999999, We specify how incoming requests should be routed to different parts of your application.
+554.6," And later when we'll create our project, we'll have here different path depending on"
+559.12, different routes that our users might want to visit.
+562.72, And the last file in my project is Whiskey.
+565.76, Whiskey is a standard interface between the web servers and Python web applications or frameworks.
+571.84, The key point here to keep in mind is that the Whiskey.py file serves as the entry point
+577.0400000000001, for Whiskey applications.
+579.0, And finally manage.py.
+581.2, And the Py script is very important.
+583.48, This is a command line utility that comes with every Django project.
+587.6400000000001," So for instance when we're going to create our first application, we will need manage.py"
+592.36, to help us do so.
+593.88, Also manage.py provides various commands for performing comment tasks such as creating
+598.5600000000001," database tables, running development servers, creating super users, as we're going to see"
+604.12, when we'll create our project.
+606.44, It helps also running tests.
+608.2, So it acts as a wrapper around Django's administrative tasks.
+612.4000000000001," So to show you that, let's actually create an application within our project."
+617.48, So the idea of Django is creating different applications within a project.
+622.24," And this is fantastic because once your project starts to grow bigger and bigger, you would"
+626.84, want to divide your main project into smaller applications.
+630.72, So to create an application simply you would need to change directory to my project.
+637.56, So let me minimize a little bit to list the components of that folder.
+642.3599999999999, You can see that we have indeed my project and manage.py.
+645.88, Now to create an application simply you would need to type this command Python manage.py
+652.16," follow by command called startapp and start app takes one argument or one input, which"
+658.28, is the name of your application.
+660.4, For simplicity sake I'm going to call it my app.
+664.3199999999999, Hit enter.
+666.0, And now you can see immediately that we have my app folder that has been created inside
+670.92, my project's folder.
+672.92, Now let's go ahead and run our server.
+675.16, To do that again I'm going to utilize the manage.py command line tool.
+679.72, So we'll say Python manage.py a command called run server.
+687.36, And you can see this message that has appeared telling us that starting development server
+691.92, add HTTP 127 001 on port 8000 127.0.0.1 that's the local host that's your local machine.
+703.4, And it's running on port 8000.
+705.7199999999999, So if simply you will click on that let's go ahead to our web browser and check it out.
+712.36, And there we go this is the welcome page of Django running on local host port 8000.
+719.72, It gives you a nice congratulations message telling you that the install worked successfully.
+725.4, So in the next video we're going to dive deeper into creating our first application.

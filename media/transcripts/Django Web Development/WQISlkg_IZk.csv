@@ -1,0 +1,345 @@
+start,text
+0.0, Hello and welcome back. In this video we are going to talk about Django Forms. Django Forms
+6.0, simplify collecting and validating user data through an easy to use framework. They automatically
+12.5," generate HTML forms and handle the conversion and validation of data. For example, forms"
+18.3," are very useful for tasks like collecting data for models, user input validation, or filtering"
+24.3," content. And some of the key features of Django Forms is validation. So, forms automatically"
+30.580000000000002, validate user input based on specified rules and data types. Forms handles CSRF tokens or
+38.620000000000005, cross-site request forgery. This is to prevent malicious submissions of forms. Also reuse.
+46.38, So you can define a form once and reuse it across reviews. And this in fact reduces redundant
+52.98," code. And finally customization. To personalize your form, you can create custom fields, widgets,"
+59.98, and error messages. This is Django official documentation for working with forms. And I highly
+66.74, recommend that you read this web page. It's very important. It's going to give you a lot of
+72.34, information on how to work with Django Forms. But I'm going to tell you everything about this
+78.82, web page in this video. So let's start from the top. Forms are very essential for any
+84.58, interactive web application as we mentioned. And in fact Django is generous enough to provide
+89.97999999999999, us with robust tools and libraries to create handle and process forms. And if you'll scroll
+95.5," down here below, you will find that the page is talking about HTML forms. So you need to know"
+102.34, three things in HTML forms. The first thing is the structure. So HTML forms are a collection of
+110.26, elements within form tags as you can see here. These tags enable the users to input data and send
+117.30000000000001, it to the server. The second thing you need to be aware of is elements. Basic elements include text
+123.78," inputs and checkboxes and more complex interactions. In fact, like date pickers, we can use JavaScript"
+130.58, and CSS. And last but not least attributes. So forms basically must specify two things. A target URL
+140.18," which is the action attribute and also the HTTP method. Whatever the method is, get post, it doesn't"
+148.18, matter. But the most important thing is you must have those two things. The target URL and your
+155.46," HTTP method. When it comes to Django's role in forms, you need to know that Django simplifies"
+161.3," form handling by three things. The first thing is data preparation, which is done by restructuring"
+167.46," data for rendering, also creating HTML forms. And this involves generating HTML for forms. And"
+174.82, finally processing data. And this includes handling and validating the submitted data. I know all of
+180.9," that sounds theoretical to you, but it's very important to understand these principles before we"
+185.94," go ahead and start coding our Django form. Django automates much of the form handling process,"
+192.34," which makes it very easier and more secure than writing custom code. And to show you all of that,"
+198.26, let's go ahead and start coding a simple Django form to understand and appreciate how easy it is
+204.02," to create forms in Django. All right guys, so I'm inside the folder called lesson9 Django forms."
+210.02," And as always, the first thing we need to do in any Django application we have is to register"
+215.86, this application inside our installed app list. So this is the forms project and our application is
+221.62, called form underscore app. So I'm going to just type this inside single quotes form underscore app.
+230.10000000000002," Then I will go to my application and I will create URLs.py file, hit enter. Then I will go back to"
+239.3, the URLs.py which is in our project. And I'm going to add a path here. And this path is going to be
+246.98000000000002," on an empty route, which is empty strings. Be careful. Do not do like that. That's going to be an error."
+253.62," So you need to leave empty, empty strings like that. Okay. Also, I want to redirect that to include"
+261.62," inside my application inside my URLs.py file. All right. So that's going to be the application,"
+269.70000000000005, which is form underscore app dot URLs. All right. And also I will need to add include as always.
+278.02000000000004, This is awesome. Now let's go ahead to our form underscore application and create a file called
+283.54, forms dot pie. This is the main file where we're going to create our form. So the first thing you
+290.66, need to do in your forms dot pie file is to import the forms module from Django to access form
+297.3," classes and fields. And as I told you, Django is generous enough to give us those out of the box"
+302.98, tools and utilities in order to develop our application rapidly. I'm going to import from Django.
+309.3, I will import the forms module or library. So you can use the word module and library interchangeably
+315.85999999999996, that doesn't matter. So this forms module here has a lot of classes and fields that we're going
+320.9," to utilize later. Next, I want to create a class. This class I'm going to call it contact form."
+327.53999999999996," So this is to define this contact form class, which is going to inherit from forms dot form."
+333.85999999999996, And forms dot form is the base class for all of the regular forms in Django.
+339.14," Next, I want to define a name field. And the name field is going to have a type of character field."
+345.22," So I'm going to use forms again. I'm going to have character field. And the character field,"
+352.5," I'm going to set the maximum length for it as 100 characters, which simply means that this maximum"
+358.42, length is going to ensure that the input cannot exceed 100 characters. You can define the maximum length
+365.06," as you see fit. Also, I want to define an email field. And this email field is going to have a type"
+372.02000000000004," of email field, which is simply going to automatically validate that the input is a valid email address"
+378.58000000000004," format. And as you may have guessed it, this is to collect the user's email. So for instance,"
+383.7," if you will miss the ad sign, that's going to give you an error and tells you that this is not"
+388.42," a valid email address. Next, I want to define a message field. And the message field is going to"
+395.38," have a type of character field. So forms dot character field. But this time, I will have a widget."
+402.9, And that's going to be equal to forms dot text area. And this is simply will allow the users to
+408.65999999999997, write a longer message in a multi-line text box. This is as far as the fields are concerned.
+414.82," Now, I want to define a method that's going to handle the sending of an email once the form is"
+420.34," validated. So this method, I'm going to call it send email, which takes self, of course,"
+427.06," and self here pertains to the self object, the self message that we're going to send."
+432.58," And in practice, of course, you would implement the actual email send the logic here."
+437.94, So I'm going simply to print and I'm going to format this in string format. And I will say
+445.7, something like sending email from whatever self dot cleaned data. And that's going to have here
+454.26," sub email, then we'll type with message and self here dot clean data again sub message. And"
+463.86," that's basically it. This is our message that we want to print. And the clean data in both cases,"
+470.74, whether the email or the message means that this data contains all validated input data from
+476.42, the form. This print statement again is going to simulate the email being sent. Now we have our
+482.26, form out of the way. Let's go ahead and start writing our URLs.py file. So naturally in your
+488.98," application, we don't have a URLs.py by default. So every time we need to create it manually."
+495.94, And the first thing that I want to do inside URLs.py is to just import the path function to
+502.98," define your L patterns. So I'm going to say from Django dot URLs, I want to import the path."
+511.7," Also, I want to import the views. We haven't created the views yet. So maybe it's a good idea to"
+517.3, go and start by creating the views first. So you see this first code line tells you from Django.chord
+524.18, cuts import render. And the whole code line says that I want to import the required utilities from
+530.42," Django shortcut module. For now, we have render, but I'm going to add another method that I'm going to"
+535.4599999999999," talk about a little bit later. But simply the render method, as you have seen with me, the last"
+540.02," lesson is to return HTML responses by rendering templates. All right, we're going to leave that for"
+546.66," now. Also, I want to import from the current directory, the forms. I want to import the contact"
+552.5, form class. And I think I have called this forms.py. This is not accurate because that's form only.
+561.3, Django has identified that this contact form is indeed a class that's included in form.py.
+568.5," All right, let's shut the explorer one more time and let's move on. The next thing that I want to do"
+574.18, is I want to create some functions. The first page is going to be a homepage. This homepage is
+580.5," going to have two elements, a logo and a button. When you will click the button, you will enter this"
+586.42," form. You will enter the form. You will fill the form. You will hit submit. And again, you will be"
+591.54," redirected to a third page. So basically, we'll have three pages, a homepage, a contact page,"
+597.7, and success page. So we're going to be building three different HTML files. This was a quick walkthrough
+605.22," on how we're going to structure our form. But for now, I want to create this function that's going"
+611.38," to be called home underscore view. And naturally, that's going to take the HTTP request. And the"
+616.98," request is going to be naturally a get request. Once again, if you're not going to define your"
+622.02," request, by default, the HTTP request is going to be get. And that's not only in Django, but in any"
+628.9," other framework or programming language in general. So what I want to do is to render. And by now,"
+635.9399999999999," I hope that you remember that the render method takes two parameters, the request and the HTML template."
+642.5799999999999, So the request is going to be whatever the request is. And the template name or the HTML template
+649.22," is going to be, well, we're going to create a folder here. And the last time when we have rendered"
+655.94," different static assets also HTML for the template, we're going to create just a folder called"
+660.98, template and inside template will have form app. And inside form app will have different HTML files.
+667.5400000000001," So that's going to be inside our form app. So form underscore app. And the file, I'm going to call it"
+675.22, home.html or you can call it index.html. I'm trying to do things a little bit differently each
+682.02, lesson to show you that a lot of things are possible and to not only stick with one thing.
+687.86," All right, so this is the home view. So let me just maybe add a quick comment here. This is the"
+695.6999999999999, home page view function. The next function that I want to create is the contact view. That's going
+704.8199999999999, to handle the contact form essentially. So that's very important indeed. I'm going to call this
+709.7800000000001," function contact underscore view. And again, it's going to take a request. And here the first thing"
+716.4200000000001, that I want to do in that function is to check out if the request method is posed in order to
+722.4200000000001," identify the form submissions. So I'm going to say if request dot method is equal to post. In this case,"
+731.62, I'm going to instantiate the form with the submitted post data. So that's going to take the
+738.26, contact form class. And here is the request dot post. And I'm going to save that in a variable
+746.02," called form. So that's going to be our form. Again, I'm checking if the request method is"
+752.9," post method. And if that's the case, I'm creating a form object by instant shading the contact"
+759.14," form class with the submitted post data. And inside that control flow, I want again to validate the"
+766.74, form data. So I'm going to check if form dot is valid. And this is a built in method that
+774.9, returns true if the form has no errors or false otherwise. So that's just going to check out
+781.38, if the data is valid. We're going to call the custom send email method defined in our form that
+787.94, we have created. That's going to simulate sending data. We're going actually to take the form
+793.54," and we're going to invoke the send email method. And if all that is good, we're going to redirect"
+799.86," the user to the success page upon successful form submission. And for that, I will need to import"
+806.0999999999999, a complimentary method called redirect from Django.shortcuts. You can see here the description of
+813.54, the redirect function. This is simply a built in method again that redirects the user to any page
+820.1," that you want. So again, if the form is valid, the message is submitted and the email is sent,"
+825.46, we're going to redirect the user to a success page. So I'm using the redirect method. And that's
+832.98," essentially going to be our contact success page. We haven't created any HTML pages yet. I know,"
+839.46," but that's essentially going to be called contact success. Otherwise, or in other words, if the"
+846.26," request method is not posed, we're going to create an empty form instance to display. So else,"
+853.22, I'm going to create an empty instance or an empty object from that contact form class.
+859.54," And again, I'm going to save that in a variable called form or assign that in a variable called"
+866.26," form. And finally here, I want to render the contact form template with the form instance."
+872.26, So I'm going to render again the request. And the second parameter is the template's name.
+880.18, And that's going to be a page called contact.html. That's going to be the contact form. So we're going
+888.02," to let's call form app, okay, form underscore app. That's going to be the folder inside the"
+894.3399999999999," templates folder that we're going to create in a minute. And inside it, I want to create contact.html."
+900.5," And don't forget to create a context. So the context, of course, is in a form of dictionary. So the"
+906.5799999999999, context here that we have studied in earlier lessons is going to be a dictionary in a form of key
+913.3," value pairs. So the form is going to be equal to the form, which means that this string called form"
+921.62, is going to be equal to whatever the form that we're going to have based on the form data validation.
+928.26, Do not just forget to pass the context here in the render method. Let me just add a quick comment
+933.7, here. So I'm going to see here that this is to define the contact underscore view. To
+944.58, handle the contact form. The last thing that I want to do here is I want to define the contact
+952.1," success view. We said that we have three pages, the home page, the contact form page, and the"
+958.1800000000001, third and last one is the success page. So let me add this comment here to define the contact success
+968.66, view function. To handle the success page. And this is going to be a very simple function. So
+977.38," I'm going to call this function contact success view. Again, it's taking request."
+987.9399999999999, And here I want to render the contact success template. I'm going to show just the confirmation
+993.14, message that everything is okay. So we're going to render again request. I know
+1000.8199999999999, you know this by heart now. The second parameter is the template name or the HTML page.
+1008.1, And that's going to be inside the form underscore app for over slash. And I'm going to call it contact success.
+1020.58, All right. This is the third and last function. So one function to handle the contact success view.
+1027.22, The other one for the contact form itself. And the first one is just a simple home view.
+1033.5400000000002, Now let's go to our URLs.py file that we have created. And let's actually import from the current
+1040.5, directory. The views. So I want naturally to define the URL patterns list. And the first path is
+1049.46," going to be the root URL, which is going to map to the home view. That's going to be called when"
+1055.78," the root pages accessed, of course. So that's the path with the empty route. I want views.home"
+1065.06, underscore view to be called. And I will give it a name of home just home. That's the first path.
+1072.5, So the second path is going to be contact. And we're going to just invoke the contact view function.
+1082.18, And I'm going to give it a name of contact. And the last and final route is going to be contact
+1089.0600000000002, for or slash success. And also I'm going to give it a name of what we have just given here. Hold on.
+1099.7, Contact success. So let me just copy this. And I'm going to give it that name.
+1106.1000000000001, Right? Contact dash success. This name by the way is very helpful in things like we have done
+1112.5800000000002," here. So to redirect the user instead of writing the full path, you can do like this. Return"
+1120.18, redirect and the name contact success. And the redirect method is going to identify that based
+1127.46, on the name given here in that path that's going to go to the contact for or slash success.
+1133.46, Right. Let's go now and create our folders. So I want to create a folder. I'm going to call it
+1140.74, templates inside templates. I want to create a different one called form underscore app. And inside
+1147.38," form underscore app, I will create three different HTML pages. So the first one is contact underscore"
+1155.7, success.html contact.html of course. And the main page or the homepage is home.html.
+1167.38," Moreover, I want to create a folder called static. For our static assets, you can put it in the"
+1175.46," application or in form project itself. Doesn't matter. Django, as I told you the last time,"
+1181.38," is smart enough to identify where is the static folder. So if you want, you can put your static"
+1187.7," folder on the same level with manage.py file, your application and project folders. All right. So"
+1194.74," let's go ahead and create here styles. Also, I want to create images. And we won't need any JavaScript."
+1206.5, And I've created a logo. I want to put it here in images. That's the logo that I created.
+1212.3400000000001," Could be your personal logo or any other logo. The next thing inside styles, I want to create"
+1220.5," styles.ss. And as we're going to render static assets, do not forget to go to settings.py,"
+1227.54," we will need to go to the bottom of the file. But first, let's go ahead and just import the"
+1234.5, operating system module because we're going to need it in order to join the base there with our
+1240.5, static folder. And this configuration step is very important. We have discussed it in the last
+1245.86, video. So I'm going to create static files underscore doors. And this is of course a tuple. And here
+1255.62, I'm going to take the operating system dot path dot join. And here I want the base there. And if
+1263.46," you remember the last time, I told you to not forget the comma. The comma is very important. And we"
+1269.6200000000001, have gotten error last time. So make sure to have the comma right. Now let's go ahead and write some
+1275.38," HTML. So the first thing as we have learned the last time, we need to start by load static."
+1284.58, And now we can create our HTML file meta character set UTF8 that's including the basic metadata for
+1292.1," the page. You can delete that if you want. Doesn't matter. Also, you can delete this. It doesn't matter"
+1298.6599999999999," really. In the title, I want to call this home. And also I want to link the styles dot CSS. So what I'm"
+1308.02, going to do is simply I'm going to write link in the horizontal reference. I'm going to type curly
+1314.02, braces ampersand. And that's going to be static. And I want the path. The path here is going to be
+1321.78," inside styles folder and the files called styles dot CSS. Right. In the body, I want a simple div"
+1330.26, with a class. I'm going to call it centered content. That's going to be for the styling. And I want
+1339.22, the image. The source here is going to be again curly braces ampersand static. And the path is
+1346.74," going to be inside the images folder. The file is called logo. If I'm not mistaken, images, let's"
+1353.6200000000001," take a look. Yep. Logo dot png. The next thing, of course, is the form. And the form here is going"
+1363.46, to have an action. That action again is going to be inside curly braces. And inside
+1371.6200000000001, it. And percent like this. That's going to be the URL. And the URL here is the contact. And also
+1382.18, the method of that form is going to be a get method. Alright. So let's break this down a little
+1389.14, bit. So we have the action attribute. This action attribute right here is very important
+1395.38, because it's going to use the contact name the URL pattern. So from within the form when you will
+1401.0600000000002," click on the button, this URL contact is going to be triggered. This contact page that we haven't"
+1407.8600000000001, written yet. That's going to be essentially your Django form. This is the comment in Django
+1415.5400000000002, template language. It starts with comment in curly braces ampersand and ends with end comment
+1421.3," with curly braces ampersand. So yeah, that's very important guys to memorize whenever you will"
+1428.58, create the form. You will need to have an action with the URL that's going to be working with the
+1433.94," get method essentially to submit the form via this URL query string. And of course, do not forget"
+1441.1399999999999," inside the form. We'll need to have a button. I'm going to give it a class of btn. Also, I want to"
+1447.3799999999999, give it a type of submit and the button. Let's say click to enter form. This is our simple HTML page.
+1459.3, This is our basic homepage. Right. With the button with the logo first button and this button is
+1466.1, going to take you to the contact URL. So that's it guys. This is our homepage with a simple
+1472.98," div with centered content class with a simple logo, a form that has a button when clicked,"
+1479.7, it's going to submit and it's going to redirect you to the contact URL.
+1484.42," All right. By the way, let's go ahead and run our server. Let's do python manage.py"
+1492.18," run server. And we have our logo, our big logo and of course, click to enter form. So that's"
+1500.82, all what we have so far. I'm going to just split the page. This site is going to be the browser
+1506.34, and this site is going to be our code. All right. Let's move on. Let's go now and create our contact.html
+1513.3," file. The form itself is going to be very simple. Again, I'm just going to delete that. I'm going"
+1520.58," to add of course, load static. So we're going to red that in curly braces and percent with spaces,"
+1527.46, of course. And we'll have this general HTML boilerplate. And here I'm going to
+1535.14," call this form contact us. And again, linking the styles.cs. So link in the edge ref. I'm having"
+1546.1000000000001, those curly braces. I hope this is clear for you guys. I mean the image. So you can do like that.
+1553.94," So inside curly braces, double n percent. And here is static. And we'll have here styles"
+1561.54," for slash styles.cs. And that's about right. So for the body, inside the body here, I will have"
+1570.34," h1 tag. And we'll say here, contact us. All right. And if we'll click to click to enter form,"
+1578.34, and there we go. We have our contact us that we have just written. So let's change that to
+1583.4599999999998," contact. Let's refresh. And there we go. The next thing I want to create, of course, is our form."
+1591.22, So the form here is going to have post method and not a get method like in the main homepage.
+1598.26," This one, because in the main homepage, when you click, you want to get the URL, which is your"
+1604.9," contact form that we're writing. And this form, if you remember, that we have created"
+1609.7800000000002," informed up by that has different fields. It has a name, it has an email and message."
+1616.3400000000001, All right. So that's essentially that you want to see on the page. So let's get back to contact
+1622.5," form. And let's move on. So this form is going to be form tag, of course. And it doesn't have an"
+1628.82," action. Instead, it has a method. And the method, of course, is a post method, because we're submitting"
+1635.46," form. So inside here, we'll have something that's entirely new. That's called the CSRF token,"
+1642.1799999999998, or cross site request forgery. These are some malicious attacks that can eventually happen by
+1648.1," hackers. So for Django to protect us from those kind of malicious attack, we will have a CSRF token."
+1656.42," And that's going to tell Django, Hey, I want you to prevent the cross site request forgery"
+1661.38, attacks by embedding this unique token. The next thing is I want to render the form fields.
+1669.78," How to render the form fields? Well, in form, there is a method called as underscore p. This is going"
+1677.0600000000002, to render the form fields using this as underscore p method. This is a method that simply is going to
+1684.02," wrap each field in a paragraph tax. It's going to provide a simple structure. Next, I want to create"
+1689.62," a button. This button is going to have a type of submit. And simply here, you can say submit."
+1697.46," And of course, the button is going to be used for sending the form data. And that's it guys. This"
+1702.98, is our simple form. Hit control as let's go and hit click to enter form. And there we go. Take a
+1709.94, look at that. This is our form that we've just created using this form.as underscore p. That's
+1716.8200000000002," why I told you it's very, very handy. And we have already created our contact form class in form.py."
+1722.74, And you see that Django is really structuring everything very easily for you to just concentrate
+1728.42, on the most important part and leave the connection between pages and forms to Django. Now let me show
+1735.3799999999999," you a full type in name. Let's say John. Let's say email, for example, J. Let's say for instance,"
+1742.58," J, whatever. I know that's not a correct email. And I will say this is a message. And when I will"
+1750.74," click on submit, take a look here. This is form validation. It tells me that please include an"
+1758.9, app in the email address. This J as whatever that I wrote is missing an ad sign. So let's correct
+1766.1000000000001, that. Let's say John at backbrace.com. Submit. And it has redirected me to this page because we
+1776.42, haven't created the success page yet. So let's go ahead and work on that the contact success page.
+1782.42," Again, I will type load static. And I need a boilerplate. I don't need those lines. Here I will"
+1791.8600000000001," say success page. Let's just make this a little bit smaller. And again, I want link and inside"
+1801.94," the horizontal reference again, curly braces, M% static. And here inside the styles folder,"
+1810.9, I want to go to styles file for the body. I want just the h1 tag. Say here success. Then we'll have
+1819.14, a paragraph. Say your contact message. Has been successfully sent. We will be in touch soon. Just
+1831.0600000000002, to give it a formal professional look. And the last thing that I want to do is I want just a link
+1836.26, and anchor to take me from the success page to home page again to this one. So that's going to be
+1843.94," inside the horizontal reference again curly braces, M% URL. Don't forget about the spaces."
+1853.06, And that's going to be home. Let me just double check. We have defined that in our URLs as
+1860.42, correct. So let's get back to our contact success. And let's right here back to home page.
+1869.7, All right. So let's go ahead. Let's just refresh. Let's click on click to enter form. All right.
+1876.1000000000001, Awesome. And let's do we're going to change the styling quickly to give it a better look.
+1882.98," So contact us name is Robert email Robert at mail dot com. And Django is great. For example,"
+1895.06, that's the message. Now let's submit. And we are back. There is something not right here because
+1902.74," we should see the success page. However, the route is correct. Okay. So that's good. Let's debug this."
+1911.8600000000001," The route is correct. So contact success, but the actual page is not being well rendered."
+1918.42, So let's actually take a look. Let's see in the URLs. All right. So let's check out. So this is Home
+1927.46, view. That's okay. Contact view. That's also okay. And now I see the error. The contact slash success
+1936.26, shouldn't redirect us to home underscore view. This is not the correct method. The correct method
+1942.02, for the success page. Let's check out views.py is contact success view. Let's copy that. Let's get back
+1949.06, to your else. And let's substitute the home view with contact success view. And now everything should
+1956.26, work as expected. Let's go ahead and retry. Let's say Nancy this time. Nancy at back dot com. Django is
+1966.5, great. And let's submit. And there we go. Now we have our success page. Your contact message has
+1975.94, been successfully sent. We'll be in touch soon. Back to home page. Let's click on that. And we are
+1981.54, redirected to our home page. That was a little bit of debugging. It's very important to know how to
+1989.06, spot the errors and debug your code. It's very important to know the structure of your code
+1994.8999999999999," in order to be able to debug your code whenever something crashes. All right, guys. So the basic"
+2000.98, functionality is working for our form. All right. Let's go ahead and work on the CSS. And that's
+2006.8999999999999, going to be the last thing that we're going to do today. All right. So let's go for the body first.
+2012.6599999999999," So font family. I'm going to make it aerial. Also, let's give it background color. F9 F9 F9."
+2022.26," This ivory color. Also the font color triple three. Also, I want to give it the margin of zero."
+2031.22," Also, the padding we're going to give it 20 pixels. And the overflow, let's make it hidden"
+2038.6599999999999," for the scrolling. Also, let's target the button. Also, let's change the color. Let's make"
+2044.8999999999999," it triple F, which is very close to the background color. And for the padding, I'm going to give it"
+2050.58," 10 pixels top and bottom and 20 pixels right and left. For the border, we're going to make it"
+2057.38," none. Let's give it some radius. Some roundness to the edges. Border radius, let's give it just"
+2063.46," five pixels. And for the cursor, want to change it to be pointer. Right. Let's just refresh."
+2070.5, Okay. Let's awesome. Okay. And the button here also has been changed. And the background here
+2075.14, has been changed. All right. Let's move on. Let's do some hovering. Let's do button with the hover.
+2080.74, I'm going to give it background color with a different degree of blue. 357 AB8.
+2091.54, All right. Let's finish with the homepage first. So I'm going to start by
+2098.42, the homepage to be very specific with the homepage styling. So I want that was called the
+2107.14," centered content, I believe. Let's check out centered content. Yep. Let's try it. Let's just"
+2114.18," copy that. That's the centered content class. And we will have here height. And the height,"
+2122.5, I'm going to give it 100 VH. All right. The display is going to be flexed. Flex direction is column.
+2132.1, Also justify content to the center and align items also to the center. Let's just do like that.
+2143.46, And awesome. Everything is being centered and in the middle of the page. Let's work on the
+2148.5, bottom. I want just a couple of things. I want to increase the font size to be 16 pixels. And I want
+2156.26," to remove the outline. As far as the logo is concerned, let's check out for our HTML page."
+2165.0600000000004," Here for the logo, I haven't actually created a class. So let's actually create a class here."
+2174.34, So that's going to be a class. And let's give it a name of just logo.
+2180.82, All right. So I want for the logo class to have a width of 13%. Let's see how it looks like.
+2189.86, Okay. All right. We're going to change that a little bit. So the max width here is 600 pixels.
+2199.94," Also the display is going to be block. And finally, I want the margin. Zero auto,"
+2210.42," 20 pixels. And I think that looks good. Now for the form styling, the main form here will have"
+2219.14," maximum width of 400 pixels. Next, I want margin zero auto. Let's have border one pixel, solid triple"
+2232.1, F. Just refresh. Okay. That's better. Also the border radius. Let's give it some roundness.
+2241.06," Again, border radius. And let's make it five pixels. Maybe increase it a little bit."
+2247.94," 10 pixels. All right. That looks about right. Next, I have the label. So for the label, we're going"
+2255.62," to make the font weight bold. So for the input, now for the input, we have two different inputs."
+2262.42, Right. We have two inputs and one text area. So I'm going to define which input exactly I want.
+2270.66, Input with type of text. So that's the first one. And the second one is email. So this is the
+2279.38," second one. And also we have the text area. So for the text area, we're going to have a width of 100%."
+2290.58," Also, we'll have padding for eight pixels. Let's have margin. 10 pixels."
+2299.7," 0 and 20 pixels. Also, let's have border radius. It's going to be five pixels. Also, let's make the box,"
+2312.9, box sizing border box. And that's basically it. Let's just refresh and that looks better. Let's work on the border.
+2326.98," So let me add here border. Let's do one pixel, solid, and let's do triple F. Let's make a triple D."
+2335.94," It's okay. Let's save. And that looks much, much better. So let me just add anything. Let's say"
+2342.34, Robert. Let's say Robert at john.com message. All right. Submit. Okay. Now let's work on that.
+2355.1400000000003, All right. So we don't have classes. So maybe we can just trap everything here around a class. So
+2362.2599999999998, let's call this success message. And let's just do like that. All right. Success.
+2373.14," Hifn message. That's going to appear text aligned to the center. Right. Also, let's give max width"
+2385.78," for 400 pixels. Also, let's have a margin of 0.0. Let's have a background color. Well,"
+2397.14," the background color we can keep it as it is to have only one color, one style. For the border,"
+2404.02," I'm going to make it one pixel, solid, and triple D. Also, let's do border radius. Let's give it five"
+2413.78, pixels. Let's also do box shadow 0 for pixels 8 pixels. RGB again 0 0 0.1. And let's give it some
+2428.9," padding 20 pixels. Also for the paragraph success, success message with the paragraph. Let's just"
+2439.78, margin 20 pixels 0. All right. That looks awesome. One more thing. I wanted those H1 tags to be in
+2447.6200000000003, this blue color. I don't know why nothing has changed. Maybe I haven't done that. I haven't done
+2454.42," that actually. Okay. Let's do H1 tag for a 9 this one. Let's get back here. Low world. Submit. Also,"
+2466.42," I want for the anchors to remove text decoration. So text decoration is set to none. And also,"
+2475.62," let's give him the same color. This four A90 E2. Let's do like that. And that looks much, much better."
+2484.82," All right, guys. So this is our Django form. Click to enter the form. Let's just write here"
+2491.1400000000003, Henry. Henry at mail.com. Please contact me as soon as possible. And let's submit here. And we have
+2504.26, the success message. Your contact message has been successfully sent. We will be in touch soon.
+2510.26," Back to home page. And we redirected to the home page. All right, guys. So this is the end of"
+2515.86," this tutorial working with forms in Django. In the next video, we are going to have an"
+2521.1400000000003, introduction to Django authentication system. Thank you so much for watching. And I will see you in the
+2526.6600000000003, next video.

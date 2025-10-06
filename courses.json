@@ -24,7 +24,7 @@
       { "video_id": "py17", "title": "Lecture 17: Python Classes", "video_url": "https://www.youtube.com/embed/tsMrUdynbQQ" },
       { "video_id": "py18", "title": "Lecture 18: More Python Class Methods", "video_url": "https://www.youtube.com/embed/gLnCmUkgUQk" },
       { "video_id": "py19", "title": "Lecture 19: Inheritance", "video_url": "https://www.youtube.com/embed/rgM7Z9BNm1s"},
-      { "video_id": "py20", "title": "Lecture 20: Fitness Tracker Object-Oriented Programming Example", "video_url": "https://www.youtube.com/embed/rgM7Z9BNm1s" },
+      { "video_id": "py20", "title": "Lecture 20: Fitness Tracker Object-Oriented Programming Example", "video_url": "https://www.youtube.com/embed/-wyc5FwzkcM" },
       { "video_id": "py21", "title": "Lecture 21: Timings Programs and Counting Operations", "video_url": "https://www.youtube.com/embed/lvp4NfED6K4" },
       { "video_id": "py22", "title": "Lecture 22: Big Oh and Theta", "video_url": "https://www.youtube.com/embed/RJhoT5PEf_0" },
       { "video_id": "py23", "title": "Lecture 23: Complexity Classes Example", "video_url": "https://www.youtube.com/embed/loX34ct0hxs" },
@@ -52,8 +52,8 @@
     { "video_id": "dj09", "title": "Forms", "video_url": "https://www.youtube.com/embed/WQISlkg_IZk" },
     { "video_id": "dj10", "title": "Authentication", "video_url": "https://www.youtube.com/embed/0gAFW4UxsZg" },
     { "video_id": "dj11", "title": "App Build(Part 1)", "video_url": "https://www.youtube.com/embed/wQPaXedytlg" },
-    { "video_id": "dj11", "title": "App Build(Part 2)", "video_url": "https://www.youtube.com/embed/jyjytSjqII4" },
-    { "video_id": "dj12", "title": "App Build(Part 3)", "video_url": "https://www.youtube.com/embed/ZpKl3U-arN8" }
+    { "video_id": "dj12", "title": "App Build(Part 2)", "video_url": "https://www.youtube.com/embed/jyjytSjqII4" },
+    { "video_id": "dj13", "title": "App Build(Part 3)", "video_url": "https://www.youtube.com/embed/ZpKl3U-arN8" }
   ]
 
   }

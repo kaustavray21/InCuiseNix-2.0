@@ -5,33 +5,38 @@ from core.models import Video
 from transcripts.services import get_transcript, save_transcript_to_csv, sanitize_filename
 
 class Command(BaseCommand):
-    help = 'Generates and saves transcripts for all videos in the database.'
+    help = 'Generates and saves transcripts for all videos, naming files by video_id.'
 
     def handle(self, *args, **kwargs):
         self.stdout.write(self.style.SUCCESS('Starting transcript generation process...'))
         
-        videos = Video.objects.all()
+        videos = Video.objects.select_related('course').all()
         total_videos = videos.count()
         new_transcripts_created = 0
         
         for index, video in enumerate(videos):
-            self.stdout.write(f'Processing video {index + 1}/{total_videos}: "{video.title}"')
+            self.stdout.write(f'Processing video {index + 1}/{total_videos}: "{video.title}" (ID: {video.video_id})')
             
             try:
-                # Sanitize the title to check for the transcript file
-                sanitized_title = sanitize_filename(video.title)
-                transcript_path = os.path.join(settings.MEDIA_ROOT, 'transcripts', f"{sanitized_title}.csv")
+                sanitized_course_title = sanitize_filename(video.course.title)
+                
+                # Check for existing transcript file using video_id
+                transcript_path = os.path.join(
+                    settings.MEDIA_ROOT, 
+                    'transcripts', 
+                    sanitized_course_title, 
+                    f"{video.video_id}.csv"
+                )
 
                 if os.path.exists(transcript_path):
                     self.stdout.write(self.style.SUCCESS(f'Transcript for "{video.title}" already exists. Skipping.'))
                     continue
 
-                # Pass both the URL and the title to the main get_transcript function
-                transcript_data = get_transcript(video.video_url, video.title)
+                # Pass the entire video object to the service functions
+                transcript_data = get_transcript(video)
                 
                 if transcript_data:
-                    # Pass the original title to the save function
-                    save_transcript_to_csv(transcript_data, video.title)
+                    save_transcript_to_csv(transcript_data, video)
                     self.stdout.write(self.style.SUCCESS(f'Successfully generated new transcript for "{video.title}"'))
                     new_transcripts_created += 1
                 else:

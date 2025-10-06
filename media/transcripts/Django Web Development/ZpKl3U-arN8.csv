@@ -1,0 +1,561 @@
+start,text
+0.0," Now, the last time we have seen that we have properly rendered this HTML page as a test."
+8.28, So I'm going to minimize that for now.
+10.94, Let me also shut the Integrated Terminal and I will delete this.
+15.44, Now I want to show you a new perspective or a new concept in writing HTML pages.
+21.080000000000002," If you write applications in Django, most probably that you are going to write a lot of HTML"
+25.84, pages.
+26.84," If the different pages have common elements such as the header, the footer, maybe a navigation"
+32.2," bar, navigation menu, it's going to be very hectic if you're going to duplicate the code"
+37.4, in all of the pages.
+39.2," First of all, it's not practical."
+40.64," Second of all, it's not the smartest way to do things."
+44.28, So Django actually allows you to create what we call the Bayes layout.
+49.08, Now the Bayes layout is simply a template that serves as a common structure for other
+53.56, templates to build upon.
+55.48," So say here, for example, we have a home page, we have the product confirm the lead page,"
+61.48," product form and product list, but also we have a layout.html page."
+66.2, And basically it's going to contain all of the elements that are consistent across all
+70.8, of the other pages.
+72.36," So for example, we'll have a header, we'll have a footer, we'll have a navigation bar,"
+77.24, and so on.
+78.24, So we're going to create this Bayes layout and we're going to extend that Bayes layout
+82.56, in other pages.
+84.48," And in our Bayes layout, we'll have common structure and placeholders called blocks."
+89.56, Those blocks are placeholder for whatever being dynamically generated in each page.
+94.60000000000001," So let's say that we want the title for a certain page, that's the home page, for instance."
+100.60000000000001, And we have a different page for the product form.
+103.32000000000001," Instead of writing different titles, we're going to simply insert that in a block form"
+108.96000000000001, and based on the title that you're going to give that's going to be auto generated.
+113.48, And render whatever the page title is going to be.
+115.92, And how we'll do that simply by extending that Bayes layout in the other pages.
+121.76," So we'll have in home product to confirm the lead, product form and product list in all"
+127.16," of those pages, we're going to extend the layout."
+130.76," First of all, I'm not going to do anything strange in that layout.html."
+135.96, That's going to be a simple HTML page where I'm going to use Bootstrap 5 and JQuery for
+140.72, styling.
+142.28," So for the title, I'm going to call that inventory app."
+148.48," But now be careful in those title HTML tags, we will need to have those Django template"
+153.28, block tags inside curly braces with the ampersand of course.
+159.2, And we will have here block and that's going to be title.
+162.56," And of course, do not forget to close the block tags with the ampersand and curly braces"
+168.36, and we'll type here and block.
+172.04, Next I want to insert here that Bootstrap link from CDN.
+175.79999999999998, So let me show you that.
+177.4," So from this website here, jsdeliver.com package mpm Bootstrap, I want to just take that link."
+185.39999999999998, So this one here is for JavaScript and that one is for your link.
+190.76," So if you will copy that that's going to copy only, if you will copy the URL, you're"
+195.32, going to copy the URL only.
+197.04, So what I'm going to do is I'm going to select all the link and I'm going to paste it
+201.44, here.
+202.44," Alright, and I'm going to leave also the link to the jsdeliver for the CDN because we're"
+207.35999999999999, going to use the same thing for JavaScript.
+211.23999999999998," Right, so that's as far as the Bootstrap CSS from our CDN page."
+215.76," By the way, I might use some styling but we're going to do that later."
+219.76," But for now in the body, I want to create an navigation bar."
+223.76, This navigation bar will have a class of nav bar and these are Bootstrap classes by
+229.44, the way.
+230.44, So nav bar class with nav bar hyphen expand.
+236.84, So I need a large expandable navigation bar.
+240.2, Also I need a dark so that's going to be dark.
+243.28, nav bar hyphen dark.
+246.23999999999998, Also I need a fixed top for that navigation bar.
+248.48," So that's another class by the way, which is called fixed hyphen top."
+252.88," Alright, and that has created the navigation bar with all of the needed classes."
+257.88," Inside the navigation bar, I need a link or an anchor that's going to be the link for"
+263.36, the home page.
+264.36, We're going to write simply inventory app if you remember in the demo.
+269.72," When you will click it, it will not do anything simply."
+271.64, It will take you to the home page.
+274.12," Right, so that's going also to take a class and I'm going to say here a dot nav bar hyphen"
+282.08000000000004, brand.
+282.92," Right, that's going to have a horizontal reference in double curly braces or in curly"
+289.68," braces only and double ampersand and inside here, that's going to be the URL for the home"
+296.0, page.
+297.76, And simply I'm going to type here inventory app.
+301.36," Alright, so this is my anchor, my link."
+306.08000000000004, Now I need a button.
+307.44, This button simply is going to be a toggle or button.
+310.64," Right, it's going to toggle the navigation bar on smaller screens."
+314.71999999999997," If you're going to resize your screen to be small, when you will click on the top, it's"
+320.47999999999996, going to open or expand the menu to you.
+323.88, So this is the usefulness of this button.
+326.88, This button is going to have a class of nav bar toggle.
+331.24, Also it's going to have a type of button.
+333.36, The data toggle is going to be set to collapse.
+336.56, Also I need data target and that's going to take me to the navigation bar and this
+341.38, data target has of course this ID selector nav bar nav.
+345.56," When you will click the button, it's going to show or hide that target element."
+350.4, The next attribute that I want is something called area dash controls and that's going
+356.76, to be set to nav bar nav.
+359.16, This area controls set to nav bar simply improves accessibility.
+364.8, So this is simply for the button.
+367.56, So you will have more control when you will click on the button to show or hide the element
+372.40000000000003, with that ID nav bar.
+374.56, The next attribute also helps with accessibility and that's called area expanded and I'm going
+379.68, to set it to false.
+381.16, And this simply indicates the current state of the collapsible content.
+384.32, By default we're going to set it to false because we don't want it to be open.
+388.96000000000004," When you will navigate to your website, you don't want that button to be opened."
+394.08, You don't want it to be expanded I mean.
+395.84, You can use the button to navigation bar and in that case the area expandance going to
+401.08, transform from false to true.
+403.44, And the last attribute is area label and the area label I'm going to set it to toggle
+408.88, navigation.
+410.47999999999996, And the name explains the function of course this basically provides an accessible label
+414.64, for the button.
+416.24, And in that button I will need an icon.
+418.56, This icon I'm going to just put it in a span.
+421.84, This span is going to take a bootstrap class.
+424.59999999999997, So span with this class called nav bar toggler icon.
+432.35999999999996, Next I want to dive with also a class.
+435.56, So it's going to be collapse dot nav bar collapse.
+442.59999999999997, And that's going to be a collapsible nav bar content.
+445.96, But also I want to create an ID.
+448.88, So the ID here is going to be nav bar nav.
+454.84, The one that we have actually set it here.
+458.48, So this is the nav bar nav ID in that div inside the div I will have the items container.
+465.6, So that's going to be in a form of unordered list with a class of nav bar nav.
+471.2, And then I'm going to list all of the nav bar items.
+474.12, So I'm going to have a list with a class called nav item.
+477.48, So that first list is going to have the ad product link.
+482.52000000000004, And for that I will need the anchor with the class nav link.
+486.32, And the link for that is going to be the product create link.
+489.88, And let me show you in the URLs here.
+493.16, That product create will need it to put inside our layout.
+499.40000000000003, So now you see the idea whenever you will click on ad product that's going to take you
+504.8," to that URL here, the product create URL."
+507.84000000000003, And I will need another one.
+509.52000000000004, And that's going to be for showing products.
+513.16, So basically that's going to be the product list.
+516.6, So we'll copy that.
+517.6800000000001, And let me just put it instead of that product create.
+522.04, Just put some spaces.
+523.76," All right, that's better."
+525.64," And instead of ad product, I'm going to type show products."
+531.76, And that's basically everything we need to do for the items.
+534.16, That's an unordered list that has two different list items.
+538.28," Each one that's going to take you to a different URL, want to add the product and the other"
+543.0, want to show all of the products.
+545.3199999999999," And after the navigation bar, we will need that container, right?"
+549.56, So I'm going to create another div with container class.
+555.0, And in that div we're going to dynamically or define a content block that can be overridden
+560.68, in the child template.
+562.0," So based on each child template, we're going to dynamically generate everything inside"
+567.0, that div.
+569.12," So as you guessed that, we're going to use the block here."
+574.04," And the block, I'm going to change the name for block name."
+578.88," Simply, that's going to be content."
+581.5999999999999, And we don't need for the end block to write the same thing.
+585.4399999999999, So we can leave it like that.
+587.6, And that's basically everything for our layout.
+590.8000000000001," Just before I forget, we will need two more links, one for the jQuery and another one"
+595.44," for the JavaScript, the CDN JavaScript actually."
+599.24, So that's going to be above the closing tag of the body.
+603.0400000000001, So you can visit releases.jQuery.com.
+605.88," You want to click on that link, slim-minified."
+608.9200000000001," All right, so click here and you're going to copy that."
+613.84, Copy and just paste it in here.
+617.12, And we need the other one from the bootstrap.
+619.36, So we have above for the CSS and we need that one for JavaScript.
+624.8, So I'm going to copy that as well and paste it here.
+630.28," Until now, we don't have anything."
+631.96," So if you will click here, you have a white page because the home is empty."
+635.88," It's true that we have written the layout, but we haven't extended anything yet to other"
+640.5600000000001, pages.
+641.5600000000001, So that's what we're going to do now.
+643.44, The first thing that you want to do is to extend the base layout template from your
+649.08, InVap directory.
+650.7600000000001," To do that, you're going of course to type extents."
+654.72," So extending here the file itself layout.html, but you need to provide the full path."
+660.6," So you will type InVap, forward slash, and the name of the file."
+664.72, That's layout.html.
+667.5200000000001, So that's the first thing that you want to do.
+670.4, And exactly the same thing is going to be across all of other files.
+676.3199999999999," For home.html, I want to create a title."
+680.72, I'm not going to type simply a title like that.
+683.6," No, no, no, we don't need this."
+685.4, We need a block title.
+687.4," So I need a block with again, I don't need in the end block."
+693.48, I don't need to write that.
+696.72, So you can keep it like this.
+698.16," And I need title, right?"
+699.76, So that's going to be title.
+701.52," And here in the middle, I will type home."
+704.3199999999999," So based on each page, the title is going to change, right?"
+709.3199999999999, And that's going to take exactly the styles and the basically out from your layout.html.
+716.76, Right?
+717.76, So that's as far as the title.
+718.96, Let me actually do like this.
+722.04, And I will minimize this a little bit.
+724.2," If you can do, squeeze that more."
+727.04, Close the bar here.
+729.08, And let's refresh.
+730.72, And we have an error.
+731.72, There is an error somewhere.
+733.2800000000001, Your L product create.
+735.0400000000001, Right?
+736.0400000000001, I missed the single quotes.
+738.48, I apologize for that guys.
+740.4000000000001," So yeah, you need to put this in single quotes."
+743.5200000000001, The product list also.
+747.2," And yeah, let me shut all of the other links."
+751.44, And you can see here that we have home.
+754.44, Awesome.
+757.2, Let's get back to home page.
+759.36," After the title, I need the content."
+760.9200000000001, So I also will need a content block.
+764.5200000000001, Right?
+765.5200000000001, So that's going to be content here.
+768.96," Then inside that content block, I will need it."
+771.6800000000001, Dave with jumbo tron class.
+773.48," Again, these are bootstrap classes."
+775.88," So yeah, jumbo tron.textcenter."
+783.92, Then I will have h1 with class display for.
+790.12, Then I will say here something like welcome to the inventory management system.
+799.76, Then I will have a paragraph with lead class.
+803.16," Then in that paragraph, I will say something like, come manage your products efficiently"
+812.28, and effectively.
+815.28, Something like that.
+816.88," And after that paragraph, I'm going to add a horizontal rule with some margin to separate"
+821.36, the content.
+822.36," So that's going to be a bootstrap class, of course."
+824.9599999999999, So hr.myfn4.
+829.28," If you will refresh, you can see here this is with four pixels margin."
+837.64, I will have also a paragraph.
+840.4, And I will say something.
+842.04," Use the navigation bar to add, view, update or delete products."
+854.72, So these are the four components of our crowd grouter application or website.
+860.36, Right.
+861.36," Next I want to create a button, but not button button, it's going to be a link."
+866.72," It's actually a button hidden inside the link, if you will."
+871.96," Just to view all the products, to list all the products."
+875.1600000000001," So we're going to have another link, another anchor with bootstrap class that's going to"
+879.44," be btn, btn primary and btn large."
+884.9200000000001, The link to that is going to take me to the product list URL.
+889.76," And if we'll click here, it took us to inventory app."
+893.96, Right.
+894.96, So let's get back.
+896.72," And again, the title has changed to home."
+899.52, Awesome.
+900.52," Inside here, I'm going to say view products, save that refresh."
+907.48," Okay, that's better."
+908.96, Right.
+909.96, I'm going to give also to that link a rule attribute.
+915.0400000000001, So that's going to be a button.
+918.72, Right.
+919.72, We want basically to have this primary button that will link to the product list page.
+924.96, All right guys.
+925.96, So this is simply our home page.
+928.32, Let me go quickly and write the styling in the layout page.
+933.12, This is the only styling that I want to write manually.
+937.72," So yeah, everything works except that we haven't written the other pages yet."
+941.64, So let's go to product form.
+944.0400000000001, We're going to extend of course the base layout.
+947.76, And then I will have title block.
+950.12, So maybe I can go to the home page and copy those two lines.
+955.0, Copy that.
+956.0, Let's get back to product form.
+958.24, Let's paste that in.
+960.4, I will need also end block.
+962.8, So.
+964.8, All right.
+965.8, Awesome.
+966.8," And inside the content, I will have H1 tag with text center class."
+974.16, So text center.
+976.96, And here I will say product form.
+979.32, This is going to be our form.
+980.6, We have studied forms together and it's an absolute pleasure to write forms in Django to
+985.84, be honest.
+986.84, I personally love it.
+988.0," Now after that H1 tag, I need a form."
+991.12, The form will have a class of jambotron.
+993.4000000000001," Again, this is a bootstrap class."
+995.72, So form dot jambotron.
+1000.44, We don't need action.
+1001.52, We need a method of course.
+1003.68, And the method is going to be naturally a post method.
+1007.3199999999999," And as we have learned, the first thing you need to include in your form is the CSRF"
+1011.28, token.
+1012.3599999999999, So we're going to include the CSRF token.
+1015.5999999999999, The next thing is the form itself.
+1017.4, So we want to render the form fields with the Django's form rendering.
+1021.7199999999999, So that's going to be a form like that.
+1025.0," Not like this, just form and that's double curly braces."
+1029.56," And of course, after the form, we'll have a submit button."
+1032.28, So button with type submit.
+1036.52, So I can choose it here.
+1038.6, And you can say save product.
+1041.68," So after you will enter everything in the form, you will simply save the product."
+1046.6399999999999, I forgot to give that button bootstrap class.
+1049.52, So that's going to have simple bootstrap classes.
+1054.3999999999999," That's going to be BTN, BTN dash success and BTN block."
+1061.8400000000001," All right, guys, and this is simply our product form."
+1064.72," Now, let's go ahead and check that out."
+1067.16," If I will click on add product, we have got an error."
+1072.32, Get create not found with greequest.get create is not a valid view function or pattern.
+1079.96," That should render the page, right?"
+1082.32, So let's go ahead and check out in our views.py file.
+1088.52, And let's see.
+1090.1999999999998," Oh, I see the problem."
+1091.12, That's my bad.
+1091.7199999999998," I apologize for that, guys."
+1093.2399999999998," Of course, this is a render method and not redirect."
+1096.52, We redirect only to the names.
+1098.6399999999999," We are rendering with different arguments, the HTTP request method, the template's name,"
+1104.12, and the context.
+1105.12," So, yeah, that's going to be render, of course."
+1110.36," Right, so let's get back here and let's click on add product."
+1115.52, And now we have our product form.
+1117.6, Awesome.
+1118.76," All right, but I feel that there is something wrong in the layout."
+1123.1999999999998, So let's check out the layout together.
+1125.9599999999998," So first of all, let me check, okay, so I see that I haven't actually had the dot for"
+1131.36," the table, the h, right?"
+1134.1599999999999, But I think that's the difference in the bootstrap version.
+1138.8799999999999," So I'm going to change the bootstrap version from 533 to 452, 4.5."
+1147.08, Control as to save.
+1149.4399999999998, Let's refresh the page and now we have different layout.
+1152.6799999999998," And this layout actually is much, much better."
+1155.76, So simply you're going to do the same thing as I've showed you before.
+1160.1999999999998, Simply you're going to change the version from 533 to 452.
+1165.24, Because all of the classes that have written are only compatible with 452.
+1170.6," Right, so yeah, we have everything."
+1172.9199999999998," Now guys, if you'll click on inventory app, you're going to..."
+1176.32," Get back to the app, view products, of course, you don't have anything."
+1180.0, Let's try to add a product.
+1184.1599999999999, Let's add a shirt.
+1185.8799999999999," Let's add, let's say, S123, for example, for the price, let's make it 20,"
+1191.36," quantity, let's make it one supplier, let's say anything, ABC, right?"
+1196.52, Save product and we have the list.
+1199.28," Of course, we haven't written the list yet."
+1200.96," If you don't have an error, that means that everything is okay and waiting for us to"
+1204.56, write the product list page.
+1206.44, So let's actually go ahead and do that.
+1209.6399999999999, Let's go to the product list.
+1211.96," And again, I will need a content block."
+1214.1599999999999, So block here content.
+1219.9199999999998," I prefer to delete this, but you know, you can keep it if you want."
+1224.32, It's just a matter of habit.
+1226.8799999999999, H1 tag with class of text center.
+1231.6799999999998, And we'll type here products.
+1233.84," Okay, let's refresh the page and we have products."
+1237.32, Now I need a table.
+1239.8799999999999, That table will have different classes.
+1241.9199999999998, The first class is table.
+1244.28, The second class is table bordered.
+1246.8, So table hyphen bordered.
+1251.12, And another one's going to be table stripped.
+1254.24, So table hyphen stripped.
+1257.52, This is a simple table with those bootstrapped classes for the borders and strict rows.
+1263.2, I need a table head now with a class of T hat dark.
+1267.1200000000001, So we're going to keep the theme exactly the same.
+1269.52, We're going to keep the headers dark as in the navigation bar.
+1274.04, So I'm going to have T hat with class T hat hyphen dark.
+1279.44," And inside the table header, I will have a table row."
+1283.16, So T are so T hat and we'll say here product ID and I will need six more.
+1291.16," So 1, 2, 3, 4, 5, 6."
+1295.96, And here that's going to be the name.
+1299.44, Here we will have our SKU.
+1304.24, Here we're going to have the price.
+1307.3600000000001, Also I want quantity.
+1314.36, And the supplier.
+1317.56, And finally I want actions.
+1321.6, So let's refresh that and we have here our table header.
+1326.36, That's the end of the table row and the table header.
+1329.12, Now I need table body.
+1331.1599999999999," So for the T body, I will have here to loop through the products past to the template."
+1338.28, So that's going to be a simple for loop.
+1340.52, So we'll say for product in products and I'm going to just trap that here in curly braces
+1348.6, and also ampersand.
+1350.16, And be careful about the spaces guys.
+1356.16," That's very, very important."
+1358.24," So for product in products, I want to begin a table row for each product."
+1364.52," And inside the table row, I will display all of the fields."
+1367.64, And that's going to be in a TD tag or table data tag.
+1371.0800000000002, And here simply we're going to plug everything inside double curly braces.
+1375.44, So we need the product.product underscore ID.
+1380.0800000000002, So product ID.
+1381.88, That's the first one.
+1382.88, Just make like that.
+1385.48, All right.
+1387.48, You can do like this.
+1389.2, And the second field is the name.
+1395.64," As we have the SKU, we have the price, we have the quantity, we have the supplier."
+1410.2, Right.
+1411.2," As far as the last one that's going to be for the actions, right, it's going to be a little"
+1417.3200000000002, bit different from the other table data items.
+1421.16, So we'll need a link and anchor.
+1423.5600000000002, And that's going to take me to the product update view.
+1426.8000000000002," So that's going to be the URL that's taking me to the product update view, right?"
+1435.4, That's just minimize this a little bit or making like that.
+1439.2, Okay.
+1440.2, So this is the product update view.
+1442.0800000000002," And here I'm going to simply type the product because I will need that product by ID, right?"
+1447.48," I want to target that product by its own ID, its own unique identifier."
+1452.72, So that's going to be product.product ID.
+1457.24, And here simply I'm going to type update.
+1459.56, Right.
+1460.56, So maybe we can refresh and we have an error because I haven't closed the for loop.
+1466.28," So for the for loop, you will need of course to end up with that curly braces and percent."
+1472.96, And here you will do and for right.
+1475.68, Refresh again and we have everything.
+1478.3600000000001," So this is the product that we have added guys, right?"
+1482.52," Product ID number one, the name is shirt, SKU, price, quantity, supplier and actions."
+1490.16, You can update and you can delete.
+1492.0, So let's work on the delete part as far as the delete.
+1496.6000000000001," But before the delete, let's give that a class."
+1500.0," So let's give that a class of BTN just to change that link to a button, right?"
+1507.2, We are manipulating using those bootstrap classes.
+1512.0," Yeah, so that's danger that's going to be read the update."
+1517.0, Right.
+1518.0, So let's check out.
+1519.0, Okay.
+1520.0, We have red one.
+1522.0," However, I prefer the danger button to be for the delete."
+1527.52," I might change that to warning, right?"
+1530.92, So let's do warning here.
+1533.52," That makes more sense, right?"
+1536.52, Yeah.
+1537.52, The update is going to be with yellow and the delete button is going to be with red.
+1541.52, So I'm going exactly to copy the same thing here.
+1546.52," And here I'm going to call that delete, right?"
+1551.52, And here the button is going to be danger.
+1555.52," And instead of product update, that's going to be product delete."
+1560.52," And that's basically it, guys."
+1562.52, This is our products list HTML page.
+1566.52, Right.
+1567.52, So let's refresh and we have two buttons update and delete.
+1572.52," If you prefer to center everything, you can add the text center."
+1576.52, You can add that class to your table here.
+1579.52, So you can take that and you can do like this.
+1584.52, You can add that here.
+1585.52, You can refresh and you have everything centered.
+1589.52, Right.
+1590.52, If you prefer.
+1591.52, All right.
+1592.52," So we have actually written the product list, the product form, the layout of course."
+1598.52, That was the first one.
+1599.52," The home page, the only thing that's remaining for us is the product confirm the delete."
+1605.52, So the first thing that I want is a title.
+1607.52, So I'm going to have a title block.
+1609.52, So that's going to be a title.
+1612.52, All right.
+1613.52, And you can see here the lead product.
+1616.52, That's as far as the title.
+1618.52," Also, I want the content block."
+1620.52, So I'm going to have another block with content here.
+1623.52, Right.
+1625.52," And inside the content, I will have H1 tag with text center class."
+1632.52, And we'll type something like are you sure you want to delete this product.
+1643.52, Then I will have a form with a post method.
+1646.52, Right.
+1647.52, And we don't need actions.
+1649.52, Just I will need a class that's that's going to be text center.
+1659.52," And inside that form, of course, the first thing we need to do is the CSRF."
+1663.52, So that's the first thing.
+1665.52, Then I will have a button and a link.
+1667.52, The button is for the yes because it's going to have a submit type.
+1671.52," And the link, if you will click on the cancel link, that's going to take you to the product's list."
+1677.52, This is basically our page.
+1679.52, Just a simple form with yes or no.
+1681.52, So let's have our button with the submit type.
+1685.52," And also it's going to take class of BTN, BTN danger."
+1694.52, And here you will type yes.
+1697.52," Also, I will need a link."
+1699.52," This link is going to have two classes, BTN and BTN secondary."
+1706.52, Right.
+1707.52, That's going to direct us to the product's list view.
+1711.52, Curly braces in double ampersand.
+1714.52, Inside here we'll have URL with the product list.
+1719.52," If I'm not mistaken, that's the product list."
+1722.52, Let's take a look to the views or the URL's rather.
+1725.52," Yep, the product list."
+1727.52, And here I will simply say cancel.
+1731.52, And this was the last break in our application building guys.
+1735.52, So let me just refresh the page.
+1738.52, Let's click on update.
+1740.52, And I think we have the same mistake.
+1742.52, Let's go to views.
+1744.52, Let's go to the update.
+1747.52, Right.
+1748.52, And that's of course render.
+1750.52, Not redirect.
+1752.52, I deeply apologize for that guys.
+1754.52, So here is okay.
+1756.52, It's proper.
+1757.52, So let's do like that.
+1758.52, And we have here our product form.
+1761.52," Let's go to inventory app again, view product."
+1763.52, So we have this product update.
+1765.52, And now it's working.
+1766.52, We can update.
+1767.52," If you notice here, that's the product ID number one."
+1769.52, Right.
+1770.52, And let's do for instance pants.
+1772.52," Now if you will click on save product, you will immediately get this warning."
+1777.52, Please fill out this field.
+1779.52, So we will need to do that.
+1780.52, Let's say P123.
+1782.52, That's going to be $50.
+1785.52," For example, quantity."
+1786.52, Let's do 10.
+1788.52, And we have XYZ.
+1790.52, Inc.
+1791.52, Save product.
+1793.52, Now we have different product with the same ID number.
+1798.52, Let's try to delete that.
+1800.52, Now perfect.
+1801.52, We are redirected to that page.
+1803.52, Are you sure you want to delete this product?
+1806.52," If we'll click on cancel, we'll get back to our page here."
+1810.52, And if we will delete again.
+1812.52," If we'll say yes this time, the product is deleted from our products list."
+1818.52, So let's add another product.
+1820.52, Let's say shoes.
+1822.52, Let's say SH456.
+1825.52," Price $3, quantity 2, and the supplier FUBAR."
+1830.52, Right.
+1831.52, Save product.
+1832.52, And we have product ID2 because the first one was the one that we have actually deleted from our database.
+1840.52, You can update.
+1842.52, You can show products.
+1844.52, You can get back to your homepage.
+1846.52, You can add another product.
+1848.52, And so on.
+1850.52," Alright guys, so this is our fully functional website where you can add your products, update them, delete them."
+1857.52," And you know, you can improve upon this by adding more functionalities if you want."
+1862.52, And let me show you the responsiveness of the webpage.
+1865.52," If we'll click here, well actually nothing happens."
+1869.52, Let's check that out.
+1871.52, So we have for the styling for Bootstrap 4.5.2.
+1875.52, And I think I haven't changed down here below for the JavaScript.
+1879.52, Right.
+1880.52, So that also should be compatible 4.5.2.
+1887.52, Right.
+1888.52, Now let's go ahead and try.
+1890.52, Click OK.
+1891.52, Now the navigation bar is expandable.
+1894.52, The add product and show products buttons that were hidden.
+1897.52, Now they are shown and they are fully functional.
+1900.52," If you will click on show products for example, it's working."
+1904.52," Again, if you will click on add product, also the add product form is working."
+1910.52, And let me show you another interesting thing.
+1913.52, Let's go to the inventory.
+1915.52, Let me go to the dev tools.
+1918.52," And let me show you if I will click here, take a look at the state changes."
+1923.52, The state of that button changes from false to true.
+1929.52, Focus on that area expanded.
+1931.52, It's going to change from true to false.
+1939.52," And of course the other classes, the collapse and the collapse show class,"
+1945.52, the nav bar toggler and the nav collapse and collapse show.
+1949.52, They all change.
+1954.52, Congratulations guys!
+1956.52, I've reached the last stop of our Django course journey and what an advent rate has been.
+1962.52," From the basics to building a full-fledged inventory management system,"
+1966.52, you have all done an amazing job.
+1968.52, Your hard work and dedication have truly paid off.
+1971.52," And before leaving, I want to give a huge shout out to NetNGF for letting me host this course on their awesome channel."
+1977.52," Keep exploring, keep coding and remember this is just the beginning."
+1981.52, I can't wait to see what you'll all create next.
+1983.52," Once again, thank you so much guys for watching, happy coding and best of luck for each and every one of you."

@@ -1,0 +1,253 @@
+start,text
+0.0, Hello and welcome to the final project of our Django course.
+6.68, We're going to put everything we've learned into practice.
+9.92," We will build an inventory management system, and if you recall, in the first video of"
+14.120000000000001," the course, I've shown you a demo of that project, how the inventory management system"
+18.72," works, covering a lot of tasks in your website."
+21.76," That includes adding products, viewing the list of products, updating product details,"
+26.8, or deleting any product that you want to take out of the list.
+29.76," Now for styling, we're going to use Bootstrap 5 integrated with Django CresP forms."
+34.800000000000004," This project is going to be divided into two parts, the backhand and fronthand."
+40.0," For the backhand, we're going to focus on the server setup, databases, and then we're"
+44.400000000000006, going to move to the frontend to create the HTML pages.
+48.6," And finally, we're going to bring everything together to see our application in action."
+53.0, Now Django CresP forms is a popular Django application that helps you manage Django forms
+57.64, in a more elegant and dry way.
+59.84, Dry here stands for Don't Repeat Yourself.
+62.52, It allows you to define your forms using Django's form classes and then easily render them
+67.60000000000001, in your templates with custom styling.
+70.44," As far as CresP bootstrap 5, this is an extension of Django CresP forms that will specifically"
+75.96000000000001, focuses on integrating bootstrap 5 styling into Django forms.
+80.36," And with that out of the way, let's go ahead and start creating our project."
+83.84, The first thing that I want to do of course is to activate the virtual environment by
+87.58, typing Pppnv shell.
+91.08, That's good.
+92.08, Control L to clear the terminal.
+94.0, Now I want to install Django inside my project by typing Ppnv install Django.
+101.08000000000001," Alright guys, awesome."
+104.16," If you will take a look to the pip file, you will find that for now we have only Django"
+108.84, installed.
+109.92, We will need to install a couple of dependencies for Django CresP forms and CresP bootstrap
+114.92, 5.
+115.92, So let's go ahead and do that.
+117.76," Let's get back to the website where I can just copy this, install Django CresP forms"
+123.04, and get back to my terminal here and we'll do pipnv and then I will paste that install
+129.24, Django CresP forms.
+134.04, The next dependency that I will need is the install CresP bootstrap 5.
+139.36, So I can copy everything and I can paste that in and I will change from pip to pipnv.
+146.36," Alright, great."
+149.36, Let me just shut that and take a look.
+151.64000000000001, We have Django Django CresP forms and CresP bootstrap 5 dependencies installed in our project.
+158.24, Now we are ready to start creating our project.
+160.92000000000002, So let me open again my integrated terminal.
+163.8, So I'm going to use Django admin command line to start the project and I'm going to call
+170.56, my project I and V project.
+175.88000000000002, Let's change directory to I and V project.
+179.84," Now if you will take a look to our components, let me just minimize this a little bit, control"
+184.0, L and LS.
+186.12, Now if you will take a look we have of course manage the pi command line and our I and V project
+191.52, folder.
+193.12, So I will do Python manage the pi start app and I will create my application.
+200.24, I will call it I and V app.
+202.12, So we'll have I and V project and I and V app.
+206.28, Now let's list the components of our folder and we have our I and V app I and V project
+211.08, and manage the pi.
+212.68, Awesome.
+213.68, Now let me go to my I and V project here and to the other folder I and V project to settings
+220.36, the pi.
+221.36, Let me just close that for now.
+222.88000000000002, We don't need that.
+224.20000000000002, Now in installed apps I will need to add three different things.
+227.56, Of course the first thing I will need to add is my I and V app.
+234.52, The second application that I will need is crispy forms.
+238.0, So that's going to be crispy underscore forms and the third one is crispy bootstrap
+245.36, five.
+246.36, So type that crispy underscore bootstrap five.
+252.12, Alright and we are done with the installed apps part.
+255.8, Let me just go down here below and I want to make sure to specify the crispy template pack.
+262.52000000000004, This is very important if you're going to use bootstrap five.
+265.72, So I'm going to declare this variable crispy underscore template underscore pack.
+272.72, It's going to be equal to bootstrap version five.
+277.48, This is the latest bootstrap version by the way.
+280.68, And we are actually done with settings the pi.
+283.24, Now let's go ahead to the in app folder and let's start by creating our models.
+291.96000000000004, Now in the models we will need to create a product table in our database.
+296.64000000000004, This is the first step.
+298.2, Of course we will need to set up our database to store the products with the different ID
+303.2, numbers.
+304.2, So for that I'm going to create a class.
+306.71999999999997, Just increase the font a little bit.
+309.2, Right so I'm going to have a class and I'm going to call it product and I'm passing
+315.32, models dot model.
+317.91999999999996, Then I will need different fields.
+319.44, Now the first field in my table of course is going to be the product ID.
+324.08, Right so we will need an ID for each product item.
+327.76, The product ID is going to be a primary key essentially in our table.
+333.0, So that's going to be an auto incrementing primary key field.
+337.12, And for that I'm going to take the models class and I'm going to access a class called
+341.76, auto field.
+343.08, Now the auto field is going to auto increment your ID number.
+347.36, So you don't have to worry about manually enter the ID numbers of each product item
+352.24, in your list.
+353.4, So this is an auto field and taking inside primary key and we're going to set it to true
+361.08, which means that the product ID is going to be our primary key in our product stable.
+367.0, And if you don't know what primary key means simply this is a unique identifier.
+371.91999999999996, Right this is a unique identifier in your table that's going to be assigned to each record
+377.15999999999997, in your database table.
+378.64, So that's going to ensure that each record in your table can be uniquely identified and
+383.59999999999997, distinguished from others.
+385.47999999999996, So for each product item we will have a unique ID number.
+389.12, The next field that we want is the name of the product.
+391.84, So that's going to take the models class dot car field class and we're going to set
+397.71999999999997, a maximum length to the name.
+400.88, So we can give a maximum length of let's say for instance 100 characters.
+407.8, Right and we're going to store that in a label called name.
+411.59999999999997, Now I will need four more so one two three four and I will need SKU or stock keeping unit.
+420.28, The stock keeping unit basically is also a unique identifier for each product.
+426.4, I'm not going to set it as primary key but I'm going to give it an attribute of unique
+431.76, which means that each product in your product's list will have a unique SKU number.
+437.28000000000003, So that's going to be the stock keeping unit.
+440.92, Also I will need a price.
+443.84000000000003, We will need also quantity and we'll need the supplier of the product.
+450.28000000000003, Right so let's change quickly each field.
+453.76, So for the name we are set maximum length of 100 for the SKU that's a character field
+459.92, with the maximum length of let's give it 50 for example because I see that 100 is too much.
+466.84000000000003, Also let's give it another attribute.
+468.64000000000004, So that's going to be unique and we're going to set it to true.
+474.08000000000004, Right also for the price I will need a character field.
+478.16, No we don't need of course a character field for the price.
+481.12, We need to be float field.
+483.40000000000003, So that's going to be float field.
+486.28000000000003, Right and I'm going to leave it empty.
+488.48, Now for the quantity I don't need a character field of course.
+491.71999999999997, I'm going to need integer field and the same as the float field.
+495.44, I'm going to leave it empty.
+496.68, I'm not going to pass any parameters.
+499.28, And finally for the supplier of course that's going to be character field because we need
+504.12, characters right it's going to be the name of the supplier and the maximum length.
+508.28, Also I think I'm going to leave it to 100.
+511.2, And the last thing in the product class I will need a string representation of the product model
+517.6, to return the product name.
+519.96, If you remember in the beginning of the course when we created the tour agency we have created
+523.84, also this term method.
+526.0, Just the way to give us a proper string representation of the model.
+530.48, So that's going to be underscore underscore underscore underscore underscore passing inside
+535.28, the self to the self product right.
+537.9200000000001, We need the self product to be represented through that string.
+543.08, And we're going to return self dot name.
+547.56, Right it's as simple as that.
+549.4399999999999, This is our product class in our models.py.
+552.68, So we can go ahead and make migrations at that stage.
+555.68, So we'll say Python manage the pie make migrations.
+562.04, Good now we can apply the migrations.
+564.0, So we'll say Python manage the pie migrate.
+569.2399999999999, Fantastic we have applied actually the migrations and if you will take a look to the migrations
+573.3599999999999, folder in the triple zero one initial.
+576.52, They will have here all of your fields the product ID the name the SKU the price the
+581.0, quantity and the supplier great.
+583.04, And if you will take a look to the migrations folder if you'll open the triple zero one
+587.3199999999999, initial pie you will find here all of your fields have been actually created right the
+591.76, product ID the name all of the fields that we've created together in models.py.
+596.4, Let's move on to create our forms.
+598.88, So I'm going to create a file called forms.py now forms.py is very important.
+605.04, It's going to be the form essentially to add your product the name of the product the
+610.5999999999999, SKU the price the supplier all of the necessary information that concerns your product in
+616.28, your database table.
+618.0, And you know that's essentially everything related to your products item to be added
+621.92, to your database table.
+623.48, And of course in the forms.py I want to create my product form.
+627.1999999999999, First thing that I want to import is the forms module.
+630.04, So from Django I want to import forms.
+635.48, So I want from the current directory models to import the product class.
+641.88, These are the two things that we will need in our forms.py.
+645.88, Next I want to define a model form for the product model.
+650.3199999999999, So I'm going to create a class and I'm going to call that class product form.
+658.4, And inside here I'm going to pass the forms as parameters dot model form.
+664.9599999999999, Then we'll have a meta class.
+666.92, Now the meta class is going to define different attributes.
+670.0799999999999, Now the first attribute that we need to specify is the model which is going to be our product
+674.56, class.
+675.56, The second attribute is the fields and the fields here is going to include all of the
+680.4399999999999, fields from the product model.
+682.68, So in single quotes underscore underscore all underscore underscore.
+687.24, The third attribute is the labels.
+689.8, So the labels are going to be a dictionary of different key value pair sets.
+694.32, And the first key value pair is going to be the product ID.
+698.24, So the product underscore ID that should be written exactly like we have defined them
+704.6800000000001, here.
+705.6800000000001," So that should be like that in small letters product underscore ID the same for the name,"
+711.64, the SKU and the other attributes.
+715.68, So let's get back to our forms.
+717.68, Now the product ID is going to be set to product.
+723.16, We can write it this way product ID.
+726.3599999999999, Right?
+727.3599999999999, And we need five more.
+728.88," We need the name SKU price, quantity and supplier."
+733.52, Right?
+734.52, So let's do name that's going to be equal to the name itself.
+741.4, So I will need the SKU going to put it in a capital form like that.
+746.9599999999999, The price.
+751.24, And finally we need the supplier.
+763.88, Awesome.
+765.4, The last attribute in my meta class is going to be widgets.
+770.6," Again, it's going to be in a form of it's going to be a dictionary with different key value"
+776.48, pair sets.
+777.64," Now before coding the widgets attribute, let me just talk a little bit about that attribute."
+783.28, This is going to be used to specify the type of input widget that should be used to render
+789.08, each form field in the HTML template.
+792.0," So for example, each field of the form is going to be associated with a specific input"
+797.92, widget.
+798.92, Let's say for instance that we have number input widget for the product ID price and
+804.4399999999999," quantity fields, which provides an input field for numeric values."
+809.56, We have a widget for the text input for the name SKU and supplier fields.
+814.16, And that's going to provide an input field for text values.
+818.16, So that's the usefulness of this widgets attribute in our meta class.
+822.56, So let's go ahead and code that.
+824.56, So the product underscore ID is going to be set to forms dot number input.
+834.0799999999999, This is a class that's going to take different attributes.
+838.1999999999999," So the attributes, now let me maybe I can just shut the explorer."
+844.3599999999999, The attributes here is going to be in a form also of key value pairs.
+849.1199999999999, It's going to be a dictionary essentially.
+851.88, And the first one is the placeholder.
+858.52, And the placeholder here is going to be we can say EG1 for example.
+867.0, This is the number input widget for the product ID with placeholder.
+871.8, Also I'm going to use a little bit of CSS.
+873.96, So I'm going to give this a class form control.
+877.08, All of the widgets actually are going to take the CSS class form control.
+881.52, So that's going to be the second attribute.
+885.36," The class is set to let's say form, iPhone control."
+891.16, So this is the first item in the widgets.
+894.68, Actually let me just make like that.
+896.68, I'm going to separate this by a comma.
+899.76, I'm going to take the product ID and we'll need five more.
+903.3199999999999," One, two, three, four, five."
+905.4, We will need one for the name.
+908.16," We will need another one for the SKU for the price, the quantity and the supplier."
+923.88," Instead of the number input, I will need text input."
+928.9599999999999," And for the placeholder instead of one, I can put shirt for example."
+934.56, Right.
+935.56, And also it's going to take form control class for the SKU instead of the number input.
+941.4, We're going to have also text input.
+944.0, The T here is capitalized by the way.
+945.8399999999999, So I apologize for that.
+947.64," For the SKU, also I will need text input."
+953.04," And for the placeholder, we can just put any number or put any code if you want."
+960.08," Just one, two, three, four, five."
+963.36, Right.
+964.36, Because I'm very creative.
+965.64, I'm going to leave it like that.
+968.32, Let me just put a dot for the price and the quantity.
+972.08, I'm going to leave it as number input.
+974.72," As far as the placeholder for the price, I can make 19.99 for example."
+980.1600000000001, That's going to be the same.
+981.32," Also for the quantity, we can just leave it at one or maybe you can make it 10."
+987.6, Now you're free to put the placeholder that you want of course.
+990.32," And for the supplier, I'm going to change the number input to text input."
+997.9200000000001," And here we can say for instance, ABC core."
+1001.8000000000001," All right guys, great job."
+1003.64," In the next part, we're going to tackle views.py, where we'll define the logic for handling"
+1008.36, user requests and rendering the responses.
+1011.4, And then we'll move on to URLs.py file.
+1014.24, And the URLs.py as you know acts as a router for directing the incoming requests to the
+1020.08, appropriate views.
+1022.16, Thank you so much for watching and I will see you shortly in the next part.

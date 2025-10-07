@@ -1,0 +1,17 @@
+/* static/css/home_components/social_follow_section.css */
+
+/* --- Social Follow Section --- */
+.social-follow-section {
+  padding: 4rem 0;
+}
+
+.social-icon {
+  font-size: 1.75rem;
+  color: #343a40;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.2);
+  color: #663F83;
+}

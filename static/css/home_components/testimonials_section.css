@@ -1,0 +1,35 @@
+/* static/css/home_components/testimonials_section.css */
+
+/* --- Testimonials Section --- */
+.testimonials-section {
+  background-color: #f1f3f5;
+  padding: 6rem 0;
+}
+
+.testimonial-card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.testimonial-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+}
+
+.testimonial-name {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.testimonial-role {
+  color: #6c757d;
+}
+
+.carousel-indicators [data-bs-target] {
+  background-color: #663F83;
+}

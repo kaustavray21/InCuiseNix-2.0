@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Get all necessary DOM elements ---
     const addNoteModalEl = document.getElementById('addNoteModal');
     const addNoteModal = new bootstrap.Modal(addNoteModalEl);
-    const addNoteForm = document.getElementById('add-note-form'); // Corrected ID
+    const addNoteForm = document.getElementById('add-note-form');
     
     const editNoteModalEl = document.getElementById('editNoteModal');
     const editNoteModal = new bootstrap.Modal(editNoteModalEl);
-    const editNoteForm = document.getElementById('edit-note-form'); // Corrected ID
+    const editNoteForm = document.getElementById('edit-note-form');
 
     const notesListContainer = document.getElementById('notes-list-container');
     const notePopupOverlay = document.getElementById('note-popup-overlay');
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Event Listener for Adding a Note ---
     if (addNoteForm) {
         addNoteForm.addEventListener('submit', async function(event) {
-            event.preventDefault(); // Prevents page refresh
+            event.preventDefault();
             const videoId = document.getElementById('player-data-container').dataset.videoId;
             const formData = new FormData(this);
 
@@ -43,13 +43,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Event Listener for Saving Edited Note ---
     if (editNoteForm) {
         editNoteForm.addEventListener('submit', async function(event) {
-            event.preventDefault(); // Prevents page refresh
+            event.preventDefault();
             const noteId = document.getElementById('edit-note-id').value;
             const newTitle = document.getElementById('edit-note-title').value;
             const newContent = document.getElementById('edit-note-content').value;
 
             try {
-                // Now sends both title and content
                 const data = await api.editNote(noteId, newTitle, newContent);
                 if (data.status === 'success') {
                     ui.updateNoteInUI(data.note);
@@ -87,15 +86,24 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (data.status === 'success') {
                             noteCard.remove();
                         } else {
-                             console.error('Failed to delete note:', data.message);
+                            console.error('Failed to delete note:', data.message);
                         }
                     } catch (error) {
                         console.error('Error deleting note:', error);
                     }
                 }
             } else {
-                // Handle View: Shows popup with correct title and content
-                ui.showNotePopup(noteCard);
+                // --- THIS IS THE FIX ---
+                // Handle View: Read data directly from the card's attributes
+                const note = {
+                    id: noteCard.dataset.noteId,
+                    title: noteCard.dataset.noteTitle,
+                    content: noteCard.dataset.noteContent,
+                    timestamp: noteCard.dataset.noteTimestamp
+                };
+                
+                // Pass the clean 'note' object to the UI function
+                ui.showNotePopup(note);
             }
         });
     }

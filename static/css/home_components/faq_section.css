@@ -1,0 +1,25 @@
+/* static/css/home_components/faq_section.css */
+
+/* --- FAQ Hover Styles --- */
+.accordion-item {
+  cursor: pointer;
+}
+
+.accordion-button {
+  pointer-events: none;
+  font-weight: 700;
+  background-color: #f9f7f9;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.accordion-item:hover .accordion-button {
+  background-color: #663F83;
+  color: #E7E3E3;
+}
+
+.accordion-collapse {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s ease-out, opacity 0.3s ease-in-out;
+}

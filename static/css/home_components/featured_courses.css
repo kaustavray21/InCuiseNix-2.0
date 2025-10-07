@@ -1,0 +1,50 @@
+/* static/css/components/featured_courses.css */
+
+/* --- Featured Courses Section --- */
+.course-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: #fff; /* Ensure card has a background */
+}
+
+.course-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 1rem 1.5rem rgba(0,0,0,0.1);
+}
+
+.course-card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* BUGFIX: Forcefully remove underline from the link wrapper */
+.course-card-link, .course-card-link:hover {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+/* Style for the title itself */
+.course-card-link .card-title {
+  color: #212529;
+  transition: color 0.2s ease-in-out;
+}
+
+/* Adds a nice hover effect to the title */
+.course-card-link:hover .card-title {
+  color: #663F83; /* Your brand's violet color */
+}
+
+
+.course-rating {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #ffc107; /* Gold color for stars */
+}
+
+.course-rating .rating-text {
+  color: #6c757d;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+}

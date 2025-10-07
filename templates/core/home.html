@@ -4,6 +4,17 @@
 <!-- This block name has been corrected from 'extra_css' to 'custom_css' -->
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/page_animations.css' %}">
+
+    <!-- Homepage section-specific styles -->
+    <link rel="stylesheet" href="{% static 'css/home_components/hero_section.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_components/about_section.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_components/featured_courses.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/home_components/status_section.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_components/testimonials_section.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_components/faq_section.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_components/social_follow_section.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -20,6 +31,5 @@
 
 <!-- This block name has been corrected from 'extra_js' to 'custom_js' -->
 {% block extra_js %}
-<script src="{% static 'js/animation.js' %}" defer></script>
 <script src="{% static 'js/home.js' %}" defer></script>
 {% endblock %}

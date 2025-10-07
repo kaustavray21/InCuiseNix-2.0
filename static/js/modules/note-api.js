@@ -18,14 +18,17 @@ export function addNote(videoId, formData) {
     });
 }
 
-export function editNote(noteId, newContent) {
+// static/js/modules/note-api.js
+
+export function editNote(noteId, newTitle, newContent) { // <-- FIX: Accepts both title and content
     return fetchAPI(`/note/edit/${noteId}/`, {
         method: 'POST',
         headers: {
             'X-CSRFToken': csrfToken,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ content: newContent }),
+        // FIX: Sends both title and content in the request body
+        body: JSON.stringify({ title: newTitle, content: newContent }),
     });
 }
 

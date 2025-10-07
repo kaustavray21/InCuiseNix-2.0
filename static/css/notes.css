@@ -160,4 +160,14 @@
 .note-popup-card .primary-cta:hover {
     text-decoration: underline;
 }
+
+/* static/css/notes.css */
+
+.note-full-content {
+    font-size: 0.9rem;
+    color: #e0e0e0; /* Lighter text for content */
+    margin: 0.75rem 0; /* Adds space above and below the content */
+    white-space: pre-wrap; /* Respects line breaks and spacing in the note */
+    word-wrap: break-word; /* Prevents long words from overflowing */
+}
 /* --- END: Note Detail Pop-up Card Styles --- */

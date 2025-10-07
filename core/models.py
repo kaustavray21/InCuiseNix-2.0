@@ -35,7 +35,7 @@ class Note(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
     # Add this new line for the title
-    title = models.CharField(max_length=200, default="Untitled Note")
+    title = models.CharField(max_length=200)
     content = models.TextField()
     video_timestamp = models.PositiveIntegerField(help_text="Timestamp in seconds")
     created_at = models.DateTimeField(auto_now_add=True)

@@ -3,49 +3,10 @@
 import { formatTimestamp } from './utils.js';
 
 /**
- * Creates the HTML for a single note card.
- * This version displays the full title and content.
- * @param {object} note - The note object.
- * @returns {string} The HTML string for the note card.
- */
-function createNoteCardHTML(note) {
-    // Sanitize content to prevent issues with quotes in data attributes
-    const safeTitle = note.title.replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-    const safeContent = note.content.replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-
-    return `
-        <div class="note-card"
-             data-note-id="${note.id}"
-             data-note-title="${safeTitle}"
-             data-note-content="${safeContent}"
-             data-note-timestamp="${note.video_timestamp}">
-            
-            <div class="note-card-header">
-                <strong class="note-title">${note.title}</strong>
-                <div class="note-actions">
-                    <button class="note-btn note-btn-edit" title="Edit Note">
-                        <i class="fas fa-pen-to-square"></i>
-                    </button>
-                    <button class="note-btn note-btn-delete" title="Delete Note">
-                        <i class="fas fa-trash-can"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <p class="note-full-content">${note.content}</p>
-            
-            <small class="note-timestamp-display">
-                Note at ${formatTimestamp(note.video_timestamp)}
-            </small>
-        </div>
-    `;
-}
-
-/**
  * Adds a new note to the top of the notes list.
- * @param {object} note - The new note object to add.
+ * @param {string} noteCardHTML - The HTML of the new note card from the server.
  */
-export function addNoteToUI(note) {
+export function addNoteToUI(noteCardHTML) {
     const notesListContainer = document.getElementById('notes-list-container');
     const noNotesMessage = document.getElementById('no-notes-message');
     
@@ -53,7 +14,6 @@ export function addNoteToUI(note) {
         noNotesMessage.style.display = 'none';
     }
     
-    const noteCardHTML = createNoteCardHTML(note);
     notesListContainer.insertAdjacentHTML('afterbegin', noteCardHTML);
 }
 
@@ -64,11 +24,12 @@ export function addNoteToUI(note) {
 export function updateNoteInUI(note) {
     const noteCard = document.querySelector(`.note-card[data-note-id='${note.id}']`);
     if (noteCard) {
-        // Update the visible text
-        noteCard.querySelector('.note-title').textContent = note.title;
+        // Update the visible preview text
+        noteCard.querySelector('.note-title-preview').textContent = note.title;
         
-        // FIX: Target the correct class for the full content
-        noteCard.querySelector('.note-full-content').textContent = note.content;
+        // Create a truncated preview for the content
+        const contentPreview = note.content.split(' ').slice(0, 10).join(' ') + (note.content.split(' ').length > 10 ? '...' : '');
+        noteCard.querySelector('.note-content-preview').textContent = contentPreview;
         
         // Update the data attributes for future interactions
         noteCard.dataset.noteTitle = note.title;
@@ -103,7 +64,7 @@ export function showNotePopup(note) {
     // Populate the popup with data from the clean 'note' object
     popupTitle.textContent = note.title;
     popupContent.textContent = note.content;
-    popupTimestamp.textContent = `Note at ${formatTimestamp(note.timestamp)}`;
+    popupTimestamp.textContent = `Note at ${formatTimestamp(parseInt(note.timestamp, 10))}`;
     
     // Make the popup visible
     notePopupOverlay.style.display = 'flex';

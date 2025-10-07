@@ -12,6 +12,7 @@ import google.generativeai as genai
 from django.conf import settings
 from transcripts.models import Transcript
 from transcripts.models import TranscriptLine
+from django.template.loader import render_to_string
 
 
 # --- User Authentication and Static Pages ---
@@ -184,15 +185,14 @@ def add_note_view(request, video_id):
         note.video = video
         note.save()
         
+        note_card_html = render_to_string(
+            'core/components/video_player/_note_card.html',
+            {'note': note}
+        )
+        
         return JsonResponse({
             'status': 'success',
-            'note': {
-                'id': note.id,
-                'title': note.title,  # <-- Add this line
-                'content': note.content,
-                'timestamp': note.video_timestamp,
-                'created_at': _date(note.created_at, 'd M Y, H:i'),
-            }
+            'note_card_html': note_card_html,
         })
     
     return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
@@ -270,5 +270,3 @@ def gemini_assistant_view(request):
             return JsonResponse({'error': 'An error occurred while communicating with the AI service.'}, status=500)
 
     return JsonResponse({'error': 'Invalid request method.'}, status=405)
-
-

@@ -1,0 +1,20 @@
+<div class="note-card" 
+     data-note-id="{{ note.id }}" 
+     data-note-title="{{ note.title }}" 
+     data-note-content="{{ note.content }}"
+     data-note-timestamp="{{ note.video_timestamp }}">
+  
+  <div class="card-body">
+    <div class="note-status-indicator"></div>
+    
+    <div class="note-text-wrapper">
+      <p class="card-text fw-bold note-title-preview">{{ note.title }}</p>
+      <small class="note-timestamp text-muted">{{ note.created_at|date:"d M Y, H:i" }}</small>
+    </div>
+    
+    <div class="note-actions">
+        <button class="note-btn note-btn-edit" data-bs-toggle="modal" data-bs-target="#editNoteModal"><i class="fas fa-pencil-alt"></i></button>
+        <button class="note-btn note-btn-delete"><i class="fas fa-trash"></i></button>
+    </div>
+  </div>
+</div>

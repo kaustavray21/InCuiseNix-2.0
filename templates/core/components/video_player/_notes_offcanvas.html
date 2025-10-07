@@ -1,39 +1,27 @@
-<!-- templates/core/components/video_player/_notes_offcanvas.html -->
-
 <div class="offcanvas offcanvas-end" tabindex="-1" id="notesOffcanvas" aria-labelledby="notesOffcanvasLabel">
-  <!-- Offcanvas Header -->
   <div class="offcanvas-header">
     <h5 id="notesOffcanvasLabel">My Notes for "{{ current_video.title }}"</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   
-  <!-- Offcanvas Body -->
   <div class="offcanvas-body">
     <div id="notes-list-container" class="d-flex flex-column gap-3">
       
-      <!-- Loop through each note object -->
       {% for note in notes %}
-        <!-- 
-          This is the main container for a single note.
-          It holds all the data required by the JavaScript in data-* attributes.
-        -->
         <div class="note-card" 
              data-note-id="{{ note.id }}" 
              data-note-title="{{ note.title }}" 
-             data-full-content="{{ note.content }}"
-             data-timestamp="{{ note.video_timestamp }}">
+             data-note-content="{{ note.content }}"
+             data-note-timestamp="{{ note.video_timestamp }}">
           
           <div class="card-body">
             <div class="note-status-indicator"></div>
             
-            <!-- This wrapper contains the title, content preview, and timestamp -->
             <div class="note-text-wrapper">
               <p class="card-text fw-bold note-title-preview">{{ note.title }}</p>
-              <p class="card-text text-muted note-content-preview">{{ note.content|truncatewords:10 }}</p>
               <small class="note-timestamp text-muted">{{ note.created_at|date:"d M Y, H:i" }}</small>
             </div>
             
-            <!-- This wrapper contains the edit and delete buttons -->
             <div class="note-actions">
                 <button class="note-btn note-btn-edit" data-bs-toggle="modal" data-bs-target="#editNoteModal"><i class="fas fa-pencil-alt"></i></button>
                 <button class="note-btn note-btn-delete"><i class="fas fa-trash"></i></button>
@@ -41,7 +29,6 @@
           </div>
         </div>
       {% empty %}
-        <!-- This message is shown only if there are no notes for the video -->
         <p id="no-notes-message" class="text-muted">You haven't added any notes for this video yet.</p>
       {% endfor %}
     </div>

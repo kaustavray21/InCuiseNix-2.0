@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 const data = await api.addNote(videoId, formData);
                 if (data.status === 'success') {
-                    ui.addNoteToUI(data.note);
+                    // FIX: Pass the rendered HTML from the server to the UI function
+                    ui.addNoteToUI(data.note_card_html);
                     addNoteForm.reset();
                     addNoteModal.hide();
                 } else {
@@ -93,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             } else {
-                // --- THIS IS THE FIX ---
                 // Handle View: Read data directly from the card's attributes
                 const note = {
                     id: noteCard.dataset.noteId,

@@ -1,0 +1,13 @@
+<h4 class="mb-3">Course Playlist</h4>
+<div class="video-list-container">
+    {% for v in all_videos %}
+        <a href="{% url 'video_player' course.id %}?vid={{ v.id }}" class="card-link">
+            <div class="card {% if video and v.id == video.id %}current-video{% endif %}">
+                <p class="tip" title="{{ v.title }}">{{ v.title }}</p>
+                <p class="second-text">Lecture {{ forloop.counter }}</p>
+            </div>
+        </a>
+    {% empty %}
+        <p>No videos available for this course.</p>
+    {% endfor %}
+</div>

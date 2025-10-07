@@ -5,15 +5,18 @@
     </div>
 
     <div class="terminal-body" id="transcript-container">
-        {% if transcript_lines %}
-            {% for line in transcript_lines %}
-                <p class="transcript-line" data-start="{{ line.start_time }}">
-                    <span class="timestamp">[{{ line.formatted_time }}]</span>
-                    <span class="text-content">{{ line.text }}</span>
-                </p>
-            {% endfor %}
-        {% else %}
+        <!-- Loop through the new transcript model relationship -->
+        {% for line in video.transcripts.all %}
+            <!-- Use the new field name 'start' -->
+            <p class="transcript-line" data-start="{{ line.start }}">
+                <!-- Format the timestamp directly in the template -->
+                <span class="timestamp">[{{ line.start|floatformat:2 }}s]</span>
+                <!-- Use the new field name 'content' -->
+                <span class="text-content">{{ line.content }}</span>
+            </p>
+        {% empty %}
+            <!-- This part runs if no transcripts are found -->
             <p class="text-muted">Transcript is not available for this video.</p>
-        {% endif %}
+        {% endfor %}
     </div>
 </aside>

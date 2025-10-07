@@ -1,8 +1,10 @@
+# kaustavray21/incuisenix-2.0/InCuiseNix-2.0-7bf06a071d5eca737f6c16c2c6eadcbe4d1a2e6b/core/models.py
+
 from django.db import models
 from django.contrib.auth.models import User
 
 class Course(models.Model):
-    course_id = models.CharField(max_length=50, unique=True)
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     description = models.TextField()
     image_url = models.URLField(max_length=200)
@@ -11,13 +13,24 @@ class Course(models.Model):
         return self.title
 
 class Video(models.Model):
-    video_id = models.CharField(max_length=50, unique=True)
+    id = models.AutoField(primary_key=True)
+    youtube_id = models.CharField(max_length=50, unique=True)
     title = models.CharField(max_length=200)
     video_url = models.URLField(max_length=200)
     course = models.ForeignKey(Course, related_name='videos', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
+
+class Transcript(models.Model):
+    id = models.AutoField(primary_key=True)
+    start = models.FloatField()
+    content = models.TextField()
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name='transcripts')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='transcripts')
+
+    def __str__(self):
+        return f'{self.video.title} - {self.start}'
 
 class Enrollment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -29,12 +42,10 @@ class Enrollment(models.Model):
 
     def __str__(self):
         return f"{self.user.username} enrolled in {self.course.title}"
-    
-# core/models.py
+
 class Note(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
-    # Add this new line for the title
     title = models.CharField(max_length=200)
     content = models.TextField()
     video_timestamp = models.PositiveIntegerField(help_text="Timestamp in seconds")
@@ -44,5 +55,4 @@ class Note(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        # Update the string representation to include the title
         return f'"{self.title}" by {self.user.username} for {self.video.title}'

@@ -1,0 +1,80 @@
+/* static/css/custom_form.css */
+
+.form-card {
+    background-color: #fff;
+    border: 1px solid #e2e8f0; /* slate-200 */
+    border-radius: 0.75rem; /* rounded-xl */
+    padding: 1rem; /* p-4 */
+    font-size: 0.875rem; /* text-sm */
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.form-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.form-card-title {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: 700; /* font-bold */
+}
+
+.form-card-input,
+.form-card-textarea {
+    background-color: #f1f5f9; /* slate-100 */
+    color: #475569; /* slate-600 */
+    border: 1px solid #e2e8f0; /* slate-200 */
+    outline: none;
+    border-radius: 0.5rem; /* rounded-lg */
+    padding: 0.75rem;
+    transition: border-color 0.3s;
+    width: 100%;
+    box-sizing: border-box; /* Important for padding */
+}
+
+.form-card-input::placeholder,
+.form-card-textarea::placeholder {
+    color: #475569; /* slate-600 */
+    opacity: 0.5;
+}
+
+.form-card-input:focus,
+.form-card-textarea:focus {
+    border-color: #475569; /* focus:border-slate-600 */
+}
+
+.form-card-textarea {
+    height: 7rem; /* h-28 */
+    resize: none;
+}
+
+.form-card-actions {
+    display: flex;
+    justify-content: flex-end; /* Pushes button to the right */
+    width: 100%;
+}
+
+.form-card-submit {
+    background-color: #3b82f6; /* bg-blue-500 */
+    color: white;
+    border: 1px solid #e2e8f0; /* border-slate-200 */
+    border-radius: 0.5rem; /* rounded-lg */
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-card-submit:hover {
+    background-color: #2563eb; /* hover:bg-blue-600 */
+}
+
+.form-card-submit svg {
+    stroke: white;
+}

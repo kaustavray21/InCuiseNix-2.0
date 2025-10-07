@@ -166,3 +166,18 @@ html {
   font-weight: 500;
   transition: all 0.3s ease-in;
 }
+
+.btn-custom-in {
+    background-color: #6a0dc5; /* New purple color */
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    border: none; /* Ensure no default border */
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-custom-in:hover {
+    background-color: #580bad; /* A slightly darker purple for hover */
+    color: #fff;
+}

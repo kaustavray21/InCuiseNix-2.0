@@ -1,3 +1,4 @@
+# core/forms.py
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -27,10 +28,15 @@ class LoginForm(FormStylingMixin, AuthenticationForm):
 class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
-        # Add 'title' to the list of fields
         fields = ['title', 'content', 'video_timestamp']
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter note title'}),
-            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Write your note here...'}),
+            'title': forms.TextInput(attrs={
+                'class': 'form-card-input',
+                'placeholder': 'Your title...'
+            }),
+            'content': forms.Textarea(attrs={
+                'class': 'form-card-textarea',
+                'placeholder': 'Your note...'
+            }),
             'video_timestamp': forms.HiddenInput(),
         }

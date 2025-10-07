@@ -1,12 +1,14 @@
+<!-- templates/core/components/video_player/_note_popup.html -->
 <div class="note-popup-overlay" id="note-popup-overlay">
-    <div class="note-popup-card">
-        <div class="status-ind"></div>
-        <div class="right">
-            <p class="text-content" id="popup-note-content"></p>
-            <p class="time" id="popup-note-meta"></p>
-            <div class="button-wrap">
-                <button class="primary-cta" id="popup-close-btn">Close</button>
-            </div>
-        </div>
+  <div class="note-popup-card">
+    <div class="status-ind"></div>
+    <div class="right">
+      <h4 id="popup-note-title" class="mb-0"></h4> <!-- Title goes here -->
+      <p id="popup-note-content" class="text-content"></p>
+      <div class="d-flex justify-content-between align-items-center">
+        <small id="popup-note-time" class="time"></small>
+        <button class="primary-cta" id="popup-close-btn">Close</button>
+      </div>
     </div>
+  </div>
 </div>

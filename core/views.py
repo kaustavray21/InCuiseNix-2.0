@@ -173,7 +173,7 @@ def video_player_view(request, course_id):
 def add_note_view(request, video_id):
     """
     Handles adding a new note via an AJAX request to prevent page reloads.
-    Returns the new note's data as JSON.
+    Returns the new note's data (including title) as JSON.
     """
     video = get_object_or_404(Video, id=video_id)
     form = NoteForm(request.POST)
@@ -184,14 +184,14 @@ def add_note_view(request, video_id):
         note.video = video
         note.save()
         
-        # Return a JSON response with the newly created note's details
         return JsonResponse({
             'status': 'success',
             'note': {
                 'id': note.id,
+                'title': note.title,  # <-- Add this line
                 'content': note.content,
                 'timestamp': note.video_timestamp,
-                'created_at': _date(note.created_at, 'd M Y, H:i'), # Format the date
+                'created_at': _date(note.created_at, 'd M Y, H:i'),
             }
         })
     
@@ -200,17 +200,27 @@ def add_note_view(request, video_id):
 @login_required
 @require_POST
 def edit_note_view(request, note_id):
-    """Handles editing a note via an AJAX request."""
+    """Handles editing a note's title and content via an AJAX request."""
     note = get_object_or_404(Note, id=note_id, user=request.user)
     data = json.loads(request.body)
+    new_title = data.get('title')
     new_content = data.get('content')
 
-    if new_content:
+    if new_content and new_title:
+        note.title = new_title
         note.content = new_content
         note.save()
-        return JsonResponse({'status': 'success', 'message': 'Note updated successfully.'})
+        return JsonResponse({
+            'status': 'success', 
+            'message': 'Note updated successfully.',
+            'note': { # <-- Send back the updated note
+                'id': note.id,
+                'title': note.title,
+                'content': note.content,
+            }
+        })
     
-    return JsonResponse({'status': 'error', 'message': 'Content cannot be empty.'}, status=400)
+    return JsonResponse({'status': 'error', 'message': 'Title and content cannot be empty.'}, status=400)
 
 @login_required
 @require_POST

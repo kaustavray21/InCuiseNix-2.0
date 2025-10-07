@@ -1,23 +1,34 @@
-<div class="modal fade" id="addNoteModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add a Note</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form id="addNoteForm" method="post" data-video-id="{{ current_video.id }}">
-                <div class="modal-body">
-                    {{ form.video_timestamp }}
-                    <div class="mb-3">
-                        <label for="{{ form.content.id_for_label }}" class="form-label">Note Content</label>
-                        {{ form.content }}
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save Note</button>
-                </div>
-            </form>
-        </div>
+<!-- templates/core/components/video_player/_add_note_modal.html -->
+<div class="modal fade" id="addNoteModal" tabindex="-1" aria-labelledby="addNoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addNoteModalLabel">Add a New Note</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="add-note-form">
+          {% csrf_token %}
+          <input type="hidden" name="video_timestamp" id="id_video_timestamp">
+          
+          <!-- New Title Field -->
+          <div class="mb-3">
+            <label for="id_title" class="form-label">Title</label>
+            {{ form.title }}
+          </div>
+
+          <!-- Existing Content Field -->
+          <div class="mb-3">
+            <label for="id_content" class="form-label">Content</label>
+            {{ form.content }}
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save Note</button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </div>

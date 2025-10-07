@@ -30,9 +30,12 @@ class Enrollment(models.Model):
     def __str__(self):
         return f"{self.user.username} enrolled in {self.course.title}"
     
+# core/models.py
 class Note(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
+    # Add this new line for the title
+    title = models.CharField(max_length=200, default="Untitled Note")
     content = models.TextField()
     video_timestamp = models.PositiveIntegerField(help_text="Timestamp in seconds")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -41,6 +44,5 @@ class Note(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"Note by {self.user.username} for {self.video.title} at {self.video_timestamp}s"
-    
-
+        # Update the string representation to include the title
+        return f'"{self.title}" by {self.user.username} for {self.video.title}'

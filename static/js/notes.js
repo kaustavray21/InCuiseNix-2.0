@@ -1,106 +1,126 @@
+// static/js/notes.js
+
 import * as api from './modules/note-api.js';
 import * as ui from './modules/note-ui.js';
 import { formatTimestamp } from './modules/utils.js';
 
 document.addEventListener('DOMContentLoaded', function() {
+    // --- Get all necessary DOM elements ---
     const addNoteModalEl = document.getElementById('addNoteModal');
     const addNoteModal = new bootstrap.Modal(addNoteModalEl);
-    const addNoteForm = document.getElementById('addNoteForm');
+    const addNoteForm = document.getElementById('add-note-form'); // Corrected ID
+    
     const editNoteModalEl = document.getElementById('editNoteModal');
     const editNoteModal = new bootstrap.Modal(editNoteModalEl);
-    const editNoteForm = document.getElementById('editNoteForm');
-    const editNoteContent = document.getElementById('editNoteContent');
-    const notesList = document.getElementById('notes-list-container');
+    const editNoteForm = document.getElementById('edit-note-form'); // Corrected ID
+
+    const notesListContainer = document.getElementById('notes-list-container');
     const notePopupOverlay = document.getElementById('note-popup-overlay');
     const popupCloseBtn = document.getElementById('popup-close-btn');
 
-    // Format all timestamps on page load
-    document.querySelectorAll('.note-timestamp').forEach(el => {
-        const seconds = parseInt(el.dataset.seconds, 10);
-        if (!isNaN(seconds)) {
-            el.textContent = `Timestamp: ${formatTimestamp(seconds)}`;
-        }
-    });
+    // --- Event Listener for Adding a Note ---
+    if (addNoteForm) {
+        addNoteForm.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevents page refresh
+            const videoId = document.getElementById('player-data-container').dataset.videoId;
+            const formData = new FormData(this);
 
-    addNoteModalEl.addEventListener('show.bs.modal', function() {
-        if (window.videoPlayer) {
-            window.videoPlayer.pause();
-            const currentTime = Math.round(window.videoPlayer.currentTime);
-            addNoteForm.querySelector('input[name="video_timestamp"]').value = currentTime;
-        }
-    });
-
-    addNoteForm.addEventListener('submit', async function(event) {
-        event.preventDefault();
-        const videoId = this.dataset.videoId;
-        const formData = new FormData(this);
-
-        try {
-            const data = await api.addNote(videoId, formData);
-            if (data.status === 'success') {
-                ui.addNoteToUI(data.note);
-                addNoteForm.reset();
-                addNoteModal.hide();
-                if (window.videoPlayer) window.videoPlayer.play();
-            }
-        } catch (error) {
-            console.error('Error adding note:', error);
-        }
-    });
-
-    editNoteForm.addEventListener('submit', async function(event) {
-        event.preventDefault();
-        const noteId = this.dataset.noteId;
-        const newContent = editNoteContent.value;
-
-        try {
-            const data = await api.editNote(noteId, newContent);
-            if (data.status === 'success') {
-                ui.updateNoteInUI(noteId, newContent);
-                editNoteModal.hide();
-            }
-        } catch (error) {
-            console.error('Error updating note:', error);
-        }
-    });
-
-    notesList.addEventListener('click', async function(event) {
-        const target = event.target;
-        const editButton = target.closest('.btn-edit-note');
-        const deleteButton = target.closest('.btn-delete-note');
-        const noteCard = target.closest('.note-card');
-
-        if (editButton) {
-            editNoteContent.value = editButton.dataset.noteContent;
-            editNoteForm.dataset.noteId = editButton.dataset.noteId;
-            editNoteModal.show();
-            return;
-        }
-
-        if (deleteButton) {
-            const noteId = deleteButton.dataset.noteId;
-            if (confirm('Are you sure you want to delete this note?')) {
-                try {
-                    const data = await api.deleteNote(noteId);
-                    if (data.status === 'success') {
-                        ui.removeNoteFromUI(noteId);
-                    }
-                } catch (error) {
-                    console.error('Error deleting note:', error);
+            try {
+                const data = await api.addNote(videoId, formData);
+                if (data.status === 'success') {
+                    ui.addNoteToUI(data.note);
+                    addNoteForm.reset();
+                    addNoteModal.hide();
+                } else {
+                    console.error('Failed to add note:', data.errors);
                 }
+            } catch (error) {
+                console.error('Error submitting form:', error);
             }
-            return;
-        }
-        
-        if (noteCard) {
-            ui.showNotePopup(noteCard);
-        }
-    });
+        });
+    }
 
-    popupCloseBtn.addEventListener('click', ui.closeNotePopup);
-    notePopupOverlay.addEventListener('click', (event) => {
-        if (event.target === notePopupOverlay) {
-            ui.closeNotePopup();
-        }
-    });
+    // --- Event Listener for Saving Edited Note ---
+    if (editNoteForm) {
+        editNoteForm.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevents page refresh
+            const noteId = document.getElementById('edit-note-id').value;
+            const newTitle = document.getElementById('edit-note-title').value;
+            const newContent = document.getElementById('edit-note-content').value;
+
+            try {
+                // Now sends both title and content
+                const data = await api.editNote(noteId, newTitle, newContent);
+                if (data.status === 'success') {
+                    ui.updateNoteInUI(data.note);
+                    editNoteModal.hide();
+                } else {
+                    console.error('Failed to update note:', data.message);
+                }
+            } catch (error) {
+                console.error('Error updating note:', error);
+            }
+        });
+    }
+
+    // --- Main Event Listener for the Notes List (for viewing, editing, deleting) ---
+    if (notesListContainer) {
+        notesListContainer.addEventListener('click', async function(event) {
+            const target = event.target;
+            const noteCard = target.closest('.note-card');
+
+            if (!noteCard) return; // Exit if click was not on a card
+
+            const editButton = target.closest('.note-btn-edit');
+            const deleteButton = target.closest('.note-btn-delete');
+            const noteId = noteCard.dataset.noteId;
+
+            if (editButton) {
+                // Handle Edit: Populates modal with correct title and content
+                ui.populateEditModal(noteCard);
+            
+            } else if (deleteButton) {
+                // Handle Delete
+                if (confirm('Are you sure you want to delete this note?')) {
+                    try {
+                        const data = await api.deleteNote(noteId);
+                        if (data.status === 'success') {
+                            noteCard.remove();
+                        } else {
+                             console.error('Failed to delete note:', data.message);
+                        }
+                    } catch (error) {
+                        console.error('Error deleting note:', error);
+                    }
+                }
+            } else {
+                // Handle View: Shows popup with correct title and content
+                ui.showNotePopup(noteCard);
+            }
+        });
+    }
+    
+    // --- Listeners to close the note detail popup ---
+    if (popupCloseBtn) {
+        popupCloseBtn.addEventListener('click', () => {
+             notePopupOverlay.style.display = 'none';
+        });
+    }
+    if (notePopupOverlay) {
+        notePopupOverlay.addEventListener('click', (event) => {
+            if (event.target === notePopupOverlay) {
+                 notePopupOverlay.style.display = 'none';
+            }
+        });
+    }
+
+    // --- Set timestamp in "Add Note" modal when it opens ---
+    if (addNoteModalEl) {
+        addNoteModalEl.addEventListener('show.bs.modal', function () {
+            if (window.videoPlayer && typeof window.videoPlayer.currentTime === 'number') {
+                const currentTime = Math.round(window.videoPlayer.currentTime);
+                document.getElementById('id_video_timestamp').value = currentTime;
+            }
+        });
+    }
 });

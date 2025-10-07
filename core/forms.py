@@ -27,8 +27,10 @@ class LoginForm(FormStylingMixin, AuthenticationForm):
 class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ['content', 'video_timestamp']
+        # Add 'title' to the list of fields
+        fields = ['title', 'content', 'video_timestamp']
         widgets = {
-            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter note title'}),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Write your note here...'}),
             'video_timestamp': forms.HiddenInput(),
         }

@@ -23,9 +23,14 @@
     transition: background-color 0.2s, color 0.2s;
     border-radius: .25rem;
     margin: 0.2rem 0;
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Vertically center icon and text */
   }
   .sidebar .nav-link:hover, .sidebar .nav-link.active {
     background-color: #e9ecef;
+  }
+  .sidebar .nav-link svg {
+      margin-right: 8px; /* Add space between icon and text */
   }
 </style>
 
@@ -41,6 +46,9 @@
                         {% for course in enrolled_courses %}
                         <li class="nav-item">
                             <a class="nav-link course-link" href="#" data-course-id="{{ course.id }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder-fill" viewBox="0 0 16 16">
+                                    <path d="M9.828 3h3.982a2 2 0 0 1 1.992 2.181l-1.178 6.6a2 2 0 0 1-1.992 1.819H2.618a2 2 0 0 1-1.992-1.819l-1.178-6.6A2 2 0 0 1 2.228 3h3.982l.54.54a.5.5 0 0 0 .353.146h2.829a.5.5 0 0 0 .353-.146zM2 4.5a.5.5 0 0 0-.5.5l.78 4.4a.5.5 0 0 0 .498.4h10.444a.5.5 0 0 0 .498-.4l.78-4.4a.5.5 0 0 0-.5-.5h-13z"/>
+                                </svg>
                                 {{ course.title }}
                             </a>
                         </li>
@@ -92,8 +100,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const welcomeContainer = document.getElementById('welcome-message-container');
     const roadmapContainer = document.getElementById('roadmap-container');
     
-    // The event listener for the title card has been removed.
-
     courseLinks.forEach(link => {
         link.addEventListener('click', async function(event) {
             event.preventDefault();

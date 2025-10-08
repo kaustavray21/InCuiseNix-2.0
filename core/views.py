@@ -5,10 +5,16 @@ from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, LoginForm, NoteForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from .models import Enrollment, Course, Video, Note, Transcript
+from .models import Enrollment, Course, Video, Note
 from django.template.loader import render_to_string
-import google.generativeai as genai
-from django.conf import settings
+
+# --- New Imports for RAG Assistant ---
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import status
+from .rag_utils import query_router # Import our new RAG logic
+# ------------------------------------
 
 def home(request):
     return render(request, 'core/home.html')
@@ -164,26 +170,38 @@ def delete_note_view(request, note_id):
     note.delete()
     return JsonResponse({'status': 'success', 'message': 'Note deleted successfully.'})
 
-@login_required
-def gemini_assistant_view(request):
-    if request.method == 'POST':
-        api_key = settings.GEMINI_API_KEY
-        if not api_key:
-            return JsonResponse({'error': 'AI Assistant is not configured.'}, status=500)
+# --- NEW: RAG Assistant API View ---
+# This replaces the old gemini_assistant_view
 
-        data = json.loads(request.body)
-        prompt = data.get('prompt')
+class AssistantAPIView(APIView):
+    """
+    API View to handle queries to the AI assistant.
+    Uses a query router to decide between RAG and a general LLM chain.
+    """
+    permission_classes = [IsAuthenticated]
 
-        if not prompt:
-            return JsonResponse({'error': 'A prompt is required.'}, status=400)
+    def post(self, request, *args, **kwargs):
+        query = request.data.get('query')
+        # --- NEW: Get the video_id from the request ---
+        video_id = request.data.get('video_id')
+
+        if not query:
+            return Response(
+                {'error': 'Query not provided.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         try:
-            genai.configure(api_key=api_key)
-            model = genai.GenerativeModel('gemini-2.5-pro')
-            response = model.generate_content(prompt)
-            return JsonResponse({'response': response.text})
+            # --- NEW: Pass both query and video_id to the router ---
+            chain = query_router(query, video_id)
+            
+            answer = chain.invoke(query)
+            
+            return Response({'answer': answer}, status=status.HTTP_200_OK)
+            
         except Exception as e:
-            return JsonResponse({'error': 'An error occurred with the AI service.'}, status=500)
-
-    return JsonResponse({'error': 'Invalid request method.'}, status=405)
-
+            print(f"An error occurred while processing the assistant query: {e}")
+            return Response(
+                {'error': 'An error occurred while processing your request.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )

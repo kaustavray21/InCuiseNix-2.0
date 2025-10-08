@@ -1,8 +1,51 @@
+# Django Framework
 Django==5.2.6
-python-dotenv
-pymysql
-mysqlclient
+djangorestframework==3.15.2
+django-cors-headers==4.4.0
+
+# Database
+PyMySQL==1.1.1
+
+# AI & Machine Learning (using FAISS Vector Store)
 google-generativeai
+langchain
+langchain-core
+langchain-community
+langchain-google-genai
+faiss-cpu         # <-- The new, reliable vector store
+langchain-text-splitters
+pandas==2.2.2
+numpy==1.26.4
+
+# YouTube Transcript & Video Processing
 youtube-transcript-api
 yt-dlp
 openai-whisper
+
+# Utilities
+python-dotenv==1.0.1
+requests==2.31.0
+beautifulsoup4==4.12.3
+SQLAlchemy==2.0.31
+pydantic==2.8.2
+
+# Other Dependencies
+asgiref==3.8.1
+certifi==2024.7.4
+charset-normalizer==3.3.2
+coloredlogs==15.0.1
+humanfriendly==10.0
+idna==3.7
+langsmith
+packaging==24.1
+posthog==3.5.0
+python-dateutil==2.9.0.post0
+pytz==2024.1
+PyYAML==6.0.1
+six==1.16.0
+soupsieve==2.5
+sqlparse==0.5.0
+tenacity==8.5.0
+typing_extensions==4.12.2
+tzdata==2024.1
+urllib3==2.2.2

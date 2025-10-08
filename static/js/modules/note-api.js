@@ -11,29 +11,29 @@ async function fetchAPI(url, options) {
 }
 
 export function addNote(videoId, formData) {
-    return fetchAPI(`/note/add/${videoId}/`, {
+    // UPDATED: Corrected URL path
+    return fetchAPI(`/api/notes/add/${videoId}/`, {
         method: 'POST',
         headers: { 'X-CSRFToken': csrfToken },
         body: formData,
     });
 }
 
-// static/js/modules/note-api.js
-
-export function editNote(noteId, newTitle, newContent) { // <-- FIX: Accepts both title and content
-    return fetchAPI(`/note/edit/${noteId}/`, {
+export function editNote(noteId, newTitle, newContent) {
+    // UPDATED: Corrected URL path
+    return fetchAPI(`/api/notes/edit/${noteId}/`, {
         method: 'POST',
         headers: {
             'X-CSRFToken': csrfToken,
             'Content-Type': 'application/json'
         },
-        // FIX: Sends both title and content in the request body
         body: JSON.stringify({ title: newTitle, content: newContent }),
     });
 }
 
 export function deleteNote(noteId) {
-    return fetchAPI(`/note/delete/${noteId}/`, {
+    // UPDATED: Corrected URL path
+    return fetchAPI(`/api/notes/delete/${noteId}/`, {
         method: 'POST',
         headers: { 'X-CSRFToken': csrfToken },
     });

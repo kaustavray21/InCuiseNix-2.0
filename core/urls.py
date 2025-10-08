@@ -1,25 +1,32 @@
+# core/urls.py
+
 from django.urls import path
-from . import views
+from .views import auth_views, content_views, api_views
 
 urlpatterns = [
-    # Existing URL patterns
-    path('', views.home, name='home'),
-    path('about/', views.about_view, name='about'),
-    path('signup/', views.signup_view, name='signup'),
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
-    path('dashboard/', views.dashboard_view, name='dashboard'),
-    path('courses/', views.courses_list_view, name='courses_list'),
-    path('enroll/<int:course_id>/', views.enroll_view, name='enroll'),
-    path('roadmap/<int:course_id>/', views.roadmap_view, name='roadmap'),
-    path('course/<int:course_id>/', views.video_player_view, name='video_player'),
+    # --- Content Page URLs ---
+    path('', content_views.home, name='home'),
+    path('dashboard/', content_views.dashboard_view, name='dashboard'),
+    path('courses/', content_views.courses_list_view, name='courses_list'),
+    path('courses/<int:course_id>/', content_views.video_player_view, name='video_player'),
 
-    # Note URLs
-    path('notes/add/<int:video_id>/', views.add_note_view, name='add_note'),
-    path('notes/edit/<int:note_id>/', views.edit_note_view, name='edit_note'),
-    path('notes/delete/<int:note_id>/', views.delete_note_view, name='delete_note'),
-
-    # --- NEW: Assistant API URL ---
-    path('api/assistant/', views.AssistantAPIView.as_view(), name='assistant_api'),
+    # --- Authentication URLs ---
+    path('signup/', auth_views.signup_view, name='signup'),
+    path('login/', auth_views.login_view, name='login'),
+    path('logout/', auth_views.logout_view, name='logout'),
+    
+    # --- Standalone Roadmap URL (Corrected) ---
+    path('roadmap/<int:course_id>/', api_views.roadmap_view, name='roadmap'),
+    
+    # --- API Endpoint URLs ---
+    path('api/enroll/<int:course_id>/', api_views.enroll_view, name='enroll'),
+    
+    # Note API URLs
+    path('api/notes/add/<int:video_id>/', api_views.add_note_view, name='add_note'),
+    path('api/notes/edit/<int:note_id>/', api_views.edit_note_view, name='edit_note'),
+    path('api/notes/delete/<int:note_id>/', api_views.delete_note_view, name='delete_note'),
+    
+    # AI Assistant API URL
+    path('api/assistant/', api_views.AssistantAPIView.as_view(), name='assistant_api'),
 ]
 handler404 = 'core.views.custom_404_view'

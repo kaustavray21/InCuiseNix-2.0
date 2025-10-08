@@ -6,10 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const sendButton = document.getElementById('assistant-send-btn');
     const assistantChat = document.getElementById('assistant-chat'); // Get the main assistant container
 
-    // --- NEW: Read the video ID from the data attribute ---
     const videoId = assistantChat ? assistantChat.dataset.videoId : null;
 
-    // Use a more robust method to get the CSRF token
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -26,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     const csrfToken = getCookie('csrftoken');
 
-    // Initialize the showdown converter for Markdown
     const converter = new showdown.Converter();
 
     const handleSubmit = async function(event) {
@@ -34,33 +31,32 @@ document.addEventListener('DOMContentLoaded', function() {
         const query = assistantInput.value.trim();
         if (!query) return;
 
-        // Display user's message
         appendMessage(query, 'user');
         assistantInput.value = '';
 
-        // Show loading indicator
         showLoadingIndicator();
 
-        // --- NEW: Get the current video's title ---
+        // --- UPDATED LOGIC ---
         const videoTitle = document.getElementById('current-video-title').textContent.trim();
+        // Get timestamp if the player exists, otherwise default to 0
+        const timestamp = window.videoPlayer ? window.videoPlayer.currentTime : 0;
 
         try {
-            // --- UPDATED FETCH CALL ---
             const response = await fetch('/api/assistant/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': csrfToken
                 },
-                // --- NEW: Send the videoId and video_title along with the query ---
+                // --- UPDATED: Send all context: query, id, title, and timestamp ---
                 body: JSON.stringify({ 
                     query: query, 
                     video_id: videoId,
-                    video_title: videoTitle 
+                    video_title: videoTitle,
+                    timestamp: timestamp // Add the current timestamp
                 })
             });
 
-            // Remove loading indicator before appending the response
             removeLoadingIndicator();
             
             if (!response.ok) {
@@ -93,16 +89,13 @@ document.addEventListener('DOMContentLoaded', function() {
         messageElement.classList.add('chat-message', sender);
 
         if (sender === 'assistant') {
-            // Convert the Markdown string from the AI to HTML
             const htmlContent = converter.makeHtml(message);
             messageElement.innerHTML = htmlContent;
         } else {
-            // Keep user messages as plain text
             messageElement.textContent = message;
         }
 
         chatBox.appendChild(messageElement);
-        // Scroll to the latest message
         chatBox.scrollTop = chatBox.scrollHeight;
     }
 

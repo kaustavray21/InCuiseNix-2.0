@@ -1,3 +1,4 @@
+let plyrInstance;
 document.addEventListener('DOMContentLoaded', function() {
     const playerElement = document.getElementById('player');
     if (!playerElement) return;

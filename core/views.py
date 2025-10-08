@@ -7,13 +7,16 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from .models import Enrollment, Course, Video, Note
 from django.template.loader import render_to_string
+import logging
 
 # --- New Imports for RAG Assistant ---
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-from .rag_utils import query_router # Import our new RAG logic
+from .rag_utils import query_router
+
+logger = logging.getLogger(__name__)
 # ------------------------------------
 
 def home(request):
@@ -182,8 +185,9 @@ class AssistantAPIView(APIView):
 
     def post(self, request, *args, **kwargs):
         query = request.data.get('query')
-        # --- NEW: Get the video_id from the request ---
         video_id = request.data.get('video_id')
+
+        logger.info(f"Received API request: query='{query}', video_id='{video_id}'")
 
         if not query:
             return Response(
@@ -192,16 +196,15 @@ class AssistantAPIView(APIView):
             )
 
         try:
-            # --- NEW: Pass both query and video_id to the router ---
-            chain = query_router(query, video_id)
-            
-            answer = chain.invoke(query)
+            # --- UPDATED: The router now returns the final answer directly ---
+            answer = query_router(query, video_id)
             
             return Response({'answer': answer}, status=status.HTTP_200_OK)
             
         except Exception as e:
-            print(f"An error occurred while processing the assistant query: {e}")
+            logger.error(f"An error occurred in AssistantAPIView: {e}", exc_info=True)
             return Response(
                 {'error': 'An error occurred while processing your request.'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+        

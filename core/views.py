@@ -186,8 +186,10 @@ class AssistantAPIView(APIView):
     def post(self, request, *args, **kwargs):
         query = request.data.get('query')
         video_id = request.data.get('video_id')
+        # --- NEW: Get the video title from the request ---
+        video_title = request.data.get('video_title')
 
-        logger.info(f"Received API request: query='{query}', video_id='{video_id}'")
+        logger.info(f"Received API request: query='{query}', video_id='{video_id}', video_title='{video_title}'")
 
         if not query:
             return Response(
@@ -196,8 +198,19 @@ class AssistantAPIView(APIView):
             )
 
         try:
-            # --- UPDATED: The router now returns the final answer directly ---
-            answer = query_router(query, video_id)
+            # --- NEW: Create a context-aware prompt ---
+            # This tells the AI to focus its answer on the current video.
+            if "this video" in query.lower() and video_title:
+                contextual_query = (
+                    f"Given the context of the video titled '{video_title}', "
+                    f"answer the following question: {query}"
+                )
+            else:
+                contextual_query = query
+
+
+            # --- UPDATED: The router now receives the contextual query ---
+            answer = query_router(contextual_query, video_id)
             
             return Response({'answer': answer}, status=status.HTTP_200_OK)
             
@@ -207,4 +220,3 @@ class AssistantAPIView(APIView):
                 {'error': 'An error occurred while processing your request.'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-        

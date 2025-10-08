@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show loading indicator
         showLoadingIndicator();
 
+        // --- NEW: Get the current video's title ---
+        const videoTitle = document.getElementById('current-video-title').textContent.trim();
+
         try {
             // --- UPDATED FETCH CALL ---
             const response = await fetch('/api/assistant/', {
@@ -49,8 +52,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': csrfToken
                 },
-                // --- NEW: Send the videoId along with the query ---
-                body: JSON.stringify({ query: query, video_id: videoId })
+                // --- NEW: Send the videoId and video_title along with the query ---
+                body: JSON.stringify({ 
+                    query: query, 
+                    video_id: videoId,
+                    video_title: videoTitle 
+                })
             });
 
             // Remove loading indicator before appending the response

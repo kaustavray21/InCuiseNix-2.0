@@ -1,5 +1,3 @@
-// static/js/modules/note-ui.js
-
 import { formatTimestamp } from './utils.js';
 
 /**
@@ -19,23 +17,38 @@ export function addNoteToUI(noteCardHTML) {
 
 /**
  * Updates an existing note card in the UI after an edit.
- * @param {object} note - The updated note object.
+ * @param {object} note - The updated note object from the server.
  */
 export function updateNoteInUI(note) {
-    const noteCard = document.querySelector(`.note-card[data-note-id='${note.id}']`);
+    // 1. Find the specific note card using its data attribute.
+    const noteCard = document.querySelector(`.note-card[data-note-id="${note.id}"]`);
+
     if (noteCard) {
-        // Update the visible preview text
-        noteCard.querySelector('.note-title-preview').textContent = note.title;
-        
-        // Create a truncated preview for the content
-        const contentPreview = note.content.split(' ').slice(0, 10).join(' ') + (note.content.split(' ').length > 10 ? '...' : '');
-        noteCard.querySelector('.note-content-preview').textContent = contentPreview;
-        
-        // Update the data attributes for future interactions
+        // 2. Find the title and content elements within that card.
+        //    (Assumes your note card has elements with class "note-title" and "note-content")
+        const titleElement = noteCard.querySelector('.note-title');
+        const contentElement = noteCard.querySelector('.note-content');
+
+        if (titleElement) {
+            titleElement.textContent = note.title;
+        }
+
+        if (contentElement) {
+            // Create a truncated preview for the content for display on the card
+            const contentPreview = note.content.substring(0, 100) + (note.content.length > 100 ? '...' : '');
+            contentElement.textContent = contentPreview;
+        }
+
+        // 3. CRITICAL: Update the data attributes on the card itself.
+        //    This ensures that when you click "edit" or "view" again,
+        //    the modals are populated with the latest, correct data.
         noteCard.dataset.noteTitle = note.title;
         noteCard.dataset.noteContent = note.content;
+    } else {
+        console.error(`Could not find a note card with ID ${note.id} to update in the UI.`);
     }
 }
+
 
 /**
  * Populates the "Edit Note" modal with the correct data.

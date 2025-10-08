@@ -55,7 +55,7 @@
 }
 
 .video-list-container:hover > .card-link > .card:not(:hover) {
-    filter: blur(2px); 
+    filter: blur(1px); 
     transform: scale(0.95);
     box-shadow: 0 0 5px rgba(219, 213, 213, 0.2);
 }

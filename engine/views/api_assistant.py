@@ -40,10 +40,15 @@ class AssistantAPIView(APIView):
             user = request.user
 
             logger.info(f"Attempting to find Video with youtube_id OR vimeo_id = '{video_id_from_request}'")
-            video = get_object_or_404(
-                Video,
+            
+            # --- UPDATED LOGIC ---
+            # Use Video.objects.get instead of get_object_or_404 so that Video.DoesNotExist 
+            # is caught by the specific except block below for proper logging.
+            video = Video.objects.get(
                 Q(youtube_id=video_id_from_request) | Q(vimeo_id=video_id_from_request)
             )
+            # ---------------------
+            
             logger.info(f"Successfully found video: {video.title} (DB ID: {video.pk})")
 
             conversation = None
@@ -114,7 +119,7 @@ class AssistantAPIView(APIView):
              logger.error(f"Video with youtube_id OR vimeo_id '{video_id_from_request}' not found in database.", exc_info=False)
              return Response(
                  {'error': f'Video with ID {video_id_from_request} not found.'},
-                 status=status.HTTP_44_NOT_FOUND
+                 status=status.HTTP_404_NOT_FOUND  # Fixed typo (was 44)
              )
         except Exception as e:
             logger.error(f"An error occurred in AssistantAPIView: {e}", exc_info=True)
@@ -139,7 +144,10 @@ class PublicAssistantAPIView(APIView):
         
         try:
             logger.info(f"[Public API] : Trying to find video with youtube_id or vimeo_id : {video_id_from_prompt_request}")
-            video = get_object_or_404(Video, Q(youtube_id = video_id_from_prompt_request)|Q(vimeo_id = video_id_from_prompt_request))
+            
+            # --- UPDATED LOGIC ---
+            video = Video.objects.get(Q(youtube_id = video_id_from_prompt_request)|Q(vimeo_id = video_id_from_prompt_request))
+            # ---------------------
 
             logger.info(f"[Public API] : Found video : {video.title} (DB ID: {video.pk})")
             logger.debug(f"[Public API] : Calling query_router for : {query} on video {video_id_from_prompt_request}")
@@ -153,6 +161,6 @@ class PublicAssistantAPIView(APIView):
             return Response({'error': f'Video with Id {video_id_from_prompt_request} not found.' },status=status.HTTP_404_NOT_FOUND)
         
         except Exception as e :
-            logger.error(f"[Public API] : An error occured : {e}", exc_info=True)
+            logger.error(f"[Public API] : An error occurred : {e}", exc_info=True)
 
-            return Response({'error' : 'An error occured processiong your request.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error' : 'An error occurred processing your request.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

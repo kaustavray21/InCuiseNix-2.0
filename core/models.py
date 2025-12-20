@@ -35,6 +35,21 @@ class Video(models.Model):
         db_index=True
     )
 
+    # --- NEW: OCR Status Tracking ---
+    OCR_TRANSCRIPT_STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('processing', 'Processing'),
+        ('complete', 'Complete'),
+        ('failed', 'Failed'),
+    ]
+    ocr_transcript_status = models.CharField(
+        max_length=20,
+        choices=OCR_TRANSCRIPT_STATUS_CHOICES,
+        default='pending',
+        db_index=True
+    )
+    # -------------------------------
+
     INDEX_STATUS_CHOICES = [
         ('none', 'No Index'),
         ('indexing', 'Indexing'),
@@ -63,6 +78,19 @@ class Transcript(models.Model):
     def __str__(self):
         return f'{self.video.title} - {self.start}'
 
+# --- NEW: OCR Transcript Model ---
+class OCRTranscript(models.Model):
+    id = models.AutoField(primary_key=True)
+    start = models.FloatField() # Start timestamp of the 30-second window
+    content = models.TextField() # Aggregated OCR text from frames in this window
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name='ocr_transcripts')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='ocr_transcripts')
+    youtube_id = models.CharField(max_length=50, db_index=True, blank=True, null=True)
+    vimeo_id = models.CharField(max_length=50, db_index=True, blank=True, null=True)
+
+    def __str__(self):
+        return f'OCR - {self.video.title} - {self.start}s'
+# ---------------------------------
 
 class Enrollment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -124,4 +152,4 @@ class ConversationMessage(models.Model):
         ordering = ['timestamp']
 
     def __str__(self):
-        return f'Query in "{self.conversation.title}" at {self.timestamp}'
+        return f'Query in "{self.conversation.title}" at {self.conversation.created_at}'

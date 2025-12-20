@@ -1,6 +1,6 @@
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
-from django.db import transaction  # <--- Import transaction
+from django.db import transaction
 from core.models import Note, Video
 from django_q.tasks import async_task
 import logging
@@ -9,20 +9,36 @@ logger = logging.getLogger(__name__)
 
 @receiver(post_save, sender=Video)
 def on_video_save(sender, instance, created, **kwargs):
-    # Check if it's new AND has a Vimeo ID
+    # 1. Existing Logic: Handle New Video Processing (Transcoding/Fetching)
     if created and instance.vimeo_id:
         logger.info(f"Signal: New video created (DB ID: {instance.pk}, Vimeo ID: {instance.vimeo_id}). Scheduling processing pipeline.")
         
-        # Set status to processing immediately
         instance.transcript_status = 'processing'
         instance.index_status = 'indexing'
-        instance.save(update_fields=['transcript_status', 'index_status'])
+        # We also set OCR to processing immediately to reserve the task
+        instance.ocr_transcript_status = 'processing' 
         
-        # --- FIX 1: Use on_commit to ensure DB is ready ---
-        # --- FIX 2: Pass instance.vimeo_id instead of instance.pk ---
+        instance.save(update_fields=['transcript_status', 'index_status', 'ocr_transcript_status'])
+        
         transaction.on_commit(lambda: async_task(
             'engine.tasks.task_process_new_video',
-            instance.vimeo_id  # <--- This was instance.pk before
+            instance.vimeo_id 
+        ))
+
+    # 2. NEW Logic: Trigger OCR specifically
+    # Triggers if it's a new video OR if the status was manually set to 'pending'
+    if (created or instance.ocr_transcript_status == 'pending') and instance.ocr_transcript_status != 'complete':
+        
+        # If we didn't already set it to processing in the block above
+        if instance.ocr_transcript_status != 'processing':
+            logger.info(f"Signal: Triggering OCR for Video {instance.pk}")
+            instance.ocr_transcript_status = 'processing'
+            instance.save(update_fields=['ocr_transcript_status'])
+        
+     
+        transaction.on_commit(lambda: async_task(
+            'engine.tasks.task_process_video_ocr',
+            video_id=instance.pk
         ))
 
 @receiver(post_save, sender=Note)
@@ -36,7 +52,6 @@ def on_note_save(sender, instance, created, **kwargs):
             
             logger.info(f"Signal: Queuing note index update for user {instance.user.id}, video {platform_id}")
             
-            # Good practice to use on_commit here too
             transaction.on_commit(lambda: async_task(
                 'engine.tasks.task_update_note_index', 
                 user_id=instance.user.id, 

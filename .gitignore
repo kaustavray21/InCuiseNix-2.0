@@ -8,3 +8,5 @@ local_videos
 django_cache
 media/temp_audio/
 media/transcripts/Test kit
+media/temp_videos/
+

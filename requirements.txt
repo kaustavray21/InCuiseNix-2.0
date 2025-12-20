@@ -58,3 +58,8 @@ browser-cookie3
 PyVimeo
 curl_cffi
 brotli
+
+# OCR & Image Processing (New)
+paddlepaddle>=2.6.0
+paddleocr>=2.7.0
+opencv-python>=4.9.0

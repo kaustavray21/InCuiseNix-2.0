@@ -8,6 +8,7 @@ from .frame_extractor import FrameExtractor
 from .ocr_extractor import OCRExtractor
 from .text_processor import TextProcessor
 from .ocr_downloader import VideoDownloader
+from engine.transcript_service.utils import sanitize_filename
 
 logger = logging.getLogger(__name__)
 
@@ -18,23 +19,33 @@ class VideoOCRService:
         self.text_processor = TextProcessor(min_similarity=0.85)
         self.downloader = VideoDownloader()
         
-        self.csv_dir = os.path.join(settings.MEDIA_ROOT, 'ocr_transcripts')
-        if not os.path.exists(self.csv_dir):
-            os.makedirs(self.csv_dir)
+        # Base directory
+        self.ocr_root_dir = os.path.join(settings.MEDIA_ROOT, 'ocr_transcripts')
+        if not os.path.exists(self.ocr_root_dir):
+            os.makedirs(self.ocr_root_dir)
 
     def _save_to_csv(self, video, unique_entries: List[Dict]):
         """
-        Saves OCR results to a CSV named after the Vimeo or YouTube ID.
+        Saves OCR results to a CSV.
+        Organizes files into subfolders by Course Name.
         """
-        # Determine filename based on Platform ID
+        # 1. Determine Filename (ID preferred)
         platform_id = video.vimeo_id or video.youtube_id
-        
         if platform_id:
             filename = f"{platform_id}.csv"
         else:
             filename = f"video_{video.id}.csv"
             
-        file_path = os.path.join(self.csv_dir, filename)
+        # 2. Determine Folder (Course Name)
+        if video.course:
+            course_dir_name = sanitize_filename(video.course.title)
+        else:
+            course_dir_name = "Uncategorized"
+            
+        final_dir = os.path.join(self.ocr_root_dir, course_dir_name)
+        os.makedirs(final_dir, exist_ok=True)
+        
+        file_path = os.path.join(final_dir, filename)
         
         try:
             with open(file_path, 'w', newline='', encoding='utf-8') as f:
@@ -54,17 +65,36 @@ class VideoOCRService:
             video = Video.objects.get(id=video_id)
             video_path = None
             
-            if video.video_url and os.path.exists(video.video_url):
-                 video_path = video.video_url
-            elif video.video_url and ("http" in video.video_url):
-                 video_path = self.downloader.download_video(video.video_url)
+            # --- FIX: Robust URL Construction ---
+            # If video_url is missing, build it from the IDs
+            target_url = video.video_url
+            if not target_url:
+                if video.vimeo_id:
+                    target_url = f"https://vimeo.com/{video.vimeo_id}"
+                elif video.youtube_id:
+                    target_url = f"https://www.youtube.com/watch?v={video.youtube_id}"
+            
+            logger.info(f"Video {video.id}: processing target '{target_url}'")
+
+            # --- Logic to handle local vs URL ---
+            # 1. Check if it is a local file path that actually exists
+            if target_url and os.path.exists(target_url):
+                 logger.info(f"Found local file: {target_url}")
+                 video_path = target_url
+                 
+            # 2. If it looks like a URL, download it
+            elif target_url and ("http" in target_url or "vimeo" in target_url or "youtube" in target_url):
+                 logger.info(f"Downloading from URL: {target_url}")
+                 video_path = self.downloader.download_video(target_url)
                  temp_video_path = video_path 
             
+            # 3. If we still don't have a path, we can't proceed
             if not video_path or not os.path.exists(video_path):
-                 logger.error(f"Video {video.id}: File not found.")
+                 logger.error(f"Video {video.id}: Could not resolve video file. Target URL was: {target_url}")
                  return False
 
-            logger.info(f"Processing OCR for: {video.title}")
+            # --- Start OCR Extraction ---
+            logger.info(f"Starting OCR extraction for: {video.title}")
 
             raw_segments = []
             for timestamp, frame in self.frame_extractor.extract_frames(video_path):
@@ -88,7 +118,7 @@ class VideoOCRService:
                     vimeo_id=video.vimeo_id
                 )
 
-            # 2. File System Update (CSV)
+            # 2. File System Update
             self._save_to_csv(video, unique_entries)
 
             return True

@@ -3,6 +3,8 @@ import logging
 from django.core.management.base import BaseCommand
 from django.conf import settings
 from core.models import Video
+# --- ADDED: Import sanitization to match your OCR Service ---
+from engine.transcript_service.utils import sanitize_filename 
 
 class Command(BaseCommand):
     help = 'Syncs video status. Resets FAILED, processing, or stuck tasks if no data exists.'
@@ -24,18 +26,45 @@ class Command(BaseCommand):
                     changed = True
             
             # 2. Sync OCR Transcript Status
-            if video.ocr_transcripts.exists():
+            # --- UPDATED LOGIC: Check both Database AND File System ---
+            ocr_db_exists = video.ocr_transcripts.exists()
+            
+            # Construct the expected path based on your new folder structure
+            if video.course:
+                course_dir = sanitize_filename(video.course.title)
+            else:
+                course_dir = "Uncategorized"
+                
+            # Determine filename (matches video_ocr_service.py logic)
+            platform_id = video.vimeo_id or video.youtube_id
+            if platform_id:
+                filename = f"{platform_id}.csv"
+            else:
+                filename = f"video_{video.id}.csv"
+
+            ocr_file_path = os.path.join(settings.MEDIA_ROOT, 'ocr_transcripts', course_dir, filename)
+            ocr_file_exists = os.path.exists(ocr_file_path)
+
+            # Mark complete ONLY if both DB records and File exist
+            if ocr_db_exists and ocr_file_exists:
                 if video.ocr_transcript_status != 'complete':
                     video.ocr_transcript_status = 'complete'
                     changed = True
             else:
-                # FIX: Added 'failed' to the list. 
-                # If it failed before (and has no data), we reset it to pending to retry.
+                # If currently marked processing/complete/failed but missing data, reset to pending
                 if video.ocr_transcript_status in ['processing', 'complete', 'failed']:
-                    self.stdout.write(self.style.WARNING(f"  Resetting OCR for '{video.title}': Status was '{video.ocr_transcript_status}' -> 'pending'"))
+                    if not ocr_db_exists:
+                        reason = "No DB records"
+                    elif not ocr_file_exists:
+                        reason = f"File missing at {course_dir}/{filename}"
+                    else:
+                        reason = "Unknown"
+
+                    self.stdout.write(self.style.WARNING(f"  Resetting OCR for '{video.title}': {reason} -> 'pending'"))
                     video.ocr_transcript_status = 'pending'
                     changed = True
                     reset_count += 1
+            # ----------------------------------------------------------
 
             # 3. Sync FAISS Index Status
             platform_id = video.youtube_id or video.vimeo_id

@@ -158,7 +158,7 @@ FAISS_INDEX_ROOT = os.path.join(BASE_DIR, 'faiss_indexes/')
 
 Q_CLUSTER = {
     'name': 'InCuiseNixQueue',
-    'workers': 5,
+    'workers': 2,
     'timeout': 7200,  # 2 hours for long transcriptions
     'retry': 7500,    # Retry after 2 hours 5 mins
     'queue_limit': 50,

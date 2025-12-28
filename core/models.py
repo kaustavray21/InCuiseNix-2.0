@@ -11,6 +11,20 @@ class Course(models.Model):
         return self.title
 
 class Video(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('processing', 'Processing'),
+        ('complete', 'Complete'),
+        ('failed', 'Failed'),
+    ]
+
+    INDEX_STATUS_CHOICES = [
+        ('none', 'No Index'),
+        ('indexing', 'Indexing'),
+        ('complete', 'Complete'),
+        ('failed', 'Failed'),
+    ]
+
     id = models.AutoField(primary_key=True)
     
     youtube_id = models.CharField(max_length=50, unique=True, blank=True, null=True, db_index=True)
@@ -22,41 +36,28 @@ class Video(models.Model):
     
     course = models.ForeignKey(Course, related_name='videos', on_delete=models.CASCADE)
 
-    TRANSCRIPT_STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('processing', 'Processing'),
-        ('complete', 'Complete'),
-        ('failed', 'Failed'),
-    ]
     transcript_status = models.CharField(
         max_length=20,
-        choices=TRANSCRIPT_STATUS_CHOICES,
+        choices=STATUS_CHOICES,
         default='pending',
         db_index=True
     )
 
-    # --- NEW: OCR Status Tracking ---
-    OCR_TRANSCRIPT_STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('processing', 'Processing'),
-        ('complete', 'Complete'),
-        ('failed', 'Failed'),
-    ]
     ocr_transcript_status = models.CharField(
         max_length=20,
-        choices=OCR_TRANSCRIPT_STATUS_CHOICES,
+        choices=STATUS_CHOICES,
         default='pending',
         db_index=True
     )
-    # -------------------------------
 
-    INDEX_STATUS_CHOICES = [
-        ('none', 'No Index'),
-        ('indexing', 'Indexing'),
-        ('complete', 'Complete'),
-        ('failed', 'Failed'),
-    ]
     index_status = models.CharField(
+        max_length=20,
+        choices=INDEX_STATUS_CHOICES,
+        default='none',
+        db_index=True
+    )
+
+    ocr_index_status = models.CharField(
         max_length=20,
         choices=INDEX_STATUS_CHOICES,
         default='none',
@@ -65,7 +66,6 @@ class Video(models.Model):
 
     def __str__(self):
         return self.title
-
 class Transcript(models.Model):
     id = models.AutoField(primary_key=True)
     start = models.FloatField()

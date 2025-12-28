@@ -3,7 +3,6 @@ import logging
 from django.core.management.base import BaseCommand
 from django.conf import settings
 from core.models import Video
-# --- ADDED: Import sanitization to match your OCR Service ---
 from engine.transcript_service.utils import sanitize_filename 
 
 class Command(BaseCommand):
@@ -26,16 +25,13 @@ class Command(BaseCommand):
                     changed = True
             
             # 2. Sync OCR Transcript Status
-            # --- UPDATED LOGIC: Check both Database AND File System ---
             ocr_db_exists = video.ocr_transcripts.exists()
             
-            # Construct the expected path based on your new folder structure
             if video.course:
                 course_dir = sanitize_filename(video.course.title)
             else:
                 course_dir = "Uncategorized"
                 
-            # Determine filename (matches video_ocr_service.py logic)
             platform_id = video.vimeo_id or video.youtube_id
             if platform_id:
                 filename = f"{platform_id}.csv"
@@ -45,13 +41,11 @@ class Command(BaseCommand):
             ocr_file_path = os.path.join(settings.MEDIA_ROOT, 'ocr_transcripts', course_dir, filename)
             ocr_file_exists = os.path.exists(ocr_file_path)
 
-            # Mark complete ONLY if both DB records and File exist
             if ocr_db_exists and ocr_file_exists:
                 if video.ocr_transcript_status != 'complete':
                     video.ocr_transcript_status = 'complete'
                     changed = True
             else:
-                # If currently marked processing/complete/failed but missing data, reset to pending
                 if video.ocr_transcript_status in ['processing', 'complete', 'failed']:
                     if not ocr_db_exists:
                         reason = "No DB records"
@@ -60,34 +54,57 @@ class Command(BaseCommand):
                     else:
                         reason = "Unknown"
 
-                    self.stdout.write(self.style.WARNING(f"  Resetting OCR for '{video.title}': {reason} -> 'pending'"))
+                    self.stdout.write(self.style.WARNING(f"  Resetting OCR Transcript for '{video.title}': {reason} -> 'pending'"))
                     video.ocr_transcript_status = 'pending'
                     changed = True
                     reset_count += 1
-            # ----------------------------------------------------------
 
-            # 3. Sync FAISS Index Status
-            platform_id = video.youtube_id or video.vimeo_id
-            index_exists_on_disk = False
+            # 3. Sync Standard FAISS Index Status
+            std_index_path = ""
+            std_index_exists = False
 
             if platform_id:
-                index_path = os.path.join(settings.FAISS_INDEX_ROOT, 'transcripts', platform_id)
-                if os.path.exists(index_path) and os.path.exists(os.path.join(index_path, 'index.faiss')):
-                    index_exists_on_disk = True
+                std_index_path = os.path.join(settings.FAISS_INDEX_ROOT, 'transcripts', platform_id)
+                if os.path.exists(std_index_path) and os.path.exists(os.path.join(std_index_path, 'index.faiss')):
+                    std_index_exists = True
 
-            if index_exists_on_disk:
+            if std_index_exists:
                 if video.index_status != 'complete':
                     video.index_status = 'complete'
                     changed = True
             else:
                 if video.index_status in ['indexing', 'complete', 'failed']:
-                    self.stdout.write(self.style.WARNING(f"  Resetting Index for '{video.title}': Status was '{video.index_status}' -> 'none'"))
+                    self.stdout.write(self.style.WARNING(f"  Resetting Standard Index for '{video.title}': Files missing -> 'none'"))
                     video.index_status = 'none'
                     changed = True
                     reset_count += 1
 
+            # 4. Sync OCR FAISS Index Status
+            ocr_index_exists = False
+            
+            if platform_id:
+                ocr_index_path = os.path.join(settings.FAISS_INDEX_ROOT, 'ocr', platform_id)
+                if os.path.exists(ocr_index_path) and os.path.exists(os.path.join(ocr_index_path, 'index.faiss')):
+                    ocr_index_exists = True
+
+            if ocr_index_exists:
+                if video.ocr_index_status != 'complete':
+                    video.ocr_index_status = 'complete'
+                    changed = True
+            else:
+                if video.ocr_index_status in ['indexing', 'complete', 'failed']:
+                    self.stdout.write(self.style.WARNING(f"  Resetting OCR Index for '{video.title}': Files missing -> 'none'"))
+                    video.ocr_index_status = 'none'
+                    changed = True
+                    reset_count += 1
+
             if changed:
-                video.save(update_fields=['transcript_status', 'index_status', 'ocr_transcript_status'])
+                video.save(update_fields=[
+                    'transcript_status', 
+                    'ocr_transcript_status', 
+                    'index_status', 
+                    'ocr_index_status'
+                ])
                 updated_count += 1
 
         self.stdout.write(self.style.SUCCESS(f"\n-----------------------------------"))

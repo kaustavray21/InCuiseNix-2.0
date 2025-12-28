@@ -11,7 +11,25 @@ logger = logging.getLogger(__name__)
 class Command(BaseCommand):
     help = 'Imports local OCR CSV files into the database.'
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--wipe',
+            action='store_true',
+            help='Wipe all existing OCR transcripts before importing.',
+        )
+
     def handle(self, *args, **options):
+        # --- WIPE LOGIC ---
+        if options['wipe']:
+            self.stdout.write(self.style.WARNING('!!! WIPE DETECTED !!!'))
+            self.stdout.write('Cleaning Database records...')
+            with transaction.atomic():
+                count, _ = OCRTranscript.objects.all().delete()
+                # Reset only the transcript status. We do not touch index status.
+                Video.objects.update(ocr_transcript_status='pending')
+            self.stdout.write(self.style.SUCCESS(f'  - Deleted {count} OCR transcript rows from DB.'))
+        # ------------------
+
         base_dir = os.path.join(settings.MEDIA_ROOT, 'ocr_transcripts')
         
         if not os.path.exists(base_dir):
@@ -50,6 +68,7 @@ class Command(BaseCommand):
     def process_file(self, file_path, file_id):
         video = None
         
+        # Try finding video by ID (e.g. video_123.csv)
         if file_id.startswith('video_'):
             try:
                 db_id = int(file_id.split('_')[1])
@@ -57,18 +76,21 @@ class Command(BaseCommand):
             except (IndexError, ValueError):
                 pass
         
+        # Try finding video by Vimeo ID
         if not video:
             try:
                 video = Video.objects.get(vimeo_id=file_id)
             except Video.DoesNotExist:
                 pass
         
+        # Try finding video by YouTube ID
         if not video:
             try:
                 video = Video.objects.get(youtube_id=file_id)
             except Video.DoesNotExist:
                 raise Video.DoesNotExist
 
+        # If we didn't wipe, we might need to overwrite specific records
         if video.ocr_transcripts.exists():
             self.stdout.write(f"  Updating existing records for: {video.title}")
             video.ocr_transcripts.all().delete()
@@ -79,7 +101,7 @@ class Command(BaseCommand):
         
         with open(file_path, 'r', encoding='utf-8') as f:
             reader = csv.reader(f)
-            next(reader, None) 
+            next(reader, None) # Skip header
             
             for row in reader:
                 if len(row) < 2:
@@ -107,7 +129,5 @@ class Command(BaseCommand):
                 OCRTranscript.objects.bulk_create(transcript_objects)
                 
                 video.ocr_transcript_status = 'complete'
-                if video.ocr_index_status == 'none': 
-                    video.ocr_index_status = 'none' 
-                    
-                video.save(update_fields=['ocr_transcript_status', 'ocr_index_status'])
+                # We strictly update ONLY the transcript status, as requested.
+                video.save(update_fields=['ocr_transcript_status'])

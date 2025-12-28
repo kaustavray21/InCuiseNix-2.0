@@ -58,16 +58,31 @@ class VideoDownloader:
         cleaned_url = self._clean_url(url)
         unique_name = str(uuid.uuid4())
         # We use a UUID filename so we can find it regardless of the extension yt-dlp chooses
+        # NOTE: The post-processor will force this to be .mp4
         output_template = os.path.join(self.temp_dir, f"{unique_name}.%(ext)s")
 
-        # --- NEW LOGIC: Dynamic Referer & Video-Only Format ---
+        # --- NEW LOGIC: Dynamic Referer & Transcoding ---
         vimeo_referer = os.getenv('VIMEO_REFERER', 'https://vimeo.com/')
 
         ydl_opts = {
             # OPTIMIZATION: Prioritize video-only streams (bestvideo). 
-            # This is faster for OCR (no audio needed) and avoids audio-merge errors on protected Vimeo videos.
+            # We allow AV1 here because we will transcode it below.
             'format': 'bestvideo[height<=720]/best[height<=720]/best',
             
+            # --- TRANSCODING LOGIC ---
+            # This fixes the "AV1 not supported" crash in OpenCV by converting everything to H.264
+            'postprocessors': [{
+                'key': 'FFmpegVideoConvertor',
+                'preferedformat': 'mp4',
+            }],
+            'postprocessor_args': {
+                # Force video codec to libx264 (Standard H.264)
+                # -crf 23: Balance between quality and file size
+                # -preset fast: Faster encoding
+                'ffmpeg': ['-c:v', 'libx264', '-crf', '23', '-preset', 'fast']
+            },
+            # -------------------------
+
             'outtmpl': output_template,
             'quiet': False,
             'no_warnings': False,
@@ -93,23 +108,30 @@ class VideoDownloader:
 
         elif "youtube" in cleaned_url:
             # YouTube works BEST when we DO NOT provide a custom User-Agent.
-            # yt-dlp will automatically select the correct one (e.g., iOS Client).
             pass
 
         try:
-            logger.info(f"Downloader: Downloading {cleaned_url}")
+            logger.info(f"Downloader: Downloading {cleaned_url} (Transcoding to H.264)")
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 ydl.extract_info(cleaned_url, download=True)
                 
                 # --- ROBUST FILE FINDER ---
-                # Search for any file starting with the UUID we generated
+                # Search for any file starting with the UUID. 
+                # Note: It will almost certainly be .mp4 now due to conversion.
                 search_pattern = os.path.join(self.temp_dir, f"{unique_name}.*")
                 found_files = glob.glob(search_pattern)
 
                 if found_files:
                     # Return the largest file (ignores small temp parts or thumbnails)
                     actual_file = max(found_files, key=os.path.getsize)
-                    logger.info(f"Downloader: Found file at {actual_file}")
+                    
+                    # --- FIX: File Size Validation ---
+                    if os.path.getsize(actual_file) == 0:
+                        logger.error(f"Downloader: Downloaded file is empty (0 bytes): {actual_file}")
+                        self.cleanup(actual_file)
+                        return None
+                    
+                    logger.info(f"Downloader: Found valid file at {actual_file}")
                     return os.path.abspath(actual_file)
                 else:
                     logger.error(f"Downloader: Download finished but no file found for ID {unique_name}")

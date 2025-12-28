@@ -9,7 +9,6 @@ from .vector_store.retriever import get_retriever
 
 LLM_MODEL = "gemini-2.5-flash" 
 
-# --- NEW: A more advanced classifier ---
 def get_query_type_classifier_chain():
     """
     Classifies the user's question into one of three categories:
@@ -22,7 +21,7 @@ def get_query_type_classifier_chain():
         "1.  'Fetch_Notes' questions are requests to list, see, or get all personal notes. "
         "    Examples: 'show me all my notes', 'what notes do I have?', 'list my notes for this video'.\n"
         "2.  'RAG' questions ask something specific about the video content, the user's notes, or the transcript. "
-        "    Examples: 'what did the video say about variables?', 'explain my note on functions', 'what is a decorator?'.\n"
+        "    Examples: 'what did the video say about variables?', 'explain my note on functions', 'what is a decorator?', 'what code was shown on the screen?'.\n"
         "3.  'General' questions are for information not in the video or notes. "
         "    Examples: 'hello', 'who are you?', 'what is the capital of France?'.\n\n"
         "Respond with ONLY the category name ('Fetch_Notes', 'RAG', or 'General').\n\n"
@@ -30,18 +29,21 @@ def get_query_type_classifier_chain():
     )
     llm = ChatGoogleGenerativeAI(model=LLM_MODEL, google_api_key=settings.GEMINI_API_KEY, temperature=0)
     return prompt | llm | StrOutputParser()
-# --- END NEW ---
 
 
 def get_rag_chain(video_id: str, user_id: int | None):
     retriever = get_retriever(video_id, user_id=user_id)
 
+    # Context explicitly includes OCR and Notes
     prompt_template = """
     You are a helpful AI assistant for the InCuiseNix e-learning platform.
     Your goal is to provide accurate and helpful answers based on the user's question and the context provided.
 
     Use the following sources to answer the user's question:
-    1.  **Video Context**: Key information retrieved from the video transcript and the user's personal notes.
+    1.  **Video Context**: Key information retrieved from:
+        * **Audio Transcripts**: What was spoken in the video.
+        * **Visual Text (OCR)**: Code, slides, diagrams, or text that appeared on the screen.
+        * **User Notes**: The user's personal notes on this video.
     2.  **Chat History**: The ongoing conversation between you and the user.
 
     CONTEXT:
@@ -72,6 +74,7 @@ def get_rag_chain(video_id: str, user_id: int | None):
 
 
 def get_general_chain():
+    # Kept simple as requested (No context injection)
     prompt = ChatPromptTemplate.from_template(
         "You are a helpful AI assistant. Answer the following question to the best of your ability.\nQuestion: {question}"
     )
@@ -80,9 +83,16 @@ def get_general_chain():
 
 
 def get_summarizer_chain():
+    # Updated to acknowledge OCR and Notes in the context
     prompt_template = """
     You are an expert AI assistant for the InCuiseNix e-learning platform.
-    Your task is to provide a concise and helpful summary of the video transcript provided below.
+    Your task is to provide a concise and helpful summary based on the context provided.
+    
+    The context provided below contains information from:
+    1.  **Audio Transcripts**: Spoken content.
+    2.  **Visual Text (OCR)**: On-screen code, slides, or diagrams.
+    3.  **User Notes**: Personal user annotations (if available).
+
     Based *only* on the following CONTEXT from the video, please answer the user's request.
     
     CONTEXT:
@@ -95,11 +105,18 @@ def get_summarizer_chain():
     llm = ChatGoogleGenerativeAI(model=LLM_MODEL, google_api_key=settings.GEMINI_API_KEY)
     return prompt | llm | StrOutputParser()
 
+
 def get_time_based_chain():
+    # Updated to acknowledge OCR and Notes in the context
     prompt_template = """
     You are an expert AI assistant for a video learning platform.
     The user has asked what is being discussed at a specific moment in the video.
-    The following CONTEXT is the transcript from that exact moment.
+    
+    The following CONTEXT represents that exact moment and includes:
+    1.  **Audio Transcripts**: What was being said.
+    2.  **Visual Text (OCR)**: What was shown on screen (code, slides, etc.).
+    3.  **User Notes**: Relevant notes created at this timestamp.
+
     Your task is to carefully analyze this CONTEXT and concisely explain the main topic, concept, or action being discussed.
     Synthesize the information into a clear and helpful summary. Do not state that the context is insufficient.
     

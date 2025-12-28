@@ -1,5 +1,6 @@
 import os
 import logging
+import shutil
 from django.core.management.base import BaseCommand
 from django.conf import settings
 from core.models import Video
@@ -81,22 +82,42 @@ class Command(BaseCommand):
 
             # 4. Sync OCR FAISS Index Status
             ocr_index_exists = False
+            ocr_index_path = ""
             
             if platform_id:
                 ocr_index_path = os.path.join(settings.FAISS_INDEX_ROOT, 'ocr', platform_id)
                 if os.path.exists(ocr_index_path) and os.path.exists(os.path.join(ocr_index_path, 'index.faiss')):
                     ocr_index_exists = True
 
+            # --- NEW LOGIC: Check for Orphaned OCR Index (Index exists but no DB Data) ---
+            if ocr_index_exists and not ocr_db_exists:
+                self.stdout.write(self.style.WARNING(f"  Orphaned OCR Index found for '{video.title}' (No DB transcripts). Deleting index..."))
+                try:
+                    shutil.rmtree(ocr_index_path)
+                    self.stdout.write(self.style.SUCCESS("    - Index deleted successfully."))
+                    
+                    # Update flags/statuses immediately
+                    ocr_index_exists = False
+                    video.ocr_transcript_status = 'pending'
+                    video.ocr_index_status = 'none'
+                    changed = True
+                    reset_count += 1
+                except Exception as e:
+                    self.stdout.write(self.style.ERROR(f"    - Failed to delete orphaned index: {e}"))
+
+            # Standard Status Sync
             if ocr_index_exists:
                 if video.ocr_index_status != 'complete':
                     video.ocr_index_status = 'complete'
                     changed = True
             else:
                 if video.ocr_index_status in ['indexing', 'complete', 'failed']:
-                    self.stdout.write(self.style.WARNING(f"  Resetting OCR Index for '{video.title}': Files missing -> 'none'"))
-                    video.ocr_index_status = 'none'
-                    changed = True
-                    reset_count += 1
+                    # Only log if we didn't just reset it in the orphaned block
+                    if video.ocr_index_status != 'none':
+                        self.stdout.write(self.style.WARNING(f"  Resetting OCR Index for '{video.title}': Files missing -> 'none'"))
+                        video.ocr_index_status = 'none'
+                        changed = True
+                        reset_count += 1
 
             if changed:
                 video.save(update_fields=[

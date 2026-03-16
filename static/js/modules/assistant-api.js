@@ -32,10 +32,6 @@ export async function submitQuery(query, timestamp, options = {}) {
 
   const effectiveQuery = query || "Start";
 
-  if (!options.forceNew && query) {
-    DomUtils.appendMessage(query, "user");
-  }
-
   const currentState = State.getState();
 
   const requestData = {

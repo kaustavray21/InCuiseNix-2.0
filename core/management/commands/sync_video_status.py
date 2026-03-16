@@ -42,15 +42,36 @@ class Command(BaseCommand):
             ocr_file_path = os.path.join(settings.MEDIA_ROOT, 'ocr_transcripts', course_dir, filename)
             ocr_file_exists = os.path.exists(ocr_file_path)
 
-            if ocr_db_exists and ocr_file_exists:
+            # --- UPDATED LOGIC START ---
+            # Explicitly handle the case where no DB entries exist
+            if not ocr_db_exists:
+                should_reset = False
+                
+                # Reset OCR Transcript Status
+                if video.ocr_transcript_status != 'pending':
+                    video.ocr_transcript_status = 'pending'
+                    should_reset = True
+                
+                # Reset OCR Index Status to 'pending' as requested
+                if video.ocr_index_status != 'pending':
+                    video.ocr_index_status = 'pending'
+                    should_reset = True
+                
+                if should_reset:
+                    self.stdout.write(self.style.WARNING(f"  No OCR Transcripts (DB) for '{video.title}'. Resetting statuses to pending."))
+                    changed = True
+                    reset_count += 1
+            
+            # If DB exists, check for the physical file
+            elif ocr_db_exists and ocr_file_exists:
                 if video.ocr_transcript_status != 'complete':
                     video.ocr_transcript_status = 'complete'
                     changed = True
+            
+            # DB exists but physical file is missing
             else:
                 if video.ocr_transcript_status in ['processing', 'complete', 'failed']:
-                    if not ocr_db_exists:
-                        reason = "No DB records"
-                    elif not ocr_file_exists:
+                    if not ocr_file_exists:
                         reason = f"File missing at {course_dir}/{filename}"
                     else:
                         reason = "Unknown"
@@ -59,6 +80,7 @@ class Command(BaseCommand):
                     video.ocr_transcript_status = 'pending'
                     changed = True
                     reset_count += 1
+            # --- UPDATED LOGIC END ---
 
             # 3. Sync Standard FAISS Index Status
             std_index_path = ""
@@ -89,31 +111,30 @@ class Command(BaseCommand):
                 if os.path.exists(ocr_index_path) and os.path.exists(os.path.join(ocr_index_path, 'index.faiss')):
                     ocr_index_exists = True
 
-            # --- NEW LOGIC: Check for Orphaned OCR Index (Index exists but no DB Data) ---
+            # Check for Orphaned OCR Index (Index exists but no DB Data)
             if ocr_index_exists and not ocr_db_exists:
                 self.stdout.write(self.style.WARNING(f"  Orphaned OCR Index found for '{video.title}' (No DB transcripts). Deleting index..."))
                 try:
                     shutil.rmtree(ocr_index_path)
                     self.stdout.write(self.style.SUCCESS("    - Index deleted successfully."))
                     
-                    # Update flags/statuses immediately
+                    # Update flags/statuses
                     ocr_index_exists = False
                     video.ocr_transcript_status = 'pending'
-                    video.ocr_index_status = 'none'
+                    video.ocr_index_status = 'pending' # Set to pending as requested
                     changed = True
-                    reset_count += 1
                 except Exception as e:
                     self.stdout.write(self.style.ERROR(f"    - Failed to delete orphaned index: {e}"))
 
-            # Standard Status Sync
+            # Standard Status Sync for OCR Index
             if ocr_index_exists:
                 if video.ocr_index_status != 'complete':
                     video.ocr_index_status = 'complete'
                     changed = True
             else:
                 if video.ocr_index_status in ['indexing', 'complete', 'failed']:
-                    # Only log if we didn't just reset it in the orphaned block
-                    if video.ocr_index_status != 'none':
+                    # Only log if we didn't just reset it (avoid duplicate logs)
+                    if video.ocr_index_status != 'pending':
                         self.stdout.write(self.style.WARNING(f"  Resetting OCR Index for '{video.title}': Files missing -> 'none'"))
                         video.ocr_index_status = 'none'
                         changed = True

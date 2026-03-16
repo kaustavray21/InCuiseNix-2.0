@@ -74,6 +74,11 @@ document.addEventListener("DOMContentLoaded", function () {
         return; // Don't send empty messages
       }
 
+      // --- (NEW) Render user message BEFORE typing indicator ---
+      if (typeof DomUtils.appendMessage === "function") {
+          DomUtils.appendMessage(query, "user");
+      }
+
       // --- (NEW Step 4) Show Typing Indicator ---
       // This check prevents multiple loading indicators
       if (!document.getElementById("assistant-loading-msg")) {

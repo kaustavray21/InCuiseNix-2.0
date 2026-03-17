@@ -18,4 +18,5 @@ urlpatterns = [
     path('api/v1/transcript/queue/', api_transcript.TranscriptQueueView.as_view(), name='api_queue_transcript'),
          
     path('api/v1/index/queue/', api_transcript.IndexQueueView.as_view(), name='api_queue_index'),
+    path('api/tutor/start/', api_tutor.start_tutor_session, name='start_tutor'),
 ]

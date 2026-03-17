@@ -32,6 +32,12 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
+import os
+
+
+SARVAM_API_KEY = os.getenv("SARVAM_API_KEY")
+SARVAM_BASE_URL = "https://api.sarvam.ai"
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

@@ -1,6 +1,6 @@
 import logging
 from langchain_community.vectorstores import FAISS
-from langchain.retrievers import EnsembleRetriever
+from langchain_classic.retrievers.ensemble import EnsembleRetriever
 from .config import get_embeddings
 # Updated import to include get_ocr_vector_store
 from .loader import get_transcript_vector_store, get_note_vector_store, get_ocr_vector_store 
